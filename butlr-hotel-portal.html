@@ -7,6 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Bodoni+Moda:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Firebase Web SDK (compat builds for simple script-tag usage) -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+
 <style>
 :root{
   --ink:#0B1320; --ink-2:#0E1525; --ink-3:#141C2F; --ink-4:#1B243A;
@@ -608,9 +612,9 @@ tr:hover td{background:rgba(255,255,255,.015);}
               <button class="btn primary">+ Manual order</button>
             </div>
           </div>
-          <div class="kanban">
-            <div class="col">
-              <h3>Received <span class="cn">3</span></h3>
+          <div class="kanban" id="liveKanban">
+            <div class="col" data-status="0" id="col-received">
+              <h3>Received <span class="cn" id="cn-received">0</span></h3>
               <div class="order-card">
                 <div class="rm">1208 · Wagyu Tartare</div>
                 <div class="it">+ Soufflé, water</div>
@@ -627,8 +631,8 @@ tr:hover td{background:rgba(255,255,255,.015);}
                 <div class="meta"><span>BTR-1210</span><span class="eta">Housekeeping</span></div>
               </div>
             </div>
-            <div class="col">
-              <h3>Preparing <span class="cn">4</span></h3>
+            <div class="col" data-status="1" id="col-preparing">
+              <h3>Preparing <span class="cn" id="cn-preparing">0</span></h3>
               <div class="order-card">
                 <div class="rm">1809 · Lamb Rack</div>
                 <div class="it">Med-rare</div>
@@ -650,8 +654,8 @@ tr:hover td{background:rgba(255,255,255,.015);}
                 <div class="meta"><span>BTR-1204</span><span class="eta">ETA 12m</span></div>
               </div>
             </div>
-            <div class="col">
-              <h3>Plated <span class="cn">2</span></h3>
+            <div class="col" data-status="2" id="col-plated">
+              <h3>Plated <span class="cn" id="cn-plated">0</span></h3>
               <div class="order-card">
                 <div class="rm">1208 · Lobster Risotto</div>
                 <div class="it">Plated · awaiting butler</div>
@@ -663,8 +667,8 @@ tr:hover td{background:rgba(255,255,255,.015);}
                 <div class="meta"><span>BTR-1202</span><span class="eta">Ready</span></div>
               </div>
             </div>
-            <div class="col">
-              <h3>En route <span class="cn">2</span></h3>
+            <div class="col" data-status="3" id="col-enroute">
+              <h3>En route <span class="cn" id="cn-enroute">0</span></h3>
               <div class="order-card">
                 <div class="rm">1809 · Champagne</div>
                 <div class="it">Hassan delivering</div>
@@ -676,8 +680,8 @@ tr:hover td{background:rgba(255,255,255,.015);}
                 <div class="meta"><span>BTR-1200</span><span class="eta">5m</span></div>
               </div>
             </div>
-            <div class="col">
-              <h3>Delivered <span class="cn">1</span></h3>
+            <div class="col" data-status="5" id="col-delivered">
+              <h3>Delivered <span class="cn" id="cn-delivered">0</span></h3>
               <div class="order-card" style="opacity:.7;">
                 <div class="rm">1208 · Soufflé</div>
                 <div class="it">Closed · awaiting rating</div>
@@ -1080,70 +1084,178 @@ if (localStorage.getItem('butlrPortalAuth')) {
 }
 
 // ============================================================
-// LIVE ORDER SIMULATION
-// New "incoming orders" appear every 25-45 seconds on the Order Board.
+// LIVE ORDER BOARD · Firebase Realtime Database
+// Mirrors /requests path written by the iOS app.
 // ============================================================
-const SAMPLE_INCOMING = [
-    {dept:"F&B", room:"1208", item:"Wagyu Tartare × 1", guest:"Mr. Abdulaziz", time:"now"},
-    {dept:"Housekeeping", room:"1414", item:"Extra towels × 2 · Toothbrush", guest:"Ms. Chen", time:"now"},
-    {dept:"Spa", room:"1610", item:"Hammam Ritual · 18:00", guest:"Mr. Park", time:"now"},
-    {dept:"Concierge", room:"0902", item:"Dinner res. Nobu · 8pm tomorrow", guest:"Mrs. Patel", time:"now"},
-    {dept:"F&B", room:"1208", item:"Dom Pérignon 2013 · 1 btl", guest:"Mr. Abdulaziz", time:"now"},
-    {dept:"Bring-It", room:"2204", item:"Phone charger · USB-C", guest:"Ms. Tanaka", time:"now"},
-    {dept:"Wake-Up", room:"0712", item:"06:30 · with coffee + curtains", guest:"Mr. Khalifa", time:"now"},
-    {dept:"Spa", room:"1108", item:"Royal Massage 60min · 14:00", guest:"Ms. Hoffmann", time:"now"},
-];
+const firebaseConfig = {
+    apiKey: "AIzaSyBA83Y-08jROP7MCXAyUfl0CAYlavW3KIs",
+    authDomain: "butlr-1ea3a.firebaseapp.com",
+    databaseURL: "https://butlr-1ea3a-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "butlr-1ea3a",
+    storageBucket: "butlr-1ea3a.firebasestorage.app",
+    messagingSenderId: "132167085330",
+    appId: "1:132167085330:web:1838ffb84ebce9355b57cb"
+};
 
-function startLiveMode() {
-    // Render the first order immediately
-    setTimeout(addIncomingOrder, 3000);
-    // Then every 25-45 seconds
-    setInterval(() => {
-        if (Math.random() > 0.3) addIncomingOrder();
-    }, 30000);
-    // Increment live counters every few seconds
-    startLiveCounters();
-}
+let __fbApp = null;
+let __fbDb = null;
 
-function addIncomingOrder() {
-    const board = document.getElementById('orderBoard');
-    if (!board) return;
-    const sample = SAMPLE_INCOMING[Math.floor(Math.random() * SAMPLE_INCOMING.length)];
-    const row = document.createElement('div');
-    row.className = 'order-row new-order';
-    row.style.cssText = 'animation: slideIn .5s ease-out;';
-    row.innerHTML = '<div><div class="dept-tag ' + sample.dept.toLowerCase().replace(/\s+/g,'-').replace('&','and') + '">' + sample.dept + '</div></div>' +
-                    '<div class="room">Room ' + sample.room + '</div>' +
-                    '<div class="item">' + sample.item + '</div>' +
-                    '<div class="guest">' + sample.guest + '</div>' +
-                    '<div class="time"><span class="live-dot"></span> Just now</div>' +
-                    '<div class="actions-cell"><button class="btn ghost btn-sm" onclick="acceptOrder(this)">Accept</button></div>';
-    board.insertBefore(row, board.firstChild);
-
-    // Toast notification
-    toast('🔔 New ' + sample.dept + ' request · Room ' + sample.room);
-
-    // Update incoming count badge
-    bumpCounter('incomingCount');
-}
-
-function acceptOrder(btn) {
-    btn.textContent = '✓ Accepted';
-    btn.disabled = true;
-    btn.style.opacity = '0.5';
-    bumpCounter('acceptedCount');
-}
-
-function bumpCounter(id) {
-    const el = document.getElementById(id);
-    if (el) {
-        const n = parseInt(el.textContent) || 0;
-        el.textContent = n + 1;
+function initFirebase() {
+    if (__fbApp) return;
+    try {
+        __fbApp = firebase.initializeApp(firebaseConfig);
+        __fbDb = firebase.database();
+        console.log("[Butlr Portal] Firebase initialized · listening to /requests");
+    } catch (e) {
+        console.error("[Butlr Portal] Firebase init failed:", e);
     }
 }
 
+// Map iOS RequestKind → portal dept label/class
+const KIND_TO_DEPT = {
+    dining:       { label: "F&B",           cls: "f-and-b" },
+    housekeeping: { label: "Housekeeping",  cls: "housekeeping" },
+    spa:          { label: "Spa",           cls: "spa" },
+    bringIt:      { label: "Bring-It",      cls: "bring-it" },
+    wakeUp:       { label: "Wake-Up",       cls: "wake-up" },
+    concierge:    { label: "Concierge",     cls: "concierge" },
+    transport:    { label: "Transport",     cls: "transport" },
+    experience:   { label: "Experience",    cls: "experience" }
+};
+
+// Map iOS OrderStatus → kanban column id
+function columnIdForStatus(status) {
+    switch (parseInt(status)) {
+        case 0: return "col-received";    // .placed
+        case 1: return "col-preparing";   // .preparing
+        case 2: return "col-plated";      // .leftDepartment
+        case 3: return "col-enroute";     // .onTheWay
+        case 4: return "col-enroute";     // .atDoor
+        case 5: return "col-delivered";   // .delivered
+        default: return "col-received";
+    }
+}
+
+function statusLabel(status) {
+    switch (parseInt(status)) {
+        case 0: return "Just placed";
+        case 1: return "Preparing";
+        case 2: return "Ready";
+        case 3: return "En route";
+        case 4: return "At the door";
+        case 5: return "Delivered";
+        default: return "—";
+    }
+}
+
+function etaForStatus(status, kind) {
+    switch (parseInt(status)) {
+        case 0: return "ETA 30m";
+        case 1: return kind === "dining" ? "ETA 22m" : "ETA 15m";
+        case 2: return "ETA 10m";
+        case 3: return "ETA 5m";
+        case 4: return "At the door";
+        case 5: return "Delivered";
+        default: return "—";
+    }
+}
+
+function renderRequest(req) {
+    const colId = columnIdForStatus(req.status);
+    const col   = document.getElementById(colId);
+    if (!col) return;
+
+    const dept  = KIND_TO_DEPT[req.kind] || { label: req.kind, cls: "f-and-b" };
+    const lines = Array.isArray(req.lines)
+        ? req.lines.map(l => (l.quantity > 1 ? l.quantity + "× " : "") + l.name).join(" · ")
+        : (req.title || "");
+    const total = req.total ? (" · SAR " + req.total) : "";
+    const eta   = etaForStatus(req.status, req.kind);
+
+    const existing = document.getElementById("req-" + req.id);
+    const card = existing || document.createElement("div");
+    card.className = "order-card" + (parseInt(req.status) === 5 ? "" : "");
+    card.id = "req-" + req.id;
+    card.dataset.status = req.status;
+    if (parseInt(req.status) === 5) card.style.opacity = ".65";
+    card.innerHTML =
+        '<div class="rm"><span class="dept-tag ' + dept.cls + '">' + dept.label + '</span> · ' + (req.title || "Request") + '</div>' +
+        '<div class="it">' + (lines || "—") + total + '</div>' +
+        '<div class="meta"><span>' + req.id + '</span><span class="eta">' + eta + '</span></div>' +
+        (parseInt(req.status) < 5
+            ? '<div style="margin-top:8px;"><button class="btn ghost btn-sm" onclick="advanceRequest(\'' + req.id + '\', ' + (parseInt(req.status)+1) + ')">Advance →</button></div>'
+            : '');
+
+    // Move to correct column if needed
+    if (existing && existing.parentNode !== col) {
+        existing.remove();
+        col.appendChild(card);
+    } else if (!existing) {
+        // Insert after the <h3> header
+        const h = col.querySelector("h3");
+        if (h && h.nextSibling) col.insertBefore(card, h.nextSibling); else col.appendChild(card);
+    }
+}
+
+function refreshCounters() {
+    ["received","preparing","plated","enroute","delivered"].forEach(name => {
+        const col = document.getElementById("col-" + name);
+        const cn  = document.getElementById("cn-" + name);
+        if (!col || !cn) return;
+        cn.textContent = col.querySelectorAll(".order-card").length;
+    });
+    const live = document.getElementById("liveOrderCount");
+    if (live) {
+        const total = document.querySelectorAll('#liveKanban .order-card').length;
+        live.textContent = total;
+    }
+}
+
+function advanceRequest(id, nextStatus) {
+    if (!__fbDb) return;
+    __fbDb.ref("requests/" + id + "/status").set(nextStatus);
+    toast("Order " + id + " → " + statusLabel(nextStatus));
+}
+
+function clearKanban() {
+    document.querySelectorAll('#liveKanban .order-card').forEach(c => c.remove());
+}
+
+function attachRequestsListener() {
+    if (!__fbDb) return;
+    __fbDb.ref("requests").on("value", (snap) => {
+        const val = snap.val() || {};
+        const ids = Object.keys(val);
+        // Remove cards for requests that no longer exist
+        document.querySelectorAll('#liveKanban .order-card').forEach(c => {
+            const cid = c.id.replace("req-", "");
+            if (!ids.includes(cid)) c.remove();
+        });
+        // Render every current request
+        ids.forEach(k => renderRequest(val[k]));
+        refreshCounters();
+    });
+
+    // New-order toast: child_added after first snapshot
+    let firstLoad = true;
+    setTimeout(() => { firstLoad = false; }, 2000);
+    __fbDb.ref("requests").on("child_added", (snap) => {
+        if (firstLoad) return;
+        const req = snap.val();
+        const dept = KIND_TO_DEPT[req.kind] || { label: req.kind };
+        toast("🔔 New " + dept.label + " request · " + (req.title || req.id));
+    });
+}
+
+function startLiveMode() {
+    // Clear the static mock cards in the kanban (they were placeholder content)
+    clearKanban();
+    initFirebase();
+    attachRequestsListener();
+    startLiveCounters();
+}
+
 function startLiveCounters() {
-    // Subtle revenue increment to show "live" feel
     let revenue = 47820;
     setInterval(() => {
         revenue += Math.floor(Math.random() * 80) + 20;
