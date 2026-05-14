@@ -382,6 +382,73 @@ tr:hover td{background:rgba(255,255,255,.015);}
 </head>
 <body>
 
+  <!-- ===== LOGIN OVERLAY (shown until staff logs in) ===== -->
+  <div id="loginOverlay" style="position:fixed; inset:0; z-index:9999;
+       background:linear-gradient(180deg,#070B14 0%, #0B1320 100%);
+       display:flex; align-items:center; justify-content:center; padding:24px;">
+    <div style="max-width:420px; width:100%;">
+      <div style="text-align:center; margin-bottom:40px;">
+        <div style="display:inline-flex; align-items:center; gap:14px; padding:8px 14px;
+             border:1px solid rgba(201,169,97,.22); border-radius:999px;
+             color:#E2C893; font-size:11px; letter-spacing:.32em; text-transform:uppercase;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#C9A961;
+                box-shadow:0 0 12px #C9A961;"></span>
+          Butlr Portal · Hotel Staff
+        </div>
+        <h1 style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:48px;
+            color:#FAF7EE; margin:20px 0 8px; letter-spacing:-.01em;">
+          Welcome back.
+        </h1>
+        <p style="color:#A6ADBF; font-size:14px; margin:0;">
+          Sign in to your hotel's Butlr back office.
+        </p>
+      </div>
+
+      <div style="background:rgba(255,255,255,.025); border:1px solid rgba(201,169,97,.22);
+           border-radius:16px; padding:24px;">
+        <label style="display:block; font-size:10px; letter-spacing:.2em;
+               color:#E2C893; text-transform:uppercase; margin-bottom:6px;">
+          Hotel Code
+        </label>
+        <input id="loginHotelCode" type="text" placeholder="e.g. RITZ-RYD-2026" value="RITZ-RYD-2026"
+               style="width:100%; padding:14px; background:rgba(255,255,255,.04);
+                      border:1px solid rgba(201,169,97,.22); border-radius:12px;
+                      color:#FAF7EE; font-size:14px; outline:none; font-family:inherit;
+                      margin-bottom:14px;" />
+
+        <label style="display:block; font-size:10px; letter-spacing:.2em;
+               color:#E2C893; text-transform:uppercase; margin-bottom:6px;">
+          Staff PIN
+        </label>
+        <input id="loginPin" type="password" placeholder="••••••" value="••••••"
+               style="width:100%; padding:14px; background:rgba(255,255,255,.04);
+                      border:1px solid rgba(201,169,97,.22); border-radius:12px;
+                      color:#FAF7EE; font-size:14px; outline:none; font-family:inherit;
+                      margin-bottom:18px;" />
+
+        <button onclick="doLogin()" style="width:100%; padding:16px; border:none; cursor:pointer;
+                background:linear-gradient(180deg,#E2C893,#C9A961); color:#1A1306;
+                border-radius:12px; font-weight:600; font-size:14px; font-family:inherit;
+                box-shadow:0 10px 24px rgba(201,169,97,.22);">
+          Sign in
+        </button>
+        <div id="loginError" style="display:none; margin-top:12px; padding:10px;
+             background:rgba(220,80,80,.10); border:1px solid rgba(220,80,80,.4);
+             border-radius:10px; color:#F4A8A8; font-size:12px; text-align:center;">
+          Invalid hotel code or PIN.
+        </div>
+      </div>
+
+      <div style="margin-top:14px; padding:12px; text-align:center;
+           font-size:11px; color:#7B8294;">
+        DEMO ACCESS · Hotel Code: <span style="color:#E2C893;">RITZ-RYD-2026</span>
+        · PIN: <span style="color:#E2C893;">any</span>
+      </div>
+    </div>
+  </div>
+
+
+
 <div class="app">
 
   <!-- ============ SIDEBAR ============ -->
@@ -986,5 +1053,142 @@ function toast(msg){
   window.__t = setTimeout(()=> el.classList.remove('show'), 1800);
 }
 </script>
+
+<script>
+// ============================================================
+// LOGIN HANDLING
+// ============================================================
+function doLogin() {
+    const code = document.getElementById('loginHotelCode').value.trim().toUpperCase();
+    const pin = document.getElementById('loginPin').value.trim();
+    // Demo: accept the demo code, OR any code with any PIN (so hotels can try without real creds)
+    if (code === 'RITZ-RYD-2026' || (code.length >= 6 && pin.length >= 4)) {
+        localStorage.setItem('butlrPortalAuth', code);
+        document.getElementById('loginOverlay').style.display = 'none';
+        startLiveMode();
+    } else {
+        document.getElementById('loginError').style.display = 'block';
+    }
+}
+
+// Auto-skip login if already authenticated
+if (localStorage.getItem('butlrPortalAuth')) {
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('loginOverlay').style.display = 'none';
+        startLiveMode();
+    });
+}
+
+// ============================================================
+// LIVE ORDER SIMULATION
+// New "incoming orders" appear every 25-45 seconds on the Order Board.
+// ============================================================
+const SAMPLE_INCOMING = [
+    {dept:"F&B", room:"1208", item:"Wagyu Tartare × 1", guest:"Mr. Abdulaziz", time:"now"},
+    {dept:"Housekeeping", room:"1414", item:"Extra towels × 2 · Toothbrush", guest:"Ms. Chen", time:"now"},
+    {dept:"Spa", room:"1610", item:"Hammam Ritual · 18:00", guest:"Mr. Park", time:"now"},
+    {dept:"Concierge", room:"0902", item:"Dinner res. Nobu · 8pm tomorrow", guest:"Mrs. Patel", time:"now"},
+    {dept:"F&B", room:"1208", item:"Dom Pérignon 2013 · 1 btl", guest:"Mr. Abdulaziz", time:"now"},
+    {dept:"Bring-It", room:"2204", item:"Phone charger · USB-C", guest:"Ms. Tanaka", time:"now"},
+    {dept:"Wake-Up", room:"0712", item:"06:30 · with coffee + curtains", guest:"Mr. Khalifa", time:"now"},
+    {dept:"Spa", room:"1108", item:"Royal Massage 60min · 14:00", guest:"Ms. Hoffmann", time:"now"},
+];
+
+function startLiveMode() {
+    // Render the first order immediately
+    setTimeout(addIncomingOrder, 3000);
+    // Then every 25-45 seconds
+    setInterval(() => {
+        if (Math.random() > 0.3) addIncomingOrder();
+    }, 30000);
+    // Increment live counters every few seconds
+    startLiveCounters();
+}
+
+function addIncomingOrder() {
+    const board = document.getElementById('orderBoard');
+    if (!board) return;
+    const sample = SAMPLE_INCOMING[Math.floor(Math.random() * SAMPLE_INCOMING.length)];
+    const row = document.createElement('div');
+    row.className = 'order-row new-order';
+    row.style.cssText = 'animation: slideIn .5s ease-out;';
+    row.innerHTML = '<div><div class="dept-tag ' + sample.dept.toLowerCase().replace(/\s+/g,'-').replace('&','and') + '">' + sample.dept + '</div></div>' +
+                    '<div class="room">Room ' + sample.room + '</div>' +
+                    '<div class="item">' + sample.item + '</div>' +
+                    '<div class="guest">' + sample.guest + '</div>' +
+                    '<div class="time"><span class="live-dot"></span> Just now</div>' +
+                    '<div class="actions-cell"><button class="btn ghost btn-sm" onclick="acceptOrder(this)">Accept</button></div>';
+    board.insertBefore(row, board.firstChild);
+
+    // Toast notification
+    toast('🔔 New ' + sample.dept + ' request · Room ' + sample.room);
+
+    // Update incoming count badge
+    bumpCounter('incomingCount');
+}
+
+function acceptOrder(btn) {
+    btn.textContent = '✓ Accepted';
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    bumpCounter('acceptedCount');
+}
+
+function bumpCounter(id) {
+    const el = document.getElementById(id);
+    if (el) {
+        const n = parseInt(el.textContent) || 0;
+        el.textContent = n + 1;
+    }
+}
+
+function startLiveCounters() {
+    // Subtle revenue increment to show "live" feel
+    let revenue = 47820;
+    setInterval(() => {
+        revenue += Math.floor(Math.random() * 80) + 20;
+        const el = document.getElementById('liveRevenue');
+        if (el) el.textContent = '$' + revenue.toLocaleString();
+    }, 8000);
+}
+
+// ============================================================
+// TOAST NOTIFICATIONS
+// ============================================================
+function toast(msg) {
+    const existing = document.getElementById('butlrToast');
+    if (existing) existing.remove();
+    const t = document.createElement('div');
+    t.id = 'butlrToast';
+    t.textContent = msg;
+    t.style.cssText = 'position:fixed; bottom:30px; right:30px; z-index:1000;' +
+                      'padding:14px 20px; background:linear-gradient(180deg,#E2C893,#C9A961);' +
+                      'color:#1A1306; font-weight:600; font-size:13px; border-radius:12px;' +
+                      'box-shadow:0 12px 30px rgba(201,169,97,.4); animation:slideIn .3s;';
+    document.body.appendChild(t);
+    setTimeout(() => t.style.opacity = '0', 4000);
+    setTimeout(() => t.remove(), 4400);
+}
+
+// Animation keyframes
+const styleSheet = document.createElement('style');
+styleSheet.textContent = `
+    @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); }
+                          to { opacity: 1; transform: none; } }
+    .new-order { background: rgba(201,169,97,.08) !important; }
+    .live-dot { display:inline-block; width:6px; height:6px; border-radius:50%;
+                background:#C9A961; box-shadow:0 0 8px #C9A961;
+                animation: blink 1.5s ease-in-out infinite; margin-right:4px; }
+    @keyframes blink { 50% { opacity: 0.3; } }
+`;
+document.head.appendChild(styleSheet);
+
+// Sign-out function
+function signOut() {
+    localStorage.removeItem('butlrPortalAuth');
+    location.reload();
+}
+</script>
+
 </body>
 </html>
