@@ -324,6 +324,47 @@ tr:hover td{background:rgba(255,255,255,.015);}
   flex-shrink:0;
 }
 
+/* Guest info panel on each card */
+.oc-guest{
+  padding:8px 12px 10px;
+  margin:0 12px 8px;
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--line);
+  border-radius:8px;
+}
+.oc-guest .og-name{
+  font-family:'Bodoni Moda', serif;
+  font-size:13.5px; color:var(--ivory); font-weight:500;
+  margin-bottom:5px;
+}
+.oc-guest .og-tags{
+  display:flex; gap:6px; flex-wrap:wrap;
+}
+.oc-guest .og-tag{
+  font-size:9.5px; font-weight:600; letter-spacing:.05em;
+  padding:2px 7px; border-radius:999px;
+  background:rgba(201,169,97,.12); color:var(--gold-2);
+  border:1px solid rgba(201,169,97,.2);
+}
+.oc-guest .og-tag.allergy{
+  background:rgba(217,123,123,.12);
+  color:#E89B9B;
+  border-color:rgba(217,123,123,.28);
+}
+
+/* Staff trail (who did what) */
+.oc-trail{
+  display:flex; flex-direction:column; gap:3px;
+  padding:6px 12px 10px;
+  font-size:10.5px; color:var(--muted);
+}
+.oc-trail .ot-step{ line-height:1.5; }
+.oc-trail .ot-step b{
+  color:var(--gold-2); font-weight:600;
+  letter-spacing:.04em; margin-right:4px;
+  font-size:9.5px; text-transform:uppercase;
+}
+
 .oc-title{
   font-family:'Bodoni Moda', serif; font-size:14.5px; font-weight:500;
   color:var(--ivory); padding:0 12px; line-height:1.3;
@@ -399,6 +440,40 @@ tr:hover td{background:rgba(255,255,255,.015);}
 .order-card.urgent{ border-color:rgba(217,123,123,.45); }
 .order-card.urgent::before{ background:#D97B7B !important; }
 .order-card.urgent .oc-foot .oc-time::before{ background:#D97B7B; box-shadow:0 0 8px #D97B7B; }
+
+/* Manager department filter pills */
+.dept-pill{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 14px; border-radius:999px;
+  background:transparent; border:1px solid var(--line);
+  color:var(--soft); font-size:11.5px; font-weight:600;
+  letter-spacing:.04em; font-family:inherit; cursor:pointer;
+  transition: all .15s;
+}
+.dept-pill:hover{ border-color:var(--line-strong); color:var(--ivory); }
+.dept-pill.on{
+  background:linear-gradient(180deg, rgba(201,169,97,.18), rgba(201,169,97,.08));
+  border-color:var(--line-strong);
+  color:var(--ivory);
+  box-shadow:0 0 0 1px rgba(201,169,97,.16);
+}
+.dept-pill .dp-dot{
+  width:7px; height:7px; border-radius:50%;
+  box-shadow:0 0 6px currentColor;
+}
+
+/* Role badge in topbar */
+#roleBadge{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 12px; border-radius:999px;
+  font-size:11px; font-weight:600; letter-spacing:.06em;
+  font-family:inherit;
+  margin-right:4px;
+}
+#roleBadge .rb-dot{
+  width:6px; height:6px; border-radius:50%;
+  box-shadow:0 0 8px currentColor;
+}
 
 /* ===== MENU MANAGER ===== */
 .menu-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:12px; margin-top:6px;}
@@ -697,9 +772,11 @@ tr:hover td{background:rgba(255,255,255,.015);}
         </div>
       </div>
       <div class="right">
+        <span id="roleBadge"></span>
+        <button class="icon-btn" id="signOutBtn" title="Sign out" onclick="signOut()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2v-2M10 12h11m0 0l-3-3m3 3l-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
         <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 8a6 6 0 1112 0c0 7 3 7 3 9H3c0-2 3-2 3-9z M10 21a2 2 0 004 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="dot"></span></button>
-        <button class="btn primary">+ Add a guest</button>
+        <button class="btn primary" onclick="openAddGuest()">+ Add a guest</button>
       </div>
     </div>
 
@@ -793,12 +870,43 @@ tr:hover td{background:rgba(255,255,255,.015);}
           <div class="head">
             <div>
               <span class="lab">Live · auto-refreshes</span>
-              <h2>Order board · all departments</h2>
+              <h2 id="orderBoardTitle">Order board · all departments</h2>
             </div>
             <div class="actions">
-              <button class="btn ghost">F&B only</button>
-              <button class="btn ghost">Filter dept</button>
               <button class="btn primary">+ Manual order</button>
+            </div>
+          </div>
+          <!-- Manager filter bar — only shows for manager / butler roles -->
+          <div id="deptFilterBar" style="display:none; margin-top:14px; padding:8px;
+               background:rgba(255,255,255,.02);
+               border:1px solid var(--line); border-radius:12px;
+               overflow-x:auto; white-space:nowrap;
+               -webkit-overflow-scrolling:touch;">
+            <div style="display:inline-flex; gap:6px; align-items:center;">
+              <button class="dept-pill on" data-filter="all">
+                <span class="dp-dot" style="background:#C9A961;"></span>All departments
+              </button>
+              <button class="dept-pill" data-filter="dining">
+                <span class="dp-dot" style="background:#E2A65C;"></span>F&amp;B
+              </button>
+              <button class="dept-pill" data-filter="housekeeping">
+                <span class="dp-dot" style="background:#7FB3E0;"></span>Housekeeping
+              </button>
+              <button class="dept-pill" data-filter="spa">
+                <span class="dp-dot" style="background:#C8A8D8;"></span>Spa
+              </button>
+              <button class="dept-pill" data-filter="concierge">
+                <span class="dp-dot" style="background:#D4A574;"></span>Concierge
+              </button>
+              <button class="dept-pill" data-filter="bringIt">
+                <span class="dp-dot" style="background:#9BC59B;"></span>Bring-It
+              </button>
+              <button class="dept-pill" data-filter="wakeUp">
+                <span class="dp-dot" style="background:#F0C770;"></span>Wake-Up
+              </button>
+              <button class="dept-pill" data-filter="transport">
+                <span class="dp-dot" style="background:#8DB6C9;"></span>Transport
+              </button>
             </div>
           </div>
           <div class="kanban" id="liveKanban">
@@ -1277,6 +1385,7 @@ function doLogin() {
         localStorage.setItem('butlrPortalRole', role);
         document.getElementById('loginOverlay').style.display = 'none';
         applyRoleToUI(role);
+        promptStaffName();
         startLiveMode();
     } else {
         const errEl = document.getElementById('loginError');
@@ -1293,8 +1402,65 @@ if (localStorage.getItem('butlrPortalAuth')) {
         document.getElementById('loginOverlay').style.display = 'none';
         const role = localStorage.getItem('butlrPortalRole') || 'manager';
         applyRoleToUI(role);
+        promptStaffName();
         startLiveMode();
     });
+}
+
+// ============================================================
+// STAFF NAME — asked once per device, stored locally
+// ============================================================
+function getStaffName() {
+    return (localStorage.getItem('butlrStaffName') || "").trim();
+}
+
+function promptStaffName() {
+    if (getStaffName()) return; // already set
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `position:fixed; inset:0; z-index:9998;
+        display:flex; align-items:center; justify-content:center;
+        background:rgba(7,11,20,.92); padding:24px;`;
+    overlay.innerHTML = `
+      <div style="max-width:400px; width:100%; background:rgba(255,255,255,.03);
+           border:1px solid rgba(201,169,97,.22); border-radius:18px; padding:30px;">
+        <div style="display:inline-flex; align-items:center; gap:8px; padding:5px 12px;
+             border:1px solid rgba(201,169,97,.3); border-radius:999px; color:#E2C893;
+             font-size:10px; letter-spacing:.2em; text-transform:uppercase; margin-bottom:16px;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#C9A961;
+            box-shadow:0 0 10px #C9A961;"></span> Hello
+        </div>
+        <h2 style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:28px;
+            color:#FAF7EE; margin:0 0 8px;">Your name?</h2>
+        <p style="color:#A6ADBF; font-size:13px; margin:0 0 18px;">
+          So guests know who's serving them. Shows up on each order you accept.
+        </p>
+        <input id="staffNameInput" type="text" placeholder="e.g. Marco · Chef de Cuisine"
+               style="width:100%; padding:14px; background:rgba(255,255,255,.04);
+                      border:1px solid rgba(201,169,97,.22); border-radius:12px;
+                      color:#FAF7EE; font-size:14px; outline:none; font-family:inherit;
+                      margin-bottom:16px;" />
+        <button id="staffNameSave" style="width:100%; padding:14px; border:none; cursor:pointer;
+                background:linear-gradient(180deg,#E2C893,#C9A961); color:#1A1306;
+                border-radius:12px; font-weight:600; font-size:14px; font-family:inherit;
+                box-shadow:0 8px 20px rgba(201,169,97,.22);">
+          Continue
+        </button>
+      </div>`;
+    document.body.appendChild(overlay);
+    const input = overlay.querySelector('#staffNameInput');
+    const btn = overlay.querySelector('#staffNameSave');
+    setTimeout(() => input.focus(), 50);
+    const save = () => {
+        const v = input.value.trim();
+        if (v.length < 2) {
+            input.style.borderColor = 'rgba(217,123,123,.5)';
+            return;
+        }
+        localStorage.setItem('butlrStaffName', v);
+        overlay.remove();
+    };
+    btn.addEventListener('click', save);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') save(); });
 }
 
 // ============================================================
@@ -1318,20 +1484,33 @@ window.__butlrRole = 'manager';
 
 function isVisibleForRole(reqKind) {
     const r = ROLE_INFO[window.__butlrRole];
-    if (!r || !r.kinds) return true;   // Manager / Butler see all
-    return r.kinds.indexOf(reqKind) >= 0;
+    if (!r) return false;
+    // Department-staff: only their kind(s)
+    if (r.kinds && r.kinds.indexOf(reqKind) < 0) return false;
+    // Manager / Butler: also apply the dept filter they picked
+    if (!r.kinds) {
+        const filt = window.__butlrDeptFilter || 'all';
+        if (filt !== 'all' && filt !== reqKind) return false;
+    }
+    return true;
 }
 
 function applyRoleToUI(role) {
     window.__butlrRole = role;
+    window.__butlrDeptFilter = 'all'; // managers can drill into one dept
     const r = ROLE_INFO[role] || ROLE_INFO.manager;
 
-    // Update breadcrumb / page title
+    // Clean title — no inline tag
     const top = document.getElementById('topTitle');
-    if (top) top.innerHTML = 'Live order board <span style="color:' + r.color + '; font-size:.75em; font-weight:500; margin-left:8px;">· ' + r.label + '</span>';
+    if (top) top.textContent = 'Live order board';
+    const boardTitle = document.getElementById('orderBoardTitle');
+    if (boardTitle) {
+        boardTitle.textContent = (r.kinds === null)
+            ? 'Order board · all departments'
+            : 'Order board · ' + r.label;
+    }
 
-    // Hide / show sidebar items that are irrelevant to this role
-    // (Department-specific staff don't need Menu Manager, Staff list, etc.)
+    // Sidebar visibility per role
     const sidebarItems = {
         dining:       ['orders','menus','folio'],
         housekeeping: ['orders'],
@@ -1348,27 +1527,56 @@ function applyRoleToUI(role) {
             const go = n.dataset.go;
             n.style.display = (allowed.indexOf(go) >= 0) ? '' : 'none';
         });
-        // Force navigate to orders if current view isn't allowed
         go('orders');
     } else {
-        // Manager / Butler: show everything
         document.querySelectorAll('.nav-item').forEach(n => { n.style.display = ''; });
     }
 
-    // Add a role badge in the top bar
-    let badge = document.getElementById('roleBadge');
-    if (!badge) {
-        badge = document.createElement('div');
-        badge.id = 'roleBadge';
-        badge.style.cssText = 'display:inline-flex; align-items:center; gap:6px; padding:5px 12px; background:rgba(201,169,97,.10); border:1px solid rgba(201,169,97,.3); border-radius:999px; font-size:11px; font-weight:600; letter-spacing:.06em; color:' + r.color + '; margin-left:12px;';
-        const topbar = document.querySelector('.topbar .crumbs') || document.querySelector('.topbar');
-        if (topbar && topbar.parentNode) topbar.parentNode.insertBefore(badge, topbar.nextSibling);
+    // Role badge in topbar right
+    const badge = document.getElementById('roleBadge');
+    if (badge) {
+        badge.style.color = r.color;
+        badge.style.borderColor = r.color + '55';
+        badge.style.background = r.color + '15';
+        badge.innerHTML = '<span class="rb-dot" style="background:' + r.color + ';"></span>' + r.label;
     }
-    badge.style.color = r.color;
-    badge.style.borderColor = r.color + '55';
-    badge.style.background = r.color + '15';
-    badge.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:' + r.color + '; box-shadow:0 0 8px ' + r.color + ';"></span>' + r.label;
+
+    // Show / hide the department filter bar (only managers + butlers can drill)
+    const bar = document.getElementById('deptFilterBar');
+    if (bar) bar.style.display = (r.kinds === null) ? '' : 'none';
+
+    // Reset the dept filter buttons
+    document.querySelectorAll('.dept-pill').forEach(p => {
+        p.classList.toggle('on', p.dataset.filter === 'all');
+    });
 }
+
+// Wire dept filter clicks (once)
+document.addEventListener('click', (e) => {
+    const pill = e.target.closest('.dept-pill');
+    if (!pill) return;
+    document.querySelectorAll('.dept-pill').forEach(p => p.classList.remove('on'));
+    pill.classList.add('on');
+    window.__butlrDeptFilter = pill.dataset.filter;
+    // Re-render every card by clearing then re-applying snapshot
+    if (__fbDb) {
+        __fbDb.ref("requests").once("value", (snap) => {
+            const val = snap.val() || {};
+            // remove existing cards first
+            document.querySelectorAll('#liveKanban .order-card').forEach(c => c.remove());
+            Object.keys(val).forEach(k => renderRequest(val[k]));
+            refreshCounters();
+        });
+    }
+    // Update board title
+    const boardTitle = document.getElementById('orderBoardTitle');
+    if (boardTitle) {
+        const filt = window.__butlrDeptFilter;
+        const label = filt === 'all' ? 'all departments' :
+                      (ROLE_INFO[filt] ? ROLE_INFO[filt].label : filt);
+        boardTitle.textContent = 'Order board · ' + label;
+    }
+});
 
 // ============================================================
 // LIVE ORDER BOARD · Firebase Realtime Database
@@ -1475,8 +1683,17 @@ function renderRequest(req) {
     const lines = Array.isArray(req.lines) && req.lines.length
         ? req.lines.map(l => (l.quantity > 1 ? '<span style="color:var(--gold-2);">' + l.quantity + '×</span> ' : "") + l.name).join("  ·  ")
         : "—";
-    const room = req.roomNumber ? req.roomNumber : "—";
-    const note = (req.note || "").trim();
+    const room      = req.roomNumber ? req.roomNumber : "—";
+    const note      = (req.note || "").trim();
+    const guest     = (req.guestName || "").trim();
+    const loyalty   = (req.loyaltyTier || "").trim();
+    const allergies = (req.allergies || "").trim();
+    // Staff who has touched the order so far
+    const trail = [];
+    if (req.staffAcceptedBy)  trail.push(["Accepted",   req.staffAcceptedBy]);
+    if (req.staffReadyBy)     trail.push(["Ready",      req.staffReadyBy]);
+    if (req.staffOnRouteBy)   trail.push(["En route",   req.staffOnRouteBy]);
+    if (req.staffDeliveredBy) trail.push(["Delivered",  req.staffDeliveredBy]);
     const priceText = req.total
         ? "SAR " + Number(req.total).toLocaleString()
         : "Complimentary";
@@ -1498,12 +1715,28 @@ function renderRequest(req) {
             '<span class="oc-id">' + req.id + '</span>' +
         '</div>';
 
+    const guestHTML = (guest || loyalty || allergies)
+        ? '<div class="oc-guest">' +
+              (guest ? '<div class="og-name">' + guest + '</div>' : '') +
+              '<div class="og-tags">' +
+                  (loyalty ? '<span class="og-tag tier">' + loyalty + '</span>' : '') +
+                  (allergies ? '<span class="og-tag allergy">⚠ ' + allergies + '</span>' : '') +
+              '</div>' +
+          '</div>'
+        : '';
+    const trailHTML = trail.length
+        ? '<div class="oc-trail">' +
+              trail.map(s => '<span class="ot-step"><b>' + s[0] + ':</b> ' + s[1] + '</span>').join('') +
+          '</div>'
+        : '';
     const bodyHTML =
+        guestHTML +
         '<div class="oc-title">' + (req.title || "Request") + '</div>' +
         '<div class="oc-items">' + lines + '</div>' +
         (note
             ? '<div class="oc-note"><span class="oc-note-label">NOTE</span> ' + note + '</div>'
-            : '');
+            : '') +
+        trailHTML;
 
     const footHTML =
         '<div class="oc-foot">' +
@@ -1570,8 +1803,20 @@ function refreshCounters() {
 
 function advanceRequest(id, nextStatus) {
     if (!__fbDb) return;
-    __fbDb.ref("requests/" + id + "/status").set(nextStatus);
-    toast("Order " + id + " → " + statusLabel(nextStatus));
+    const staff = getStaffName() || "Staff";
+    const ns = parseInt(nextStatus);
+    // Map status → which staff field to populate
+    let field = null;
+    if (ns === 1) field = "staffAcceptedBy";
+    else if (ns === 2) field = "staffReadyBy";
+    else if (ns === 3) field = "staffOnRouteBy";
+    else if (ns === 4) field = "staffOnRouteBy";  // at-door uses same actor as on-route
+    else if (ns === 5) field = "staffDeliveredBy";
+
+    const updates = { status: ns };
+    if (field) updates[field] = staff;
+    __fbDb.ref("requests/" + id).update(updates);
+    toast(staff + " · order " + id + " → " + statusLabel(ns));
 }
 
 function clearKanban() {
@@ -1659,6 +1904,334 @@ function signOut() {
     location.reload();
 }
 </script>
+
+
+<!-- ============================================================
+     ADD A GUEST MODAL (front-desk issuance)
+     ============================================================ -->
+<div id="addGuestModal" style="display:none; position:fixed; inset:0; z-index:9000;
+     background:rgba(7,11,20,.85); backdrop-filter:blur(8px);
+     align-items:center; justify-content:center; padding:24px;">
+  <div style="max-width:520px; width:100%; background:linear-gradient(180deg,#0E1525 0%, #0B1320 100%);
+       border:1px solid rgba(201,169,97,.28); border-radius:20px; padding:30px;
+       max-height:90vh; overflow-y:auto;">
+
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+      <div style="display:inline-flex; align-items:center; gap:8px; padding:5px 12px;
+           border:1px solid rgba(201,169,97,.3); border-radius:999px; color:#E2C893;
+           font-size:10px; letter-spacing:.2em; text-transform:uppercase;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#C9A961;
+              box-shadow:0 0 10px #C9A961;"></span> Front desk
+      </div>
+      <button onclick="closeAddGuest()" style="background:none; border:none; color:#A6ADBF;
+              font-size:22px; cursor:pointer;">×</button>
+    </div>
+
+    <h2 style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:28px;
+        color:#FAF7EE; margin:0 0 4px;">Issue Butlr access</h2>
+    <p style="color:#A6ADBF; font-size:13px; margin:0 0 22px;">
+      The guest will get a printable card with a QR code and their unique PIN.
+    </p>
+
+    <!-- Form -->
+    <div id="addGuestForm">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+        <div>
+          <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+                 color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Guest name</label>
+          <input id="ag_name" type="text" placeholder="Mr. Bader Al-Sanousi"
+                 style="width:100%; padding:12px; background:rgba(255,255,255,.04);
+                        border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                        color:#FAF7EE; font-size:13px; outline:none; font-family:inherit;" />
+        </div>
+        <div>
+          <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+                 color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Room #</label>
+          <input id="ag_room" type="text" placeholder="1208"
+                 style="width:100%; padding:12px; background:rgba(255,255,255,.04);
+                        border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                        color:#FAF7EE; font-size:13px; outline:none; font-family:inherit;" />
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+        <div>
+          <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+                 color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Check-in</label>
+          <input id="ag_checkin" type="date"
+                 style="width:100%; padding:12px; background:rgba(255,255,255,.04);
+                        border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                        color:#FAF7EE; font-size:13px; outline:none; font-family:inherit;
+                        color-scheme:dark;" />
+        </div>
+        <div>
+          <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+                 color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Check-out</label>
+          <input id="ag_checkout" type="date"
+                 style="width:100%; padding:12px; background:rgba(255,255,255,.04);
+                        border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                        color:#FAF7EE; font-size:13px; outline:none; font-family:inherit;
+                        color-scheme:dark;" />
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+        <div>
+          <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+                 color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Loyalty tier</label>
+          <select id="ag_tier"
+                 style="width:100%; padding:12px; background:rgba(255,255,255,.04);
+                        border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                        color:#FAF7EE; font-size:13px; outline:none; font-family:inherit; appearance:none;
+                        background-image:url('data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;10&quot; height=&quot;6&quot; viewBox=&quot;0 0 12 8&quot;><path d=&quot;M1 1l5 5 5-5&quot; stroke=&quot;%23E2C893&quot; stroke-width=&quot;1.4&quot; fill=&quot;none&quot;/></svg>');
+                        background-repeat:no-repeat; background-position:calc(100% - 12px) center;">
+            <option value="Maison Gold">Maison Gold</option>
+            <option value="Maison Black">Maison Black</option>
+            <option value="Maison Silver">Maison Silver</option>
+            <option value="Standard">Standard</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+                 color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Language</label>
+          <select id="ag_lang"
+                 style="width:100%; padding:12px; background:rgba(255,255,255,.04);
+                        border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                        color:#FAF7EE; font-size:13px; outline:none; font-family:inherit; appearance:none;
+                        background-image:url('data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;10&quot; height=&quot;6&quot; viewBox=&quot;0 0 12 8&quot;><path d=&quot;M1 1l5 5 5-5&quot; stroke=&quot;%23E2C893&quot; stroke-width=&quot;1.4&quot; fill=&quot;none&quot;/></svg>');
+                        background-repeat:no-repeat; background-position:calc(100% - 12px) center;">
+            <option value="English">English</option>
+            <option value="Arabic">Arabic</option>
+            <option value="English / Arabic">English / Arabic</option>
+            <option value="French">French</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Chinese">Chinese</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+               color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Allergies / dietary</label>
+        <input id="ag_allergies" type="text" placeholder="Shellfish · Peanuts · None"
+               style="width:100%; padding:12px; background:rgba(255,255,255,.04);
+                      border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                      color:#FAF7EE; font-size:13px; outline:none; font-family:inherit;" />
+      </div>
+
+      <div style="margin-bottom:22px;">
+        <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+               color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Phone (optional)</label>
+        <input id="ag_phone" type="tel" placeholder="+966 555 0123"
+               style="width:100%; padding:12px; background:rgba(255,255,255,.04);
+                      border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                      color:#FAF7EE; font-size:13px; outline:none; font-family:inherit;" />
+      </div>
+
+      <button onclick="issueGuestAccess()" style="width:100%; padding:15px; border:none; cursor:pointer;
+              background:linear-gradient(180deg,#E2C893,#C9A961); color:#1A1306;
+              border-radius:12px; font-weight:600; font-size:14px; font-family:inherit;
+              box-shadow:0 10px 24px rgba(201,169,97,.22);">
+        Issue Butlr access
+      </button>
+    </div>
+
+    <!-- Result: printable welcome card -->
+    <div id="addGuestResult" style="display:none;">
+      <div style="text-align:center; padding:8px 0 20px;">
+        <div style="display:inline-block; font-size:11px; letter-spacing:.18em;
+             color:#5BB58A; text-transform:uppercase; padding:5px 12px;
+             border:1px solid rgba(91,181,138,.4); border-radius:999px;
+             background:rgba(91,181,138,.08); font-weight:600;">
+          ✓ Access issued
+        </div>
+      </div>
+
+      <div id="welcomeCard" style="border:1px solid rgba(201,169,97,.3);
+           background:linear-gradient(180deg,#0E1525 0%, #060A12 100%);
+           border-radius:14px; padding:26px; text-align:center; margin-bottom:18px;">
+        <div style="font-size:9px; letter-spacing:.32em; color:#E2C893; margin-bottom:4px;">
+          BUTLR · WELCOME ABOARD
+        </div>
+        <div id="wc_hotel" style="font-family:'Bodoni Moda',serif; font-size:18px;
+             color:#FAF7EE; font-weight:500; margin-bottom:18px;">
+          The Ritz-Carlton, Riyadh
+        </div>
+
+        <div id="wc_qr" style="display:inline-block; padding:14px;
+             background:#FAF7EE; border-radius:12px; margin-bottom:14px;">
+          <!-- QR placeholder pattern -->
+          <svg width="140" height="140" viewBox="0 0 21 21" style="image-rendering:pixelated;">
+            <rect width="21" height="21" fill="#FAF7EE"/>
+            <g fill="#1A1306">
+              <!-- Top-left finder -->
+              <rect x="0" y="0" width="7" height="1"/><rect x="0" y="1" width="1" height="6"/>
+              <rect x="6" y="1" width="1" height="6"/><rect x="0" y="6" width="7" height="1"/>
+              <rect x="2" y="2" width="3" height="3"/>
+              <!-- Top-right finder -->
+              <rect x="14" y="0" width="7" height="1"/><rect x="14" y="1" width="1" height="6"/>
+              <rect x="20" y="1" width="1" height="6"/><rect x="14" y="6" width="7" height="1"/>
+              <rect x="16" y="2" width="3" height="3"/>
+              <!-- Bottom-left finder -->
+              <rect x="0" y="14" width="7" height="1"/><rect x="0" y="15" width="1" height="6"/>
+              <rect x="6" y="15" width="1" height="6"/><rect x="0" y="20" width="7" height="1"/>
+              <rect x="2" y="16" width="3" height="3"/>
+              <!-- Random-looking modules so it reads as a real QR -->
+              <rect x="8" y="0" width="1" height="1"/><rect x="9" y="2" width="1" height="1"/>
+              <rect x="10" y="0" width="1" height="1"/><rect x="11" y="3" width="1" height="1"/>
+              <rect x="12" y="1" width="1" height="1"/><rect x="13" y="4" width="1" height="1"/>
+              <rect x="8" y="5" width="1" height="1"/><rect x="10" y="5" width="1" height="1"/>
+              <rect x="0" y="8" width="1" height="1"/><rect x="2" y="9" width="1" height="1"/>
+              <rect x="4" y="8" width="1" height="1"/><rect x="6" y="10" width="1" height="1"/>
+              <rect x="8" y="8" width="2" height="2"/><rect x="11" y="9" width="1" height="1"/>
+              <rect x="13" y="8" width="1" height="1"/><rect x="15" y="9" width="1" height="1"/>
+              <rect x="17" y="8" width="1" height="1"/><rect x="19" y="10" width="1" height="1"/>
+              <rect x="9" y="11" width="1" height="1"/><rect x="11" y="12" width="1" height="1"/>
+              <rect x="13" y="11" width="1" height="1"/><rect x="15" y="12" width="1" height="1"/>
+              <rect x="17" y="11" width="1" height="1"/><rect x="19" y="13" width="1" height="1"/>
+              <rect x="8" y="14" width="1" height="1"/><rect x="10" y="15" width="1" height="1"/>
+              <rect x="12" y="14" width="1" height="1"/><rect x="14" y="15" width="1" height="1"/>
+              <rect x="16" y="14" width="1" height="1"/><rect x="18" y="15" width="1" height="1"/>
+              <rect x="9" y="17" width="1" height="1"/><rect x="11" y="18" width="1" height="1"/>
+              <rect x="13" y="17" width="1" height="1"/><rect x="15" y="18" width="1" height="1"/>
+              <rect x="17" y="17" width="1" height="1"/><rect x="19" y="18" width="1" height="1"/>
+              <rect x="8" y="19" width="1" height="1"/><rect x="10" y="20" width="1" height="1"/>
+              <rect x="12" y="19" width="1" height="1"/>
+            </g>
+          </svg>
+        </div>
+
+        <div style="font-size:10px; letter-spacing:.2em; color:#A6ADBF;
+             text-transform:uppercase; margin-bottom:6px;">
+          Or enter PIN inside the Butlr app
+        </div>
+        <div id="wc_pin" style="font-family:'Inter',monospace; font-size:32px;
+             color:#E2C893; letter-spacing:.18em; font-weight:600; margin-bottom:14px;">
+          BTR-0000
+        </div>
+
+        <div id="wc_meta" style="font-size:11px; color:#A6ADBF; line-height:1.6;">
+          Mr. Bader · Room 1208 · 5 nights
+        </div>
+        <div style="margin-top:14px; padding-top:14px; border-top:1px solid rgba(201,169,97,.18);
+             font-size:9px; letter-spacing:.2em; color:#7B8294; text-transform:uppercase;">
+          butlr.app · scan to download
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px;">
+        <button onclick="window.print()" style="flex:1; padding:14px; border:none; cursor:pointer;
+                background:rgba(255,255,255,.06); color:#FAF7EE;
+                border:1px solid rgba(201,169,97,.22); border-radius:12px;
+                font-weight:600; font-size:13px; font-family:inherit;">
+          Print card
+        </button>
+        <button onclick="resetAddGuest()" style="flex:1; padding:14px; border:none; cursor:pointer;
+                background:linear-gradient(180deg,#E2C893,#C9A961); color:#1A1306;
+                border-radius:12px; font-weight:600; font-size:13px; font-family:inherit;">
+          Add another guest
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+@media print {
+  body * { visibility:hidden; }
+  #welcomeCard, #welcomeCard * { visibility:visible; }
+  #welcomeCard { position:absolute; left:0; top:0; width:100%; max-width:none; }
+}
+</style>
+
+<script>
+// ============================================================
+// FRONT-DESK GUEST ISSUANCE
+// ============================================================
+function openAddGuest() {
+    document.getElementById('addGuestModal').style.display = 'flex';
+    document.getElementById('addGuestForm').style.display  = '';
+    document.getElementById('addGuestResult').style.display = 'none';
+    // Default dates: today + 5 days
+    const today = new Date();
+    const out = new Date(today.getTime() + 5*86400000);
+    const fmt = d => d.toISOString().slice(0,10);
+    document.getElementById('ag_checkin').value = fmt(today);
+    document.getElementById('ag_checkout').value = fmt(out);
+}
+
+function closeAddGuest() {
+    document.getElementById('addGuestModal').style.display = 'none';
+}
+
+function resetAddGuest() {
+    ['ag_name','ag_room','ag_allergies','ag_phone'].forEach(id => {
+        document.getElementById(id).value = '';
+    });
+    document.getElementById('addGuestForm').style.display  = '';
+    document.getElementById('addGuestResult').style.display = 'none';
+}
+
+function generateGuestPin() {
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // skip ambiguous I/O/1/0
+    let p = "BTR-";
+    for (let i = 0; i < 4; i++) p += chars[Math.floor(Math.random() * chars.length)];
+    return p;
+}
+
+function issueGuestAccess() {
+    const name      = document.getElementById('ag_name').value.trim();
+    const room      = document.getElementById('ag_room').value.trim();
+    const checkin   = document.getElementById('ag_checkin').value;
+    const checkout  = document.getElementById('ag_checkout').value;
+    const tier      = document.getElementById('ag_tier').value;
+    const lang      = document.getElementById('ag_lang').value;
+    const allergies = document.getElementById('ag_allergies').value.trim();
+    const phone     = document.getElementById('ag_phone').value.trim();
+
+    if (!name || !room) {
+        alert("Guest name and room number are required.");
+        return;
+    }
+
+    const pin = generateGuestPin();
+    const hotelCode = (localStorage.getItem('butlrPortalAuth') || 'RITZ-RYD-2026');
+    const guestRecord = {
+        pin, name, room,
+        checkIn: checkin, checkOut: checkout,
+        tier, language: lang,
+        allergies: allergies || "None",
+        phone,
+        issuedAt: Date.now() / 1000,
+        issuedBy: getStaffName ? (getStaffName() || "Front desk") : "Front desk",
+        expired: false
+    };
+
+    // Save to Firebase under /hotels/{hotelCode}/guests/{pin}
+    if (__fbDb) {
+        const safeHotel = hotelCode.replace(/[^A-Z0-9-]/gi, '');
+        __fbDb.ref("hotels/" + safeHotel + "/guests/" + pin).set(guestRecord)
+              .catch(e => console.error("[Butlr] guest save failed:", e));
+    }
+
+    // Compute nights
+    let nights = 0;
+    if (checkin && checkout) {
+        nights = Math.max(1, Math.round((new Date(checkout) - new Date(checkin)) / 86400000));
+    }
+
+    // Fill the welcome card
+    document.getElementById('wc_pin').textContent  = pin;
+    document.getElementById('wc_meta').textContent =
+        name + " · Room " + room + " · " + nights + " night" + (nights === 1 ? "" : "s");
+
+    document.getElementById('addGuestForm').style.display  = 'none';
+    document.getElementById('addGuestResult').style.display = '';
+
+    toast("Access issued for " + name + " · " + pin);
+}
+</script>
+
 
 </body>
 </html>
