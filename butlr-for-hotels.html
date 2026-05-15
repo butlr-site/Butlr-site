@@ -547,11 +547,36 @@ footer{
         <input id="hf_phone" type="tel" placeholder="+966 11 234 5678" />
       </div>
 
+      <!-- ===== Legal consent ===== -->
+      <div style="margin-top:6px; padding:14px;
+           background:rgba(201,169,97,.05); border:1px solid var(--line);
+           border-radius:12px;">
+        <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;
+               color:var(--soft); font-size:12px; line-height:1.6;">
+          <input type="checkbox" id="hf_consent_msa" style="margin-top:4px; accent-color:#C9A961; flex-shrink:0;" />
+          <span>I confirm I have authority to sign on behalf of the hotel, and I agree to the
+            <a href="#" onclick="event.preventDefault(); window.open('Butlr-Hotel-Agreement.pdf','_blank');"
+               style="color:var(--gold-2); text-decoration:underline;">Butlr Master Service Agreement</a>
+            and its
+            <a href="#" onclick="event.preventDefault(); window.open('Butlr-Hotel-Agreement.pdf#page=7','_blank');"
+               style="color:var(--gold-2); text-decoration:underline;">Data Processing Agreement</a>.</span>
+        </label>
+        <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-top:10px;
+               color:var(--soft); font-size:12px; line-height:1.6;">
+          <input type="checkbox" id="hf_consent_privacy" style="margin-top:4px; accent-color:#C9A961; flex-shrink:0;" />
+          <span>I have read and agree to the
+            <a href="butlr-privacy-policy.html" target="_blank"
+               style="color:var(--gold-2); text-decoration:underline;">Butlr Privacy Policy</a>.
+            I confirm my hotel processes guest data lawfully under applicable data-protection law (GDPR, PDPL, etc.).</span>
+        </label>
+      </div>
+
       <button class="cta" style="width:100%; margin-top:14px;" onclick="submitSignup()">
         Start 14-day free trial
       </button>
       <p style="text-align:center; margin-top:14px; font-size:11.5px; color:var(--muted);">
-        No card required for trial. You'll only enter card details if you keep going after day 14.
+        No card required for trial. You'll only enter card details if you keep going after day 14.<br/>
+        Your consent is recorded with a timestamp and the email above.
       </p>
     </div>
 
@@ -653,6 +678,12 @@ function submitSignup() {
         alert("Hotel name, city, rooms and email are required.");
         return;
     }
+    const consentMSA     = document.getElementById('hf_consent_msa')?.checked;
+    const consentPrivacy = document.getElementById('hf_consent_privacy')?.checked;
+    if (!consentMSA || !consentPrivacy) {
+        alert("Please confirm you agree to the Master Service Agreement and Privacy Policy to continue.");
+        return;
+    }
 
     const code = generateHotelCode(name, city);
     const pins = {
@@ -669,7 +700,15 @@ function submitSignup() {
         pins,
         signedUpAt: Date.now()/1000,
         trialEndsAt: Date.now()/1000 + 14*86400,
-        status: 'trial'
+        status: 'trial',
+        consent: {
+            msa: true,
+            privacy: true,
+            acceptedAt: Date.now() / 1000,
+            acceptedBy: contact || email,
+            acceptedFromIP: 'recorded-server-side',  // would be real IP via Cloud Function later
+            userAgent: navigator.userAgent.substring(0, 200)
+        }
     };
 
     fbDB.ref("hotels/" + code).set(record).then(() => {

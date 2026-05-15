@@ -1078,25 +1078,30 @@ tr:hover td{background:rgba(255,255,255,.015);}
       <div class="view" data-view="bookings">
         <div class="section">
           <div class="head">
-            <div><span class="lab">In-house · 96% occupancy</span><h2>Active stays</h2></div>
+            <div><span class="lab" id="guestsLab">Loading guest list…</span><h2>Active stays</h2></div>
             <div class="actions">
-              <button class="btn ghost">Filter floor</button>
-              <button class="btn ghost">Export</button>
-              <button class="btn primary">+ Add booking</button>
+              <button class="btn ghost" onclick="refreshGuestList()">Refresh</button>
+              <button class="btn primary" onclick="openAddGuest()">+ Add a guest</button>
             </div>
           </div>
           <table>
-            <tr><th>Guest</th><th>Suite</th><th>Check-in</th><th>Check-out</th><th>Access code</th><th>Tier</th><th>Flags</th></tr>
+            <thead>
+              <tr><th>Guest</th><th>Room</th><th>Stay</th><th>Day</th><th>PIN</th><th>Tier</th><th>Allergies</th><th></th></tr>
+            </thead>
+            <tbody id="guestListBody">
+              <tr><td colspan="8" style="text-align:center; color:var(--muted); padding:30px;">Loading from Firebase…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div style="display:none;">
             <tr><td>Bader Abdulaziz</td><td>1208 · Royal King</td><td>11 May</td><td>14 May</td><td>4821</td><td><span class="pill gold">Black</span></td><td><span class="pill muted">Anniversary</span></td></tr>
             <tr><td>Faisal Al-Qahtani</td><td>1410 · Presidential</td><td>10 May</td><td>15 May</td><td>9173</td><td><span class="pill gold">Black</span></td><td><span class="pill warn">No nuts</span></td></tr>
             <tr><td>L. Conti (& family)</td><td>0712 · Executive</td><td>11 May</td><td>17 May</td><td>2046</td><td><span class="pill muted">Silver</span></td><td><span class="pill muted">2 children</span></td></tr>
             <tr><td>Y. Tanaka</td><td>1809 · Royal</td><td>12 May</td><td>16 May</td><td>6708</td><td><span class="pill gold">Black</span></td><td><span class="pill ok">Returning</span></td></tr>
             <tr><td>S. Kapoor</td><td>0805 · Deluxe</td><td>12 May</td><td>14 May</td><td>5519</td><td><span class="pill muted">—</span></td><td><span class="pill muted">Vegetarian</span></td></tr>
             <tr><td>H. Müller</td><td>1115 · Royal King</td><td>09 May</td><td>13 May</td><td>3382</td><td><span class="pill muted">Gold</span></td><td><span class="pill bad">Medical alert</span></td></tr>
-            <tr><td>R. Okafor (party of 6)</td><td>2001 · Penthouse</td><td>11 May</td><td>14 May</td><td>1990</td><td><span class="pill gold">Black</span></td><td><span class="pill muted">Birthday · 12 May</span></td></tr>
-          </table>
-        </div>
-      </div>
+          </table></div>
 
       <!-- ============ STAFF ============ -->
       <div class="view" data-view="staff">
@@ -2446,6 +2451,23 @@ function issueGuestAccess() {
     document.getElementById('wc_meta').textContent =
         name + " · Room " + room + " · " + nights + " night" + (nights === 1 ? "" : "s");
 
+    // Build the deep link for the QR
+    const safeHotel = code.replace(/[^A-Z0-9-]/gi, '');
+    const deepLink = "https://butlr.app/r/" + encodeURIComponent(safeHotel) + "/" + pin;
+
+    // Render the real QR into the canvas
+    const canvas = document.getElementById('wc_qr_canvas');
+    if (canvas && window.QRCode) {
+        window.QRCode.toCanvas(canvas, deepLink, {
+            width: 200, margin: 1,
+            color: { dark: "#1A1306", light: "#FAF7EE" },
+            errorCorrectionLevel: 'M'
+        }, err => { if (err) console.error("QR render failed:", err); });
+    }
+
+    // Save for "Show on screen" + email button
+    window.__lastIssuedGuest = { pin, name, room, deepLink, hotel: safeHotel };
+
     document.getElementById('addGuestForm').style.display  = 'none';
     document.getElementById('addGuestResult').style.display = '';
 
@@ -2500,6 +2522,296 @@ function pwaInstall() {
         __deferredInstallPrompt.userChoice.then(() => { __deferredInstallPrompt = null; });
     } else {
         alert("Your browser doesn't support direct install. Open this page in Chrome or Safari and use 'Add to Home Screen' from the share menu.");
+    }
+}
+</script>
+
+
+<!-- ============================================================
+     LIVE GUEST LIST · reads /hotels/{code}/guests/* from Firebase
+     ============================================================ -->
+<div id="editGuestModal" style="display:none; position:fixed; inset:0; z-index:9100;
+     background:rgba(7,11,20,.85); backdrop-filter:blur(8px);
+     align-items:center; justify-content:center; padding:24px;">
+  <div style="max-width:480px; width:100%;
+       background:linear-gradient(180deg,#0E1525 0%, #0B1320 100%);
+       border:1px solid rgba(201,169,97,.28); border-radius:20px; padding:28px;
+       max-height:90vh; overflow-y:auto;">
+
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+      <div style="display:inline-flex; align-items:center; gap:8px; padding:5px 12px;
+           border:1px solid rgba(201,169,97,.3); border-radius:999px; color:#E2C893;
+           font-size:10px; letter-spacing:.2em; text-transform:uppercase;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#C9A961;
+              box-shadow:0 0 10px #C9A961;"></span> Edit stay
+      </div>
+      <button onclick="closeEditGuest()" style="background:none; border:none; color:#A6ADBF;
+              font-size:22px; cursor:pointer;">×</button>
+    </div>
+
+    <h2 id="eg_title" style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:24px;
+        color:#FAF7EE; margin:0 0 4px;">Mr. Al-Sanousi</h2>
+    <p id="eg_sub" style="color:#A6ADBF; font-size:13px; margin:0 0 18px;">
+      PIN: BTR-MA85 · Room 1208 · stay updates in real time on the guest's app
+    </p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+      <div class="f-field">
+        <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+               color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Room</label>
+        <input id="eg_room" type="text" style="width:100%; padding:11px;
+               background:rgba(255,255,255,.04); border:1px solid rgba(201,169,97,.22);
+               border-radius:10px; color:#FAF7EE; font-size:13px; outline:none; font-family:inherit;" />
+      </div>
+      <div class="f-field">
+        <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+               color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Tier</label>
+        <select id="eg_tier" style="width:100%; padding:11px;
+                background:rgba(255,255,255,.04); border:1px solid rgba(201,169,97,.22);
+                border-radius:10px; color:#FAF7EE; font-size:13px; outline:none; font-family:inherit; appearance:none;">
+          <option>Maison Gold</option><option>Maison Black</option>
+          <option>Maison Silver</option><option>Standard</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+      <div class="f-field">
+        <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+               color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Check-in</label>
+        <input id="eg_checkin" type="date" style="width:100%; padding:11px;
+               background:rgba(255,255,255,.04); border:1px solid rgba(201,169,97,.22);
+               border-radius:10px; color:#FAF7EE; font-size:13px; outline:none; font-family:inherit; color-scheme:dark;" />
+      </div>
+      <div class="f-field">
+        <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+               color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Check-out</label>
+        <input id="eg_checkout" type="date" style="width:100%; padding:11px;
+               background:rgba(255,255,255,.04); border:1px solid rgba(201,169,97,.22);
+               border-radius:10px; color:#FAF7EE; font-size:13px; outline:none; font-family:inherit; color-scheme:dark;" />
+      </div>
+    </div>
+
+    <div class="f-field" style="margin-bottom:18px;">
+      <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+             color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Allergies / dietary</label>
+      <input id="eg_allergies" type="text" style="width:100%; padding:11px;
+             background:rgba(255,255,255,.04); border:1px solid rgba(201,169,97,.22);
+             border-radius:10px; color:#FAF7EE; font-size:13px; outline:none; font-family:inherit;" />
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <button onclick="saveEditGuest()" style="padding:14px; border:none; cursor:pointer;
+              background:linear-gradient(180deg,#E2C893,#C9A961); color:#1A1306;
+              border-radius:12px; font-weight:600; font-size:13px; font-family:inherit;
+              box-shadow:0 8px 20px rgba(201,169,97,.22);">
+        Save changes
+      </button>
+      <button onclick="endStay()" style="padding:14px; border:none; cursor:pointer;
+              background:transparent; color:#E89B9B;
+              border:1px solid rgba(217,123,123,.45); border-radius:12px;
+              font-weight:600; font-size:13px; font-family:inherit;">
+        End stay
+      </button>
+    </div>
+    <p style="font-size:10.5px; color:var(--muted); margin-top:12px; text-align:center; line-height:1.5;">
+      Any change here updates the guest's iPhone instantly.
+    </p>
+  </div>
+</div>
+
+<script>
+let __editingPin = null;
+let __guestsCache = {};
+
+function refreshGuestList() {
+    if (!__fbDb) { return; }
+    const code = (localStorage.getItem('butlrPortalAuth') || '').replace(/[^A-Z0-9-]/gi, '');
+    if (!code) return;
+    __fbDb.ref("hotels/" + code + "/guests").once("value", snap => {
+        const all = snap.val() || {};
+        __guestsCache = all;
+        renderGuestList(all);
+    });
+}
+
+function dayOfStay(checkIn, checkOut) {
+    if (!checkIn || !checkOut) return ["—", "—"];
+    const ci = new Date(checkIn); ci.setHours(0,0,0,0);
+    const co = new Date(checkOut); co.setHours(0,0,0,0);
+    const today = new Date(); today.setHours(0,0,0,0);
+    const totalNights = Math.max(1, Math.round((co - ci) / 86400000));
+    const dayN = Math.max(1, Math.round((today - ci) / 86400000) + 1);
+    return ["Day " + Math.min(dayN, totalNights) + " of " + totalNights, totalNights];
+}
+
+function fmtDate(iso) {
+    if (!iso) return "—";
+    const d = new Date(iso);
+    return d.toLocaleDateString(undefined, { day:"numeric", month:"short" });
+}
+
+function tierPill(tier) {
+    const map = {
+        "Maison Black":  '<span class="pill gold">Black</span>',
+        "Maison Gold":   '<span class="pill gold">Gold</span>',
+        "Maison Silver": '<span class="pill muted">Silver</span>',
+        "Standard":      '<span class="pill muted">—</span>'
+    };
+    return map[tier] || '<span class="pill muted">' + (tier || "—") + '</span>';
+}
+
+function renderGuestList(all) {
+    const tbody = document.getElementById("guestListBody");
+    if (!tbody) return;
+    const pins = Object.keys(all).filter(p => !all[p].expired);
+    document.getElementById("guestsLab").textContent =
+        pins.length + " active stay" + (pins.length === 1 ? "" : "s");
+    if (pins.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--muted); padding:30px;">No active guests yet · click "+ Add a guest" at the top</td></tr>';
+        return;
+    }
+    tbody.innerHTML = pins.map(pin => {
+        const g = all[pin];
+        const [day,] = dayOfStay(g.checkIn, g.checkOut);
+        const allergy = g.allergies && g.allergies !== "None"
+            ? '<span class="pill bad">⚠ ' + g.allergies + '</span>'
+            : '<span class="pill muted">—</span>';
+        return '<tr>' +
+            '<td><b style="color:var(--ivory);">' + (g.name || "—") + '</b></td>' +
+            '<td>' + (g.room || "—") + '</td>' +
+            '<td>' + fmtDate(g.checkIn) + ' → ' + fmtDate(g.checkOut) + '</td>' +
+            '<td>' + day + '</td>' +
+            '<td><span style="font-family:monospace; color:var(--gold-2);">' + pin + '</span></td>' +
+            '<td>' + tierPill(g.tier) + '</td>' +
+            '<td>' + allergy + '</td>' +
+            '<td style="text-align:right;"><button class="btn ghost btn-sm" onclick="openEditGuest(\'' + pin + '\')">Edit</button></td>' +
+        '</tr>';
+    }).join("");
+}
+
+function openEditGuest(pin) {
+    const g = __guestsCache[pin];
+    if (!g) return;
+    __editingPin = pin;
+    document.getElementById('eg_title').textContent = g.name || "—";
+    document.getElementById('eg_sub').textContent =
+        "PIN: " + pin + " · Room " + (g.room || "—") + " · stay updates live on guest's app";
+    document.getElementById('eg_room').value = g.room || "";
+    document.getElementById('eg_tier').value = g.tier || "Maison Gold";
+    document.getElementById('eg_checkin').value = g.checkIn || "";
+    document.getElementById('eg_checkout').value = g.checkOut || "";
+    document.getElementById('eg_allergies').value = g.allergies || "";
+    document.getElementById('editGuestModal').style.display = 'flex';
+}
+
+function closeEditGuest() {
+    document.getElementById('editGuestModal').style.display = 'none';
+    __editingPin = null;
+}
+
+function saveEditGuest() {
+    if (!__editingPin || !__fbDb) return;
+    const code = (localStorage.getItem('butlrPortalAuth') || '').replace(/[^A-Z0-9-]/gi, '');
+    const updates = {
+        room:      document.getElementById('eg_room').value.trim(),
+        tier:      document.getElementById('eg_tier').value,
+        checkIn:   document.getElementById('eg_checkin').value,
+        checkOut:  document.getElementById('eg_checkout').value,
+        allergies: document.getElementById('eg_allergies').value.trim() || "None",
+        lastEditedAt: Date.now() / 1000,
+        lastEditedBy: (typeof getStaffName === "function" ? (getStaffName() || "Front desk") : "Front desk")
+    };
+    __fbDb.ref("hotels/" + code + "/guests/" + __editingPin).update(updates).then(() => {
+        toast("✓ Stay updated for " + __editingPin + " — guest's app refreshes live");
+        closeEditGuest();
+        refreshGuestList();
+    });
+}
+
+function endStay() {
+    if (!__editingPin || !__fbDb) return;
+    if (!confirm("End this stay? The guest's Butlr access will expire immediately.")) return;
+    const code = (localStorage.getItem('butlrPortalAuth') || '').replace(/[^A-Z0-9-]/gi, '');
+    __fbDb.ref("hotels/" + code + "/guests/" + __editingPin).update({
+        expired: true,
+        endedAt: Date.now() / 1000
+    }).then(() => {
+        toast("✓ Stay ended · guest app shows farewell screen");
+        closeEditGuest();
+        refreshGuestList();
+    });
+}
+
+// Refresh guest list when bookings view is opened
+const __origGo2 = window.go;
+window.go = function(name) {
+    __origGo2(name);
+    if (name === 'bookings') refreshGuestList();
+};
+</script>
+
+
+
+<!-- ============================================================
+     COOKIE / PRIVACY CONSENT BANNER (GDPR / PDPL)
+     One-time. Persists in localStorage.
+     ============================================================ -->
+<div id="cookieBanner" style="display:none; position:fixed; bottom:18px; left:18px; right:18px;
+     z-index:9300; max-width:680px; margin:0 auto;
+     background:linear-gradient(180deg, rgba(11,19,32,.96), rgba(7,11,20,.98));
+     backdrop-filter:blur(10px);
+     border:1px solid rgba(201,169,97,.32); border-radius:14px; padding:18px 20px;
+     box-shadow:0 20px 50px rgba(0,0,0,.5);">
+  <div style="display:flex; gap:14px; align-items:flex-start; flex-wrap:wrap;">
+    <div style="flex:1; min-width:280px;">
+      <div style="display:inline-flex; align-items:center; gap:7px; padding:3px 9px;
+           border:1px solid rgba(201,169,97,.3); border-radius:999px; color:#E2C893;
+           font-size:9px; letter-spacing:.2em; text-transform:uppercase; font-weight:600;
+           margin-bottom:6px;">
+        <span style="width:5px;height:5px;border-radius:50%;background:#C9A961;
+              box-shadow:0 0 8px #C9A961;"></span> Privacy notice
+      </div>
+      <div style="font-size:12.5px; color:#D4DBEB; line-height:1.5;">
+        Butlr uses essential cookies to keep your portal session logged in. We process hotel + guest data under our
+        <a href="butlr-privacy-policy.html" target="_blank" style="color:#E2C893; text-decoration:underline;">Privacy Policy</a>
+        and your hotel's Butlr
+        <a href="#" onclick="event.preventDefault(); alert('See your Butlr Master Service Agreement signed at onboarding.');" style="color:#E2C893; text-decoration:underline;">Master Service Agreement</a>.
+        By using this portal you accept both.
+      </div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <button onclick="acceptCookies()" style="padding:10px 18px; border:none; cursor:pointer;
+              background:linear-gradient(180deg, #E2C893, #C9A961); color:#1A1306;
+              border-radius:10px; font-weight:600; font-size:12px; font-family:inherit;
+              white-space:nowrap;">
+        Accept &amp; continue
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+    if (!localStorage.getItem('butlr.portalConsent')) {
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('cookieBanner').style.display = 'block';
+        });
+    }
+})();
+function acceptCookies() {
+    localStorage.setItem('butlr.portalConsent', String(Date.now()));
+    document.getElementById('cookieBanner').style.display = 'none';
+    // Also log consent to Firebase as audit evidence
+    if (typeof __fbDb !== 'undefined' && __fbDb) {
+        const hotel = (localStorage.getItem('butlrPortalAuth') || '').replace(/[^A-Z0-9-]/gi,'');
+        if (hotel) {
+            __fbDb.ref('hotels/' + hotel + '/consent/portal').push({
+                acceptedAt: Date.now() / 1000,
+                staff: (typeof getStaffName === 'function' ? getStaffName() : '') || 'unknown',
+                userAgent: navigator.userAgent.substring(0, 200)
+            });
+        }
     }
 }
 </script>
