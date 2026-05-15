@@ -286,6 +286,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
 .order-card.dept-concierge::before   { background:#D4A574; }
 .order-card.dept-transport::before   { background:#8DB6C9; }
 .order-card.dept-experience::before  { background:#D89BB8; }
+.order-card.dept-laundry::before     { background:#C9C0E0; }
 
 .oc-head{
   display:flex; align-items:center; justify-content:space-between;
@@ -308,6 +309,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
 .oc-head .oc-dept.concierge    { background:rgba(212,165,116,.13); color:#D4A574; border-color:rgba(212,165,116,.25); }
 .oc-head .oc-dept.transport    { background:rgba(141,182,201,.13); color:#8DB6C9; border-color:rgba(141,182,201,.25); }
 .oc-head .oc-dept.experience   { background:rgba(216,155,184,.13); color:#D89BB8; border-color:rgba(216,155,184,.25); }
+.oc-head .oc-dept.laundry      { background:rgba(201,192,224,.13); color:#C9C0E0; border-color:rgba(201,192,224,.25); }
 
 .oc-head .oc-id{
   font-family:'Inter', monospace; font-size:10.5px;
@@ -439,6 +441,17 @@ tr:hover td{background:rgba(255,255,255,.015);}
 }
 .oc-actions button.advance:hover{
   filter:brightness(1.06);
+}
+.oc-actions button.reply{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  color:var(--ivory);
+  flex:0 0 auto;
+  min-width:80px;
+}
+.oc-actions button.reply:hover{
+  background:rgba(201,169,97,.12);
+  border-color:var(--line-strong);
 }
 
 /* Status pill in card (when delivered) */
@@ -642,6 +655,120 @@ tr:hover td{background:rgba(255,255,255,.015);}
 /* MISC */
 .muted{color:var(--muted);}
 .spacer{height:18px;}
+
+/* ============================================================
+   RESPONSIVE · phone / iPad / desktop / wide
+   ============================================================ */
+* { word-wrap: break-word; overflow-wrap: anywhere; }
+html, body { overflow-x: hidden; max-width: 100vw; }
+
+/* Tablet & smaller laptops */
+@media (max-width: 1100px) {
+  .topbar { padding: 14px 18px; }
+  .topbar h1 { font-size: 20px; }
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* iPad portrait */
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar {
+    position: fixed; top: 0; bottom: 0; left: -280px; width: 280px;
+    z-index: 50; transition: left .3s ease;
+  }
+  .sidebar.open { left: 0; }
+  .mobile-toggle { display: flex !important; }
+  .topbar h1 { font-size: 18px; }
+  .topbar .right { gap: 6px; }
+  .topbar .right .btn { padding: 7px 11px; font-size: 11px; }
+  .topbar .right #roleBadge { padding: 5px 9px; font-size: 10px; }
+  .topbar .right .icon-btn { width: 32px; height: 32px; }
+  .content { padding: 18px 16px; }
+  .section { padding: 18px; }
+  .section .head { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .section .head .actions { width: 100%; flex-wrap: wrap; gap: 6px; }
+  .kpis { grid-template-columns: 1fr; }
+  .kpi { padding: 16px; }
+  .kpi .v { font-size: 22px; }
+  /* Tables → horizontally scrollable on tablets */
+  table { display: block; overflow-x: auto; white-space: nowrap; }
+  table tr { white-space: normal; }
+  /* Forms */
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+/* Phone */
+@media (max-width: 640px) {
+  .topbar { padding: 10px 12px; gap: 8px; }
+  .topbar .left .crumbs { font-size: 9px; }
+  .topbar h1 { font-size: 15px; }
+  .topbar .right .btn.primary { padding: 7px 10px; font-size: 10.5px; }
+  .topbar .right .icon-btn { display: none; }
+  .topbar .right #pwaInstallBtn { display: none !important; }
+  .topbar .right #signOutBtn { display: inline-flex !important; }
+  .content { padding: 14px 12px; }
+
+  .kanban { gap: 10px; }
+  .col { padding: 12px; min-height: 0; }
+  .col h3 { font-size: 12px; }
+  .col h3 .cn { font-size: 10px; padding: 1px 7px; }
+
+  .order-card { margin-bottom: 8px; }
+  .oc-title { font-size: 13.5px; padding: 0 11px; }
+  .oc-items { font-size: 11px; padding: 0 11px; line-height: 1.4; }
+  .oc-head { padding: 9px 11px 5px; flex-wrap: wrap; gap: 5px; }
+  .oc-head .oc-room { font-size: 10.5px; padding: 2px 6px; }
+  .oc-head .oc-id { font-size: 9.5px; }
+  .oc-foot { padding: 7px 11px 9px; flex-wrap: wrap; gap: 4px; }
+  .oc-actions { padding: 0 11px 9px; flex-direction: column; }
+  .oc-actions button { width: 100%; padding: 8px; font-size: 11px; }
+
+  .dept-pill { padding: 6px 11px; font-size: 11px; }
+  #deptFilterBar { padding: 6px; }
+
+  /* Section heads */
+  .section { padding: 14px; border-radius: 12px; }
+  .section .head h2 { font-size: 17px; }
+  .section .head .lab { font-size: 9px; letter-spacing: .18em; }
+
+  /* Tabs row */
+  .tabs-row { gap: 4px; overflow-x: auto; white-space: nowrap; padding-bottom: 4px; }
+  .tab-item { padding: 8px 12px; font-size: 11px; white-space: nowrap; }
+
+  /* Add Guest + Edit Guest + Chat modals — full width */
+  #addGuestModal > div,
+  #editGuestModal > div,
+  #replyChatModal > div,
+  #laundryEditorModal > div { max-width: 100%; padding: 22px 18px; }
+  #replyChatModal > div { height: 92vh; border-radius: 18px 18px 0 0; }
+  #replyChatModal #rc_messages { padding: 14px 14px; }
+  #replyChatModal #rc_input { font-size: 13px; padding: 12px; }
+
+  /* QR fullscreen */
+  #qrFullscreen #qrfs_hotel { font-size: 22px; }
+  #qrFullscreen #qrfs_pin { font-size: 34px; }
+  #qrFullscreen #qrfs_canvas { width: 80vw !important; height: 80vw !important; }
+
+  /* Login overlay */
+  #loginOverlay h1 { font-size: 36px !important; }
+  #loginOverlay input, #loginOverlay select { font-size: 13px !important; padding: 12px !important; }
+
+  /* Cookie banner */
+  #cookieBanner { left: 10px !important; right: 10px !important; bottom: 10px !important; padding: 14px !important; }
+  #cookieBanner > div { flex-direction: column; align-items: stretch !important; }
+  #cookieBanner button { width: 100%; }
+
+  /* Charts */
+  .section [style*="height:280px"], .section [style*="height:240px"] { height: 200px !important; }
+}
+
+/* Very narrow phones */
+@media (max-width: 380px) {
+  .topbar h1 { font-size: 14px; }
+  .col h3 { font-size: 11px; }
+  .oc-title { font-size: 12.5px; }
+}
+
 </style>
 </head>
 <body>
@@ -725,6 +852,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
           <div>Bring-It</div><div style="color:#E2C893;">3366</div>
           <div>Wake-Up</div><div style="color:#E2C893;">2255</div>
           <div>Transport</div><div style="color:#E2C893;">1144</div>
+          <div>Laundry</div><div style="color:#E2C893;">8800</div>
         </div>
       </div>
     </div>
@@ -925,6 +1053,9 @@ tr:hover td{background:rgba(255,255,255,.015);}
               <button class="dept-pill" data-filter="transport">
                 <span class="dp-dot" style="background:#8DB6C9;"></span>Transport
               </button>
+              <button class="dept-pill" data-filter="laundry">
+                <span class="dp-dot" style="background:#C9C0E0;"></span>Laundry
+              </button>
             </div>
           </div>
           <div class="kanban" id="liveKanban">
@@ -1010,11 +1141,12 @@ tr:hover td{background:rgba(255,255,255,.015);}
       <!-- ============ MENU MANAGER ============ -->
       <div class="view" data-view="menus">
         <div class="tabs-row">
-          <div class="tab-item on">F&B Menu</div>
-          <div class="tab-item">Spa Menu</div>
-          <div class="tab-item">Service Menu</div>
-          <div class="tab-item">Wine List</div>
-          <div class="tab-item">Pillow Menu</div>
+          <div class="tab-item on" onclick="switchMenuTab(this,'fnb')">F&B Menu</div>
+          <div class="tab-item" onclick="switchMenuTab(this,'spa')">Spa Menu</div>
+          <div class="tab-item" onclick="switchMenuTab(this,'laundry')">Laundry Menu</div>
+          <div class="tab-item" onclick="switchMenuTab(this,'service')">Service Menu</div>
+          <div class="tab-item" onclick="switchMenuTab(this,'wine')">Wine List</div>
+          <div class="tab-item" onclick="switchMenuTab(this,'pillow')">Pillow Menu</div>
         </div>
         <div class="section">
           <div class="head">
@@ -1260,6 +1392,127 @@ tr:hover td{background:rgba(255,255,255,.015);}
         </div>
       </div>
 
+      <!-- ============ LAUNDRY MENU (hidden by default) ============ -->
+      <div id="laundryMenuSection" class="section" style="display:none;">
+        <div class="head">
+          <div><span class="lab">Valet · per-piece pricing</span><h2>Laundry &amp; pressing menu</h2></div>
+          <div class="actions">
+            <button class="btn ghost" onclick="loadLaundryMenu()">Refresh</button>
+            <button class="btn primary" onclick="openLaundryEditor(null)">+ Add item</button>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr><th>Item</th><th>Category</th><th>Wash &amp; fold</th><th>Dry clean</th><th>Iron only</th><th></th></tr>
+          </thead>
+          <tbody id="laundryMenuBody">
+            <tr><td colspan="6" style="text-align:center; color:var(--muted); padding:30px;">Loading from Firebase…</td></tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top:14px; padding:14px; background:rgba(201,169,97,.05);
+             border:1px solid var(--line); border-radius:12px;
+             display:flex; gap:18px; flex-wrap:wrap; font-size:11.5px; color:var(--soft);">
+          <div><b style="color:var(--gold-2);">EXPRESS</b> · 4h turnaround · +50% surcharge</div>
+          <div><b style="color:var(--gold-2);">SAME DAY</b> · before 8am next morning · +25%</div>
+          <div><b style="color:var(--gold-2);">STANDARD</b> · 24 hours · base price</div>
+        </div>
+        <p style="margin-top:8px; font-size:11px; color:var(--muted);">
+          These prices appear in the guest's Butlr app under the Laundry tile. Edits sync instantly.
+        </p>
+      </div>
+
+      <!-- ============ LAUNDRY ITEM EDITOR MODAL ============ -->
+      <div id="laundryEditorModal" style="display:none; position:fixed; inset:0; z-index:9100;
+           background:rgba(7,11,20,.85); backdrop-filter:blur(8px);
+           align-items:center; justify-content:center; padding:24px;">
+        <div style="max-width:460px; width:100%;
+             background:linear-gradient(180deg,#0E1525 0%, #0B1320 100%);
+             border:1px solid rgba(201,169,97,.28); border-radius:18px; padding:26px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+            <div style="display:inline-flex; align-items:center; gap:8px; padding:5px 12px;
+                 border:1px solid rgba(201,169,97,.3); border-radius:999px; color:#E2C893;
+                 font-size:10px; letter-spacing:.2em; text-transform:uppercase;">
+              <span style="width:6px;height:6px;border-radius:50%;background:#C9A961;
+                    box-shadow:0 0 10px #C9A961;"></span> Laundry item
+            </div>
+            <button onclick="closeLaundryEditor()" style="background:none; border:none; color:#A6ADBF;
+                    font-size:22px; cursor:pointer;">×</button>
+          </div>
+
+          <h2 id="laundryEditorTitle" style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:22px;
+              color:#FAF7EE; margin:0 0 16px;">Add laundry item</h2>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+            <div>
+              <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+                     color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Item name</label>
+              <input id="le_name" type="text" placeholder="Dress shirt"
+                     style="width:100%; padding:11px; background:rgba(255,255,255,.04);
+                            border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                            color:#FAF7EE; font-size:13px; outline:none; font-family:inherit;" />
+            </div>
+            <div>
+              <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+                     color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Category</label>
+              <select id="le_category" style="width:100%; padding:11px;
+                      background:rgba(255,255,255,.04); border:1px solid rgba(201,169,97,.22);
+                      border-radius:10px; color:#FAF7EE; font-size:13px; outline:none; font-family:inherit; appearance:none;">
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:10px;">
+            <div>
+              <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+                     color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Wash &amp; fold</label>
+              <input id="le_wash" type="number" placeholder="3"
+                     style="width:100%; padding:11px; background:rgba(255,255,255,.04);
+                            border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                            color:#FAF7EE; font-size:13px; outline:none; font-family:inherit;" />
+            </div>
+            <div>
+              <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+                     color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Dry clean</label>
+              <input id="le_dry" type="number" placeholder="5"
+                     style="width:100%; padding:11px; background:rgba(255,255,255,.04);
+                            border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                            color:#FAF7EE; font-size:13px; outline:none; font-family:inherit;" />
+            </div>
+            <div>
+              <label style="display:block; font-size:9.5px; letter-spacing:.2em;
+                     color:#E2C893; text-transform:uppercase; margin-bottom:5px;">Iron only</label>
+              <input id="le_iron" type="number" placeholder="2"
+                     style="width:100%; padding:11px; background:rgba(255,255,255,.04);
+                            border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                            color:#FAF7EE; font-size:13px; outline:none; font-family:inherit;" />
+            </div>
+          </div>
+
+          <p style="font-size:10.5px; color:var(--muted); margin:0 0 16px;">
+            Prices are per piece, in your hotel's local currency. Enter <b>0</b> for any service this item doesn't support.
+          </p>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <button id="le_saveBtn" onclick="saveLaundryItem()" style="padding:13px; border:none; cursor:pointer;
+                    background:linear-gradient(180deg,#E2C893,#C9A961); color:#1A1306;
+                    border-radius:10px; font-weight:600; font-size:13px; font-family:inherit;">
+              Save item
+            </button>
+            <button id="le_deleteBtn" onclick="deleteLaundryItem()" style="padding:13px; border:none; cursor:pointer;
+                    background:transparent; color:#E89B9B;
+                    border:1px solid rgba(217,123,123,.45); border-radius:10px;
+                    font-weight:600; font-size:13px; font-family:inherit; display:none;">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- ============ EXPERIENCES ============ -->
       <div class="view" data-view="experiences">
         <div class="section">
@@ -1420,7 +1673,8 @@ const PIN_TO_ROLE = {
     "9911": "concierge",
     "3366": "bringIt",
     "2255": "wakeUp",
-    "1144": "transport"
+    "1144": "transport",
+    "8800": "laundry"
 };
 
 function doLogin() {
@@ -1528,7 +1782,8 @@ const ROLE_INFO = {
     bringIt:      { label: "Bring-It",     kinds: ["bringIt"],      color: "#9BC59B" },
     wakeUp:       { label: "Wake-Up",      kinds: ["wakeUp"],       color: "#F0C770" },
     transport:    { label: "Transport",    kinds: ["transport"],    color: "#8DB6C9" },
-    experience:   { label: "Experience",   kinds: ["experience"],   color: "#D89BB8" }
+    experience:   { label: "Experience",   kinds: ["experience"],   color: "#D89BB8" },
+    laundry:      { label: "Laundry",       kinds: ["laundry"],       color: "#C9C0E0" }
 };
 window.__butlrRole = 'manager';
 
@@ -1569,7 +1824,8 @@ function applyRoleToUI(role) {
         bringIt:      ['orders'],
         wakeUp:       ['orders'],
         transport:    ['orders'],
-        experience:   ['orders','experiences']
+        experience:   ['orders','experiences'],
+        laundry:      ['orders']
     };
     const allowed = sidebarItems[role];
     if (allowed) {
@@ -1666,7 +1922,8 @@ const KIND_TO_DEPT = {
     wakeUp:       { label: "Wake-Up",       cls: "wake-up" },
     concierge:    { label: "Concierge",     cls: "concierge" },
     transport:    { label: "Transport",     cls: "transport" },
-    experience:   { label: "Experience",    cls: "experience" }
+    experience:   { label: "Experience",    cls: "experience" },
+    laundry:      { label: "Laundry",       cls: "laundry" }
 };
 
 // Map iOS OrderStatus → kanban column id
@@ -1799,6 +2056,9 @@ function renderRequest(req) {
 
     const actionsHTML = status < 5
         ? '<div class="oc-actions">' +
+              '<button onclick="openReplyChat(\'' + req.id + '\')" class="reply">' +
+                  '💬 Reply' +
+              '</button>' +
               '<button onclick="advanceRequest(\'' + req.id + '\', ' + (status+1) + ')" class="advance">' +
                   (status === 0 ? "Accept →" :
                    status === 1 ? "Mark Ready →" :
@@ -1807,7 +2067,11 @@ function renderRequest(req) {
                                   "Deliver →") +
               '</button>' +
           '</div>'
-        : '';
+        : '<div class="oc-actions">' +
+              '<button onclick="openReplyChat(\'' + req.id + '\')" class="reply">' +
+                  '💬 Reply' +
+              '</button>' +
+          '</div>';
 
     card.innerHTML = headerHTML + bodyHTML + footHTML + actionsHTML;
 
@@ -2813,6 +3077,301 @@ function acceptCookies() {
             });
         }
     }
+}
+</script>
+
+
+<!-- ============================================================
+     LAUNDRY MENU CRUD · per-hotel pricing
+     ============================================================ -->
+<script>
+let __editingLaundryItem = null;
+
+function switchMenuTab(tabEl, key) {
+    // Toggle visual active state
+    document.querySelectorAll('.view[data-view="menus"] .tab-item').forEach(t => t.classList.remove('on'));
+    tabEl.classList.add('on');
+    // Show / hide sections
+    const fnbSection = document.querySelector('.view[data-view="menus"] .section:not(#laundryMenuSection)');
+    const laundrySection = document.getElementById('laundryMenuSection');
+    if (key === 'laundry') {
+        if (fnbSection) fnbSection.style.display = 'none';
+        if (laundrySection) {
+            laundrySection.style.display = '';
+            loadLaundryMenu();
+        }
+    } else {
+        if (fnbSection) fnbSection.style.display = '';
+        if (laundrySection) laundrySection.style.display = 'none';
+    }
+}
+
+function defaultLaundryCatalog() {
+    return [
+        { name: "Dress shirt",       category: "Men",   wash: 3, dry: 4,  iron: 2 },
+        { name: "Trousers",          category: "Men",   wash: 4, dry: 5,  iron: 3 },
+        { name: "Suit · 2-piece",    category: "Men",   wash: 0, dry: 14, iron: 0 },
+        { name: "Thobe / Bisht",     category: "Men",   wash: 5, dry: 8,  iron: 4 },
+        { name: "Polo / T-shirt",    category: "Men",   wash: 2, dry: 3,  iron: 1 },
+        { name: "Blouse",            category: "Women", wash: 3, dry: 4,  iron: 2 },
+        { name: "Dress · short",     category: "Women", wash: 5, dry: 8,  iron: 4 },
+        { name: "Abaya",             category: "Women", wash: 5, dry: 8,  iron: 4 },
+        { name: "Skirt",             category: "Women", wash: 3, dry: 5,  iron: 2 },
+        { name: "Pyjamas",           category: "Other", wash: 4, dry: 0,  iron: 2 },
+        { name: "Sportswear",        category: "Other", wash: 3, dry: 0,  iron: 0 }
+    ];
+}
+
+function loadLaundryMenu() {
+    if (!__fbDb) return;
+    const code = (localStorage.getItem('butlrPortalAuth') || '').replace(/[^A-Z0-9-]/gi, '');
+    if (!code) return;
+    __fbDb.ref('hotels/' + code + '/laundryMenu').once('value', snap => {
+        let items = snap.val();
+        if (!items || Object.keys(items).length === 0) {
+            // Seed defaults on first load so the hotel has a starting point
+            items = {};
+            defaultLaundryCatalog().forEach((it, i) => {
+                const key = 'lq_' + Date.now() + '_' + i;
+                items[key] = it;
+            });
+            __fbDb.ref('hotels/' + code + '/laundryMenu').set(items);
+        }
+        renderLaundryMenu(items);
+    });
+}
+
+function renderLaundryMenu(items) {
+    const tbody = document.getElementById('laundryMenuBody');
+    if (!tbody) return;
+    const keys = Object.keys(items);
+    if (keys.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:var(--muted); padding:30px;">No items yet — add one with the button above.</td></tr>';
+        return;
+    }
+    tbody.innerHTML = keys.map(key => {
+        const it = items[key];
+        return '<tr>' +
+            '<td><b style="color:var(--ivory);">' + it.name + '</b></td>' +
+            '<td><span class="pill muted">' + it.category + '</span></td>' +
+            '<td>' + (it.wash > 0 ? 'SAR ' + it.wash : '—') + '</td>' +
+            '<td>' + (it.dry  > 0 ? 'SAR ' + it.dry  : '—') + '</td>' +
+            '<td>' + (it.iron > 0 ? 'SAR ' + it.iron : '—') + '</td>' +
+            '<td style="text-align:right;">' +
+                '<button class="btn ghost btn-sm" onclick="openLaundryEditor(\'' + key + '\')">Edit</button>' +
+            '</td>' +
+        '</tr>';
+    }).join('');
+}
+
+function openLaundryEditor(key) {
+    __editingLaundryItem = key;
+    document.getElementById('laundryEditorModal').style.display = 'flex';
+    const isEdit = !!key;
+    document.getElementById('laundryEditorTitle').textContent = isEdit ? 'Edit laundry item' : 'Add laundry item';
+    document.getElementById('le_deleteBtn').style.display = isEdit ? '' : 'none';
+    if (isEdit && __fbDb) {
+        const code = (localStorage.getItem('butlrPortalAuth') || '').replace(/[^A-Z0-9-]/gi, '');
+        __fbDb.ref('hotels/' + code + '/laundryMenu/' + key).once('value', s => {
+            const it = s.val() || {};
+            document.getElementById('le_name').value     = it.name || '';
+            document.getElementById('le_category').value = it.category || 'Men';
+            document.getElementById('le_wash').value     = it.wash || 0;
+            document.getElementById('le_dry').value      = it.dry || 0;
+            document.getElementById('le_iron').value     = it.iron || 0;
+        });
+    } else {
+        document.getElementById('le_name').value = '';
+        document.getElementById('le_category').value = 'Men';
+        document.getElementById('le_wash').value = '';
+        document.getElementById('le_dry').value = '';
+        document.getElementById('le_iron').value = '';
+    }
+}
+
+function closeLaundryEditor() {
+    document.getElementById('laundryEditorModal').style.display = 'none';
+    __editingLaundryItem = null;
+}
+
+function saveLaundryItem() {
+    if (!__fbDb) return;
+    const code = (localStorage.getItem('butlrPortalAuth') || '').replace(/[^A-Z0-9-]/gi, '');
+    const name = document.getElementById('le_name').value.trim();
+    if (!name) { alert('Item name is required.'); return; }
+    const obj = {
+        name,
+        category: document.getElementById('le_category').value,
+        wash:  parseInt(document.getElementById('le_wash').value) || 0,
+        dry:   parseInt(document.getElementById('le_dry').value)  || 0,
+        iron:  parseInt(document.getElementById('le_iron').value) || 0
+    };
+    const key = __editingLaundryItem || ('lq_' + Date.now());
+    __fbDb.ref('hotels/' + code + '/laundryMenu/' + key).set(obj).then(() => {
+        toast('✓ Saved · ' + name);
+        closeLaundryEditor();
+        loadLaundryMenu();
+    });
+}
+
+function deleteLaundryItem() {
+    if (!__fbDb || !__editingLaundryItem) return;
+    if (!confirm('Delete this item from your laundry menu?')) return;
+    const code = (localStorage.getItem('butlrPortalAuth') || '').replace(/[^A-Z0-9-]/gi, '');
+    __fbDb.ref('hotels/' + code + '/laundryMenu/' + __editingLaundryItem).remove().then(() => {
+        toast('Item removed');
+        closeLaundryEditor();
+        loadLaundryMenu();
+    });
+}
+</script>
+
+
+<!-- ============================================================
+     TWO-WAY CHAT MODAL · staff replies to guest from any card
+     ============================================================ -->
+<div id="replyChatModal" style="display:none; position:fixed; inset:0; z-index:9200;
+     background:rgba(7,11,20,.85); backdrop-filter:blur(8px);
+     align-items:flex-end; justify-content:center; padding:0;">
+  <div style="max-width:520px; width:100%; height:80vh;
+       background:linear-gradient(180deg,#0E1525 0%, #0B1320 100%);
+       border:1px solid rgba(201,169,97,.28);
+       border-radius:20px 20px 0 0;
+       display:flex; flex-direction:column;">
+
+    <!-- Header -->
+    <div style="display:flex; align-items:center; justify-content:space-between;
+         padding:16px 20px; border-bottom:1px solid var(--line);">
+      <div>
+        <div style="display:inline-flex; align-items:center; gap:7px; padding:3px 10px;
+             border:1px solid rgba(201,169,97,.3); border-radius:999px; color:#E2C893;
+             font-size:9px; letter-spacing:.2em; text-transform:uppercase; font-weight:600;">
+          <span style="width:5px;height:5px;border-radius:50%;background:#5BB58A;
+                box-shadow:0 0 8px #5BB58A;"></span> Live chat
+        </div>
+        <div id="rc_guest" style="font-family:'Bodoni Moda',serif; font-size:18px;
+             color:#FAF7EE; margin-top:6px; font-weight:500;">
+          Guest · Room ###
+        </div>
+        <div id="rc_subject" style="font-size:11.5px; color:#A6ADBF; margin-top:2px;">
+          BTR-XXXX · Concierge request
+        </div>
+      </div>
+      <button onclick="closeReplyChat()" style="background:none; border:none; color:#A6ADBF;
+              font-size:24px; cursor:pointer;">×</button>
+    </div>
+
+    <!-- Messages -->
+    <div id="rc_messages" style="flex:1; overflow-y:auto; padding:18px 20px;
+         display:flex; flex-direction:column; gap:10px;">
+      <div style="text-align:center; color:var(--muted); font-size:11px;">Loading conversation…</div>
+    </div>
+
+    <!-- Composer -->
+    <div style="padding:14px 18px; border-top:1px solid var(--line);
+         display:flex; gap:10px; align-items:center;">
+      <input id="rc_input" type="text" placeholder="Type your reply…"
+             onkeydown="if(event.key==='Enter') sendReply()"
+             style="flex:1; padding:14px; background:rgba(255,255,255,.04);
+                    border:1px solid rgba(201,169,97,.22); border-radius:14px;
+                    color:#FAF7EE; font-size:14px; outline:none; font-family:inherit;" />
+      <button onclick="sendReply()" style="padding:14px 18px; border:none; cursor:pointer;
+              background:linear-gradient(180deg,#E2C893,#C9A961); color:#1A1306;
+              border-radius:14px; font-weight:600; font-size:14px; font-family:inherit;
+              flex-shrink:0;">
+        Send ↑
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+let __chatRequestId = null;
+let __chatMessagesListener = null;
+
+function openReplyChat(reqId) {
+    __chatRequestId = reqId;
+    document.getElementById('replyChatModal').style.display = 'flex';
+    document.getElementById('rc_input').value = '';
+    // Pull request metadata to populate the header
+    if (!__fbDb) return;
+    __fbDb.ref('requests/' + reqId).once('value', s => {
+        const r = s.val() || {};
+        const dept = (typeof KIND_TO_DEPT !== 'undefined' && KIND_TO_DEPT[r.kind])
+            ? KIND_TO_DEPT[r.kind].label : (r.kind || 'request');
+        document.getElementById('rc_guest').textContent =
+            (r.guestName || 'Guest') + ' · Room ' + (r.roomNumber || '—');
+        document.getElementById('rc_subject').textContent =
+            reqId + ' · ' + dept + ' · ' + (r.title || '');
+    });
+    attachMessageListener(reqId);
+    setTimeout(() => document.getElementById('rc_input').focus(), 100);
+}
+
+function closeReplyChat() {
+    document.getElementById('replyChatModal').style.display = 'none';
+    if (__chatMessagesListener && __chatRequestId && __fbDb) {
+        __fbDb.ref('requests/' + __chatRequestId + '/messages').off('value', __chatMessagesListener);
+    }
+    __chatRequestId = null;
+    __chatMessagesListener = null;
+}
+
+function attachMessageListener(reqId) {
+    if (!__fbDb) return;
+    const ref = __fbDb.ref('requests/' + reqId + '/messages');
+    __chatMessagesListener = function(snap) {
+        const val = snap.val() || {};
+        const keys = Object.keys(val).sort();
+        const box = document.getElementById('rc_messages');
+        if (!box) return;
+        if (keys.length === 0) {
+            box.innerHTML = '<div style="text-align:center; color:var(--muted); font-size:11px; margin:auto;">No messages yet · type below to start the conversation</div>';
+            return;
+        }
+        box.innerHTML = keys.map(k => {
+            const m = val[k];
+            const fromStaff = m.from === 'staff';
+            const time = m.ts ? new Date(m.ts * 1000).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) : '';
+            return '<div style="display:flex; ' + (fromStaff ? 'justify-content:flex-end;' : 'justify-content:flex-start;') + '">' +
+                '<div style="max-width:78%; padding:10px 14px; border-radius:18px; ' +
+                (fromStaff
+                    ? 'background:linear-gradient(180deg,#E2C893,#C9A961); color:#1A1306;'
+                    : 'background:rgba(255,255,255,.06); color:#FAF7EE; border:1px solid var(--line);') +
+                '">' +
+                '<div style="font-size:13px; line-height:1.45;">' + escapeHTML(m.text || '') + '</div>' +
+                '<div style="font-size:9.5px; opacity:.7; margin-top:3px;">' + escapeHTML(m.name || (fromStaff ? 'Staff' : 'Guest')) + ' · ' + time + '</div>' +
+                '</div></div>';
+        }).join('');
+        // Scroll to bottom
+        box.scrollTop = box.scrollHeight;
+    };
+    ref.on('value', __chatMessagesListener);
+}
+
+function escapeHTML(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function sendReply() {
+    if (!__fbDb || !__chatRequestId) return;
+    const input = document.getElementById('rc_input');
+    const text = input.value.trim();
+    if (!text) return;
+    const staffName = (typeof getStaffName === 'function' ? getStaffName() : '') || 'Staff';
+    const msg = {
+        from: 'staff',
+        text: text,
+        name: staffName,
+        ts: Date.now() / 1000
+    };
+    __fbDb.ref('requests/' + __chatRequestId + '/messages').push(msg);
+    __fbDb.ref('requests/' + __chatRequestId).update({
+        lastMessageAt: Date.now() / 1000,
+        lastMessageFrom: 'staff'
+    });
+    input.value = '';
+    input.focus();
 }
 </script>
 
