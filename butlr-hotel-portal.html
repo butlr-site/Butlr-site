@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- ===== PWA · install on iPad / Android tablet / phone ===== -->
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#0B1320" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Butlr" />
+<link rel="apple-touch-icon" sizes="180x180" href="butlr-icon-180.png" />
+<link rel="apple-touch-icon" sizes="167x167" href="butlr-icon-167.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="butlr-icon-152.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="butlr-icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="butlr-icon-512.png" />
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Butlr — Hotel Portal</title>
@@ -11,6 +24,8 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
 :root{
   --ink:#0B1320; --ink-2:#0E1525; --ink-3:#141C2F; --ink-4:#1B243A;
@@ -773,6 +788,9 @@ tr:hover td{background:rgba(255,255,255,.015);}
       </div>
       <div class="right">
         <span id="roleBadge"></span>
+        <button class="btn ghost" id="pwaInstallBtn" onclick="pwaInstall()" style="font-size:11px; padding:7px 12px; display:none;">
+          <span style="color:var(--gold-2);">↓</span>&nbsp; Install on this device
+        </button>
         <button class="icon-btn" id="signOutBtn" title="Sign out" onclick="signOut()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2v-2M10 12h11m0 0l-3-3m3 3l-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
         <button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 8a6 6 0 1112 0c0 7 3 7 3 9H3c0-2 3-2 3-9z M10 21a2 2 0 004 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="dot"></span></button>
@@ -1191,11 +1209,38 @@ tr:hover td{background:rgba(255,255,255,.015);}
       <!-- ============ ANALYTICS ============ -->
       <div class="view" data-view="analytics">
         <div class="kpis">
-          <div class="kpi"><div class="lab">RevPOR · ancillary</div><div class="v">SAR 412</div><div class="d">Revenue per occupied room from Butlr</div><span class="delta up">▲ 18.2% YoY</span></div>
-          <div class="kpi"><div class="lab">Labour saved</div><div class="v">38%</div><div class="d">Guest services calls handled in-app</div><span class="delta up">▲ 6.1 pts vs Q4</span></div>
-          <div class="kpi"><div class="lab">Repeat-stay rate</div><div class="v">64%</div><div class="d">Butlr Black returning</div><span class="delta up">▲ 11 pts</span></div>
-          <div class="kpi"><div class="lab">App adoption</div><div class="v">82%</div><div class="d">Guests who open Butlr at check-in</div><span class="delta up">▲ 14 pts</span></div>
+          <div class="kpi"><div class="lab">Live revenue · 30 days</div><div class="v" id="kpi_rev">—</div><div class="d">All Butlr ancillary</div><span class="delta up" id="kpi_rev_delta">live</span></div>
+          <div class="kpi"><div class="lab">Total orders</div><div class="v" id="kpi_orders">—</div><div class="d">Across all departments</div><span class="delta up" id="kpi_orders_delta">live</span></div>
+          <div class="kpi"><div class="lab">Avg delivery time</div><div class="v" id="kpi_eta">—</div><div class="d">Placed → delivered</div><span class="delta up" id="kpi_eta_delta">live</span></div>
+          <div class="kpi"><div class="lab">Top-selling item</div><div class="v" id="kpi_top" style="font-size:18px; line-height:1.2;">—</div><div class="d" id="kpi_top_count">—</div><span class="delta up">live</span></div>
         </div>
+
+        <div class="section">
+          <div class="head"><div><span class="lab">By department · last 30 days</span><h2>Where revenue comes from</h2></div></div>
+          <div style="height:280px; padding:14px;"><canvas id="chartDept"></canvas></div>
+        </div>
+
+        <div class="section">
+          <div class="head"><div><span class="lab">Activity · last 7 days</span><h2>Orders per day</h2></div></div>
+          <div style="height:240px; padding:14px;"><canvas id="chartDays"></canvas></div>
+        </div>
+
+        <div class="section">
+          <div class="head"><div><span class="lab">Service · last 30 days</span><h2>Delivery time by department</h2></div></div>
+          <table>
+            <tr><th>Department</th><th>Orders</th><th>Avg time placed → delivered</th><th>Slowest</th><th>Fastest</th></tr>
+            <tbody id="dtTable"><tr><td colspan="5" style="text-align:center; color:var(--muted);">Loading…</td></tr></tbody>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="head"><div><span class="lab">Hall of fame</span><h2>Staff leaderboard · this month</h2></div></div>
+          <table>
+            <tr><th>Staff</th><th>Orders touched</th><th>Avg time</th><th>Tips received</th></tr>
+            <tbody id="staffTable"><tr><td colspan="4" style="text-align:center; color:var(--muted);">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
         <div class="section">
           <div class="head"><h2>Department revenue · last 30 days</h2><span class="lab">SAR</span></div>
           <table>
@@ -1549,6 +1594,7 @@ function applyRoleToUI(role) {
     document.querySelectorAll('.dept-pill').forEach(p => {
         p.classList.toggle('on', p.dataset.filter === 'all');
     });
+
 }
 
 // Wire dept filter clicks (once)
@@ -1815,6 +1861,8 @@ function advanceRequest(id, nextStatus) {
 
     const updates = { status: ns };
     if (field) updates[field] = staff;
+    if (ns === 5) updates.deliveredAt = Date.now() / 1000;
+    if (ns === 1) updates.acceptedAt  = Date.now() / 1000;
     __fbDb.ref("requests/" + id).update(updates);
     toast(staff + " · order " + id + " → " + statusLabel(ns));
 }
@@ -1856,6 +1904,201 @@ function startLiveMode() {
     attachRequestsListener();
     startLiveCounters();
 }
+
+
+// ============================================================
+// LIVE ANALYTICS · reads from Firebase /requests
+// ============================================================
+let __chartDept = null;
+let __chartDays = null;
+
+
+
+function refreshAnalytics() {
+    if (!__fbDb) return;
+    __fbDb.ref("requests").once("value", (snap) => {
+        const all = Object.values(snap.val() || {});
+        // 30-day window
+        const cutoff = Date.now()/1000 - 30*86400;
+        const recent = all.filter(r => (r.placedAt || 0) >= cutoff);
+
+        // KPIs
+        const totalRev = recent.reduce((s,r) => s + (r.total||0), 0);
+        const totalOrders = recent.length;
+
+        // Avg delivery time (only for delivered)
+        const deliveredTimes = [];
+        recent.forEach(r => {
+            if (parseInt(r.status) === 5 && r.placedAt && r.deliveredAt) {
+                deliveredTimes.push(r.deliveredAt - r.placedAt);
+            }
+        });
+        let avgDelivery = deliveredTimes.length
+            ? Math.round(deliveredTimes.reduce((a,b)=>a+b,0) / deliveredTimes.length / 60)
+            : null;
+
+        // Top item
+        const itemCounts = {};
+        recent.forEach(r => {
+            const t = r.title || "(untitled)";
+            itemCounts[t] = (itemCounts[t]||0) + 1;
+        });
+        const top = Object.entries(itemCounts).sort((a,b)=>b[1]-a[1])[0];
+
+        // By department
+        const deptRev = {};
+        const deptCnt = {};
+        recent.forEach(r => {
+            const k = r.kind || "other";
+            deptRev[k] = (deptRev[k]||0) + (r.total||0);
+            deptCnt[k] = (deptCnt[k]||0) + 1;
+        });
+
+        // Per-day for last 7 days
+        const day = (offset) => {
+            const d = new Date();
+            d.setHours(0,0,0,0);
+            d.setDate(d.getDate() - offset);
+            return d;
+        };
+        const dayLabel = [];
+        const dayCount = [];
+        for (let i = 6; i >= 0; i--) {
+            const start = day(i).getTime()/1000;
+            const end = day(i-1).getTime()/1000;
+            dayLabel.push(day(i).toLocaleDateString(undefined, {weekday:"short", day:"numeric"}));
+            dayCount.push(recent.filter(r => (r.placedAt||0) >= start && (r.placedAt||0) < end).length);
+        }
+
+        // ===== Update DOM =====
+        document.getElementById("kpi_rev").textContent    = "SAR " + totalRev.toLocaleString();
+        document.getElementById("kpi_orders").textContent = totalOrders.toLocaleString();
+        document.getElementById("kpi_eta").textContent    = (avgDelivery != null) ? (avgDelivery + " min") : "—";
+        document.getElementById("kpi_top").textContent    = top ? top[0] : "—";
+        document.getElementById("kpi_top_count").textContent = top ? (top[1] + " orders") : "—";
+
+        // Chart by department
+        const deptColors = {
+            dining:"#E2A65C", housekeeping:"#7FB3E0", spa:"#C8A8D8",
+            concierge:"#D4A574", bringIt:"#9BC59B", wakeUp:"#F0C770",
+            transport:"#8DB6C9", experience:"#D89BB8", other:"#A6ADBF"
+        };
+        const deptLabel = {
+            dining:"F&B", housekeeping:"Housekeeping", spa:"Spa",
+            concierge:"Concierge", bringIt:"Bring-It", wakeUp:"Wake-Up",
+            transport:"Transport", experience:"Experience"
+        };
+        const dKeys = Object.keys(deptRev);
+        const chartData = {
+            labels: dKeys.map(k => deptLabel[k] || k),
+            datasets: [{
+                label: "SAR",
+                data:  dKeys.map(k => deptRev[k]),
+                backgroundColor: dKeys.map(k => deptColors[k] || "#C9A961"),
+                borderRadius: 8,
+                borderSkipped: false
+            }]
+        };
+        const opts = {
+            responsive:true, maintainAspectRatio:false,
+            plugins:{ legend:{display:false} },
+            scales:{
+                x:{ ticks:{color:"#A6ADBF"}, grid:{display:false} },
+                y:{ ticks:{color:"#A6ADBF"}, grid:{color:"rgba(255,255,255,.04)"} }
+            }
+        };
+        if (__chartDept) {
+            __chartDept.data = chartData;
+            __chartDept.update();
+        } else {
+            const ctx = document.getElementById("chartDept");
+            if (ctx) __chartDept = new Chart(ctx, { type:"bar", data:chartData, options:opts });
+        }
+
+        // Chart by day
+        const daysData = {
+            labels: dayLabel,
+            datasets: [{
+                label:"Orders",
+                data: dayCount,
+                borderColor:"#E2C893",
+                backgroundColor:"rgba(201,169,97,.15)",
+                fill:true, tension:.35, pointBackgroundColor:"#C9A961",
+                pointRadius:5, pointHoverRadius:7
+            }]
+        };
+        if (__chartDays) {
+            __chartDays.data = daysData;
+            __chartDays.update();
+        } else {
+            const ctx = document.getElementById("chartDays");
+            if (ctx) __chartDays = new Chart(ctx, { type:"line", data:daysData, options:opts });
+        }
+
+        // Delivery-time table per department
+        const dtRows = dKeys.map(k => {
+            const inDept = recent.filter(r => r.kind === k && parseInt(r.status) === 5 && r.placedAt && r.deliveredAt);
+            const times = inDept.map(r => (r.deliveredAt - r.placedAt) / 60);
+            if (!times.length) return [deptLabel[k] || k, deptCnt[k]||0, "—", "—", "—"];
+            const avg = Math.round(times.reduce((a,b)=>a+b,0) / times.length);
+            const slow = Math.round(Math.max(...times));
+            const fast = Math.round(Math.min(...times));
+            return [deptLabel[k] || k, inDept.length, avg + " min", slow + " min", fast + " min"];
+        });
+        const tbody = document.getElementById("dtTable");
+        if (tbody) {
+            tbody.innerHTML = dtRows.length
+                ? dtRows.map(row => "<tr>" + row.map(c => "<td>" + c + "</td>").join("") + "</tr>").join("")
+                : '<tr><td colspan="5" style="text-align:center; color:var(--muted);">No delivered orders yet</td></tr>';
+        }
+
+        // Staff leaderboard
+        const staffStats = {};
+        recent.forEach(r => {
+            ["staffAcceptedBy","staffReadyBy","staffOnRouteBy","staffDeliveredBy"].forEach(field => {
+                const name = (r[field]||"").trim();
+                if (!name) return;
+                if (!staffStats[name]) staffStats[name] = { touched: new Set(), times: [], tips: 0 };
+                staffStats[name].touched.add(r.id);
+                if (r.tipAmount && r.tippedTo === name) staffStats[name].tips += r.tipAmount;
+            });
+            // average time for orders this staff touched
+            if (parseInt(r.status) === 5 && r.placedAt && r.deliveredAt) {
+                const dur = (r.deliveredAt - r.placedAt) / 60;
+                ["staffAcceptedBy","staffReadyBy","staffOnRouteBy","staffDeliveredBy"].forEach(f => {
+                    const name = (r[f]||"").trim();
+                    if (name && staffStats[name]) staffStats[name].times.push(dur);
+                });
+            }
+        });
+        const staffRows = Object.entries(staffStats)
+            .map(([name, s]) => {
+                const avg = s.times.length ? Math.round(s.times.reduce((a,b)=>a+b,0)/s.times.length) : null;
+                return [name, s.touched.size, avg != null ? avg + " min" : "—", s.tips ? "SAR " + s.tips : "—"];
+            })
+            .sort((a,b) => b[1] - a[1])
+            .slice(0, 12);
+        const staffBody = document.getElementById("staffTable");
+        if (staffBody) {
+            staffBody.innerHTML = staffRows.length
+                ? staffRows.map(row => "<tr>" + row.map(c => "<td>" + c + "</td>").join("") + "</tr>").join("")
+                : '<tr><td colspan="4" style="text-align:center; color:var(--muted);">No staff actions yet</td></tr>';
+        }
+    });
+}
+
+// Hook into nav: refresh analytics every time we land on it
+const __origGo = window.go;
+window.go = function(name) {
+    __origGo(name);
+    if (name === 'analytics') refreshAnalytics();
+};
+
+// Also refresh every 30s while on analytics view
+setInterval(() => {
+    const av = document.querySelector('.view[data-view="analytics"]');
+    if (av && av.classList.contains('active')) refreshAnalytics();
+}, 30000);
 
 function startLiveCounters() {
     let revenue = 47820;
@@ -2060,45 +2303,8 @@ function signOut() {
 
         <div id="wc_qr" style="display:inline-block; padding:14px;
              background:#FAF7EE; border-radius:12px; margin-bottom:14px;">
-          <!-- QR placeholder pattern -->
-          <svg width="140" height="140" viewBox="0 0 21 21" style="image-rendering:pixelated;">
-            <rect width="21" height="21" fill="#FAF7EE"/>
-            <g fill="#1A1306">
-              <!-- Top-left finder -->
-              <rect x="0" y="0" width="7" height="1"/><rect x="0" y="1" width="1" height="6"/>
-              <rect x="6" y="1" width="1" height="6"/><rect x="0" y="6" width="7" height="1"/>
-              <rect x="2" y="2" width="3" height="3"/>
-              <!-- Top-right finder -->
-              <rect x="14" y="0" width="7" height="1"/><rect x="14" y="1" width="1" height="6"/>
-              <rect x="20" y="1" width="1" height="6"/><rect x="14" y="6" width="7" height="1"/>
-              <rect x="16" y="2" width="3" height="3"/>
-              <!-- Bottom-left finder -->
-              <rect x="0" y="14" width="7" height="1"/><rect x="0" y="15" width="1" height="6"/>
-              <rect x="6" y="15" width="1" height="6"/><rect x="0" y="20" width="7" height="1"/>
-              <rect x="2" y="16" width="3" height="3"/>
-              <!-- Random-looking modules so it reads as a real QR -->
-              <rect x="8" y="0" width="1" height="1"/><rect x="9" y="2" width="1" height="1"/>
-              <rect x="10" y="0" width="1" height="1"/><rect x="11" y="3" width="1" height="1"/>
-              <rect x="12" y="1" width="1" height="1"/><rect x="13" y="4" width="1" height="1"/>
-              <rect x="8" y="5" width="1" height="1"/><rect x="10" y="5" width="1" height="1"/>
-              <rect x="0" y="8" width="1" height="1"/><rect x="2" y="9" width="1" height="1"/>
-              <rect x="4" y="8" width="1" height="1"/><rect x="6" y="10" width="1" height="1"/>
-              <rect x="8" y="8" width="2" height="2"/><rect x="11" y="9" width="1" height="1"/>
-              <rect x="13" y="8" width="1" height="1"/><rect x="15" y="9" width="1" height="1"/>
-              <rect x="17" y="8" width="1" height="1"/><rect x="19" y="10" width="1" height="1"/>
-              <rect x="9" y="11" width="1" height="1"/><rect x="11" y="12" width="1" height="1"/>
-              <rect x="13" y="11" width="1" height="1"/><rect x="15" y="12" width="1" height="1"/>
-              <rect x="17" y="11" width="1" height="1"/><rect x="19" y="13" width="1" height="1"/>
-              <rect x="8" y="14" width="1" height="1"/><rect x="10" y="15" width="1" height="1"/>
-              <rect x="12" y="14" width="1" height="1"/><rect x="14" y="15" width="1" height="1"/>
-              <rect x="16" y="14" width="1" height="1"/><rect x="18" y="15" width="1" height="1"/>
-              <rect x="9" y="17" width="1" height="1"/><rect x="11" y="18" width="1" height="1"/>
-              <rect x="13" y="17" width="1" height="1"/><rect x="15" y="18" width="1" height="1"/>
-              <rect x="17" y="17" width="1" height="1"/><rect x="19" y="18" width="1" height="1"/>
-              <rect x="8" y="19" width="1" height="1"/><rect x="10" y="20" width="1" height="1"/>
-              <rect x="12" y="19" width="1" height="1"/>
-            </g>
-          </svg>
+          <canvas id="wc_qr_canvas" width="200" height="200"
+                  style="display:block; width:200px; height:200px;"></canvas>
         </div>
 
         <div style="font-size:10px; letter-spacing:.2em; color:#A6ADBF;
@@ -2119,16 +2325,31 @@ function signOut() {
         </div>
       </div>
 
-      <div style="display:flex; gap:10px;">
-        <button onclick="window.print()" style="flex:1; padding:14px; border:none; cursor:pointer;
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:8px;">
+        <button onclick="showGuestQRFullscreen()" style="padding:14px; border:none; cursor:pointer;
+                background:linear-gradient(180deg,#E2C893,#C9A961); color:#1A1306;
+                border-radius:12px; font-weight:600; font-size:13px; font-family:inherit;
+                box-shadow:0 6px 18px rgba(201,169,97,.25);">
+          Show on screen · guest scans
+        </button>
+        <button onclick="window.print()" style="padding:14px; border:none; cursor:pointer;
                 background:rgba(255,255,255,.06); color:#FAF7EE;
                 border:1px solid rgba(201,169,97,.22); border-radius:12px;
                 font-weight:600; font-size:13px; font-family:inherit;">
           Print card
         </button>
-        <button onclick="resetAddGuest()" style="flex:1; padding:14px; border:none; cursor:pointer;
-                background:linear-gradient(180deg,#E2C893,#C9A961); color:#1A1306;
-                border-radius:12px; font-weight:600; font-size:13px; font-family:inherit;">
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <button onclick="emailGuestCard()" style="padding:12px; border:none; cursor:pointer;
+                background:transparent; color:#A6ADBF;
+                border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                font-weight:500; font-size:12px; font-family:inherit;">
+          Email to guest
+        </button>
+        <button onclick="resetAddGuest()" style="padding:12px; border:none; cursor:pointer;
+                background:transparent; color:#A6ADBF;
+                border:1px solid rgba(201,169,97,.22); border-radius:10px;
+                font-weight:500; font-size:12px; font-family:inherit;">
           Add another guest
         </button>
       </div>
@@ -2232,6 +2453,56 @@ function issueGuestAccess() {
 }
 </script>
 
+
+
+<script>
+// Register the service worker so this site can be installed as an app
+// Show the "Install" button on iOS where beforeinstallprompt never fires
+const __isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+const __inStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+if (__isIOS && !__inStandalone) {
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('pwaInstallBtn');
+        if (btn) btn.style.display = '';
+    });
+}
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('butlr-sw.js').then(reg => {
+            console.log('[Butlr] PWA service worker registered.');
+        }).catch(e => console.warn('[Butlr] SW failed:', e));
+    });
+}
+
+// Catch the install event for Android / Chrome desktop
+let __deferredInstallPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    __deferredInstallPrompt = e;
+    const btn = document.getElementById('pwaInstallBtn');
+    if (btn) btn.style.display = '';
+});
+
+function pwaInstall() {
+    // iOS Safari does not support beforeinstallprompt — show iOS hint instead
+    const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+    const inStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+    if (inStandalone) {
+        alert('Butlr is already installed on this device.');
+        return;
+    }
+    if (isIOS) {
+        alert("To install Butlr on this iPad:\n\n1. Tap the Share icon (the square with arrow up) in Safari.\n2. Scroll down and tap 'Add to Home Screen'.\n3. Tap 'Add'.\n\nButlr will appear as an app on your home screen.");
+        return;
+    }
+    if (__deferredInstallPrompt) {
+        __deferredInstallPrompt.prompt();
+        __deferredInstallPrompt.userChoice.then(() => { __deferredInstallPrompt = null; });
+    } else {
+        alert("Your browser doesn't support direct install. Open this page in Chrome or Safari and use 'Add to Home Screen' from the share menu.");
+    }
+}
+</script>
 
 </body>
 </html>
