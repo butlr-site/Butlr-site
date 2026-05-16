@@ -840,7 +840,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
            border-radius:12px; line-height:1.7;">
         <div style="text-align:center; color:#E2C893; letter-spacing:.18em;
              font-size:10px; margin-bottom:10px; text-transform:uppercase; font-weight:600;">
-          Demo Access · The Ritz-Carlton Riyadh
+          Department PIN reference
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 14px;">
           <div>Hotel code</div><div style="color:#E2C893;">RITZ-RYD-2026</div>
@@ -882,6 +882,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
 
     <div class="nav-section">Content</div>
     <div class="nav-item" data-go="menus"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M5 3v8a3 3 0 003 3v7M8 3v8M11 3v8M16 3c-1.5 0-3 2-3 5s1.5 4 3 4v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Menu Manager</div>
+    <div class="nav-item" data-go="laundry"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6z M9 3h6v3H9z M12 11a4 4 0 100 8 4 4 0 000-8z M12 13v3l2 1" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>Laundry &amp; Pressing</div>
     <div class="nav-item" data-go="experiences"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Experience Catalog</div>
     <div class="nav-item" data-go="profile"><svg class="ic" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Hotel Profile</div>
     <div class="nav-item" data-go="welcome"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Welcome Letter</div>
@@ -911,7 +912,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
         <button class="mobile-toggle icon-btn" onclick="document.getElementById('sidebar').classList.toggle('open')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
         <div>
           <div class="crumbs" id="crumbs">Operations · Dashboard</div>
-          <h1 id="topTitle">The Ritz-Carlton, Riyadh</h1>
+          <h1 id="topTitle">Dashboard</h1>
         </div>
       </div>
       <div class="right">
@@ -1331,14 +1332,14 @@ html, body { overflow-x: hidden; max-width: 100vw; }
       <!-- ============ CONCIERGE CONSOLE ============ -->
       <div class="view" data-view="concierge">
         <div class="section">
-          <div class="head"><div><span class="lab">8 active chats · avg reply 24s</span><h2>Concierge console</h2></div><div class="actions"><button class="btn ghost">Macros</button><button class="btn primary">AI co-pilot ON</button></div></div>
-          <table>
-            <tr><th>Guest</th><th>Suite</th><th>Last message</th><th>Waiting</th><th>Lang</th><th></th></tr>
-            <tr><td>Bader Abdulaziz <span class="pill gold">Black</span></td><td>1208</td><td>"Could you arrange a table for two at Myazu, 9 PM?"</td><td>12s</td><td>EN</td><td><button class="btn primary">Reply</button></td></tr>
-            <tr><td>Y. Tanaka <span class="pill gold">Black</span></td><td>1809</td><td>"明日の朝食を 7 時にお願いします。"</td><td>18s</td><td>JA→EN</td><td><button class="btn primary">Reply</button></td></tr>
-            <tr><td>H. Müller</td><td>1115</td><td>"Late checkout possible to 5 PM?"</td><td>32s</td><td>EN</td><td><button class="btn primary">Reply</button></td></tr>
-            <tr><td>R. Okafor</td><td>2001</td><td>"Birthday cake for 12 people — chocolate, no nuts."</td><td>45s</td><td>EN</td><td><button class="btn primary">Reply</button></td></tr>
-            <tr><td>L. Conti</td><td>0712</td><td>"Babysitter for tomorrow evening?"</td><td>1m</td><td>IT→EN</td><td><button class="btn primary">Reply</button></td></tr>
+          <div class="head">
+            <div><span class="lab" id="conciergeChatStatus">Live · syncing with guest app</span><h2>Concierge chat</h2></div>
+          </div>
+          <table id="conciergeChatTable">
+            <thead><tr><th style="width:22%;">Guest</th><th style="width:8%;">Room</th><th>Last message</th><th style="width:9%;">Waiting</th><th style="width:8%;"></th></tr></thead>
+            <tbody id="conciergeChatRows">
+              <tr><td colspan="5" style="text-align:center; color:var(--muted); padding:32px 0;">No active chats yet · guests will appear here when they message</td></tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -1629,6 +1630,7 @@ const NAV = {
   bookings:["Operations · Bookings","Bookings & guests"],
   concierge:["Operations · Concierge","Concierge console"],
   menus:["Content · Menu Manager","Menu manager"],
+  laundry:["Content · Laundry & Pressing","Laundry menu"],
   experiences:["Content · Experiences","City experiences"],
   profile:["Content · Hotel Profile","Hotel profile"],
   welcome:["Content · Welcome Letter","Welcome letter"],
@@ -1639,7 +1641,16 @@ const NAV = {
   settings:["Settings · Roles","Settings & roles"],
 };
 function go(name){
-  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.dataset.view===name));
+  // Special: laundry sidebar item → open Menu Manager and switch to Laundry tab
+  let viewName = name;
+  if (name === 'laundry') {
+      viewName = 'menus';
+      setTimeout(() => {
+          const laundryTab = Array.from(document.querySelectorAll('.tabs-row .tab-item')).find(el => el.textContent.includes('Laundry'));
+          if (laundryTab) laundryTab.click();
+      }, 60);
+  }
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.dataset.view===viewName));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.go===name));
   const t = NAV[name] || ["",""];
   document.getElementById('crumbs').textContent = t[0];
@@ -1805,9 +1816,8 @@ function applyRoleToUI(role) {
     window.__butlrDeptFilter = 'all'; // managers can drill into one dept
     const r = ROLE_INFO[role] || ROLE_INFO.manager;
 
-    // Clean title — no inline tag
-    const top = document.getElementById('topTitle');
-    if (top) top.textContent = 'Live order board';
+    // The top page title reflects the CURRENT view (Dashboard / Orders / etc.) — leave it to go().
+    // Only set the secondary "orderBoardTitle" specific to the Live Order Board section.
     const boardTitle = document.getElementById('orderBoardTitle');
     if (boardTitle) {
         boardTitle.textContent = (r.kinds === null)
@@ -1825,7 +1835,7 @@ function applyRoleToUI(role) {
         wakeUp:       ['orders'],
         transport:    ['orders'],
         experience:   ['orders','experiences'],
-        laundry:      ['orders']
+        laundry:      ['orders','laundry']
     };
     const allowed = sidebarItems[role];
     if (allowed) {
@@ -1978,6 +1988,13 @@ function renderRequest(req) {
     const colId = columnIdForStatus(req.status);
     const col   = document.getElementById(colId);
     if (!col) return;
+
+    // Concierge chats live in their own panel — NOT in the Order Board kanban
+    if (req.kind === 'concierge') {
+        const existing = document.getElementById("req-" + req.id);
+        if (existing) existing.remove();
+        return;
+    }
 
     // Role-based filter — drop cards that don't belong to this staff member's dept
     if (!isVisibleForRole(req.kind)) {
@@ -2171,7 +2188,74 @@ function startLiveMode() {
     clearKanban();
     initFirebase();
     attachRequestsListener();
+    attachConciergeChatListener();
     startLiveCounters();
+}
+
+// === Concierge chat real-time listener ===
+function attachConciergeChatListener() {
+    if (!__fbDb) return;
+    __fbDb.ref('requests').on('value', (snap) => {
+        const all = snap.val() || {};
+        const chats = Object.entries(all)
+            .filter(([id, r]) => r && r.kind === 'concierge')
+            .sort((a, b) => (b[1].lastMessageAt || b[1].placedAt || 0) - (a[1].lastMessageAt || a[1].placedAt || 0));
+
+        const tbody = document.getElementById('conciergeChatRows');
+        if (!tbody) return;
+        if (chats.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--muted); padding:32px 0;">No active chats yet · guests will appear here when they message</td></tr>';
+            const status = document.getElementById('conciergeChatStatus');
+            if (status) status.textContent = 'Live · 0 active chats';
+            return;
+        }
+
+        tbody.innerHTML = chats.map(([id, r]) => {
+            const guest = r.guestName || 'Guest';
+            const room = r.roomNumber || '—';
+            // Find last message — async, so for now show title or note
+            let lastMsg = r.note || r.title || '(opened a chat)';
+            // Try synchronous: if we cached messages
+            const cachedMsgs = window.__chatMsgCache && window.__chatMsgCache[id];
+            if (cachedMsgs) {
+                const lastKey = Object.keys(cachedMsgs).sort().pop();
+                if (lastKey) lastMsg = cachedMsgs[lastKey].text || lastMsg;
+            }
+            const placedSec = r.lastMessageAt || r.placedAt || (Date.now()/1000);
+            const ago = timeAgoShort(placedSec);
+            const fromGuest = (r.lastMessageFrom || 'guest') === 'guest';
+
+            return '<tr>' +
+                '<td><strong>' + escapeHTML(guest) + '</strong></td>' +
+                '<td>' + escapeHTML(String(room)) + '</td>' +
+                '<td style="max-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' +
+                    (fromGuest ? '<span style="color:var(--gold-2);">●</span> ' : '') +
+                    escapeHTML(String(lastMsg)).substring(0, 80) +
+                '</td>' +
+                '<td><span style="color:' + (fromGuest ? 'var(--gold)' : 'var(--muted)') + ';">' + ago + '</span></td>' +
+                '<td><button class="btn primary" onclick="openReplyChat(\'' + id + '\')">💬 Reply</button></td>' +
+            '</tr>';
+        }).join('');
+
+        const status = document.getElementById('conciergeChatStatus');
+        if (status) status.textContent = 'Live · ' + chats.length + ' active chat' + (chats.length === 1 ? '' : 's');
+
+        // Pre-cache messages for each chat so next render shows last message
+        chats.forEach(([id]) => {
+            __fbDb.ref('requests/' + id + '/messages').once('value', (msgSnap) => {
+                if (!window.__chatMsgCache) window.__chatMsgCache = {};
+                window.__chatMsgCache[id] = msgSnap.val() || {};
+            });
+        });
+    });
+}
+
+function timeAgoShort(sec) {
+    const diff = Math.max(0, Math.floor(Date.now()/1000 - sec));
+    if (diff < 60) return diff + 's';
+    if (diff < 3600) return Math.floor(diff/60) + 'm';
+    if (diff < 86400) return Math.floor(diff/3600) + 'h';
+    return Math.floor(diff/86400) + 'd';
 }
 
 
@@ -2562,8 +2646,11 @@ function signOut() {
       <div id="welcomeCard" style="border:1px solid rgba(201,169,97,.3);
            background:linear-gradient(180deg,#0E1525 0%, #060A12 100%);
            border-radius:14px; padding:26px; text-align:center; margin-bottom:18px;">
-        <div style="font-size:9px; letter-spacing:.32em; color:#E2C893; margin-bottom:4px;">
-          BUTLR · WELCOME ABOARD
+        <div style="margin-bottom:10px;">
+          <img src="butlr-wordmark.png" alt="Butlr" style="height:22px;"/>
+        </div>
+        <div style="font-size:9px; letter-spacing:.32em; color:#8D7639; margin-bottom:4px;">
+          WELCOME ABOARD
         </div>
         <div id="wc_hotel" style="font-family:'Bodoni Moda',serif; font-size:18px;
              color:#FAF7EE; font-weight:500; margin-bottom:18px;">
