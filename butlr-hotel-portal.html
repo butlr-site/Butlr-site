@@ -1336,7 +1336,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
             <div><span class="lab" id="conciergeChatStatus">Live · syncing with guest app</span><h2>Concierge chat</h2></div>
           </div>
           <table id="conciergeChatTable">
-            <thead><tr><th style="width:22%;">Guest</th><th style="width:8%;">Room</th><th>Last message</th><th style="width:9%;">Waiting</th><th style="width:8%;"></th></tr></thead>
+            <thead><tr><th style="width:18%;">Guest</th><th style="width:7%;">Room</th><th>Last message</th><th style="width:13%; text-align:center;">Waiting</th><th style="width:14%;"></th></tr></thead>
             <tbody id="conciergeChatRows">
               <tr><td colspan="5" style="text-align:center; color:var(--muted); padding:32px 0;">No active chats yet · guests will appear here when they message</td></tr>
             </tbody>
@@ -2197,8 +2197,14 @@ function attachConciergeChatListener() {
     if (!__fbDb) return;
     __fbDb.ref('requests').on('value', (snap) => {
         const all = snap.val() || {};
+        // Only show chats with activity in last 4 hours
+        const cutoff = (Date.now() / 1000) - (4 * 60 * 60);
         const chats = Object.entries(all)
-            .filter(([id, r]) => r && r.kind === 'concierge')
+            .filter(([id, r]) => {
+                if (!r || r.kind !== 'concierge') return false;
+                const lastTs = r.lastMessageAt || r.placedAt || 0;
+                return lastTs > cutoff;
+            })
             .sort((a, b) => (b[1].lastMessageAt || b[1].placedAt || 0) - (a[1].lastMessageAt || a[1].placedAt || 0));
 
         const tbody = document.getElementById('conciergeChatRows');
@@ -2232,8 +2238,11 @@ function attachConciergeChatListener() {
                     (fromGuest ? '<span style="color:var(--gold-2);">●</span> ' : '') +
                     escapeHTML(String(lastMsg)).substring(0, 80) +
                 '</td>' +
-                '<td><span style="color:' + (fromGuest ? 'var(--gold)' : 'var(--muted)') + ';">' + ago + '</span></td>' +
-                '<td><button class="btn primary" onclick="openReplyChat(\'' + id + '\')">💬 Reply</button></td>' +
+                '<td style="text-align:center;"><span style="color:' + (fromGuest ? 'var(--gold)' : 'var(--muted)') + ';">' + ago + '</span></td>' +
+                '<td style="text-align:right; white-space:nowrap;">' +
+                    '<button class="btn primary" style="padding:6px 12px; font-size:12px;" onclick="openReplyChat(\'' + id + '\')">💬 Reply</button>' +
+                    ' <button class="btn ghost" style="padding:6px 8px; font-size:12px;" onclick="deleteChatThread(\'' + id + '\')" title="Archive chat">×</button>' +
+                '</td>' +
             '</tr>';
         }).join('');
 
@@ -2248,6 +2257,14 @@ function attachConciergeChatListener() {
             });
         });
     });
+}
+
+function deleteChatThread(reqId) {
+    if (!confirm('Archive this chat? It will be removed from the active list.')) return;
+    if (!__fbDb) return;
+    // Don't actually delete the data — just mark as archived so it filters out
+    __fbDb.ref('requests/' + reqId).update({ archived: true, lastMessageAt: 0 });
+    toast('Chat archived');
 }
 
 function timeAgoShort(sec) {
