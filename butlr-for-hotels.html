@@ -392,7 +392,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
 <div class="container">
   <!-- ============ HEADER ============ -->
   <div class="brand">
-    <div class="brand-mark">BUTL<span class="r">r.</span></div>
+    <div class="brand-mark"><img src="butlr-wordmark.png" alt="Butlr" style="height:32px; vertical-align:middle;"/></div>
     <div class="tag"><span class="dot"></span>For Hotels</div>
   </div>
 
@@ -562,7 +562,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
       <div class="form-grid">
         <div class="f-field">
           <label>Hotel name</label>
-          <input id="hf_name" type="text" placeholder="The Ritz-Carlton, Riyadh" />
+          <input id="hf_name" type="text" placeholder="Your Hotel" />
         </div>
         <div class="f-field">
           <label>City · Country</label>
@@ -660,7 +660,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
 
       <div class="access-card">
         <div class="lab">Butlr Access Card</div>
-        <h3 id="wp_hotel">The Ritz-Carlton, Riyadh</h3>
+        <h3 id="wp_hotel">Your Hotel</h3>
         <p style="color:var(--soft); font-size:12.5px; margin:6px 0 0;">Print this card. Hand a copy to each department head.</p>
         <div class="hotel-code" id="wp_code">RITZ-RYD-2026</div>
 
@@ -698,7 +698,7 @@ html, body { overflow-x: hidden; max-width: 100vw; }
   </section>
 
   <footer>
-    BUTLR · FORTY EIGHT HOURS COMPANY · KUWAIT · 2026 · hi@bader.me
+    BUTLR · CORBIT CO. · KUWAIT · 2026 · info@corbitco.com
   </footer>
 </div>
 
@@ -798,7 +798,7 @@ function submitSignup() {
         document.getElementById('wp_pin_tr').textContent     = pins.transport;
         window.scrollTo({top:0, behavior:'smooth'});
     }).catch(e => {
-        alert("Sign-up failed: " + e.message + "\n\nTry again or email hi@bader.me");
+        alert("Sign-up failed: " + e.message + "\n\nTry again or email info@corbitco.com");
         console.error(e);
     });
 }
