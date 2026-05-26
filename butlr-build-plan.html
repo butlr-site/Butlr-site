@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Butlr — Solo Build Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Bodoni+Moda:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B1320; --gold:#C9A961; --gold-2:#E2C893; --gold-soft:#F1E4C7;
+  --cream:#F6F0E3; --ivory:#FAF7EE;
+  --line:rgba(201,169,97,.22); --line-strong:rgba(201,169,97,.5);
+  --muted:#7B8294; --soft:#B7BDCC;
+  --ok:#7CCBA1; --bad:#E0908A;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Inter', sans-serif;
+  background:
+    radial-gradient(1200px 800px at 80% -10%, rgba(201,169,97,.10), transparent 60%),
+    radial-gradient(900px 700px at 10% 90%, rgba(201,169,97,.08), transparent 55%),
+    linear-gradient(180deg,#070B14 0%, #0B1320 100%);
+  color:var(--cream); min-height:100vh; scroll-behavior:smooth;
+}
+.wrap{max-width:980px; margin:0 auto; padding:0 32px;}
+section{padding:80px 0; border-top:1px solid var(--line);}
+section:first-of-type{border-top:none;}
+
+.eyebrow{font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:var(--gold-2); margin-bottom:14px;}
+h1{font-family:'Bodoni Moda', serif; font-weight:500; font-size:60px; line-height:1; letter-spacing:-.015em; color:var(--ivory); margin:0 0 22px;}
+h1 em{font-style:italic; color:var(--gold-2); font-weight:400;}
+h2{font-family:'Bodoni Moda', serif; font-weight:500; font-size:36px; line-height:1.1; color:var(--ivory); margin:0 0 18px;}
+h3{font-family:'Bodoni Moda', serif; font-weight:500; font-size:22px; color:var(--ivory); margin:0 0 10px;}
+.slogan{font-family:'Cormorant Garamond', serif; font-style:italic; font-size:22px; color:var(--gold-soft); margin:0 0 26px;}
+p{font-size:17px; line-height:1.7; color:#D4DBEB; max-width:760px; margin:0 0 16px;}
+p.lede{font-size:20px; color:var(--ivory);}
+p.s{font-size:14px; color:var(--soft); line-height:1.6;}
+.hi{color:var(--gold-2);}
+.ok{color:var(--ok);}
+.bad{color:var(--bad);}
+
+.hero{padding-top:120px; padding-bottom:60px;}
+.pill{display:inline-block; font-size:10px; letter-spacing:.34em; text-transform:uppercase; color:var(--gold-2); border:1px solid var(--line-strong); padding:5px 11px; border-radius:999px; margin-bottom:18px;}
+
+/* split table — me vs you */
+.split{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:30px;}
+@media(max-width:800px){.split{grid-template-columns:1fr;}}
+.col{border:1px solid var(--line); border-radius:18px; padding:24px; background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,0));}
+.col.me{border-color:var(--line-strong); background:radial-gradient(500px 200px at 50% -10%, rgba(201,169,97,.10), transparent 70%), linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,0));}
+.col .tag{font-size:10px; letter-spacing:.32em; text-transform:uppercase; color:var(--gold-2); margin-bottom:6px;}
+.col h3{margin:0 0 14px;}
+.col ul{list-style:none; margin:0; padding:0;}
+.col li{padding:8px 0 8px 26px; font-size:14.5px; color:#C3CAD9; position:relative; border-bottom:1px solid rgba(201,169,97,.08);}
+.col li:last-child{border-bottom:none;}
+.col li:before{content:""; position:absolute; left:0; top:13px; width:8px; height:8px; border-radius:50%; background:var(--gold);}
+
+/* phases */
+.phases{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-top:30px;}
+@media(max-width:900px){.phases{grid-template-columns:1fr;}}
+.phase{
+  border:1px solid var(--line); border-radius:18px; padding:24px;
+  background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,0));
+}
+.phase .n{font-family:'Bodoni Moda', serif; color:var(--gold-2); font-size:13px; letter-spacing:.22em;}
+.phase h3{font-size:22px; margin:6px 0 6px;}
+.phase .dur{font-size:11px; color:var(--gold-soft); letter-spacing:.18em; margin-bottom:14px; text-transform:uppercase;}
+.phase p{font-size:14px; color:#A6ADBF; margin:0 0 10px;}
+.phase ul{list-style:none; margin:0; padding:0;}
+.phase li{padding:5px 0 5px 22px; font-size:13.5px; color:#B7BDCC; position:relative;}
+.phase li:before{content:"›"; position:absolute; left:0; color:var(--gold-2); font-family:'Bodoni Moda', serif; font-size:16px;}
+
+/* weeks */
+.weeks{margin-top:20px;}
+.week{
+  display:grid; grid-template-columns:80px 1fr; gap:20px;
+  padding:18px 20px; border:1px solid var(--line); border-radius:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,.022), rgba(255,255,255,0));
+  margin-bottom:10px;
+}
+.week .num{font-family:'Bodoni Moda', serif; font-size:40px; color:var(--gold-2); line-height:1;}
+.week .num .l{display:block; font-size:10px; color:var(--soft); letter-spacing:.3em; text-transform:uppercase; margin-top:4px; font-family:'Inter',sans-serif;}
+.week h3{margin:0 0 6px; font-size:18px;}
+.week p{font-size:14px; margin:0 0 8px; color:#A6ADBF;}
+.week .tasks{display:flex; flex-wrap:wrap; gap:6px;}
+.week .tag{
+  font-size:11px; letter-spacing:.06em; padding:4px 10px; border-radius:999px;
+  border:1px solid var(--line); color:var(--gold-2); background:rgba(201,169,97,.04);
+}
+.week .tag.me{background:rgba(201,169,97,.16); color:var(--gold-2);}
+.week .tag.you{background:rgba(124,203,161,.10); color:var(--ok); border-color:rgba(124,203,161,.3);}
+
+/* stack */
+.stack{display:grid; grid-template-columns:repeat(2, 1fr); gap:12px; margin-top:20px;}
+@media(max-width:700px){.stack{grid-template-columns:1fr;}}
+.tool{
+  border:1px solid var(--line); border-radius:14px; padding:16px 18px;
+  display:flex; gap:14px; align-items:center;
+  background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,0));
+}
+.tool .logo{
+  width:42px; height:42px; border-radius:10px;
+  background:linear-gradient(135deg, var(--gold), #6E5829);
+  display:grid; place-items:center; color:#1A1306;
+  font-family:'Bodoni Moda', serif; font-weight:700; font-size:18px;
+  flex:0 0 42px;
+}
+.tool .n{font-family:'Bodoni Moda', serif; font-size:16px; color:var(--ivory);}
+.tool .d{font-size:12.5px; color:var(--soft); margin-top:2px;}
+.tool .p{margin-left:auto; font-family:'Bodoni Moda', serif; color:var(--gold-2); font-size:14px; white-space:nowrap;}
+
+/* costs */
+.costs{
+  border:1px solid var(--line); border-radius:18px; overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,.022), rgba(255,255,255,0));
+  margin-top:24px;
+}
+.costs .head{padding:18px 22px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:flex-end;}
+.costs .head .l{font-size:11px; letter-spacing:.24em; color:var(--gold-2); text-transform:uppercase;}
+.costs .head h3{margin:4px 0 0;}
+.costs .head .ttl{font-family:'Bodoni Moda', serif; font-size:28px; color:var(--gold-2);}
+table{width:100%; border-collapse:separate; border-spacing:0;}
+table td{padding:13px 22px; font-size:14px; color:#D4DBEB; border-bottom:1px solid rgba(201,169,97,.08);}
+table td.b{color:var(--ivory); font-weight:600;}
+table td.g{color:var(--gold-2); font-family:'Bodoni Moda', serif; font-size:16px;}
+table tr.sum td{background:rgba(201,169,97,.06); font-family:'Bodoni Moda', serif; font-size:17px; color:var(--ivory);}
+table tr.sum td.g{font-size:22px;}
+table tr:last-child td{border-bottom:none;}
+
+/* risks */
+.risk{
+  border:1px solid rgba(224,144,138,.3); border-radius:14px; padding:18px 20px;
+  background:linear-gradient(180deg, rgba(224,144,138,.04), transparent);
+  margin-bottom:10px;
+}
+.risk .t{font-family:'Bodoni Moda', serif; font-size:18px; color:#F4A8A8; margin:0 0 6px;}
+.risk .d{font-size:14px; color:#C9CBD3; margin:0;}
+
+/* CTA */
+.cta-card{
+  border:1px solid var(--line-strong); border-radius:22px; padding:36px;
+  background:radial-gradient(800px 300px at 80% -20%, rgba(201,169,97,.16), transparent 60%), linear-gradient(135deg, #161E2E 0%, #0E1422 100%);
+  margin-top:30px; text-align:center;
+}
+.cta-card .l{font-size:11px; letter-spacing:.34em; color:var(--gold-2); text-transform:uppercase; margin-bottom:14px;}
+.cta-card h2{margin:0 0 14px;}
+.cta-card p{max-width:600px; margin:0 auto 24px;}
+.cta-card .day-1{
+  display:inline-block; padding:14px 28px; border-radius:12px;
+  background:linear-gradient(180deg, var(--gold-2), var(--gold)); color:#1A1306;
+  font-weight:600; letter-spacing:.04em;
+}
+
+.note{margin-top:24px; padding:14px 18px; border:1px dashed var(--line); border-radius:12px; font-size:14px; color:var(--soft); line-height:1.6; background:rgba(255,255,255,.015);}
+.note b{color:var(--gold-2);}
+
+footer{padding:40px 0 60px; text-align:center; color:var(--muted); font-size:11px; letter-spacing:.24em; text-transform:uppercase;}
+footer em{color:var(--gold-2); font-style:normal;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="pill">The solo build plan</div>
+    <div class="eyebrow">Butlr · From zero to App Store</div>
+    <h1>Just you and me.<br/>Live in ninety days.</h1>
+    <div class="slogan">"The minimum viable butler. Real. Shipped. Working."</div>
+
+    <p class="lede">Yes, you can ship the first version of Butlr from your kitchen table — without a developer, without a UI designer, with my help on the keyboard. But only a <em>small</em> version of it. This document tells you exactly what we'd build, how, in what order, and what stays on your side of the table.</p>
+  </div>
+</section>
+
+<!-- ME vs YOU -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Section I · The honest split</div>
+    <h2>What I do. What only you can do.</h2>
+    <p>I can write almost everything technical. I cannot legally sign contracts, hold credit cards, create accounts on your behalf, or submit apps to Apple as you. That's the line.</p>
+
+    <div class="split">
+      <div class="col me">
+        <div class="tag">I handle</div>
+        <h3>The technical layer</h3>
+        <ul>
+          <li>Write the full React Native code (iOS + Android)</li>
+          <li>Write the hotel-portal web app</li>
+          <li>Design every screen — using the prototype as the spec</li>
+          <li>Set up the backend (Supabase database, auth, real-time)</li>
+          <li>Wire up Stripe for payments</li>
+          <li>Generate icons, splash screens, App Store assets</li>
+          <li>Draft privacy policy &amp; terms of service</li>
+          <li>Write the App Store listing &amp; descriptions</li>
+          <li>Debug errors you paste to me</li>
+          <li>Walk you through every command, every time</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="tag">You handle</div>
+        <h3>The human &amp; legal layer</h3>
+        <ul>
+          <li>Apple Developer account ($99/year)</li>
+          <li>Google Play Console ($25 one-time)</li>
+          <li>Buy domain butlr.app (~$15/year)</li>
+          <li>Open Stripe account (your bank/ID)</li>
+          <li>Sign up for Supabase + Vercel (free tier)</li>
+          <li>Form an LLC/company (Riyadh — ~SAR 5k)</li>
+          <li>Run my code on your laptop</li>
+          <li>Test the app on your phone</li>
+          <li>Find ONE friendly hotel to pilot</li>
+          <li>Submit the app to the stores · respond to reviews</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>The split in one line.</b> I am the engineer, designer, and copywriter. You are the founder, CEO, and the human Apple/Google/Stripe needs to talk to. Neither of us can do the other's part.
+    </div>
+  </div>
+</section>
+
+<!-- THREE PHASES -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Section II · The three phases</div>
+    <h2>From zero to a real business.</h2>
+    <p>We build in three phases. Phase 1 is what you can do alone with me. Phases 2 and 3 are what comes after — when you have something real and need real humans.</p>
+
+    <div class="phases">
+      <div class="phase">
+        <div class="n">PHASE 01 · SOLO</div>
+        <h3>Butlr Lite</h3>
+        <div class="dur">Month 1–3 · ~$500</div>
+        <p>The minimum viable butler. Just enough to be real, useful, and on the App Store. One hotel, one menu, one payment flow.</p>
+        <ul>
+          <li>iPhone + Android app</li>
+          <li>1 pilot hotel portal</li>
+          <li>Real Stripe payments</li>
+          <li>Live in Apple &amp; Google Play</li>
+          <li>Proof of concept</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="n">PHASE 02 · FIRST HUMANS</div>
+        <h3>Real product</h3>
+        <div class="dur">Month 4–9 · ~$50–80k</div>
+        <p>Add 3–5 hotel pilots. Hire one part-time engineer. Build a proper back office and the world-firsts. You're now a real (tiny) company.</p>
+        <ul>
+          <li>3–5 hotel pilots</li>
+          <li>1 part-time engineer (you can afford one)</li>
+          <li>Concierge chat with real humans</li>
+          <li>Tip Jar, Bring-It, Passport</li>
+          <li>$10–50k MRR</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="n">PHASE 03 · SCALE</div>
+        <h3>Raise the seed</h3>
+        <div class="dur">Month 10+ · $5M+</div>
+        <p>Now you have traction, pilots, an app live with revenue. Take the pitch deck we built and raise the seed round. Hire engineers, sales, support, designers. Build the full platform.</p>
+        <ul>
+          <li>$5M seed round</li>
+          <li>Hire 8–12 people</li>
+          <li>100 anchor hotels</li>
+          <li>$22M ARR target year 1</li>
+          <li>Become a real company</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Why solo first?</b> Investors don't fund slide decks. They fund traction. By the time you walk in with $5k MRR and 3 hotels using your app daily, your pitch deck stops being a pitch deck and starts being a progress report. <span class="hi">That's how seed rounds get oversubscribed.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 90-DAY WEEKS -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Section III · The 90-day plan</div>
+    <h2>Week by week.</h2>
+    <p>What we actually do, in what order, who does what each week. ~10 hours of your time per week — evenings and weekends, no need to quit your job.</p>
+
+    <div class="weeks">
+
+      <div class="week">
+        <div class="num">01<span class="l">Week</span></div>
+        <div>
+          <h3>Foundation</h3>
+          <p>Get all the accounts, domains, tools. Nothing technical yet — just signing up. By Friday you'll own butlr.app, have an Apple Developer account, and be ready to build.</p>
+          <div class="tasks">
+            <span class="tag you">YOU — Apple Dev account</span>
+            <span class="tag you">YOU — Buy butlr.app domain</span>
+            <span class="tag you">YOU — Open Supabase + Vercel + Stripe</span>
+            <span class="tag me">ME — Set up the GitHub repo &amp; project scaffolding</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week">
+        <div class="num">02<span class="l">Week</span></div>
+        <div>
+          <h3>Install your toolkit</h3>
+          <p>Install Node.js, Expo CLI, Cursor (the AI code editor), and run "hello world" on your phone. This is your only steep learning curve — once your phone shows our app, the rest is iteration.</p>
+          <div class="tasks">
+            <span class="tag me">ME — Walk you through every install</span>
+            <span class="tag you">YOU — Install + run on your phone</span>
+            <span class="tag me">ME — Design system code (fonts, colours, components)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week">
+        <div class="num">03<span class="l">Week</span></div>
+        <div>
+          <h3>Splash + locate + hotels list</h3>
+          <p>The first three screens of the app, working on your phone. We translate the prototype into real React Native, screen by screen. You test, I fix.</p>
+          <div class="tasks">
+            <span class="tag me">ME — Write the screens</span>
+            <span class="tag you">YOU — Run them on your phone, report bugs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week">
+        <div class="num">04<span class="l">Week</span></div>
+        <div>
+          <h3>Verify + Hotel Home</h3>
+          <p>Guest enters name, room, code. Lands on a personalised home screen with the hotel's photo, GM letter, and service tiles. The "wow" moment of the app.</p>
+          <div class="tasks">
+            <span class="tag me">ME — Auth, verification, home screen</span>
+            <span class="tag you">YOU — Find a friendly hotel to pilot</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week">
+        <div class="num">05<span class="l">Week</span></div>
+        <div>
+          <h3>Menu + place an order</h3>
+          <p>Real menu, real "send to kitchen" button. Order is stored in the database. The hotel sees it in their portal. This is the heart of the product.</p>
+          <div class="tasks">
+            <span class="tag me">ME — Menu screens + order flow</span>
+            <span class="tag me">ME — Start the hotel portal</span>
+            <span class="tag you">YOU — Sit with the pilot hotel, agree menu</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week">
+        <div class="num">06<span class="l">Week</span></div>
+        <div>
+          <h3>Hotel portal + order tracker</h3>
+          <p>The hotel sees orders come in. They click "preparing" → guest's tracker updates. Live data flowing both ways. The product becomes useful.</p>
+          <div class="tasks">
+            <span class="tag me">ME — Portal kanban + real-time sync</span>
+            <span class="tag you">YOU — Train the pilot hotel (90 min)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week">
+        <div class="num">07<span class="l">Week</span></div>
+        <div>
+          <h3>Stripe + folio</h3>
+          <p>Real payments. Real folio. The guest's order shows up on their bill. Stripe takes the money, you (and the hotel) get paid. This week unlocks the business model.</p>
+          <div class="tasks">
+            <span class="tag me">ME — Stripe integration, folio UI</span>
+            <span class="tag you">YOU — Stripe verification (KYC) for the company</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week">
+        <div class="num">08<span class="l">Week</span></div>
+        <div>
+          <h3>Polish + concierge chat</h3>
+          <p>Bug-fixing week. Plus a simple chat where the guest can WhatsApp the front desk through the app. No AI yet — just human-to-human.</p>
+          <div class="tasks">
+            <span class="tag me">ME — Chat, polish, bug-fixing</span>
+            <span class="tag you">YOU — Test everything, write feedback</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week">
+        <div class="num">09<span class="l">Week</span></div>
+        <div>
+          <h3>App Store assets</h3>
+          <p>Icons, splash screens, screenshots, descriptions in English and Arabic, privacy policy, terms of service. The non-code work that gets you approved.</p>
+          <div class="tasks">
+            <span class="tag me">ME — Generate every asset + write copy</span>
+            <span class="tag you">YOU — Approve, take phone screenshots</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week">
+        <div class="num">10<span class="l">Week</span></div>
+        <div>
+          <h3>TestFlight beta</h3>
+          <p>Submit to TestFlight (Apple's beta program). Invite the pilot hotel's staff and 20 friends to test the app on their phones. Collect feedback, fix, repeat.</p>
+          <div class="tasks">
+            <span class="tag you">YOU — Submit to TestFlight</span>
+            <span class="tag me">ME — Fix bugs as they're reported</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week">
+        <div class="num">11<span class="l">Week</span></div>
+        <div>
+          <h3>Live pilot with the hotel</h3>
+          <p>Real guests, real orders, real money. One week of soft-launch with the pilot hotel's actual guests. Watch the dashboard. Fix the inevitable.</p>
+          <div class="tasks">
+            <span class="tag you">YOU — Sit in the hotel for the launch</span>
+            <span class="tag me">ME — On standby for live fixes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week">
+        <div class="num">12<span class="l">Week</span></div>
+        <div>
+          <h3>App Store submission</h3>
+          <p>Submit to Apple App Store + Google Play. Apple usually approves within 48 hours if the app actually works (which ours will). Google is faster. Then: you're <span class="hi">live</span>.</p>
+          <div class="tasks">
+            <span class="tag you">YOU — Hit submit</span>
+            <span class="tag me">ME — Handle any rejection feedback</span>
+            <span class="tag me">ME — Champagne emoji</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Section IV · The tools we use</div>
+    <h2>The whole stack. Almost all free.</h2>
+    <p>Every tool below has a free tier that takes us through Phase 1. You only start paying when you have real users — and by then you'll have revenue.</p>
+
+    <div class="stack">
+      <div class="tool"><div class="logo">E</div><div><div class="n">Expo + React Native</div><div class="d">Cross-platform iOS + Android in one codebase</div></div><div class="p">Free</div></div>
+      <div class="tool"><div class="logo">S</div><div><div class="n">Supabase</div><div class="d">Database + auth + real-time + storage</div></div><div class="p">Free → $25/mo</div></div>
+      <div class="tool"><div class="logo">V</div><div><div class="n">Vercel</div><div class="d">Hotel portal hosting</div></div><div class="p">Free</div></div>
+      <div class="tool"><div class="logo">$</div><div><div class="n">Stripe</div><div class="d">Payments (2.9% + 30¢ per transaction)</div></div><div class="p">Pay-per-use</div></div>
+      <div class="tool"><div class="logo">C</div><div><div class="n">Cursor</div><div class="d">AI code editor — I work directly in your codebase</div></div><div class="p">$20/mo</div></div>
+      <div class="tool"><div class="logo">G</div><div><div class="n">GitHub</div><div class="d">Code storage &amp; version control</div></div><div class="p">Free</div></div>
+      <div class="tool"><div class="logo">F</div><div><div class="n">Figma</div><div class="d">Design previews (optional — we use prototype HTML)</div></div><div class="p">Free</div></div>
+      <div class="tool"><div class="logo">W</div><div><div class="n">WhatsApp Business</div><div class="d">Concierge chat backend until we build our own</div></div><div class="p">Free</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COSTS -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Section V · Total cost — Phase 1</div>
+    <h2>Under $500 from your bank account.</h2>
+
+    <div class="costs">
+      <div class="head">
+        <div><div class="l">Out-of-pocket · 3 months</div><h3>To ship Butlr Lite to the App Store</h3></div>
+        <div class="ttl">~$430</div>
+      </div>
+      <table>
+        <tr><td class="b">Apple Developer Account</td><td>Required to publish on iOS</td><td class="g">$99</td></tr>
+        <tr><td class="b">Google Play Console</td><td>Required to publish on Android (one-off)</td><td class="g">$25</td></tr>
+        <tr><td class="b">Domain · butlr.app</td><td>Annual</td><td class="g">$15</td></tr>
+        <tr><td class="b">Cursor AI editor</td><td>3 months · $20/month</td><td class="g">$60</td></tr>
+        <tr><td class="b">Supabase Pro (optional)</td><td>2 months · $25/month</td><td class="g">$50</td></tr>
+        <tr><td class="b">LLC / commercial registration</td><td>Riyadh small-company setup · approximate</td><td class="g">$130</td></tr>
+        <tr><td class="b">Misc · icons stock, testing devices</td><td>Asset libraries, Android test phone</td><td class="g">$50</td></tr>
+        <tr class="sum"><td>Total · Phase 1</td><td></td><td class="g">~$429</td></tr>
+      </table>
+    </div>
+
+    <p class="s" style="margin-top:14px;">Everything else (engineering, design, copy, App Store assets, support, debugging) is me. Free. <span class="hi">The constraint isn't money — it's your time.</span></p>
+  </div>
+</section>
+
+<!-- RISKS -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Section VI · The honest risks</div>
+    <h2>What can go wrong.</h2>
+    <p>None of these are dealbreakers, but they're real. Better to see them today than at week 11.</p>
+
+    <div class="risk">
+      <div class="t">App Store rejection</div>
+      <div class="d">Apple sometimes rejects apps that look "thin." Mitigation: the app must work end-to-end with the pilot hotel before submission. Our spec already does. Expected outcome: approved on the second submission (1–2 weeks delay).</div>
+    </div>
+    <div class="risk">
+      <div class="t">No pilot hotel</div>
+      <div class="d">If you can't find one hotel to say yes, the app is hollow. Mitigation: start small — a boutique in your network, a friend of the family, a single hotel where you know the GM. Doesn't need to be Ritz. Needs to be real.</div>
+    </div>
+    <div class="risk">
+      <div class="t">My limits on your laptop</div>
+      <div class="d">I can write the code, but I can't physically be at your laptop. When something breaks in your environment (path issues, certs, builds), you'll need to paste me the error and we work through it. Plan for ~5–10 hours of friction across the 90 days.</div>
+    </div>
+    <div class="risk">
+      <div class="t">Scope creep</div>
+      <div class="d">You'll want to add Whisper, Tip Jar, Bring-It, Passport, the Apple Wallet key. <span class="hi">Resist.</span> Phase 1 is the minimum viable butler. Everything else is Phase 2 with real engineers.</div>
+    </div>
+    <div class="risk">
+      <div class="t">You burn out</div>
+      <div class="d">10 hours a week for 12 weeks is real work alongside a job. Mitigation: stick to the weekly plan. Skip a week if needed — the plan flexes. Don't try to do two weeks in one.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY ONE -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Section VII · Today</div>
+    <h2>One step. The only one that matters right now.</h2>
+
+    <div class="cta-card">
+      <div class="l">Day Zero</div>
+      <h2>Open an Apple Developer account.</h2>
+      <p>The only blocker to everything else. Takes 20 minutes. Costs $99. Approval can take 24–72 hours. Once it's done, the next 12 weeks unlock.</p>
+      <div class="day-1">developer.apple.com → Enroll</div>
+    </div>
+
+    <div class="note">
+      <b>What comes after.</b> The moment you say "I'm enrolled," we begin Week 1. You won't need to read another doc — I'll guide you through every step, live, in chat. We do this together.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>MAISON BUTLR · <em>Every stay. One butler.</em></div>
+    <div style="margin-top:14px;">© 2026 · Solo build plan · 90 days to the App Store</div>
+  </div>
+</footer>
+
+</body>
+</html>
