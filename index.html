@@ -3,282 +3,291 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Butlr — every stay. one butler.</title>
-<meta name="description" content="The private butler that lives on your guests' phone. White-label luxury concierge for hotels, resorts and clubs — go live in days, no integration, KWD-priced." />
+<title>Butlr. — The luxury guest experience OS for hotels &amp; venues</title>
+<meta name="description" content="BUTLR is the luxury hospitality operating system. One app for guests. One operational portal for venues. Designed for hotels, resorts, beach clubs, branded residences and premium hospitality venues." />
 
 <link rel="icon" type="image/png" sizes="192x192" href="butlr-icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="butlr-icon-512.png">
 <link rel="apple-touch-icon" sizes="180x180" href="butlr-icon-180.png">
 
-<meta property="og:title" content="Butlr — every stay. one butler." />
-<meta property="og:description" content="The private butler that lives on your guests' phone. White-label luxury concierge for hotels, resorts and clubs." />
+<meta property="og:title" content="Butlr. — The luxury guest experience OS" />
+<meta property="og:description" content="One app for guests. One operational portal for venues. The luxury hospitality OS." />
 <meta property="og:image" content="butlr-icon-512.png" />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://onebutlr.com/" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-  :root{
-    --ink:#070B14; --ink-2:#0B1320; --ink-3:#0E1422;
-    --line:rgba(201,169,97,.16); --line-2:rgba(201,169,97,.28); --line-3:rgba(255,255,255,.06);
-    --gold:#C9A961; --gold-2:#E2C893; --gold-soft:rgba(201,169,97,.08);
-    --cream:#F6F0E3; --ivory:#FAF7EE; --muted:#7B8294; --sub:#B7BDCC;
-    --maxw:1200px;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
-    background:var(--ink); color:var(--cream); line-height:1.6;
-    -webkit-font-smoothing:antialiased; overflow-x:hidden;
-  }
-  .serif{font-family:'Bodoni Moda',Georgia,serif; font-weight:500;}
-  .eyebrow{font-size:11px; letter-spacing:.32em; color:var(--gold-2); text-transform:uppercase; font-weight:500;}
-  a{color:var(--gold-2); text-decoration:none; transition:color .2s;}
-  a:hover{color:var(--gold);}
+:root{
+  --ink:#070B14; --ink-2:#0B1320; --ink-3:#0E1422; --ink-deep:#04060B;
+  --line:rgba(201,169,97,.16); --line-2:rgba(201,169,97,.28); --line-3:rgba(255,255,255,.06);
+  --gold:#C9A961; --gold-2:#E2C893; --gold-soft:rgba(201,169,97,.08);
+  --cream:#F6F0E3; --ivory:#FAF7EE; --muted:#7B8294; --sub:#B7BDCC;
+  --ok:#7BB39A; --maxw:1200px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  background:var(--ink); color:var(--cream); line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+.serif{font-family:'Bodoni Moda',Georgia,serif; font-weight:500;}
+.eyebrow{font-size:11px; letter-spacing:.32em; color:var(--gold-2); text-transform:uppercase; font-weight:500;}
+a{color:var(--gold-2); text-decoration:none; transition:color .2s;}
+a:hover{color:var(--gold);}
+.container{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
 
-  .container{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+/* ── Wordmark with gold "r." ─────────────────────────────────────── */
+.wordmark{font-family:'Bodoni Moda',Georgia,serif; font-weight:500;}
+.wordmark .r{color:var(--gold-2);}
 
-  /* ── NAV ─────────────────────────────────────────────────────────── */
-  .nav{position:fixed; top:0; left:0; right:0; z-index:100; padding:16px 0;
-    background:rgba(7,11,20,.78); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-    border-bottom:1px solid var(--line);}
-  .nav-inner{display:flex; align-items:center; justify-content:space-between;
-    max-width:var(--maxw); margin:0 auto; padding:0 24px;}
-  .brand{font-family:'Bodoni Moda',Georgia,serif; font-size:22px; color:var(--ivory); letter-spacing:.01em;}
-  .nav-links{display:flex; gap:28px; align-items:center;}
-  .nav-links a{color:var(--sub); font-size:13.5px;}
-  .nav-links a:hover{color:var(--ivory);}
-  .nav-cta{
-    display:inline-block; padding:9px 18px; border-radius:10px;
-    background:linear-gradient(135deg,var(--gold-2),var(--gold)); color:#0B1320 !important;
-    font-weight:600; font-size:13px; letter-spacing:.01em;
-    box-shadow:0 8px 20px rgba(201,169,97,.22);
-    transition:transform .2s, box-shadow .2s;
-  }
-  .nav-cta:hover{transform:translateY(-1px); box-shadow:0 12px 28px rgba(201,169,97,.32);}
-  @media (max-width:720px){ .nav-links a:not(.nav-cta){display:none;} }
+/* ── NAV ─────────────────────────────────────────────────────────── */
+.nav{position:fixed; top:0; left:0; right:0; z-index:100; padding:14px 0;
+  background:rgba(7,11,20,.78); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);}
+.nav-inner{display:flex; align-items:center; justify-content:space-between;
+  max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+.brand{font-size:22px; color:var(--ivory); letter-spacing:.01em;}
+.nav-links{display:flex; align-items:center; gap:34px;}
+.nav-links a{font-size:13px; color:var(--sub); font-weight:500;}
+.nav-links a:hover{color:var(--ivory);}
+.nav-cta{padding:9px 18px; border:1px solid var(--gold-2); border-radius:30px;
+  color:var(--gold-2) !important; font-size:12.5px; font-weight:600; letter-spacing:.04em;}
+.nav-cta:hover{background:var(--gold-soft);}
+@media (max-width:760px){.nav-links a:not(.nav-cta){display:none;}}
 
-  /* ── HERO ────────────────────────────────────────────────────────── */
-  .hero{
-    min-height:100vh; padding:120px 24px 80px;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
-    position:relative; overflow:hidden;
-  }
-  .hero::before{
-    content:""; position:absolute; inset:-200px; z-index:0;
-    background:radial-gradient(60% 50% at 50% 30%, rgba(201,169,97,.12), transparent 70%);
-    pointer-events:none;
-  }
-  .hero > *{position:relative; z-index:1;}
-  .hero .eyebrow{margin-bottom:18px;}
-  .hero h1{
-    font-family:'Bodoni Moda',Georgia,serif; font-weight:500;
-    font-size:clamp(48px, 9vw, 116px); line-height:1; letter-spacing:-.02em;
-    color:var(--ivory); margin-bottom:8px;
-  }
-  .hero h1 em{font-style:italic; color:var(--gold-2);}
-  .hero-lede{
-    margin-top:28px; max-width:640px;
-    font-size:clamp(15px, 1.4vw, 18px); color:var(--sub); line-height:1.7;
-  }
-  .hero-actions{margin-top:36px; display:flex; gap:14px; flex-wrap:wrap; justify-content:center;}
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:15px 28px; border-radius:12px;
-    font-size:14px; font-weight:600; letter-spacing:.01em;
-    transition:transform .2s, box-shadow .2s, background .2s;
-  }
-  .btn-gold{
-    background:linear-gradient(135deg,var(--gold-2),var(--gold)); color:#0B1320 !important;
-    box-shadow:0 12px 30px rgba(201,169,97,.28);
-  }
-  .btn-gold:hover{transform:translateY(-2px); box-shadow:0 18px 42px rgba(201,169,97,.42);}
-  .btn-ghost{color:var(--ivory) !important; border:1px solid var(--line-2); background:rgba(255,255,255,.02);}
-  .btn-ghost:hover{background:rgba(255,255,255,.04); border-color:var(--gold);}
-  .hero-trust{
-    margin-top:46px; font-size:11px; letter-spacing:.18em;
-    color:var(--muted); text-transform:uppercase;
-  }
+/* ── HERO ────────────────────────────────────────────────────────── */
+.hero{padding:160px 0 100px; position:relative; overflow:hidden;
+  background:radial-gradient(ellipse at top, rgba(201,169,97,.06), transparent 60%);}
+.hero::before{content:''; position:absolute; top:-50%; left:-30%; width:160%; height:160%;
+  background:radial-gradient(circle at 30% 30%, rgba(201,169,97,.04), transparent 40%),
+             radial-gradient(circle at 70% 60%, rgba(255,255,255,.02), transparent 40%);
+  pointer-events:none;}
+.hero-inner{position:relative; max-width:var(--maxw); margin:0 auto; padding:0 24px;
+  display:grid; grid-template-columns:1.15fr 1fr; gap:60px; align-items:center;}
+@media (max-width:960px){.hero-inner{grid-template-columns:1fr; gap:60px;}}
+.hero h1{font-size:clamp(40px,5.5vw,72px); line-height:1.02; color:var(--ivory);
+  letter-spacing:-.015em; margin-bottom:24px;}
+.hero h1 em{font-style:italic; color:var(--gold-2);}
+.hero p{font-size:17px; color:var(--sub); max-width:540px; margin-bottom:36px; line-height:1.65;}
+.hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:40px;}
+.btn{display:inline-flex; align-items:center; gap:8px; padding:14px 28px;
+  border-radius:32px; font-size:14px; font-weight:600; letter-spacing:.02em; transition:.2s;
+  white-space:nowrap; cursor:pointer; border:none;}
+.btn-gold{background:linear-gradient(180deg, var(--gold-2), var(--gold)); color:var(--ink);}
+.btn-gold:hover{transform:translateY(-1px); box-shadow:0 12px 32px rgba(201,169,97,.25);}
+.btn-outline{background:transparent; color:var(--ivory); border:1px solid var(--line-2);}
+.btn-outline:hover{border-color:var(--gold-2); color:var(--gold-2);}
+.hero-bullets{display:flex; flex-direction:column; gap:11px;}
+.hero-bullets li{list-style:none; display:flex; align-items:center; gap:11px; font-size:13.5px; color:var(--sub);}
+.hero-bullets .dot{width:5px; height:5px; border-radius:50%; background:var(--gold-2); flex-shrink:0;}
 
-  /* ── SECTION SCAFFOLDING ────────────────────────────────────────── */
-  section{padding:120px 0;}
-  .section-head{text-align:center; max-width:760px; margin:0 auto 60px;}
-  .section-head h2{
-    font-family:'Bodoni Moda',Georgia,serif; font-weight:500;
-    font-size:clamp(32px, 5vw, 56px); line-height:1.1; letter-spacing:-.015em;
-    color:var(--ivory); margin-top:12px;
-  }
-  .section-head p{
-    margin-top:18px; font-size:16px; color:var(--sub); line-height:1.7;
-  }
+/* ── Hero visual — two app cards stitched ────────────────────────── */
+.hero-visual{position:relative; height:540px;}
+.app-card{position:absolute; border-radius:28px; background:linear-gradient(180deg, var(--ink-2), var(--ink-deep));
+  border:1px solid var(--line-2); overflow:hidden; box-shadow:0 40px 80px rgba(0,0,0,.5);}
+.app-card.phone{width:230px; height:480px; right:8%; top:30px; transform:rotate(3deg);}
+.app-card.portal{width:380px; height:260px; left:-2%; bottom:20px; transform:rotate(-2deg);}
+.app-card .head{padding:20px 18px 0; display:flex; align-items:center; justify-content:space-between;}
+.app-card .head .badge{font-size:9px; letter-spacing:.18em; color:var(--gold-2); text-transform:uppercase;}
+.app-card .head .live-dot{width:6px; height:6px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 3px rgba(123,179,154,.18);}
+.app-card .greet{padding:14px 18px 0; font-size:11px; color:var(--gold-2); letter-spacing:.18em;}
+.app-card .name{padding:6px 18px 0; font-size:21px; color:var(--ivory); font-family:'Bodoni Moda',serif;}
+.app-card .meta{padding:6px 18px 18px; font-size:11px; color:var(--muted);}
+.app-card .tile{margin:0 14px 10px; padding:13px; background:rgba(255,255,255,.03); border:1px solid var(--line-3);
+  border-radius:14px; display:flex; align-items:center; gap:11px;}
+.app-card .tile .ico{width:32px; height:32px; border-radius:9px; background:var(--gold-soft);
+  display:flex; align-items:center; justify-content:center; color:var(--gold-2); font-size:14px;}
+.app-card .tile .tt{font-size:12.5px; color:var(--ivory); font-weight:500;}
+.app-card .tile .sub{font-size:10px; color:var(--muted);}
+.app-card.portal .row{display:flex; align-items:center; gap:9px; padding:9px 18px;
+  font-size:11.5px; color:var(--ivory); border-bottom:1px solid var(--line-3);}
+.app-card.portal .row .status{margin-left:auto; font-size:9px; color:var(--ok); padding:2px 8px;
+  background:rgba(123,179,154,.1); border-radius:10px; letter-spacing:.06em;}
+.app-card.portal .row .status.pending{color:var(--gold-2); background:var(--gold-soft);}
 
-  /* ── WHAT IS BUTLR — calm centered statement ─────────────────────── */
-  .what{padding:160px 0; border-top:1px solid var(--line-3); border-bottom:1px solid var(--line-3);
-    background:linear-gradient(180deg, transparent, rgba(201,169,97,.03), transparent);}
-  .what .quote{
-    font-family:'Bodoni Moda',Georgia,serif; font-style:italic; font-weight:400;
-    font-size:clamp(24px, 3vw, 38px); line-height:1.4; color:var(--cream);
-    max-width:880px; margin:0 auto; text-align:center; padding:0 24px;
-  }
-  .what .quote em{color:var(--gold-2); font-style:italic;}
+/* ── SECTION ──────────────────────────────────────────────────────── */
+.section{padding:110px 0; position:relative;}
+.section.alt{background:var(--ink-2);}
+.section h2{font-size:clamp(32px,4vw,52px); line-height:1.08; color:var(--ivory);
+  letter-spacing:-.012em; margin-bottom:18px;}
+.section .lede{font-size:17px; color:var(--sub); max-width:680px; margin-bottom:48px;}
+.section-head{margin-bottom:60px;}
+.section-head .eyebrow{display:block; margin-bottom:14px;}
 
-  /* ── TWO-UP audience cards (For Venues / For Guests) ─────────────── */
-  .audiences{display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:var(--maxw); margin:0 auto; padding:0 24px;}
-  @media (max-width:880px){ .audiences{grid-template-columns:1fr;} }
-  .audience-card{
-    padding:42px 36px; border:1px solid var(--line); border-radius:18px;
-    background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(201,169,97,.02));
-    transition:border .2s, transform .2s;
-  }
-  .audience-card:hover{border-color:var(--line-2);}
-  .audience-card .eyebrow{margin-bottom:14px;}
-  .audience-card h3{
-    font-family:'Bodoni Moda',Georgia,serif; font-weight:500;
-    font-size:30px; line-height:1.15; color:var(--ivory); margin-bottom:14px;
-  }
-  .audience-card p{color:var(--sub); font-size:14.5px; line-height:1.75;}
-  .audience-card ul{list-style:none; margin-top:22px; display:grid; gap:11px;}
-  .audience-card li{
-    color:var(--cream); font-size:14px; padding-left:24px; position:relative; line-height:1.55;
-  }
-  .audience-card li::before{
-    content:""; position:absolute; left:0; top:9px;
-    width:8px; height:8px; border-radius:50%; background:var(--gold-2);
-    box-shadow:0 0 12px rgba(201,169,97,.5);
-  }
-  .audience-cta{margin-top:30px;}
+/* ── TRUST / venue types ─────────────────────────────────────────── */
+.venue-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:14px;}
+.venue-pill{padding:18px 20px; border:1px solid var(--line); border-radius:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+  display:flex; align-items:center; gap:12px;}
+.venue-pill .dot{width:6px; height:6px; border-radius:50%; background:var(--gold-2);}
+.venue-pill .name{font-size:13.5px; color:var(--ivory); font-weight:500;}
 
-  /* ── PLATFORM FEATURES GRID ─────────────────────────────────────── */
-  .features-grid{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
-    max-width:var(--maxw); margin:0 auto; padding:0 24px;
-  }
-  @media (max-width:880px){ .features-grid{grid-template-columns:1fr 1fr;} }
-  @media (max-width:560px){ .features-grid{grid-template-columns:1fr;} }
-  .feature{
-    padding:26px; border:1px solid var(--line-3); border-radius:14px;
-    background:rgba(255,255,255,.015); transition:border .2s, background .2s;
-  }
-  .feature:hover{border-color:var(--line); background:rgba(255,255,255,.025);}
-  .feature .icon{
-    width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
-    background:var(--gold-soft); border:1px solid var(--line); color:var(--gold-2);
-    font-family:'Bodoni Moda',Georgia,serif; font-size:18px; margin-bottom:18px;
-  }
-  .feature h4{
-    font-family:'Bodoni Moda',Georgia,serif; font-weight:500;
-    font-size:18px; color:var(--ivory); margin-bottom:8px;
-  }
-  .feature p{font-size:13.5px; color:var(--sub); line-height:1.65;}
+/* ── PROBLEM grid ─────────────────────────────────────────────────── */
+.prob-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:1px;
+  background:var(--line); border-radius:18px; overflow:hidden; border:1px solid var(--line);}
+.prob{padding:26px; background:var(--ink-2);}
+.prob .x{width:24px; height:24px; border-radius:50%; border:1px solid rgba(255,90,90,.3);
+  color:#FF8B8B; display:flex; align-items:center; justify-content:center; font-size:12px; margin-bottom:12px;}
+.prob .t{font-size:14px; color:var(--ivory); font-weight:500; line-height:1.4;}
 
-  /* ── HOW TO JOIN — 3 step pipeline ───────────────────────────────── */
-  .steps{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
-    max-width:var(--maxw); margin:0 auto; padding:0 24px; position:relative;
-  }
-  @media (max-width:880px){ .steps{grid-template-columns:1fr;} }
-  .step{
-    padding:32px 28px; border:1px solid var(--line); border-radius:18px;
-    background:linear-gradient(180deg, rgba(201,169,97,.04), transparent);
-    position:relative;
-  }
-  .step-num{
-    font-family:'Bodoni Moda',Georgia,serif; font-size:48px; color:var(--gold-2);
-    line-height:1; margin-bottom:18px;
-  }
-  .step h4{
-    font-family:'Bodoni Moda',Georgia,serif; font-weight:500;
-    font-size:22px; line-height:1.2; color:var(--ivory); margin-bottom:10px;
-  }
-  .step p{font-size:14px; color:var(--sub); line-height:1.7;}
+/* ── SOLUTION modules ─────────────────────────────────────────────── */
+.mod-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:14px; margin-top:40px;}
+.mod{padding:22px; border:1px solid var(--line); border-radius:14px;
+  background:linear-gradient(180deg, rgba(201,169,97,.04), transparent); transition:.25s;}
+.mod:hover{border-color:var(--gold-2); transform:translateY(-2px);}
+.mod .ico{width:34px; height:34px; border-radius:10px; background:var(--gold-soft);
+  display:flex; align-items:center; justify-content:center; color:var(--gold-2); font-size:14px;
+  margin-bottom:14px;}
+.mod .n{font-size:14px; color:var(--ivory); font-weight:500;}
 
-  /* ── PRICING (placeholder until packages arrive) ─────────────────── */
-  .pricing-note{
-    max-width:760px; margin:0 auto; text-align:center; padding:0 24px;
-    color:var(--muted); font-size:13px; font-style:italic;
-  }
-  .pricing-grid{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
-    max-width:var(--maxw); margin:48px auto 0; padding:0 24px;
-  }
-  @media (max-width:880px){ .pricing-grid{grid-template-columns:1fr;} }
-  .price-card{
-    padding:36px 28px; border:1px solid var(--line); border-radius:18px;
-    background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(201,169,97,.02));
-  }
-  .price-card.featured{border:1px solid var(--gold); box-shadow:0 0 40px rgba(201,169,97,.12);}
-  .price-card .tier-eyebrow{
-    font-size:11px; letter-spacing:.28em; color:var(--gold-2); text-transform:uppercase;
-    margin-bottom:18px; font-weight:500;
-  }
-  .price-card h4{
-    font-family:'Bodoni Moda',Georgia,serif; font-weight:500;
-    font-size:30px; line-height:1.1; color:var(--ivory); margin-bottom:8px;
-  }
-  .price-card .price{
-    font-family:'Bodoni Moda',Georgia,serif; font-size:44px; color:var(--ivory);
-    line-height:1; margin:20px 0 6px;
-  }
-  .price-card .price small{font-size:14px; color:var(--muted); font-family:'Inter',sans-serif; font-weight:400;}
-  .price-card .price-sub{color:var(--sub); font-size:13px; margin-bottom:24px;}
-  .price-card ul{list-style:none; display:grid; gap:10px; margin:22px 0;}
-  .price-card li{font-size:13.5px; color:var(--cream); padding-left:22px; position:relative;}
-  .price-card li::before{
-    content:"✓"; position:absolute; left:0; top:0; color:var(--gold-2); font-weight:700;
-  }
-  .price-card .btn{margin-top:16px; width:100%; justify-content:center;}
+/* ── HOW IT WORKS ─────────────────────────────────────────────────── */
+.steps{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:24px;}
+.step{padding:32px; border:1px solid var(--line); border-radius:18px;
+  background:linear-gradient(180deg, var(--ink-2), transparent);}
+.step .num{font-family:'Bodoni Moda',serif; font-size:46px; color:var(--gold-2); line-height:1; margin-bottom:16px;}
+.step h3{font-size:18px; color:var(--ivory); margin-bottom:8px; font-weight:500;}
+.step p{font-size:14px; color:var(--sub); line-height:1.6;}
 
-  /* ── FAQ ─────────────────────────────────────────────────────────── */
-  .faq{max-width:820px; margin:0 auto; padding:0 24px;}
-  .faq details{
-    border-bottom:1px solid var(--line-3); padding:24px 0;
-  }
-  .faq summary{
-    cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:24px;
-    font-family:'Bodoni Moda',Georgia,serif; font-weight:500; font-size:19px; color:var(--ivory);
-  }
-  .faq summary::-webkit-details-marker{display:none;}
-  .faq summary::after{
-    content:"+"; color:var(--gold-2); font-size:24px; font-weight:300;
-    transition:transform .2s;
-  }
-  .faq details[open] summary::after{content:"−";}
-  .faq details p{margin-top:14px; color:var(--sub); font-size:14.5px; line-height:1.75;}
+/* ── PRODUCTS section — two big cards ────────────────────────────── */
+.products{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+@media (max-width:880px){.products{grid-template-columns:1fr;}}
+.product-card{padding:42px; border:1px solid var(--line-2); border-radius:22px;
+  background:linear-gradient(180deg, var(--ink-2), var(--ink-deep)); position:relative; overflow:hidden;}
+.product-card::before{content:''; position:absolute; inset:-50% -50% auto auto; width:300px; height:300px;
+  background:radial-gradient(circle, rgba(201,169,97,.07), transparent 60%); pointer-events:none;}
+.product-card .label{font-size:10.5px; letter-spacing:.28em; color:var(--gold-2); text-transform:uppercase; margin-bottom:18px;}
+.product-card h3{font-size:30px; color:var(--ivory); margin-bottom:14px; font-weight:500; letter-spacing:-.01em;}
+.product-card .desc{font-size:14.5px; color:var(--sub); margin-bottom:28px; line-height:1.65;}
+.product-card .feat-list{display:grid; grid-template-columns:1fr 1fr; gap:8px 18px; margin-bottom:28px;}
+.product-card .feat-list li{list-style:none; display:flex; align-items:center; gap:9px;
+  font-size:13px; color:var(--cream);}
+.product-card .feat-list .chk{color:var(--gold-2); flex-shrink:0;}
 
-  /* ── FINAL CTA BANNER ────────────────────────────────────────────── */
-  .final{
-    text-align:center; padding:120px 24px;
-    border-top:1px solid var(--line-3); border-bottom:1px solid var(--line-3);
-    background:radial-gradient(70% 80% at 50% 0%, rgba(201,169,97,.10), transparent 70%);
-  }
-  .final h2{
-    font-family:'Bodoni Moda',Georgia,serif; font-weight:500;
-    font-size:clamp(32px, 5vw, 56px); line-height:1.1; color:var(--ivory); margin-bottom:18px;
-  }
-  .final p{color:var(--sub); font-size:16px; max-width:600px; margin:0 auto 30px;}
+/* ── LIVE FLOW ────────────────────────────────────────────────────── */
+.flow{display:grid; grid-template-columns:repeat(5, 1fr); gap:8px; margin-top:40px;}
+@media (max-width:880px){.flow{grid-template-columns:1fr 1fr;}}
+.flow-step{padding:22px 18px; text-align:center; border:1px solid var(--line); border-radius:14px;
+  background:linear-gradient(180deg, var(--ink-2), transparent); position:relative;}
+.flow-step .n{font-size:9px; letter-spacing:.18em; color:var(--gold-2); text-transform:uppercase; margin-bottom:8px;}
+.flow-step .t{font-size:13px; color:var(--ivory); font-weight:500;}
+.flow-arrow{position:absolute; right:-4px; top:50%; transform:translateY(-50%); color:var(--gold-2); font-size:14px;}
 
-  /* ── FOOTER ──────────────────────────────────────────────────────── */
-  footer{padding:50px 24px 36px; max-width:var(--maxw); margin:0 auto;}
-  .foot{display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;}
-  .foot .brand{font-size:18px;}
-  .foot .links{display:flex; gap:24px; font-size:12.5px; color:var(--muted);}
-  .foot .links a{color:var(--muted);}
-  .foot .links a:hover{color:var(--ivory);}
-  .legal{margin-top:24px; text-align:center; color:var(--muted); font-size:11.5px; letter-spacing:.04em;}
+/* ── REVENUE ──────────────────────────────────────────────────────── */
+.rev-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:12px;}
+.rev{padding:18px; border:1px solid var(--line); border-radius:12px;
+  background:rgba(255,255,255,.02); font-size:13px; color:var(--cream); display:flex; align-items:center; gap:9px;}
+.rev .arrow{color:var(--gold-2);}
+
+/* ── PACKAGES ─────────────────────────────────────────────────────── */
+.pkgs{display:grid; grid-template-columns:repeat(4, 1fr); gap:18px;}
+@media (max-width:1080px){.pkgs{grid-template-columns:repeat(2, 1fr);}}
+@media (max-width:580px){.pkgs{grid-template-columns:1fr;}}
+.pkg{padding:32px 26px; border:1px solid var(--line); border-radius:20px;
+  background:linear-gradient(180deg, var(--ink-2), var(--ink-deep)); display:flex; flex-direction:column;
+  position:relative;}
+.pkg.featured{border-color:var(--gold-2);
+  background:linear-gradient(180deg, rgba(201,169,97,.05), var(--ink-deep));
+  box-shadow:0 20px 60px rgba(201,169,97,.08);}
+.pkg .featured-tag{position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+  background:linear-gradient(180deg, var(--gold-2), var(--gold)); color:var(--ink);
+  font-size:10px; font-weight:700; letter-spacing:.16em; padding:5px 14px; border-radius:30px;}
+.pkg .name{font-family:'Bodoni Moda',serif; font-size:22px; color:var(--ivory); margin-bottom:6px;}
+.pkg .for{font-size:11px; color:var(--muted); margin-bottom:22px; min-height:30px;}
+.pkg .price{font-family:'Bodoni Moda',serif; font-size:36px; color:var(--gold-2); line-height:1;}
+.pkg .per{font-size:11px; color:var(--muted); margin-top:2px;}
+.pkg ul{list-style:none; margin:24px 0; padding:0; flex:1;}
+.pkg li{font-size:12.5px; color:var(--cream); padding:6px 0; border-bottom:1px solid var(--line-3);
+  display:flex; align-items:center; gap:9px;}
+.pkg li:last-child{border-bottom:none;}
+.pkg .chk{color:var(--gold-2); font-size:11px;}
+.pkg .commission{font-size:11px; color:var(--muted); padding:11px 0; border-top:1px dashed var(--line);
+  margin-top:16px;}
+.pkg .btn{width:100%; justify-content:center; margin-top:14px;}
+
+/* ── FEATURE GRID ─────────────────────────────────────────────────── */
+.feat-cols{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;}
+@media (max-width:880px){.feat-cols{grid-template-columns:1fr;}}
+.feat-col{padding:30px; border:1px solid var(--line); border-radius:18px;
+  background:linear-gradient(180deg, var(--ink-2), transparent);}
+.feat-col h4{font-family:'Bodoni Moda',serif; font-size:19px; color:var(--gold-2); margin-bottom:18px;}
+.feat-col ul{list-style:none; padding:0;}
+.feat-col li{font-size:13px; color:var(--cream); padding:8px 0; border-bottom:1px solid var(--line-3);
+  display:flex; align-items:center; gap:9px;}
+.feat-col li:last-child{border-bottom:none;}
+.feat-col .dot{width:4px; height:4px; border-radius:50%; background:var(--gold-2);}
+
+/* ── FUTURE VISION ────────────────────────────────────────────────── */
+.future-card{padding:60px; border:1px solid var(--line-2); border-radius:24px;
+  background:radial-gradient(ellipse at top right, rgba(201,169,97,.06), transparent 60%),
+             linear-gradient(180deg, var(--ink-2), var(--ink-deep)); text-align:center;}
+.future-card h2{margin-bottom:24px;}
+.future-tags{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:36px;}
+.future-tag{padding:9px 18px; border:1px solid var(--line-2); border-radius:30px;
+  font-size:12px; color:var(--gold-2); font-weight:500; letter-spacing:.04em;}
+
+/* ── APPLY FORM ───────────────────────────────────────────────────── */
+.apply-wrap{display:grid; grid-template-columns:1fr 1.2fr; gap:60px;}
+@media (max-width:860px){.apply-wrap{grid-template-columns:1fr;}}
+.apply-form{padding:40px; border:1px solid var(--line-2); border-radius:20px;
+  background:linear-gradient(180deg, var(--ink-2), var(--ink-deep));}
+.field{margin-bottom:18px;}
+.field label{display:block; font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--gold-2); margin-bottom:7px; font-weight:600;}
+.field input, .field select, .field textarea{width:100%; padding:13px 16px; background:rgba(255,255,255,.03);
+  border:1px solid var(--line-2); border-radius:11px; color:var(--ivory); font-family:inherit; font-size:14px;
+  transition:.2s;}
+.field input:focus, .field select:focus, .field textarea:focus{outline:none; border-color:var(--gold-2);
+  background:rgba(201,169,97,.04);}
+.field textarea{resize:vertical; min-height:90px;}
+.field-row{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+.form-success{background:rgba(123,179,154,.08); border:1px solid rgba(123,179,154,.3);
+  padding:18px; border-radius:12px; color:var(--ok); font-size:13.5px; margin-top:16px; display:none;}
+.form-success.show{display:block;}
+.form-error{background:rgba(255,90,90,.08); border:1px solid rgba(255,90,90,.3);
+  padding:18px; border-radius:12px; color:#FF8B8B; font-size:13.5px; margin-top:16px; display:none;}
+.form-error.show{display:block;}
+
+/* ── FAQ ─────────────────────────────────────────────────────────── */
+.faq{max-width:820px; margin:0 auto;}
+.q{border-bottom:1px solid var(--line); padding:24px 0; cursor:pointer;}
+.q-head{display:flex; align-items:center; justify-content:space-between; gap:20px;}
+.q-head .qt{font-size:16px; color:var(--ivory); font-weight:500;}
+.q-head .plus{font-size:24px; color:var(--gold-2); transition:.25s; line-height:1;}
+.q.open .q-head .plus{transform:rotate(45deg);}
+.q-body{max-height:0; overflow:hidden; transition:.35s; color:var(--sub); font-size:14px; line-height:1.7;}
+.q.open .q-body{max-height:400px; padding-top:14px;}
+
+/* ── FOOTER ──────────────────────────────────────────────────────── */
+footer{padding:60px 0 40px; border-top:1px solid var(--line); background:var(--ink-deep);}
+.foot{display:flex; justify-content:space-between; align-items:flex-start; gap:40px;
+  max-width:var(--maxw); margin:0 auto; padding:0 24px; flex-wrap:wrap;}
+.foot-brand{flex:1; min-width:200px;}
+.foot-brand .wordmark{font-size:26px; color:var(--ivory); display:inline-block; margin-bottom:10px;}
+.foot-brand p{font-size:12.5px; color:var(--muted); max-width:280px;}
+.foot-cols{display:grid; grid-template-columns:repeat(4, 140px); gap:30px;}
+@media (max-width:760px){.foot-cols{grid-template-columns:1fr 1fr; gap:24px;}}
+.foot-col h5{font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-2); margin-bottom:14px;}
+.foot-col a{display:block; font-size:12.5px; color:var(--sub); margin-bottom:9px;}
+.foot-col a:hover{color:var(--ivory);}
+.legal{font-size:11px; color:var(--muted); text-align:center; padding:40px 24px 0; max-width:var(--maxw); margin:0 auto;}
+
+/* ── REVEAL ANIMATIONS ────────────────────────────────────────────── */
+.reveal{opacity:0; transform:translateY(20px); transition:opacity .8s ease, transform .8s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
 </style>
 </head>
 <body>
 
-<!-- ─── NAV ─────────────────────────────────────────────────────────── -->
+<!-- ── NAV ─────────────────────────────────────────────────────────── -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="#" class="brand">Butlr.</a>
+    <a href="#" class="brand wordmark">Butl<span class="r">r.</span></a>
     <div class="nav-links">
-      <a href="#venues">For Venues</a>
-      <a href="#guests">For Guests</a>
+      <a href="#products">Products</a>
       <a href="#how">How it works</a>
       <a href="#pricing">Pricing</a>
       <a href="https://portal.onebutlr.com/list-your-venue" class="nav-cta">List your venue</a>
@@ -286,7 +295,7 @@
   </div>
 </nav>
 
-<!-- ─── HERO ────────────────────────────────────────────────────────── -->
+<!-- ── 1. HERO ─────────────────────────────────────────────────────── -->
 <section class="hero">
   <div class="eyebrow">The private butler service</div>
   <h1>Every stay.<br/><em>One butler.</em></h1>
@@ -333,61 +342,126 @@
         <a href="https://portal.onebutlr.com/list-your-venue" class="btn btn-gold">List your venue →</a>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="audience-card" id="guests">
-      <div class="eyebrow">For guests</div>
-      <h3>One app. Every venue. From arrival to departure.</h3>
-      <p>Your private butler is in your pocket. Order in-room dining, request a wake-up, book the spa, hail transport — anywhere on the Butlr network, the same way, every time.</p>
-      <ul>
-        <li>Skip the front desk — check in directly from your app</li>
-        <li>Concierge chat with a real human, anytime</li>
-        <li>One Butlr Passport — preferences follow you property to property</li>
-        <li>Settle the bill on your phone at check-out</li>
-        <li>Free for guests at partner venues</li>
-      </ul>
-      <div class="audience-cta">
-        <a href="#" class="btn btn-ghost">Available on the App Store</a>
+<!-- ── 2. TRUST / VENUE TYPES ──────────────────────────────────────── -->
+<section class="section alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Built for modern hospitality</span>
+      <h2 class="serif">For venues that take experience seriously.</h2>
+      <p class="lede">Butlr is designed for premium hospitality operators who want to modernize guest experiences, streamline operations, and unlock new revenue.</p>
+    </div>
+    <div class="venue-grid">
+      <div class="venue-pill"><span class="dot"></span><span class="name">Hotels</span></div>
+      <div class="venue-pill"><span class="dot"></span><span class="name">Resorts</span></div>
+      <div class="venue-pill"><span class="dot"></span><span class="name">Beach Clubs</span></div>
+      <div class="venue-pill"><span class="dot"></span><span class="name">Luxury Venues</span></div>
+      <div class="venue-pill"><span class="dot"></span><span class="name">Branded Residences</span></div>
+      <div class="venue-pill"><span class="dot"></span><span class="name">Serviced Apartments</span></div>
+      <div class="venue-pill"><span class="dot"></span><span class="name">Wellness Resorts</span></div>
+      <div class="venue-pill"><span class="dot"></span><span class="name">Members Clubs</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. PROBLEM ──────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The problem</span>
+      <h2 class="serif">Hospitality is still fragmented.</h2>
+      <p class="lede">Guests still call reception. Requests get delayed. Departments operate separately. Staff communication is disconnected. Modern guests expect hospitality to feel seamless.</p>
+    </div>
+    <div class="prob-grid">
+      <div class="prob"><div class="x">✕</div><div class="t">Phone-based requests</div></div>
+      <div class="prob"><div class="x">✕</div><div class="t">Delayed fulfillment</div></div>
+      <div class="prob"><div class="x">✕</div><div class="t">No live request tracking</div></div>
+      <div class="prob"><div class="x">✕</div><div class="t">Weak guest communication</div></div>
+      <div class="prob"><div class="x">✕</div><div class="t">Disconnected departments</div></div>
+      <div class="prob"><div class="x">✕</div><div class="t">No centralized operations</div></div>
+      <div class="prob"><div class="x">✕</div><div class="t">No modern guest experience</div></div>
+      <div class="prob"><div class="x">✕</div><div class="t">Limited visibility for management</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 4. SOLUTION ─────────────────────────────────────────────────── -->
+<section class="section alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The solution</span>
+      <h2 class="serif">One connected hospitality platform.</h2>
+      <p class="lede">Butlr connects the guest journey into one intelligent system — from requests and concierge to operations, communication, payments and guest satisfaction.</p>
+    </div>
+    <div class="mod-grid">
+      <div class="mod"><div class="ico">🍽</div><div class="n">Room Service</div></div>
+      <div class="mod"><div class="ico">💬</div><div class="n">Concierge</div></div>
+      <div class="mod"><div class="ico">✨</div><div class="n">Housekeeping</div></div>
+      <div class="mod"><div class="ico">👔</div><div class="n">Laundry</div></div>
+      <div class="mod"><div class="ico">📥</div><div class="n">Guest Requests</div></div>
+      <div class="mod"><div class="ico">🍷</div><div class="n">Restaurant Booking</div></div>
+      <div class="mod"><div class="ico">🌿</div><div class="n">Spa &amp; Wellness</div></div>
+      <div class="mod"><div class="ico">💭</div><div class="n">Guest Chat</div></div>
+      <div class="mod"><div class="ico">💳</div><div class="n">Payments</div></div>
+      <div class="mod"><div class="ico">🎁</div><div class="n">Tipping</div></div>
+      <div class="mod"><div class="ico">📊</div><div class="n">Analytics</div></div>
+      <div class="mod"><div class="ico">⚡</div><div class="n">Live Operations</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 5. HOW IT WORKS ─────────────────────────────────────────────── -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2 class="serif">From application to live in days.</h2>
+      <p class="lede">A guided journey — from venue onboarding to guest connection to live operations.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <h3>Venue joins Butlr</h3>
+        <p>Apply through onebutlr.com. Our team reviews and onboards qualifying venues.</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3>Configure the operation</h3>
+        <p>Set up rooms, staff, departments and services through your venue portal.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3>Guest connects</h3>
+        <p>At check-in, guests connect via QR or access code — no friction, no signup wall.</p>
+      </div>
+      <div class="step">
+        <div class="num">04</div>
+        <h3>Requests flow in</h3>
+        <p>Guests request services through the app. The portal receives them instantly.</p>
+      </div>
+      <div class="step">
+        <div class="num">05</div>
+        <h3>Real-time fulfillment</h3>
+        <p>Staff are assigned, requests tracked and guests updated automatically.</p>
+      </div>
+      <div class="step">
+        <div class="num">06</div>
+        <h3>Operations, beautifully connected</h3>
+        <p>Communication, payments, analytics and guest experiences in one place.</p>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ─── PLATFORM FEATURES ───────────────────────────────────────────── -->
-<section>
-  <div class="section-head">
-    <div class="eyebrow">The platform</div>
-    <h2>Everything a five-star property needs. Nothing it doesn't.</h2>
-    <p>Twelve services, one dashboard, every guest touchpoint — designed by hospitality, built like the apps people actually use.</p>
-  </div>
-  <div class="features-grid">
-    <div class="feature"><div class="icon">⌘</div><h4>Live Order Board</h4><p>Every guest request — dining, housekeeping, spa, transport — surfaced in real-time across departments.</p></div>
-    <div class="feature"><div class="icon">⌂</div><h4>In-Room Dining</h4><p>Chef's menus by section, photo-rich items, dietary notes, instant routing to the kitchen.</p></div>
-    <div class="feature"><div class="icon">✦</div><h4>Spa &amp; Wellness</h4><p>Treatment menus, therapist booking, room schedules — managed in one place.</p></div>
-    <div class="feature"><div class="icon">✓</div><h4>Bookings &amp; Check-in</h4><p>Direct room bookings, identity-verified check-in, late and early checkout flags.</p></div>
-    <div class="feature"><div class="icon">$</div><h4>Folio &amp; Billing</h4><p>Running stay bill, charge any service to the room, settle in one tap at checkout.</p></div>
-    <div class="feature"><div class="icon">✉</div><h4>Concierge Chat</h4><p>Real human concierge thread, department routing, whispered requests, never robotic.</p></div>
-    <div class="feature"><div class="icon">◉</div><h4>Department Staff</h4><p>Job titles, seniority, shift schedules, attendance &amp; clock-in. Every team member, on one screen.</p></div>
-    <div class="feature"><div class="icon">★</div><h4>Performance</h4><p>Live leaderboards, attendance, quality ratings, KPI goals — measured on real work.</p></div>
-    <div class="feature"><div class="icon">≡</div><h4>Inventory &amp; Supply Chain</h4><p>Stock levels, par + reorder points, auto-purchase orders, audits, supplier management.</p></div>
-    <div class="feature"><div class="icon">⇆</div><h4>Multi-Venue Passport</h4><p>One Butlr profile follows the guest across every property in the network.</p></div>
-    <div class="feature"><div class="icon">⌖</div><h4>Role-Based Access</h4><p>Cleaners see only their own tasks. Supervisors see their department. Managers see everything.</p></div>
-    <div class="feature"><div class="icon">◔</div><h4>Auto Daily Brief</h4><p>The owner's morning email: yesterday's orders, on-time rate, GMV, standouts, concerns.</p></div>
-  </div>
-</section>
-
-<!-- ─── HOW IT WORKS ────────────────────────────────────────────────── -->
-<section id="how" style="background:linear-gradient(180deg, transparent, rgba(201,169,97,.025), transparent);">
-  <div class="section-head">
-    <div class="eyebrow">Joining Butlr</div>
-    <h2>Three steps. A few days.</h2>
-    <p>Self-serve from start to finish. No sales call required. Your venue is reviewed by our team — typically within 48 hours.</p>
-  </div>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <h4>Apply</h4>
-      <p>Submit your venue, license, photos and the services you want enabled. Five minutes — entirely self-serve.</p>
+<!-- ── 6. PRODUCTS ─────────────────────────────────────────────────── -->
+<section class="section alt" id="products">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The product</span>
+      <h2 class="serif">Two surfaces. One intelligent system.</h2>
+      <p class="lede">A premium iOS app for guests. A live operational portal for venues. Designed together, deployed together.</p>
     </div>
     <div class="step">
       <div class="step-num">02</div>
@@ -459,41 +533,51 @@
   </div>
 </section>
 
-<!-- ─── FAQ ─────────────────────────────────────────────────────────── -->
-<section>
-  <div class="section-head">
-    <div class="eyebrow">FAQ</div>
-    <h2>Questions, honestly answered.</h2>
-  </div>
-  <div class="faq">
-    <details>
-      <summary>How long does it take to go live?</summary>
-      <p>Most venues are live within 3–5 days. The application takes ~5 minutes, our review is typically within 48 hours, and once approved you can set up menus and invite your team the same day.</p>
-    </details>
-    <details>
-      <summary>Do we need an engineering team?</summary>
-      <p>No. Butlr is white-label and pre-built. You set up your venue through the web portal — no code, no integration with your PMS required.</p>
-    </details>
-    <details>
-      <summary>What does the guest experience cost?</summary>
-      <p>Free for the guest. Always. They download Butlr from the App Store and use it the moment they check into a partner venue.</p>
-    </details>
-    <details>
-      <summary>Which payment methods do you accept?</summary>
-      <p>UPayments for Kuwait and the GCC (KNET, KFAST, all GCC cards), Stripe for international cards (Visa, Mastercard, Amex, Apple Pay, Google Pay). Auto-routed by your venue's country.</p>
-    </details>
-    <details>
-      <summary>What if a venue doesn't have a domain email or website?</summary>
-      <p>Personal emails and small boutique venues are welcome — we just spend a little more time verifying. Your Google Maps listing, license and phone verification do most of the work.</p>
-    </details>
-    <details>
-      <summary>How does data ownership work?</summary>
-      <p>Guest data, menus, staff and orders belong to your venue. You can export anything, anytime. We never share your data with other venues.</p>
-    </details>
-    <details>
-      <summary>Can a guest who's used Butlr at one hotel use it at mine?</summary>
-      <p>Yes — that's the point. The guest's Butlr Passport (preferences, allergies, language) follows them to every venue on the network. The guest experience gets better the more places they stay.</p>
-    </details>
+<!-- ── 7. LIVE EXPERIENCE ──────────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Live experience</span>
+      <h2 class="serif">Hospitality, in real-time.</h2>
+      <p class="lede">From the moment a guest taps a request to the moment it lands at their door — every step visible, every minute accounted for.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="n">Step 01</div>
+        <div class="t">Guest requests</div>
+        <span class="flow-arrow">›</span>
+      </div>
+      <div class="flow-step">
+        <div class="n">Step 02</div>
+        <div class="t">Venue receives</div>
+        <span class="flow-arrow">›</span>
+      </div>
+      <div class="flow-step">
+        <div class="n">Step 03</div>
+        <div class="t">Staff assigned</div>
+        <span class="flow-arrow">›</span>
+      </div>
+      <div class="flow-step">
+        <div class="n">Step 04</div>
+        <div class="t">Tracked live</div>
+        <span class="flow-arrow">›</span>
+      </div>
+      <div class="flow-step">
+        <div class="n">Step 05</div>
+        <div class="t">Guest updated</div>
+      </div>
+    </div>
+    <div style="margin-top:50px; padding:30px; border:1px solid var(--line); border-radius:18px; background:var(--ink-2);">
+      <div class="eyebrow" style="margin-bottom:18px;">Examples</div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:12px;">
+        <div style="padding:14px; background:rgba(255,255,255,.02); border-radius:10px; font-size:13px; color:var(--cream);">🍳 Room service</div>
+        <div style="padding:14px; background:rgba(255,255,255,.02); border-radius:10px; font-size:13px; color:var(--cream);">🛏 Extra towels</div>
+        <div style="padding:14px; background:rgba(255,255,255,.02); border-radius:10px; font-size:13px; color:var(--cream);">💬 Concierge</div>
+        <div style="padding:14px; background:rgba(255,255,255,.02); border-radius:10px; font-size:13px; color:var(--cream);">👔 Laundry</div>
+        <div style="padding:14px; background:rgba(255,255,255,.02); border-radius:10px; font-size:13px; color:var(--cream);">🚗 Transport</div>
+        <div style="padding:14px; background:rgba(255,255,255,.02); border-radius:10px; font-size:13px; color:var(--cream);">🍷 Restaurant booking</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -505,18 +589,445 @@
   <a href="https://portal.onebutlr.com/list-your-venue" class="btn btn-gold">List your venue →</a>
 </section>
 
-<!-- ─── FOOTER ──────────────────────────────────────────────────────── -->
-<footer>
-  <div class="foot">
-    <a href="#" class="brand">Butlr.</a>
-    <div class="links">
-      <a href="privacy.html">Privacy</a>
-      <a href="butlr-privacy-policy.html">Privacy policy</a>
-      <a href="mailto:info@onebutlr.com">Contact</a>
+<!-- ── 9. PACKAGES ─────────────────────────────────────────────────── -->
+<section class="section" id="packages">
+  <div class="container">
+    <div class="section-head" style="text-align:center;">
+      <span class="eyebrow">Packages</span>
+      <h2 class="serif">One platform. Four tiers.</h2>
+      <p class="lede" style="margin:0 auto 48px;">Every package includes the Guest App and Venue Portal. Choose the operational depth your venue needs — upgrade anytime as you grow.</p>
+    </div>
+    <div class="pkgs">
+      <!-- Essential -->
+      <div class="pkg">
+        <div class="name">Essential</div>
+        <div class="for">Boutique hotels and small venues</div>
+        <div class="price">299 <span style="font-size:14px; color:var(--muted);">KWD</span></div>
+        <div class="per">per month</div>
+        <ul>
+          <li><span class="chk">✓</span>Guest App &amp; Venue Portal</li>
+          <li><span class="chk">✓</span>Up to 50 rooms</li>
+          <li><span class="chk">✓</span>Up to 10 staff accounts</li>
+          <li><span class="chk">✓</span>Room service</li>
+          <li><span class="chk">✓</span>Housekeeping</li>
+          <li><span class="chk">✓</span>Laundry</li>
+          <li><span class="chk">✓</span>Concierge requests</li>
+          <li><span class="chk">✓</span>Guest chat</li>
+          <li><span class="chk">✓</span>QR guest connection</li>
+          <li><span class="chk">✓</span>Basic analytics</li>
+          <li><span class="chk">✓</span>Standard support</li>
+        </ul>
+        <div class="commission">5% on marketplace bookings</div>
+        <a href="#apply" class="btn btn-outline">Start Essential</a>
+      </div>
+      <!-- Professional (featured) -->
+      <div class="pkg featured">
+        <div class="featured-tag">Most chosen</div>
+        <div class="name">Professional</div>
+        <div class="for">Hotels and resorts needing full guest operations</div>
+        <div class="price">599 <span style="font-size:14px; color:var(--muted);">KWD</span></div>
+        <div class="per">per month</div>
+        <ul>
+          <li><span class="chk">✓</span>Everything in Essential</li>
+          <li><span class="chk">✓</span>Up to 150 rooms</li>
+          <li><span class="chk">✓</span>Up to 30 staff accounts</li>
+          <li><span class="chk">✓</span>Advanced request tracking</li>
+          <li><span class="chk">✓</span>Department management</li>
+          <li><span class="chk">✓</span>Staff assignment</li>
+          <li><span class="chk">✓</span>Payments &amp; tipping</li>
+          <li><span class="chk">✓</span>Push notifications</li>
+          <li><span class="chk">✓</span>Guest profiles</li>
+          <li><span class="chk">✓</span>Advanced analytics</li>
+          <li><span class="chk">✓</span>Priority support</li>
+        </ul>
+        <div class="commission">4% on marketplace bookings</div>
+        <a href="#apply" class="btn btn-gold">Start Professional</a>
+      </div>
+      <!-- Elite -->
+      <div class="pkg">
+        <div class="name">Elite</div>
+        <div class="for">Luxury hotels and premium venues</div>
+        <div class="price">999 <span style="font-size:14px; color:var(--muted);">KWD</span></div>
+        <div class="per">per month</div>
+        <ul>
+          <li><span class="chk">✓</span>Everything in Professional</li>
+          <li><span class="chk">✓</span>Up to 400 rooms</li>
+          <li><span class="chk">✓</span>Up to 100 staff accounts</li>
+          <li><span class="chk">✓</span>VIP guest tagging</li>
+          <li><span class="chk">✓</span>Concierge workflows</li>
+          <li><span class="chk">✓</span>Revenue analytics</li>
+          <li><span class="chk">✓</span>Guest satisfaction insights</li>
+          <li><span class="chk">✓</span>Marketplace integrations</li>
+          <li><span class="chk">✓</span>Custom branding</li>
+          <li><span class="chk">✓</span>Pre-arrival services</li>
+          <li><span class="chk">✓</span>Dedicated onboarding</li>
+        </ul>
+        <div class="commission">3% on marketplace bookings</div>
+        <a href="#apply" class="btn btn-outline">Start Elite</a>
+      </div>
+      <!-- Enterprise -->
+      <div class="pkg">
+        <div class="name">Enterprise</div>
+        <div class="for">Hotel groups, chains, branded residences</div>
+        <div class="price" style="font-size:30px;">Custom</div>
+        <div class="per">tailored proposal</div>
+        <ul>
+          <li><span class="chk">✓</span>Unlimited rooms</li>
+          <li><span class="chk">✓</span>Unlimited staff</li>
+          <li><span class="chk">✓</span>Multi-property management</li>
+          <li><span class="chk">✓</span>Custom integrations</li>
+          <li><span class="chk">✓</span>Dedicated success team</li>
+          <li><span class="chk">✓</span>Advanced operational analytics</li>
+          <li><span class="chk">✓</span>Custom workflows</li>
+          <li><span class="chk">✓</span>White-glove onboarding</li>
+          <li><span class="chk">✓</span>Custom commission structure</li>
+          <li><span class="chk">✓</span>SLAs &amp; uptime guarantee</li>
+          <li><span class="chk">✓</span>Dedicated infrastructure</li>
+        </ul>
+        <div class="commission">Custom commission</div>
+        <a href="mailto:info@onebutlr.com?subject=Butlr%20Enterprise%20Inquiry" class="btn btn-outline">Contact Sales</a>
+      </div>
     </div>
   </div>
-  <p class="legal">© 2026 Butlr · Every stay. One butler. · Kuwait City</p>
+</section>
+
+<!-- ── 10. FEATURE GRID ────────────────────────────────────────────── -->
+<section class="section alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Everything inside</span>
+      <h2 class="serif">A complete hospitality OS.</h2>
+      <p class="lede">Three sides of the platform, one connected experience.</p>
+    </div>
+    <div class="feat-cols">
+      <div class="feat-col">
+        <h4>Guest Experience</h4>
+        <ul>
+          <li><span class="dot"></span>Live requests</li>
+          <li><span class="dot"></span>Real-time tracking</li>
+          <li><span class="dot"></span>In-app chat</li>
+          <li><span class="dot"></span>Payments</li>
+          <li><span class="dot"></span>Staff tipping</li>
+          <li><span class="dot"></span>Concierge messaging</li>
+          <li><span class="dot"></span>Room service</li>
+          <li><span class="dot"></span>SOS</li>
+          <li><span class="dot"></span>Butlr Passport</li>
+        </ul>
+      </div>
+      <div class="feat-col">
+        <h4>Operations</h4>
+        <ul>
+          <li><span class="dot"></span>Staff assignment</li>
+          <li><span class="dot"></span>Department routing</li>
+          <li><span class="dot"></span>Service management</li>
+          <li><span class="dot"></span>Request timers</li>
+          <li><span class="dot"></span>Guest profiles</li>
+          <li><span class="dot"></span>Real-time dashboards</li>
+          <li><span class="dot"></span>Audit logs</li>
+          <li><span class="dot"></span>Live presence</li>
+          <li><span class="dot"></span>Smart alerts</li>
+        </ul>
+      </div>
+      <div class="feat-col">
+        <h4>Business</h4>
+        <ul>
+          <li><span class="dot"></span>Subscription billing</li>
+          <li><span class="dot"></span>Marketplace revenue</li>
+          <li><span class="dot"></span>Upsells</li>
+          <li><span class="dot"></span>Invoicing</li>
+          <li><span class="dot"></span>Revenue analytics</li>
+          <li><span class="dot"></span>Package management</li>
+          <li><span class="dot"></span>Hotel CRM</li>
+          <li><span class="dot"></span>Operational reports</li>
+          <li><span class="dot"></span>VIP insights</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 11. FUTURE VISION ───────────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="future-card">
+      <span class="eyebrow" style="display:block; margin-bottom:18px;">The horizon</span>
+      <h2 class="serif">The future of hospitality is connected.</h2>
+      <p class="lede" style="max-width:680px; margin:0 auto 18px;">Butlr is building the foundation for a new generation of hospitality experiences — where guests, staff, services and venues operate through one intelligent ecosystem.</p>
+      <div class="future-tags">
+        <div class="future-tag">AI concierge</div>
+        <div class="future-tag">Smart personalization</div>
+        <div class="future-tag">Guest preference memory</div>
+        <div class="future-tag">Predictive hospitality</div>
+        <div class="future-tag">Luxury orchestration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 12. APPLY ───────────────────────────────────────────────────── -->
+<section class="section alt" id="apply">
+  <div class="container">
+    <div class="apply-wrap">
+      <div>
+        <span class="eyebrow" style="display:block; margin-bottom:18px;">Bring Butlr to your venue</span>
+        <h2 class="serif" style="margin-bottom:18px;">Apply to join.</h2>
+        <p class="lede" style="margin-bottom:30px;">Tell us about your venue. Our team reviews every application and onboards qualifying partners within days.</p>
+        <ul class="hero-bullets">
+          <li><span class="dot"></span>Reviewed by a real human</li>
+          <li><span class="dot"></span>Live in 7–14 days</li>
+          <li><span class="dot"></span>No integration required</li>
+          <li><span class="dot"></span>KWD pricing, monthly billing</li>
+          <li><span class="dot"></span>Cancel anytime</li>
+        </ul>
+        <div style="margin-top:38px; padding-top:30px; border-top:1px solid var(--line);">
+          <div class="eyebrow" style="margin-bottom:10px;">Already with Butlr?</div>
+          <a href="https://portal.onebutlr.com" class="btn btn-outline" style="margin-top:8px;">Open the portal →</a>
+        </div>
+      </div>
+      <form class="apply-form" id="applyForm">
+        <div class="field">
+          <label>Venue name</label>
+          <input type="text" name="brandName" required placeholder="One Sharq" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Venue type</label>
+            <select name="venueType" required>
+              <option value="">Select</option>
+              <option value="hotel">Hotel</option>
+              <option value="resort">Resort</option>
+              <option value="boutiqueHotel">Boutique hotel</option>
+              <option value="servicedApartments">Serviced apartments</option>
+              <option value="brandedResidence">Branded residence</option>
+              <option value="beachClub">Beach club</option>
+              <option value="poolClub">Pool club</option>
+              <option value="countryClub">Country club</option>
+              <option value="golfClub">Golf club</option>
+              <option value="membersClub">Members club</option>
+              <option value="marina">Marina</option>
+              <option value="cruiseShip">Cruise</option>
+              <option value="yachtCharter">Yacht charter</option>
+              <option value="glamping">Glamping</option>
+              <option value="skiLodge">Ski lodge</option>
+              <option value="daySpa">Day spa</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Selected package</label>
+            <select name="selectedPackage" required>
+              <option value="">Select</option>
+              <option value="essential">Essential — 299 KWD</option>
+              <option value="professional" selected>Professional — 599 KWD</option>
+              <option value="elite">Elite — 999 KWD</option>
+              <option value="enterprise">Enterprise — Custom</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Country</label>
+            <input type="text" name="country" required placeholder="Kuwait" />
+          </div>
+          <div class="field">
+            <label>City</label>
+            <input type="text" name="city" required placeholder="Kuwait City" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Number of rooms / branches</label>
+          <input type="text" name="roomCount" placeholder="e.g. 120 rooms · 1 branch" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Contact name</label>
+            <input type="text" name="managerName" required placeholder="Bader AlSanousi" />
+          </div>
+          <div class="field">
+            <label>Role</label>
+            <input type="text" name="managerRole" placeholder="General Manager" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Email</label>
+            <input type="email" name="email" required placeholder="you@venue.com" />
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <input type="tel" name="phone" required placeholder="+965 9999 9999" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Website</label>
+            <input type="url" name="website" placeholder="https://venue.com" />
+          </div>
+          <div class="field">
+            <label>Instagram</label>
+            <input type="text" name="instagram" placeholder="@venue" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Tell us about your venue</label>
+          <textarea name="message" placeholder="Anything you would like the Butlr team to know — style, guest profile, current operations, why you are joining..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:10px;">Apply Now →</button>
+        <div class="form-success" id="formSuccess">
+          ✓ Application received. Our team will be in touch within 48 hours.
+        </div>
+        <div class="form-error" id="formError">
+          Something went wrong submitting your application. Please email info@onebutlr.com.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── 13. FAQ ─────────────────────────────────────────────────────── -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head" style="text-align:center;">
+      <span class="eyebrow">Common questions</span>
+      <h2 class="serif">Frequently asked.</h2>
+    </div>
+    <div class="faq">
+      <div class="q">
+        <div class="q-head"><span class="qt">What is Butlr?</span><span class="plus">+</span></div>
+        <div class="q-body">Butlr is the luxury guest experience operating system for modern hospitality. One iOS app for guests, one live operational portal for venues — connected together as a single intelligent platform.</div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">Who is Butlr for?</span><span class="plus">+</span></div>
+        <div class="q-body">Premium hospitality venues — hotels, resorts, beach clubs, branded residences, serviced apartments, members clubs, wellness resorts, marinas and similar. Anyone who takes guest experience seriously.</div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">How do guests connect?</span><span class="plus">+</span></div>
+        <div class="q-body">Guests download the Butlr app for free. At check-in, they scan a QR code or enter a venue code — the app then knows their room, stay duration and preferences. No friction, no signup wall.</div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">Does Butlr replace hotel staff?</span><span class="plus">+</span></div>
+        <div class="q-body">No. Butlr makes staff more effective. AI handles speed and routing; humans handle hospitality and recovery. The best luxury experiences are still delivered by people — Butlr just removes the friction in between.</div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">Can we customize services?</span><span class="plus">+</span></div>
+        <div class="q-body">Yes. Every module (dining, spa, laundry, housekeeping, concierge, transport, etc.) is independently configurable. Add your own menu items, prices, response time targets and department routing. Elite and Enterprise tiers include custom branding.</div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">Does Butlr support payments?</span><span class="plus">+</span></div>
+        <div class="q-body">Yes. Charge-to-room (folio) is supported on all tiers. Direct in-app payments, tipping and marketplace commissions are supported on Professional and above.</div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">Can we manage staff?</span><span class="plus">+</span></div>
+        <div class="q-body">Yes. The Venue Portal includes staff accounts with roles (admin, manager, department staff), live presence, request assignment and per-staff performance tracking.</div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">Can we upgrade packages later?</span><span class="plus">+</span></div>
+        <div class="q-body">Anytime. Upgrade or downgrade from the Venue Portal. Changes are pro-rated against your current billing cycle. New features unlock instantly.</div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">Can Butlr support multiple venues?</span><span class="plus">+</span></div>
+        <div class="q-body">Yes. Multi-property management is included on Enterprise. Each property gets its own portal while sharing a unified analytics layer and centralized billing.</div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">How does onboarding work?</span><span class="plus">+</span></div>
+        <div class="q-body">After your application is approved, our team walks you through profile setup, menu configuration, staff invitations and your first test guest. Most venues go live within 7 to 14 days. Elite and Enterprise include dedicated onboarding.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 14. FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <div class="wordmark">Butl<span class="r">r.</span></div>
+      <p>The luxury guest experience operating system for hospitality. Built in Kuwait, designed for the world.</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <h5>Product</h5>
+        <a href="#products">Guest App</a>
+        <a href="#products">Venue Portal</a>
+        <a href="#packages">Packages</a>
+        <a href="https://portal.onebutlr.com">Sign in</a>
+      </div>
+      <div class="foot-col">
+        <h5>Solutions</h5>
+        <a href="#apply">Hotels</a>
+        <a href="#apply">Resorts</a>
+        <a href="#apply">Beach Clubs</a>
+        <a href="#apply">Residences</a>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="mailto:info@onebutlr.com">Contact</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://instagram.com/onebutlr">Instagram</a>
+      </div>
+      <div class="foot-col">
+        <h5>Legal</h5>
+        <a href="butlr-privacy-policy.html">Privacy Policy</a>
+        <a href="butlr-privacy-policy.html">Terms</a>
+      </div>
+    </div>
+  </div>
+  <p class="legal">© 2026 Butlr · One app. Every stay. · Kuwait City</p>
 </footer>
 
+<script>
+// FAQ accordion
+document.querySelectorAll('.q').forEach(q => {
+  q.addEventListener('click', () => {
+    q.classList.toggle('open');
+  });
+});
+
+// Reveal on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.section').forEach(s => {
+  s.classList.add('reveal');
+  obs.observe(s);
+});
+
+// Apply form submission — POSTs to the portal's existing /api/applications/submit endpoint
+const form = document.getElementById('applyForm');
+if (form) {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    const success = document.getElementById('formSuccess');
+    const error = document.getElementById('formError');
+    success.classList.remove('show');
+    error.classList.remove('show');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+    const data = Object.fromEntries(new FormData(form));
+    try {
+      const r = await fetch('https://portal.onebutlr.com/api/applications/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (r.ok) {
+        success.classList.add('show');
+        form.reset();
+        btn.textContent = 'Apply Now →';
+      } else {
+        const err = await r.json().catch(() => ({}));
+        error.textContent = err.error || 'Something went wrong. Please email info@onebutlr.com.';
+        error.classList.add('show');
+        btn.textContent = 'Apply Now →';
+      }
+    } catch (err) {
+      error.classList.add('show');
+      btn.textContent = 'Apply Now →';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+}
+</script>
 </body>
 </html>
