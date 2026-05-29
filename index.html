@@ -313,6 +313,184 @@
   .foot .links a:hover{color:var(--ivory);}
   .legal{margin-top:24px; text-align:center; color:var(--muted); font-size:11.5px; letter-spacing:.04em;}
 
+
+  /* ── Subpage hero ─────────────────────────────────────────────── */
+  .page-hero{padding:200px 24px 80px; text-align:center;}
+  .page-hero .eyebrow{display:block; margin-bottom:24px;}
+  .page-hero-h{
+    font-family:'Bodoni Moda', Georgia, serif; font-weight:500;
+    font-size:clamp(36px, 5.2vw, 72px); line-height:1.05;
+    letter-spacing:-.02em; color:var(--ivory); margin-bottom:24px;
+  }
+  .page-hero-lede{
+    font-size:clamp(15px, 1.3vw, 18px); color:var(--sub);
+    line-height:1.75; max-width:640px; margin:0 auto;
+  }
+
+  /* ── Page article body ──────────────────────────────────────── */
+  .article{max-width:760px; margin:0 auto; padding:0 24px;}
+  .article h2{
+    font-family:'Bodoni Moda', Georgia, serif; font-weight:500;
+    font-size:clamp(26px, 3vw, 38px); color:var(--ivory);
+    margin-top:60px; margin-bottom:18px; letter-spacing:-.01em;
+  }
+  .article h3{
+    font-family:'Bodoni Moda', Georgia, serif; font-weight:500;
+    font-size:20px; color:var(--ivory); margin-top:36px; margin-bottom:12px;
+  }
+  .article p{
+    font-size:16px; color:var(--cream); line-height:1.85; margin-bottom:18px;
+  }
+  .article ul{display:flex; flex-direction:column; gap:10px; margin:18px 0 24px;}
+  .article li{
+    padding-left:22px; position:relative;
+    font-size:15px; color:var(--ivory); line-height:1.6;
+  }
+  .article li:before{content:"·"; position:absolute; left:6px; color:var(--gold-2); font-size:22px; line-height:1;}
+
+  /* ── Investor positioning (1c) ────────────────────────────────── */
+  .inv-card{
+    text-align:center; max-width:880px; margin:0 auto;
+    padding:40px 24px 0;
+  }
+  .inv-h{
+    font-family:'Bodoni Moda', Georgia, serif;
+    font-size:clamp(20px, 2.3vw, 30px); color:var(--sub);
+    font-weight:400; line-height:1.35; margin-bottom:10px;
+    letter-spacing:-.005em;
+  }
+  .inv-tag{
+    font-family:'Bodoni Moda', Georgia, serif; font-style:italic;
+    font-size:clamp(24px, 2.8vw, 38px); color:var(--gold-2);
+    font-weight:500; letter-spacing:-.01em;
+  }
+
+  /* ── Value statement (6e) ─────────────────────────────────────── */
+  .vs-card{
+    text-align:center; max-width:900px; margin:0 auto;
+    padding:80px 40px;
+    border:1px solid var(--gold);
+    border-radius:24px;
+    background:
+      radial-gradient(60% 80% at 50% 0%, rgba(201,169,97,.10), transparent 70%),
+      linear-gradient(180deg, rgba(20,28,46,.55), rgba(8,12,22,.85));
+  }
+  .vs-h{
+    font-size:clamp(28px, 3.8vw, 52px); line-height:1.15;
+    margin-bottom:24px; font-weight:500;
+  }
+  .vs-body{
+    font-size:clamp(15px, 1.35vw, 18px); color:var(--sub);
+    line-height:1.75; max-width:680px; margin:0 auto;
+  }
+
+  /* ── Network effect (6f) ──────────────────────────────────────── */
+  .ne-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    gap:18px; margin-top:50px;
+  }
+  .ne{
+    padding:34px 26px; border:1px solid var(--line); border-radius:18px;
+    background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.005));
+    transition:border-color .3s, transform .3s, background .3s;
+  }
+  .ne:hover{border-color:var(--gold); transform:translateY(-4px); background:rgba(201,169,97,.04);}
+  .ne-num{
+    font-family:'Bodoni Moda', Georgia, serif;
+    font-size:28px; color:transparent;
+    -webkit-text-stroke:0.7px rgba(201,169,97,.5);
+    margin-bottom:14px; font-weight:500;
+  }
+  .ne-h{
+    font-family:'Bodoni Moda', Georgia, serif; font-size:17px;
+    color:var(--ivory); margin-bottom:10px; font-weight:500; line-height:1.25;
+  }
+  .ne p{font-size:13px; color:var(--sub); line-height:1.6;}
+  @media (max-width:900px){ .ne-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .ne-grid{grid-template-columns:1fr;} }
+
+  /* ── Market size (6g) ─────────────────────────────────────────── */
+  .ms-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    gap:14px; margin-top:50px;
+  }
+  .ms{
+    padding:36px 22px; border:1px solid var(--line); border-radius:14px;
+    text-align:center;
+    background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.005));
+  }
+  .ms-n{
+    font-family:'Bodoni Moda', Georgia, serif;
+    font-size:42px; color:var(--gold-2); font-weight:500;
+    line-height:1; letter-spacing:-.02em; margin-bottom:10px;
+  }
+  .ms-l{font-size:12px; color:var(--sub); letter-spacing:.04em;}
+  .ms-tag{
+    border-color:var(--gold);
+    background:
+      radial-gradient(60% 100% at 50% 0%, rgba(201,169,97,.10), transparent 70%),
+      linear-gradient(180deg, rgba(20,28,46,.55), rgba(8,12,22,.85));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .ms-tagline{
+    font-family:'Bodoni Moda', Georgia, serif; font-size:22px;
+    color:var(--ivory); line-height:1.2; font-weight:500;
+  }
+  .ms-tagline span{color:var(--gold-2); font-style:italic;}
+  @media (max-width:900px){ .ms-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .ms-grid{grid-template-columns:1fr;} .ms-n{font-size:34px;} }
+
+  /* ── App Store badge (inside iOS card) ────────────────────────── */
+  .appstore-block{margin-top:30px;}
+  .appstore-eyebrow{
+    font-size:10px; letter-spacing:.28em; color:var(--gold-2);
+    text-transform:uppercase; margin-bottom:12px; font-weight:500;
+  }
+  .appstore-badge{
+    display:inline-flex; align-items:center; gap:12px;
+    padding:10px 18px; border:1px solid var(--line); border-radius:12px;
+    background:rgba(255,255,255,.04); color:var(--ivory);
+  }
+  .appstore-badge .ab-small{font-size:9.5px; color:var(--muted); letter-spacing:.06em;}
+  .appstore-badge .ab-big{font-family:'Bodoni Moda', Georgia, serif; font-size:18px; font-weight:500;}
+
+  /* ── Category statement (13b) ─────────────────────────────────── */
+  .cat-card{
+    text-align:center; max-width:920px; margin:0 auto;
+    padding:60px 40px;
+  }
+  .cat-strike{
+    font-family:'Bodoni Moda', Georgia, serif; font-style:italic;
+    font-size:clamp(18px, 2vw, 24px); color:var(--muted);
+    margin-bottom:20px; text-decoration:line-through;
+    text-decoration-color:rgba(180,90,90,.6); text-decoration-thickness:1.5px;
+  }
+  .cat-h{
+    font-size:clamp(24px, 3.2vw, 44px); line-height:1.2;
+    color:var(--ivory); font-weight:500; letter-spacing:-.01em;
+  }
+
+  /* ── Sticky CTA ───────────────────────────────────────────────── */
+  .sticky-cta{
+    position:fixed; top:24px; right:24px; z-index:100;
+    display:none; align-items:center; gap:10px;
+    padding:13px 22px; border-radius:12px;
+    background:linear-gradient(135deg, var(--gold-2), var(--gold));
+    color:#0B1320 !important; font-weight:600; font-size:13.5px;
+    box-shadow:0 18px 40px rgba(201,169,97,.30);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .sticky-cta:hover{transform:translateY(-2px); box-shadow:0 22px 50px rgba(201,169,97,.45);}
+  .sticky-cta.show{display:inline-flex;}
+  .sticky-cta .sca{font-size:16px; line-height:1;}
+  @media (max-width:760px){
+    .sticky-cta{
+      top:auto; bottom:18px; right:50%; transform:translateX(50%);
+      padding:14px 28px;
+    }
+    .sticky-cta:hover{transform:translateX(50%) translateY(-2px);}
+  }
+
   /* ── Stats band (1b) ─────────────────────────────────────────── */
   .stats-band{
     display:grid; grid-template-columns:repeat(4, 1fr); gap:0;
@@ -443,6 +621,57 @@
     .lp-arrow{transform:rotate(90deg); margin:0 auto;}
   }
 
+  /* ── Request timeline (7c) ────────────────────────────────────── */
+  .tl{
+    position:relative; max-width:720px; margin:50px auto 0;
+    padding-left:170px;
+  }
+  .tl-line{
+    position:absolute; left:130px; top:14px; bottom:14px;
+    width:1px; background:linear-gradient(180deg, transparent, var(--gold) 10%, var(--gold) 90%, transparent);
+    opacity:.4;
+  }
+  .tl-item{
+    position:relative; margin-bottom:28px; display:flex; align-items:center;
+  }
+  .tl-time{
+    position:absolute; left:-170px; width:120px; text-align:right;
+    font-family:'Bodoni Moda', Georgia, serif; font-size:14px;
+    color:var(--gold-2); font-weight:500;
+  }
+  .tl-dot{
+    position:absolute; left:-44px; top:50%; transform:translateY(-50%);
+    width:14px; height:14px; border-radius:50%;
+    background:var(--ink); border:2px solid var(--gold);
+    box-shadow:0 0 0 4px rgba(8,12,22,1);
+    z-index:1;
+  }
+  .tl-dot-gold{
+    background:linear-gradient(135deg, var(--gold-2), var(--gold));
+    box-shadow:0 0 0 4px rgba(8,12,22,1), 0 0 14px rgba(201,169,97,.5);
+  }
+  .tl-card{
+    flex:1; padding:20px 24px; border:1px solid var(--line);
+    border-radius:14px;
+    background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.005));
+  }
+  .tl-card-gold{
+    border-color:var(--gold);
+    background:linear-gradient(180deg, rgba(201,169,97,.06), rgba(8,12,22,.85));
+  }
+  .tl-h{
+    font-family:'Bodoni Moda', Georgia, serif; font-size:16px;
+    color:var(--ivory); margin-bottom:4px; font-weight:500;
+  }
+  .tl-card p{font-size:13px; color:var(--sub); line-height:1.5;}
+  @media (max-width:680px){
+    .tl{padding-left:60px;}
+    .tl-line{left:24px;}
+    .tl-time{position:static; width:auto; text-align:left; display:block; margin-bottom:6px;}
+    .tl-dot{left:18px;}
+    .tl-item{display:block;}
+  }
+
   /* ── Power statement (14a) ───────────────────────────────────── */
   .power-statement{
     padding:160px 0;
@@ -498,12 +727,12 @@
   .section-head .eyebrow{display:block; margin-bottom:14px;}
   .section-head h2{
     font-family:'Bodoni Moda',Georgia,serif; font-weight:500;
-    font-size:clamp(34px, 4.8vw, 64px); line-height:1.06;
-    letter-spacing:-.018em; color:var(--ivory); margin-bottom:22px;
+    font-size:clamp(36px, 5.2vw, 72px); line-height:1.04;
+    letter-spacing:-.02em; color:var(--ivory); margin-bottom:26px;
   }
   .section-head .lede, .lede{
-    font-size:clamp(15px, 1.35vw, 18px); color:var(--sub);
-    line-height:1.75; max-width:700px; margin:0 auto;
+    font-size:clamp(15px, 1.3vw, 18px); color:var(--sub);
+    line-height:1.75; max-width:620px; margin:0 auto;
   }
 
   /* — Module grid (Section 4 — Solution) ————————————————— */
@@ -550,7 +779,7 @@
   /* — Feature grid (Guest / Venue feature sections) ——————————— */
   .feat-grid{
     display:grid; grid-template-columns:repeat(5, 1fr);
-    gap:14px; margin-top:50px;
+    gap:16px; margin-top:60px;
   }
   .feat{
     padding:24px 16px; border:1px solid var(--line);
@@ -1055,6 +1284,80 @@
     .ios-mock{order:-1;}
   }
 
+  /* ── iPhone screens gallery (2d) ──────────────────────────────── */
+  .iph-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    gap:30px; margin-top:60px; justify-items:center;
+  }
+  .iph{display:flex; flex-direction:column; align-items:center; gap:18px;}
+  .iph-label{
+    font-size:10px; letter-spacing:.28em; color:var(--gold-2);
+    text-transform:uppercase; font-weight:500;
+  }
+  .iph .phone{width:220px; height:440px; padding:12px;}
+  .iph .phone-screen{padding:50px 18px 18px;}
+  .iph .ps-eyebrow{font-size:8px; letter-spacing:.26em; margin-bottom:6px;}
+  .iph .ps-brand{font-size:20px; margin-bottom:4px;}
+  .iph .ps-hero{font-size:18px; margin-bottom:16px;}
+  .iph .ps-header{
+    font-family:'Bodoni Moda', Georgia, serif; font-size:14px;
+    color:var(--ivory); text-align:center;
+    margin-bottom:14px; font-weight:500;
+  }
+  .iph .ps-item{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:9px 10px; border-radius:8px;
+    background:rgba(255,255,255,.03); margin-bottom:6px;
+    font-size:10.5px; color:var(--ivory);
+  }
+  .iph .ps-item b{font-weight:500;}
+  .iph .ps-item span{color:var(--muted); font-size:10px;}
+  .iph .ps-item-total{
+    background:rgba(201,169,97,.08);
+    border:1px solid rgba(201,169,97,.3);
+  }
+  .iph .ps-item-total b, .iph .ps-item-total span{color:var(--gold-2);}
+  .iph .ps-pill{padding:9px 12px; font-size:10.5px; margin-bottom:5px;}
+  .iph .ps-pill-gold{font-size:11px; padding:10px 12px;}
+
+  .iph .ps-msg{
+    padding:8px 10px; border-radius:10px; margin-bottom:5px;
+    font-size:10.5px; max-width:80%;
+  }
+  .iph .ps-msg-them{
+    background:rgba(255,255,255,.04); color:var(--ivory);
+    border-bottom-left-radius:3px; align-self:flex-start; margin-right:auto;
+  }
+  .iph .ps-msg-me{
+    background:linear-gradient(135deg, rgba(201,169,97,.18), rgba(201,169,97,.12));
+    color:var(--ivory); border-bottom-right-radius:3px;
+    align-self:flex-end; margin-left:auto; text-align:right;
+  }
+
+  .iph .ps-track{display:flex; flex-direction:column; gap:6px; margin:8px 0 14px;}
+  .iph .ps-tr{
+    padding:8px 10px; border-radius:8px;
+    background:rgba(255,255,255,.03); color:var(--muted);
+    font-size:10.5px;
+  }
+  .iph .ps-tr-done{background:rgba(60,160,80,.10); color:#7adb91;}
+  .iph .ps-tr-active{
+    background:linear-gradient(135deg, rgba(201,169,97,.18), rgba(201,169,97,.10));
+    color:var(--gold-2); border:1px solid rgba(201,169,97,.3);
+  }
+
+  .iph .ps-card-row{
+    display:flex; justify-content:space-between; padding:8px 10px;
+    border-bottom:1px solid rgba(255,255,255,.04);
+    font-size:10.5px;
+  }
+  .iph .ps-card-l{color:var(--muted);}
+  .iph .ps-card-r{color:var(--ivory);}
+
+  @media (max-width:1100px){ .iph-grid{grid-template-columns:repeat(3, 1fr);} }
+  @media (max-width:760px){ .iph-grid{grid-template-columns:repeat(2, 1fr);} }
+  @media (max-width:460px){ .iph-grid{grid-template-columns:1fr;} }
+
   /* — Conversion CTA card (Section 11d) ————————————————— */
   .conv-card{
     text-align:center; max-width:840px; margin:0 auto;
@@ -1293,6 +1596,8 @@
       <a href="#guests">For Guests</a>
       <a href="#how">How it works</a>
       <a href="#pricing">Pricing</a>
+      <a href="/about.html">About</a>
+      <a href="/security.html">Security</a>
       <a href="https://portal.onebutlr.com/list-your-venue" class="nav-cta">List your venue</a>
     </div>
   </div>
@@ -1325,6 +1630,16 @@
       <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Guest access &amp; concierge</div></div>
       <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Requests tracked end-to-end</div></div>
       <div class="stat"><div class="stat-n">1</div><div class="stat-l">App across every stay</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 1c. INVESTOR POSITIONING ─────────────────────────────────── -->
+<section class="section" style="padding:60px 0 0;">
+  <div class="container">
+    <div class="inv-card">
+      <div class="inv-h">Hospitality never had a universal guest layer.</div>
+      <div class="inv-tag">Butlr is building it.</div>
     </div>
   </div>
 </section>
@@ -1439,6 +1754,75 @@
         <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="3"/><path d="M5 20c0-4 3-7 7-7s7 3 7 7"/><circle cx="18" cy="6" r="2" fill="currentColor" stroke="none"/></svg></div>
         <div class="feat-name">Roles &amp; permissions</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 2d. iPHONE SCREENS GALLERY ──────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The guest app</span>
+      <h2 class="serif">What guests actually see.</h2>
+      <p class="lede">Designed in dark luxury &mdash; ivory on midnight, gold on serif. Eight core screens of the Butlr guest experience.</p>
+    </div>
+    <div class="iph-grid">
+        <div class="iph">
+          <div class="iph-label">Home</div>
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><div class="ps-eyebrow">YOUR STAY · ROOM 504</div><div class="ps-brand">Butlr.</div><div class="ps-hero">Good evening,<br/><span class="ps-em">Bader.</span></div><div class="ps-pill">Room service</div><div class="ps-pill">Spa &amp; wellness</div><div class="ps-pill">Concierge</div><div class="ps-pill ps-pill-gold">Request anything &rarr;</div></div>
+          </div>
+        </div>
+        <div class="iph">
+          <div class="iph-label">Room service</div>
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><div class="ps-eyebrow">ROOM SERVICE</div><div class="ps-header">In-room dining</div><div class="ps-item"><b>Club Sandwich</b><span>3.500 KWD</span></div><div class="ps-item"><b>Truffle pasta</b><span>5.000 KWD</span></div><div class="ps-item"><b>Caesar salad</b><span>2.750 KWD</span></div><div class="ps-item"><b>Selection of desserts</b><span>2.000 KWD</span></div><div class="ps-pill ps-pill-gold">View cart &middot; 2 items</div></div>
+          </div>
+        </div>
+        <div class="iph">
+          <div class="iph-label">Concierge chat</div>
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><div class="ps-eyebrow">CONCIERGE</div><div class="ps-header">Rashid &middot; on shift</div><div class="ps-msg ps-msg-them">Welcome back. Any preferences for tonight?</div><div class="ps-msg ps-msg-me">Could you arrange dinner for 8pm?</div><div class="ps-msg ps-msg-them">Of course &mdash; indoor or terrace?</div><div class="ps-msg ps-msg-me">Terrace, please</div><div class="ps-pill ps-pill-gold">Send message</div></div>
+          </div>
+        </div>
+        <div class="iph">
+          <div class="iph-label">Spa booking</div>
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><div class="ps-eyebrow">SPA &middot; THIS WEEK</div><div class="ps-header">Available treatments</div><div class="ps-item"><b>Signature massage &middot; 60m</b><span>Tue 4pm</span></div><div class="ps-item"><b>Couples ritual &middot; 90m</b><span>Wed 6pm</span></div><div class="ps-item"><b>Hot stone &middot; 45m</b><span>Thu 11am</span></div><div class="ps-pill ps-pill-gold">Book Wednesday 6pm</div></div>
+          </div>
+        </div>
+        <div class="iph">
+          <div class="iph-label">Transport</div>
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><div class="ps-eyebrow">TRANSPORT</div><div class="ps-header">Where are you going?</div><div class="ps-item"><b>Airport &mdash; KWI</b><span>40 min &middot; Mercedes S-class</span></div><div class="ps-item"><b>Marina Mall</b><span>15 min &middot; SUV</span></div><div class="ps-item"><b>Custom destination</b><span>Tap to enter</span></div><div class="ps-pill ps-pill-gold">Request driver</div></div>
+          </div>
+        </div>
+        <div class="iph">
+          <div class="iph-label">Tracking</div>
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><div class="ps-eyebrow">ORDER &middot; 12:42 PM</div><div class="ps-header">Club Sandwich</div><div class="ps-track"><div class="ps-tr ps-tr-done">Received</div><div class="ps-tr ps-tr-done">Kitchen</div><div class="ps-tr ps-tr-active">Preparing &middot; 6m</div><div class="ps-tr">Delivered</div></div><div class="ps-pill">Notify when ready</div></div>
+          </div>
+        </div>
+        <div class="iph">
+          <div class="iph-label">Payment</div>
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><div class="ps-eyebrow">CHECKOUT</div><div class="ps-header">Order summary</div><div class="ps-item"><b>Club Sandwich</b><span>3.500 KWD</span></div><div class="ps-item"><b>Service (10%)</b><span>0.350 KWD</span></div><div class="ps-item ps-item-total"><b>Total</b><span>3.850 KWD</span></div><div class="ps-pill ps-pill-gold">Charge to room 504</div><div class="ps-pill">Pay with card</div></div>
+          </div>
+        </div>
+        <div class="iph">
+          <div class="iph-label">Passport</div>
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen"><div class="ps-eyebrow">BUTLR PASSPORT</div><div class="ps-header">Bader AlSanousi</div><div class="ps-card-row"><div class="ps-card-l">Member since</div><div class="ps-card-r">2026</div></div><div class="ps-card-row"><div class="ps-card-l">Preferences</div><div class="ps-card-r">No tomato</div></div><div class="ps-card-row"><div class="ps-card-l">Language</div><div class="ps-card-r">English</div></div><div class="ps-card-row"><div class="ps-card-l">Stays</div><div class="ps-card-r">12 venues</div></div><div class="ps-pill ps-pill-gold">Update Passport</div></div>
+          </div>
+        </div>
     </div>
   </div>
 </section>
@@ -1705,6 +2089,16 @@
   </div>
 </section>
 
+<!-- ── 6e. VALUE STATEMENT ─────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="vs-card">
+      <h2 class="serif vs-h">One app for every guest.<br/>One system for every venue.</h2>
+      <p class="vs-body">Guests never learn a new hotel app again. Venues never rebuild the same infrastructure again. The whole industry, one shared layer.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ── 6c. MARKETPLACE ─────────────────────────────────────────────── -->
 <section class="section alt">
   <div class="container">
@@ -1733,6 +2127,38 @@
       <div class="rev-step"><div class="rev-num">03</div><div class="rev-t">Partner fulfills</div><p>Verified service provider delivers</p></div>
       <div class="rev-arrow">&rsaquo;</div>
       <div class="rev-step"><div class="rev-num">04</div><div class="rev-t">Revenue is shared</div><p>Commission to Butlr, optional split for the venue</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6f. NETWORK EFFECT ──────────────────────────────────────── -->
+<section class="section alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Network effect</span>
+      <h2 class="serif">The more venues join, the stronger Butlr becomes.</h2>
+    </div>
+    <div class="ne-grid">
+      <div class="ne">
+        <div class="ne-num">01</div>
+        <div class="ne-h">Guests keep one app</div>
+        <p>Preferences, allergies, language, history &mdash; carried across every venue.</p>
+      </div>
+      <div class="ne">
+        <div class="ne-num">02</div>
+        <div class="ne-h">Venues gain marketplace</div>
+        <p>Access to a growing partner network: cars, yachts, flowers, experiences &mdash; commissionable.</p>
+      </div>
+      <div class="ne">
+        <div class="ne-num">03</div>
+        <div class="ne-h">Partners gain distribution</div>
+        <p>One integration, every Butlr venue. Service providers reach guests they couldn&rsquo;t before.</p>
+      </div>
+      <div class="ne">
+        <div class="ne-num">04</div>
+        <div class="ne-h">Hospitality becomes connected</div>
+        <p>The first universal layer for guest experience &mdash; for the first time.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1873,12 +2299,72 @@
   </div>
 </section>
 
+<!-- ── 7c. REQUEST TIMELINE ─────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Real-time timeline</span>
+      <h2 class="serif">Every minute, captured.</h2>
+      <p class="lede">A single guest request, followed in real time &mdash; from the tap to the rating.</p>
+    </div>
+    <div class="tl">
+      <div class="tl-line"></div>
+      <div class="tl-item">
+        <div class="tl-time">12:01 PM</div>
+        <div class="tl-dot"></div>
+        <div class="tl-card"><div class="tl-h">Guest requests towels</div><p>Room 304 &middot; via Butlr app</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">12:02 PM</div>
+        <div class="tl-dot"></div>
+        <div class="tl-card"><div class="tl-h">Housekeeping receives</div><p>Auto-routed by department</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">12:03 PM</div>
+        <div class="tl-dot"></div>
+        <div class="tl-card"><div class="tl-h">Assigned to Sarah</div><p>Closest available staff on shift</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">12:07 PM</div>
+        <div class="tl-dot"></div>
+        <div class="tl-card"><div class="tl-h">Delivered</div><p>Logged with timestamp + photo</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">12:08 PM</div>
+        <div class="tl-dot tl-dot-gold"></div>
+        <div class="tl-card tl-card-gold"><div class="tl-h">Guest rates service &starf;&starf;&starf;&starf;&starf;</div><p>+0.2 to weekly NPS</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── FINAL CTA ───────────────────────────────────────────────────── -->
 <section class="final">
   <div class="eyebrow">Begin</div>
   <h2>Bring Butlr to your venue.</h2>
   <p>Apply in five minutes. Our team reviews every venue personally — typically within 48 hours.</p>
   <a href="https://portal.onebutlr.com/list-your-venue" class="btn btn-gold">List your venue →</a>
+</section>
+
+<!-- ── 6g. MARKET SIZE ─────────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Market size</span>
+      <h2 class="serif">A platform built for global hospitality.</h2>
+      <p class="lede">Not a niche. Not a single city. A category-defining layer for every premium venue on earth.</p>
+    </div>
+    <div class="ms-grid">
+      <div class="ms"><div class="ms-n" data-target="190000">0</div><div class="ms-l">Hotels worldwide</div></div>
+      <div class="ms"><div class="ms-n" data-target="22000">0</div><div class="ms-l">Resorts</div></div>
+      <div class="ms"><div class="ms-n" data-target="5000">0</div><div class="ms-l">Beach &amp; pool clubs</div></div>
+      <div class="ms"><div class="ms-n" data-target="900">0</div><div class="ms-l">Branded residences</div></div>
+      <div class="ms"><div class="ms-n" data-target="1500">0</div><div class="ms-l">Private members clubs</div></div>
+      <div class="ms"><div class="ms-n" data-target="11000">0</div><div class="ms-l">Marinas</div></div>
+      <div class="ms"><div class="ms-n" data-target="100000">0</div><div class="ms-l">Luxury venues</div></div>
+      <div class="ms ms-tag"><div class="ms-tagline">One platform.<br/><span>For all of it.</span></div></div>
+    </div>
+  </div>
 </section>
 
 <!-- ── 9. PACKAGES ─────────────────────────────────────────────────── -->
@@ -2165,6 +2651,13 @@
         <p class="lede">Butlr is built as a premium iOS guest experience. Guests connect by QR or venue code at check-in &mdash; no friction, no sign-up wall, no extra hardware. One tap and the venue becomes their private butler.</p>
         <div style="margin-top:30px;">
           <a href="#apply" class="btn btn-gold">List your venue &rarr;</a>
+        </div>
+        <div class="appstore-block">
+          <div class="appstore-eyebrow">Coming to iPhone</div>
+          <div class="appstore-badge">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:18px; height:18px;"><path d="M17.05 12.04c-.03-2.84 2.32-4.21 2.42-4.27-1.32-1.93-3.38-2.2-4.12-2.23-1.75-.18-3.42 1.03-4.31 1.03-.9 0-2.27-1.01-3.74-.98-1.92.03-3.7 1.12-4.69 2.83-2.01 3.48-.51 8.63 1.43 11.46.96 1.39 2.09 2.94 3.57 2.89 1.44-.06 1.98-.93 3.72-.93 1.73 0 2.22.93 3.74.9 1.55-.03 2.52-1.41 3.46-2.81 1.09-1.6 1.54-3.15 1.57-3.23-.03-.01-3.01-1.15-3.05-4.66zM14.4 4.13c.8-.96 1.34-2.31 1.19-3.64-1.15.05-2.53.77-3.36 1.73-.74.85-1.39 2.21-1.21 3.52 1.28.1 2.59-.65 3.38-1.61z"/></svg>
+            <div><div class="ab-small">Download on the</div><div class="ab-big">App Store</div></div>
+          </div>
         </div>
       </div>
       <div class="ios-mock">
@@ -2542,6 +3035,16 @@
   </div>
 </section>
 
+<!-- ── 13b. CATEGORY STATEMENT ─────────────────────────────────── -->
+<section class="section alt">
+  <div class="container">
+    <div class="cat-card">
+      <div class="cat-strike">Butlr is not a concierge app.</div>
+      <h2 class="serif cat-h">It is the operating system connecting guests, staff, venues, services and hospitality revenue into one platform.</h2>
+    </div>
+  </div>
+</section>
+
 <!-- ── 14a. FINAL POWER STATEMENT ─────────────────────────────── -->
 <section class="section power-statement">
   <div class="container">
@@ -2576,6 +3079,9 @@
     </div>
     <div class="foot-col">
       <div class="foot-h">Company</div>
+      <a href="/about.html">About</a>
+      <a href="/security.html">Security</a>
+      <a href="/partners.html">Become a partner</a>
       <a href="privacy.html">Privacy</a>
       <a href="butlr-privacy-policy.html">Privacy policy</a>
       <a href="mailto:info@onebutlr.com">Contact</a>
@@ -2703,6 +3209,49 @@
     });
   }
 
+  // ── Sticky CTA — show after the hero scrolls past ──────────────
+  var stickyCta = document.querySelector('.sticky-cta');
+  if (stickyCta) {
+    var hero = document.querySelector('.hero');
+    var onScroll = function(){
+      var heroBottom = hero ? hero.getBoundingClientRect().bottom : 0;
+      var apply = document.getElementById('apply');
+      var applyTop = apply ? apply.getBoundingClientRect().top : 99999;
+      // show after hero is gone, hide once user reaches apply form
+      if (heroBottom < 60 && applyTop > 200) stickyCta.classList.add('show');
+      else stickyCta.classList.remove('show');
+    };
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+  }
+
+  // ── Market size counter — count up when scrolled into view ─────
+  var msNumbers = document.querySelectorAll('.ms-n[data-target]');
+  if (msNumbers.length && 'IntersectionObserver' in window) {
+    var fmt = function(n){
+      if (n >= 1000) return Math.round(n/1000) + 'k+';
+      return Math.round(n) + '';
+    };
+    var counterIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting || e.target.dataset.done) return;
+        e.target.dataset.done = '1';
+        var target = parseInt(e.target.getAttribute('data-target'), 10) || 0;
+        var start = 0, dur = 1400, t0 = performance.now();
+        var tick = function(t){
+          var p = Math.min((t - t0) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          e.target.textContent = fmt(start + (target - start) * eased);
+          if (p < 1) requestAnimationFrame(tick);
+          else e.target.textContent = fmt(target);
+        };
+        requestAnimationFrame(tick);
+        counterIo.unobserve(e.target);
+      });
+    }, {threshold: 0.4});
+    msNumbers.forEach(function(n){ counterIo.observe(n); });
+  }
+
   // ── Reveal-on-scroll for sections ──────────────────────────────────
   var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries){
     entries.forEach(function(e){
@@ -2723,5 +3272,12 @@
   }
 })();
 </script>
+
+<!-- ── STICKY APPLY CTA ─────────────────────────────────────────── -->
+<a href="#apply" class="sticky-cta" aria-label="List your venue">
+  <span>List your venue</span>
+  <span class="sca">&rarr;</span>
+</a>
+
 </body>
 </html>
