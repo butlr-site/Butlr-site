@@ -51,8 +51,9 @@
     border-bottom:1px solid var(--line);}
   .nav-inner{display:flex; align-items:center; justify-content:space-between;
     max-width:var(--maxw); margin:0 auto; padding:0 24px;}
-  .brand{font-family:'Bodoni Moda', Georgia, serif; font-size:24px; font-weight:500; color:var(--ivory); letter-spacing:0; white-space:nowrap;}
-  .brand .bu, .brand .r{display:inline; letter-spacing:0; margin:0; padding:0;}
+  .brand{font-family:'Bodoni Moda', Georgia, serif; font-size:24px; font-weight:500; color:var(--ivory); letter-spacing:-.005em; white-space:nowrap;}
+  .brand .bu, .brand .r{display:inline; letter-spacing:0; margin:0; padding:0; word-spacing:0;}
+  .brand .r{margin-left:-.04em;}  /* tighten any glyph-pair gap */
   .nav-links{display:flex; gap:28px; align-items:center;}
   .nav-links a{color:var(--sub); font-size:13.5px;}
   .nav-links a:hover{color:var(--ivory);}
@@ -351,6 +352,31 @@
     font-size:15px; color:var(--ivory); line-height:1.6;
   }
   .article li:before{content:"·"; position:absolute; left:6px; color:var(--gold-2); font-size:22px; line-height:1;}
+
+  /* ── Venue quality grid (8b) ──────────────────────────────────── */
+  .quality-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr);
+    gap:18px; margin-top:50px;
+  }
+  .quality{
+    padding:34px 28px; border:1px solid var(--gold);
+    border-radius:18px;
+    background:
+      radial-gradient(60% 80% at 0% 0%, rgba(201,169,97,.06), transparent 70%),
+      linear-gradient(180deg, rgba(20,28,46,.45), rgba(8,12,22,.85));
+  }
+  .quality-h{
+    font-family:'Bodoni Moda', Georgia, serif; font-size:18px;
+    color:var(--gold-2); margin-bottom:10px; font-weight:500; line-height:1.25;
+  }
+  .quality p{font-size:13.5px; color:var(--sub); line-height:1.65;}
+  @media (max-width:900px){ .quality-grid{grid-template-columns:1fr;} }
+
+  /* ── Footer email accent ─────────────────────────────────────── */
+  .foot-mail{
+    margin-top:8px; color:var(--gold-2) !important;
+    font-family:'Bodoni Moda', Georgia, serif; font-size:15px !important;
+  }
 
   /* ── Investor positioning (1c) ────────────────────────────────── */
   .inv-card{
@@ -1041,7 +1067,9 @@
     border:1px solid var(--line); border-radius:18px;
     background:rgba(255,255,255,.02);
     display:flex; flex-direction:column; gap:18px;
+    height:100%;
   }
+  .pkgs{align-items:stretch;}
   .pkg.featured{
     border-color:var(--gold);
     background:linear-gradient(180deg, rgba(201,169,97,.06), rgba(201,169,97,.01));
@@ -1074,7 +1102,7 @@
     padding-top:16px; margin-top:8px; border-top:1px solid var(--line);
     font-size:11.5px; color:var(--muted); letter-spacing:.04em;
   }
-  .pkg .btn{justify-content:center; width:100%;}
+  .pkg .btn{justify-content:center; width:100%; margin-top:auto;}
   .btn-outline{
     border:1px solid var(--gold); color:var(--gold-2) !important;
     background:transparent;
@@ -1121,7 +1149,7 @@
     border-radius:16px; background:rgba(255,255,255,.02);
   }
   .cmp{
-    width:100%; border-collapse:collapse;
+    width:100%; min-width:720px; border-collapse:collapse;
     font-size:13.5px; color:var(--ivory);
   }
   .cmp thead th{
@@ -2371,6 +2399,25 @@
   </div>
 </section>
 
+<!-- ── 8b. VENUE QUALITY GATE ─────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Quality, by design</span>
+      <h2 class="serif">Built to protect venue quality.</h2>
+      <p class="lede">Butlr is curated, not crowded. Every venue, every partner, every interaction passes through real human review before it joins the network.</p>
+    </div>
+    <div class="quality-grid">
+      <div class="quality"><div class="quality-h">Human-reviewed applications</div><p>Every venue assessed by our partnerships team &mdash; no auto-approved listings.</p></div>
+      <div class="quality"><div class="quality-h">Verified hospitality partners only</div><p>Licensing, ownership, and standards checked before any venue or service goes live.</p></div>
+      <div class="quality"><div class="quality-h">Controlled staff access &amp; roles</div><p>Role-based permissions on every action. Cleaners see tasks, owners see everything.</p></div>
+      <div class="quality"><div class="quality-h">Guest data handled securely</div><p>Encrypted in transit and at rest. Audit-logged. Never shared without explicit consent.</p></div>
+      <div class="quality"><div class="quality-h">No public marketplace spam</div><p>Curated partner network. Guests never see paid placement or sponsored noise.</p></div>
+      <div class="quality"><div class="quality-h">Reviewed in 48 hours</div><p>Quality doesn&rsquo;t mean slow. Most applications hear back within two business days.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- ── 9. PACKAGES ─────────────────────────────────────────────────── -->
 <section class="section" id="packages">
   <div class="container">
@@ -2467,7 +2514,7 @@
           <li><span class="chk">✓</span>Dedicated infrastructure</li>
         </ul>
         <div class="commission">Custom subscription + custom commission</div>
-        <a href="mailto:info@onebutlr.com?subject=Butlr%20Enterprise%20Inquiry" class="btn btn-outline">Contact Sales</a>
+        <a href="mailto:info@onebutlr.com?subject=Butlr%20Enterprise%20Inquiry" class="btn btn-outline">Start your application</a>
       </div>
     </div>
   </div>
@@ -2548,7 +2595,7 @@
       <div class="venue-card"><div class="venue-name">Marinas &amp; yacht clubs</div><div class="venue-sub">Berths, charters &amp; harbours</div></div>
     </div>
     <div style="text-align:center; margin-top:48px;">
-      <a href="#apply" class="btn btn-gold">Bring Butlr to your venue &rarr;</a>
+      <a href="#apply" class="btn btn-gold">List your venue &rarr;</a>
     </div>
   </div>
 </section>
@@ -2657,7 +2704,7 @@
           <a href="#apply" class="btn btn-gold">List your venue &rarr;</a>
         </div>
         <div class="appstore-block">
-          <div class="appstore-eyebrow">Coming to iPhone</div>
+          <div class="appstore-eyebrow">iPhone app launching soon &middot; Venue onboarding now open</div>
           <div class="appstore-badge">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:18px; height:18px;"><path d="M17.05 12.04c-.03-2.84 2.32-4.21 2.42-4.27-1.32-1.93-3.38-2.2-4.12-2.23-1.75-.18-3.42 1.03-4.31 1.03-.9 0-2.27-1.01-3.74-.98-1.92.03-3.7 1.12-4.69 2.83-2.01 3.48-.51 8.63 1.43 11.46.96 1.39 2.09 2.94 3.57 2.89 1.44-.06 1.98-.93 3.72-.93 1.73 0 2.22.93 3.74.9 1.55-.03 2.52-1.41 3.46-2.81 1.09-1.6 1.54-3.15 1.57-3.23-.03-.01-3.01-1.15-3.05-4.66zM14.4 4.13c.8-.96 1.34-2.31 1.19-3.64-1.15.05-2.53.77-3.36 1.73-.74.85-1.39 2.21-1.21 3.52 1.28.1 2.59-.65 3.38-1.61z"/></svg>
             <div><div class="ab-small">Download on the</div><div class="ab-big">App Store</div></div>
@@ -2810,7 +2857,7 @@
         </div>
         <div class="field-row">
           <div class="field">
-            <label>Website</label>
+            <label>Venue website</label>
             <input type="url" name="website" placeholder="https://venue.com" />
           </div>
           <div class="field">
@@ -2818,15 +2865,9 @@
             <input type="text" name="instagram" placeholder="@venue" />
           </div>
         </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Business license URL or Google Maps listing</label>
-            <input type="url" name="googleMapsUrl" required placeholder="https://maps.google.com/... or license URL" />
-          </div>
-          <div class="field">
-            <label>Venue website (if any)</label>
-            <input type="url" name="licenseUrl" placeholder="Or link to commercial registration" />
-          </div>
+        <div class="field">
+          <label>Business license URL or Google Maps listing</label>
+          <input type="url" name="googleMapsUrl" required placeholder="https://maps.google.com/... or license URL" />
         </div>
         <div class="field">
           <label>Tell us about your venue</label>
@@ -2851,7 +2892,7 @@
           <input type="checkbox" name="authConfirm" required />
           <span>I confirm this is a real hospitality venue and I am authorized to apply on its behalf.</span>
         </label>
-        <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:10px;">Apply Now →</button>
+        <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:10px;">Start your application →</button>
         <div class="form-success" id="formSuccess">
           ✓ Application received. Our team will be in touch within 48 hours.
         </div>
@@ -3086,11 +3127,11 @@
       <a href="/about.html">About</a>
       <a href="/security.html">Security</a>
       <a href="/partners.html">Become a partner</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="butlr-privacy-policy.html">Privacy policy</a>
+      <a href="butlr-privacy-policy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms</a>
       <a href="mailto:info@onebutlr.com">Contact</a>
       <a href="mailto:info@onebutlr.com?subject=Butlr Support">Support</a>
-      <a href="mailto:info@onebutlr.com">Terms</a>
+      <a href="mailto:info@onebutlr.com" class="foot-mail">info@onebutlr.com</a>
     </div>
   </div>
   <p class="legal">© 2026 Butlr · Every stay. One butler. · Kuwait City</p>
@@ -3153,7 +3194,7 @@
           error.textContent = 'Please confirm you are authorized to apply for this venue.';
           error.style.display = 'block';
         }
-        if (submit) { submit.disabled = false; submit.textContent = 'Apply Now →'; }
+        if (submit) { submit.disabled = false; submit.textContent = 'Start your application →'; }
         return;
       }
 
@@ -3180,7 +3221,7 @@
           }
         })
         .finally(function(){
-          if (submit) { submit.disabled = false; submit.textContent = 'Apply Now →'; }
+          if (submit) { submit.disabled = false; submit.textContent = 'Start your application →'; }
         });
     });
   }
