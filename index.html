@@ -130,7 +130,7 @@
 
   /* ── SECTION SCAFFOLDING ────────────────────────────────────────── */
   section{padding:120px 0;}
-  .section-head{text-align:center; max-width:760px; margin:0 auto 60px;}
+  .section-head{text-align:center; max-width:780px; margin:0 auto 80px;}
   .section-head h2{
     font-family:'Bodoni Moda',Georgia,serif; font-weight:500;
     font-size:clamp(32px, 5vw, 56px); line-height:1.1; letter-spacing:-.015em;
@@ -308,6 +308,160 @@
   .foot .links a:hover{color:var(--ivory);}
   .legal{margin-top:24px; text-align:center; color:var(--muted); font-size:11.5px; letter-spacing:.04em;}
 
+  /* ── Stats band (1b) ─────────────────────────────────────────── */
+  .stats-band{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:0;
+    border:1px solid var(--line); border-radius:24px;
+    background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.005));
+    overflow:hidden;
+  }
+  .stat{
+    padding:46px 28px; text-align:center;
+    border-right:1px solid var(--line); position:relative;
+  }
+  .stat:last-child{border-right:none;}
+  .stat-n{
+    font-family:'Bodoni Moda', Georgia, serif; font-size:54px;
+    color:var(--gold-2); font-weight:500; line-height:1; letter-spacing:-.02em;
+    margin-bottom:12px;
+  }
+  .stat-l{font-size:13px; color:var(--sub); letter-spacing:.02em;}
+  @media (max-width:760px){
+    .stats-band{grid-template-columns:1fr 1fr;}
+    .stat{border-bottom:1px solid var(--line);}
+    .stat:nth-child(2n){border-right:none;}
+    .stat:nth-last-child(-n+2){border-bottom:none;}
+    .stat-n{font-size:42px;}
+  }
+
+  /* ── Before / After (6d) ─────────────────────────────────────── */
+  .ba-grid{
+    display:grid; grid-template-columns:1fr auto 1fr;
+    gap:32px; align-items:stretch; margin-top:50px;
+  }
+  .ba-col{
+    padding:40px 32px; border-radius:20px;
+    border:1px solid var(--line);
+  }
+  .ba-before{
+    background:linear-gradient(180deg, rgba(180,60,60,.06), rgba(8,12,22,.85));
+    border-color:rgba(180,60,60,.25);
+  }
+  .ba-after{
+    background:linear-gradient(180deg, rgba(201,169,97,.08), rgba(8,12,22,.85));
+    border-color:rgba(201,169,97,.35);
+  }
+  .ba-h{
+    font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+    margin-bottom:22px; font-weight:500;
+  }
+  .ba-before .ba-h{color:#ff9b9b;}
+  .ba-after  .ba-h{color:var(--gold-2);}
+  .ba-col ul{display:flex; flex-direction:column; gap:14px;}
+  .ba-col li{
+    font-family:'Bodoni Moda', Georgia, serif; font-size:16px;
+    color:var(--ivory); padding-left:24px; position:relative;
+    line-height:1.5;
+  }
+  .ba-before li:before{content:"&times;"; position:absolute; left:0; color:#ff9b9b; font-size:18px;}
+  .ba-after  li:before{content:"\2713"; position:absolute; left:0; color:var(--gold-2); font-size:16px;}
+  .ba-arrow{
+    align-self:center; color:var(--gold); font-size:38px; opacity:.6;
+  }
+  @media (max-width:900px){
+    .ba-grid{grid-template-columns:1fr;}
+    .ba-arrow{transform:rotate(90deg);}
+  }
+
+  /* ── Security & privacy (11a) ────────────────────────────────── */
+  .sec-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; margin-top:50px;
+  }
+  .sec{
+    padding:32px 28px; border:1px solid var(--line); border-radius:16px;
+    background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.005));
+  }
+  .sec-h{
+    font-family:'Bodoni Moda', Georgia, serif; font-size:18px;
+    color:var(--ivory); margin-bottom:10px; font-weight:500;
+  }
+  .sec p{font-size:13.5px; color:var(--sub); line-height:1.6;}
+  @media (max-width:900px){ .sec-grid{grid-template-columns:1fr;} }
+
+  /* ── Live portal preview (7b) ────────────────────────────────── */
+  .lp-preview{
+    margin-top:60px; display:grid;
+    grid-template-columns:1fr auto 1fr auto 1fr;
+    gap:18px; align-items:stretch;
+  }
+  .lp-card{
+    padding:22px 22px; border:1px solid var(--line); border-radius:14px;
+    background:
+      linear-gradient(165deg, rgba(201,169,97,.10) 0%, transparent 40%),
+      linear-gradient(180deg, rgba(22,28,46,.55), rgba(8,12,22,.85));
+    box-shadow:0 18px 40px rgba(0,0,0,.30);
+    animation:lp-pulse 6s ease-in-out infinite;
+    opacity:0; transform:translateY(8px);
+  }
+  .lp-card:nth-child(1){animation-delay:0s;}
+  .lp-card:nth-child(3){animation-delay:0.6s;}
+  .lp-card:nth-child(5){animation-delay:1.2s;}
+  .lp-card:nth-child(7){animation-delay:1.8s;}
+  .lp-card:nth-child(9){animation-delay:2.4s;}
+  .lp-card:nth-child(11){animation-delay:3.0s;}
+  @keyframes lp-pulse {
+    0%, 12% { opacity: 0; transform: translateY(8px); border-color:var(--line); }
+    18%, 80% { opacity: 1; transform: translateY(0); border-color:var(--gold); }
+    100% { opacity: .85; transform: translateY(0); border-color:var(--line); }
+  }
+  .lp-tag{
+    font-size:10px; letter-spacing:.22em; color:var(--gold-2);
+    text-transform:uppercase; margin-bottom:10px;
+  }
+  .lp-line{
+    font-family:'Bodoni Moda', Georgia, serif; font-size:15px;
+    color:var(--ivory); margin-bottom:8px; font-weight:500;
+  }
+  .lp-meta{font-size:11.5px; color:var(--muted); letter-spacing:.01em;}
+  .lp-arrow{
+    align-self:center; width:24px; height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    position:relative;
+  }
+  .lp-arrow:after{
+    content:""; position:absolute; right:-2px; top:-3px;
+    width:6px; height:6px; border-top:1px solid var(--gold);
+    border-right:1px solid var(--gold); transform:rotate(45deg);
+  }
+  @media (max-width:900px){
+    .lp-preview{grid-template-columns:1fr;}
+    .lp-arrow{transform:rotate(90deg); margin:0 auto;}
+  }
+
+  /* ── Power statement (14a) ───────────────────────────────────── */
+  .power-statement{
+    padding:160px 0;
+    background:
+      radial-gradient(60% 80% at 50% 30%, rgba(201,169,97,.10), transparent 70%),
+      linear-gradient(180deg, rgba(8,12,22,1), rgba(4,6,12,1));
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .power-card{
+    text-align:center; max-width:920px; margin:0 auto; padding:0 24px;
+  }
+  .power-h{
+    font-family:'Bodoni Moda', Georgia, serif;
+    font-size:clamp(28px, 4vw, 48px); line-height:1.15;
+    color:var(--ivory); margin-bottom:36px; font-weight:500;
+    letter-spacing:-.015em;
+  }
+  .power-tag{
+    font-family:'Bodoni Moda', Georgia, serif; font-style:italic;
+    font-size:clamp(40px, 6vw, 72px); color:var(--gold-2);
+    margin-bottom:48px; line-height:1;
+  }
+
   /* ── Explain card (Section 2 — How it actually works) ───────────── */
   .explain-card{
     max-width:880px; margin:0 auto; padding:50px 44px;
@@ -332,18 +486,19 @@
      ════════════════════════════════════════════════════════════════ */
   .brand .r{color:var(--gold-2);}  /* no italic — matches iOS wordmark exactly */
 
-  .section{padding:120px 0; position:relative;}
+  .section{padding:160px 0; position:relative;}
+  @media (max-width:760px){ .section{padding:90px 0;} }
   .section.alt{background:linear-gradient(180deg, rgba(201,169,97,.02), transparent);}
   .section .container{padding:0 24px;}
   .section-head .eyebrow{display:block; margin-bottom:14px;}
   .section-head h2{
     font-family:'Bodoni Moda',Georgia,serif; font-weight:500;
-    font-size:clamp(34px, 5vw, 60px); line-height:1.05;
-    letter-spacing:-.015em; color:var(--ivory); margin-bottom:18px;
+    font-size:clamp(34px, 4.8vw, 64px); line-height:1.06;
+    letter-spacing:-.018em; color:var(--ivory); margin-bottom:22px;
   }
   .section-head .lede, .lede{
-    font-size:clamp(15px, 1.3vw, 17px); color:var(--sub);
-    line-height:1.7; max-width:680px; margin:0 auto;
+    font-size:clamp(15px, 1.35vw, 18px); color:var(--sub);
+    line-height:1.75; max-width:700px; margin:0 auto;
   }
 
   /* — Module grid (Section 4 — Solution) ————————————————— */
@@ -908,6 +1063,133 @@
   .conv-card h2{margin-bottom:18px;}
   @media (max-width:640px){ .conv-card{padding:48px 28px;} }
 
+  /* ── Portal mockups (3b) ─────────────────────────────────────── */
+  .mock-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr);
+    gap:20px; margin-top:50px;
+  }
+  .mock-card{
+    border:1px solid var(--line); border-radius:16px;
+    background:linear-gradient(180deg, rgba(20,28,46,.55), rgba(8,12,22,.85));
+    overflow:hidden;
+    box-shadow:0 24px 50px rgba(0,0,0,.40);
+    transition:transform .35s ease, border-color .35s ease;
+  }
+  .mock-card:hover{transform:translateY(-4px); border-color:var(--gold);}
+  .mock-bar{
+    display:flex; align-items:center; gap:6px;
+    padding:12px 16px; background:rgba(0,0,0,.35);
+    border-bottom:1px solid var(--line);
+  }
+  .mock-dot{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.20);}
+  .mock-title{
+    margin-left:14px; font-size:11.5px; color:var(--sub);
+    letter-spacing:.04em;
+  }
+  .mock-body{padding:18px 20px; display:flex; flex-direction:column; gap:12px;}
+
+  .mock-row{
+    display:flex; align-items:center; gap:12px;
+    padding:12px 14px; border:1px solid var(--line); border-radius:10px;
+    background:rgba(255,255,255,.02);
+  }
+  .mock-row-active{
+    background:rgba(201,169,97,.06);
+    border-color:rgba(201,169,97,.35);
+  }
+  .mock-pill{
+    font-size:9.5px; letter-spacing:.18em; font-weight:600;
+    padding:3px 8px; border-radius:30px;
+    text-transform:uppercase; flex-shrink:0;
+  }
+  .mock-pill-gold{background:linear-gradient(135deg,var(--gold-2),var(--gold)); color:#0B1320;}
+  .mock-pill-blue{background:rgba(60,120,200,.15); color:#7ab4ff;}
+  .mock-pill-green{background:rgba(60,160,80,.15); color:#7adb91;}
+  .mock-row-text{
+    flex:1; font-size:12.5px; color:var(--ivory);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .mock-row-text b{font-weight:500;}
+  .mock-row-meta{font-size:11px; color:var(--muted);}
+
+  .mock-kpis{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:10px;
+  }
+  .mock-kpi{
+    padding:14px 8px; text-align:center;
+    border:1px solid var(--line); border-radius:10px;
+    background:rgba(255,255,255,.02);
+  }
+  .mock-kpi-n{
+    font-family:'Bodoni Moda', Georgia, serif; font-size:22px;
+    color:var(--gold-2); font-weight:500; line-height:1;
+  }
+  .mock-kpi-u{font-size:13px; color:var(--gold-2); opacity:.7;}
+  .mock-kpi-l{font-size:10.5px; color:var(--muted); margin-top:6px; letter-spacing:.04em;}
+
+  .mock-chart{padding:8px 4px 0;}
+  .mock-bars{
+    display:flex; align-items:flex-end; gap:8px;
+    height:80px; padding:0 4px;
+  }
+  .mock-bar-col{
+    flex:1; background:rgba(201,169,97,.18); border-radius:3px 3px 0 0;
+    border-top:1px solid rgba(201,169,97,.4);
+  }
+  .mock-bar-gold{background:linear-gradient(180deg,var(--gold-2),var(--gold)); border-top:none;}
+  .mock-chart-label{
+    margin-top:10px; font-size:10px; color:var(--muted);
+    letter-spacing:.06em; text-align:center;
+  }
+
+  .mock-staff{
+    display:flex; align-items:center; gap:12px;
+    padding:10px 12px; border:1px solid var(--line); border-radius:10px;
+    background:rgba(255,255,255,.02);
+  }
+  .mock-staff-avatar{
+    width:32px; height:32px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg,var(--gold-2),var(--gold)); color:#0B1320;
+    font-family:'Bodoni Moda',Georgia,serif; font-weight:600; font-size:13px;
+  }
+  .mock-staff-info{flex:1; display:flex; flex-direction:column; gap:2px;}
+  .mock-staff-info b{font-size:12.5px; color:var(--ivory); font-weight:500;}
+  .mock-staff-info span{font-size:11px; color:var(--muted);}
+  .mock-staff-dot{width:8px; height:8px; border-radius:50%;}
+  .mock-staff-on{background:#7adb91; box-shadow:0 0 8px rgba(120,220,140,.5);}
+  .mock-staff-away{background:#f5b347;}
+  @media (max-width:900px){ .mock-grid{grid-template-columns:1fr;} }
+
+  /* ── Partner waitlist (12b) ──────────────────────────────────── */
+  .partner-card{
+    display:grid; grid-template-columns:1fr 1.2fr; gap:48px;
+    align-items:start; padding:60px 50px;
+    border:1px solid var(--gold); border-radius:24px;
+    background:
+      radial-gradient(60% 80% at 0% 0%, rgba(201,169,97,.08), transparent 70%),
+      linear-gradient(180deg, rgba(20,28,46,.55), rgba(8,12,22,.85));
+  }
+  .partner-card .eyebrow{display:block; margin-bottom:18px;}
+  .partner-bullets{
+    list-style:none; display:flex; flex-direction:column; gap:12px;
+    margin-top:24px; padding:0;
+  }
+  .partner-bullets li{
+    padding-left:24px; position:relative;
+    font-size:14px; color:var(--ivory); line-height:1.5;
+  }
+  .partner-bullets li:before{
+    content:"\2713"; position:absolute; left:0;
+    color:var(--gold-2); font-weight:600;
+  }
+  .partner-form{
+    display:flex; flex-direction:column; gap:16px;
+  }
+  @media (max-width:900px){
+    .partner-card{grid-template-columns:1fr; padding:40px 28px;}
+  }
+
   /* — Apply form (Section 12) ————————————————————————————— */
   .apply-wrap{
     display:grid; grid-template-columns:1fr 1.4fr;
@@ -1030,6 +1312,18 @@
   <div class="hero-trust">Built for hotels · resorts · beach clubs · serviced apartments · members&rsquo; clubs · marinas · spas</div>
 </section>
 
+<!-- ── 1b. STATS BAND ─────────────────────────────────────────── -->
+<section class="section" style="padding-top:80px; padding-bottom:80px;">
+  <div class="container">
+    <div class="stats-band">
+      <div class="stat"><div class="stat-n">&lt; 30s</div><div class="stat-l">Average response time</div></div>
+      <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Guest access &amp; concierge</div></div>
+      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Requests tracked end-to-end</div></div>
+      <div class="stat"><div class="stat-n">1</div><div class="stat-l">App across every stay</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- ── 2. WHAT IS BUTLR (explanation block) ────────────────────────── -->
 <section class="section">
   <div class="container">
@@ -1139,6 +1433,115 @@
       <div class="feat">
         <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="3"/><path d="M5 20c0-4 3-7 7-7s7 3 7 7"/><circle cx="18" cy="6" r="2" fill="currentColor" stroke="none"/></svg></div>
         <div class="feat-name">Roles &amp; permissions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3b. PORTAL MOCKUPS ──────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Inside the operation</span>
+      <h2 class="serif">Three screens. One control room.</h2>
+      <p class="lede">A glimpse of the venue portal &mdash; how every request, every staff member, and every metric stays in one place.</p>
+    </div>
+    <div class="mock-grid">
+      <!-- REQUEST INBOX MOCKUP -->
+      <div class="mock-card">
+        <div class="mock-bar">
+          <div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div>
+          <div class="mock-title">Request inbox</div>
+        </div>
+        <div class="mock-body">
+          <div class="mock-row mock-row-active">
+            <div class="mock-pill mock-pill-gold">NEW</div>
+            <div class="mock-row-text"><b>Room 504</b> &middot; Club Sandwich</div>
+            <div class="mock-row-meta">12:42</div>
+          </div>
+          <div class="mock-row">
+            <div class="mock-pill mock-pill-blue">PREP</div>
+            <div class="mock-row-text"><b>Suite 812</b> &middot; Extra towels</div>
+            <div class="mock-row-meta">12:38</div>
+          </div>
+          <div class="mock-row">
+            <div class="mock-pill mock-pill-blue">PREP</div>
+            <div class="mock-row-text"><b>Room 217</b> &middot; Laundry pickup</div>
+            <div class="mock-row-meta">12:30</div>
+          </div>
+          <div class="mock-row">
+            <div class="mock-pill mock-pill-green">DONE</div>
+            <div class="mock-row-text"><b>Room 411</b> &middot; Spa booking</div>
+            <div class="mock-row-meta">12:14</div>
+          </div>
+          <div class="mock-row">
+            <div class="mock-pill mock-pill-green">DONE</div>
+            <div class="mock-row-text"><b>Suite 901</b> &middot; Airport transfer</div>
+            <div class="mock-row-meta">11:55</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANALYTICS MOCKUP -->
+      <div class="mock-card">
+        <div class="mock-bar">
+          <div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div>
+          <div class="mock-title">Today &middot; Operations</div>
+        </div>
+        <div class="mock-body">
+          <div class="mock-kpis">
+            <div class="mock-kpi"><div class="mock-kpi-n">142</div><div class="mock-kpi-l">Requests</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-n">26<span class="mock-kpi-u">s</span></div><div class="mock-kpi-l">Avg response</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-n">98%</div><div class="mock-kpi-l">Completion</div></div>
+          </div>
+          <div class="mock-chart">
+            <div class="mock-bars">
+              <div class="mock-bar-col" style="height:38%"></div>
+              <div class="mock-bar-col" style="height:52%"></div>
+              <div class="mock-bar-col" style="height:71%"></div>
+              <div class="mock-bar-col" style="height:46%"></div>
+              <div class="mock-bar-col" style="height:84%"></div>
+              <div class="mock-bar-col mock-bar-gold" style="height:92%"></div>
+              <div class="mock-bar-col" style="height:62%"></div>
+            </div>
+            <div class="mock-chart-label">Mon &middot; Tue &middot; Wed &middot; Thu &middot; Fri &middot; Sat &middot; Sun</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAFF ASSIGNMENT MOCKUP -->
+      <div class="mock-card">
+        <div class="mock-bar">
+          <div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div>
+          <div class="mock-title">Staff &middot; On shift</div>
+        </div>
+        <div class="mock-body">
+          <div class="mock-staff">
+            <div class="mock-staff-avatar">M</div>
+            <div class="mock-staff-info"><b>Chef Marco</b><span>Kitchen &middot; 3 active</span></div>
+            <div class="mock-staff-dot mock-staff-on"></div>
+          </div>
+          <div class="mock-staff">
+            <div class="mock-staff-avatar">L</div>
+            <div class="mock-staff-info"><b>Layla A.</b><span>Server &middot; Floor 5</span></div>
+            <div class="mock-staff-dot mock-staff-on"></div>
+          </div>
+          <div class="mock-staff">
+            <div class="mock-staff-avatar">R</div>
+            <div class="mock-staff-info"><b>Rashid K.</b><span>Concierge &middot; 1 active</span></div>
+            <div class="mock-staff-dot mock-staff-on"></div>
+          </div>
+          <div class="mock-staff">
+            <div class="mock-staff-avatar">S</div>
+            <div class="mock-staff-info"><b>Sara N.</b><span>Spa &middot; Break</span></div>
+            <div class="mock-staff-dot mock-staff-away"></div>
+          </div>
+          <div class="mock-staff">
+            <div class="mock-staff-avatar">T</div>
+            <div class="mock-staff-info"><b>Tariq M.</b><span>Valet &middot; 2 active</span></div>
+            <div class="mock-staff-dot mock-staff-on"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1329,6 +1732,41 @@
   </div>
 </section>
 
+<!-- ── 6d. BEFORE / AFTER ─────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">For the hotel owner</span>
+      <h2 class="serif">What changes after Butlr.</h2>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-col ba-before">
+        <div class="ba-h">Before Butlr</div>
+        <ul>
+          <li>WhatsApp chaos across departments</li>
+          <li>Phone calls and lost messages</li>
+          <li>Missed and forgotten requests</li>
+          <li>No visibility into operations</li>
+          <li>No staff accountability</li>
+          <li>Revenue limited to room rate</li>
+        </ul>
+      </div>
+      <div class="ba-arrow">&rarr;</div>
+      <div class="ba-col ba-after">
+        <div class="ba-h">After Butlr</div>
+        <ul>
+          <li>Centralized request inbox</li>
+          <li>One live operational portal</li>
+          <li>Every request tracked end-to-end</li>
+          <li>Real-time analytics &amp; KPIs</li>
+          <li>Staff leaderboards &amp; performance</li>
+          <li>Marketplace revenue layer added</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── 7. LIVE EXPERIENCE ──────────────────────────────────────────── -->
 <section class="section">
   <div class="container">
@@ -1377,6 +1815,54 @@
         <div class="ex-pill"><span class="ex-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5l-1.5 3h7L14 5z"/><path d="M8.5 8v12a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V8"/><circle cx="12" cy="15" r="3"/></svg></span> Laundry</div>
         <div class="ex-pill"><span class="ex-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14l2-6h14l2 6"/><rect x="3" y="14" width="18" height="5" rx="1"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg></span> Transport</div>
         <div class="ex-pill"><span class="ex-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6l-1 7a3 3 0 0 1-4 0z"/><line x1="12" y1="11" x2="12" y2="20"/><line x1="9" y1="20" x2="15" y2="20"/></svg></span> Restaurant booking</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 7b. LIVE PORTAL PREVIEW ─────────────────────────────────── -->
+<section class="section alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Live portal preview</span>
+      <h2 class="serif">See operations happen in real-time.</h2>
+      <p class="lede">A single request &mdash; followed end-to-end through every department, every status update, every staff handoff.</p>
+    </div>
+    <div class="lp-preview">
+      <div class="lp-card lp-card-1">
+        <div class="lp-tag">GUEST REQUEST &mdash; Room 504</div>
+        <div class="lp-line">Club Sandwich &times; 1 &middot; No tomato</div>
+        <div class="lp-meta">12:42 PM &middot; Sent via Butlr</div>
+      </div>
+      <div class="lp-arrow"></div>
+      <div class="lp-card lp-card-2">
+        <div class="lp-tag">KITCHEN RECEIVES</div>
+        <div class="lp-line">Order routed automatically</div>
+        <div class="lp-meta">12:42 PM &middot; Department: Food &amp; Beverage</div>
+      </div>
+      <div class="lp-arrow"></div>
+      <div class="lp-card lp-card-3">
+        <div class="lp-tag">ASSIGNED</div>
+        <div class="lp-line">Chef Marco &middot; Server Layla</div>
+        <div class="lp-meta">12:43 PM &middot; Auto-assigned by shift</div>
+      </div>
+      <div class="lp-arrow"></div>
+      <div class="lp-card lp-card-4">
+        <div class="lp-tag">PREPARING</div>
+        <div class="lp-line">In production &middot; ETA 9 min</div>
+        <div class="lp-meta">12:43 PM &middot; Status updated live</div>
+      </div>
+      <div class="lp-arrow"></div>
+      <div class="lp-card lp-card-5">
+        <div class="lp-tag">DELIVERED</div>
+        <div class="lp-line">Handed to guest &middot; 8 min</div>
+        <div class="lp-meta">12:50 PM &middot; Server Layla</div>
+      </div>
+      <div class="lp-arrow"></div>
+      <div class="lp-card lp-card-6">
+        <div class="lp-tag">GUEST RATED</div>
+        <div class="lp-line">&starf;&starf;&starf;&starf;&starf; &middot; &ldquo;Perfect, thank you&rdquo;</div>
+        <div class="lp-meta">12:54 PM &middot; +0.2 to weekly NPS</div>
       </div>
     </div>
   </div>
@@ -1645,6 +2131,25 @@
   </div>
 </section>
 
+<!-- ── 11a. SECURITY & PRIVACY ─────────────────────────────────── -->
+<section class="section alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Security &amp; privacy</span>
+      <h2 class="serif">Hospitality-grade trust, by default.</h2>
+      <p class="lede">Every guest interaction, every staff action, every payment &mdash; protected by the same controls modern banks and luxury retailers rely on.</p>
+    </div>
+    <div class="sec-grid">
+      <div class="sec"><div class="sec-h">Role-based permissions</div><p>Cleaners see their tasks. Supervisors see their department. Owners see everything.</p></div>
+      <div class="sec"><div class="sec-h">Encrypted communication</div><p>Every guest &harr; venue message and order over TLS, at rest and in transit.</p></div>
+      <div class="sec"><div class="sec-h">Guest privacy controls</div><p>Discreet mode, private requests, and granular consent &mdash; never the default.</p></div>
+      <div class="sec"><div class="sec-h">Secure payments</div><p>PCI-compliant flows via UPayments and Stripe. Butlr never stores card numbers.</p></div>
+      <div class="sec"><div class="sec-h">Venue-controlled access</div><p>You decide which staff and which departments see which guests, rooms, and orders.</p></div>
+      <div class="sec"><div class="sec-h">Audit logs</div><p>Every action timestamped, every export traced. Compliance-ready from day one.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- ── 11c. APP STORE — iOS-FIRST GUEST APP ────────────────────── -->
 <section class="section">
   <div class="container">
@@ -1856,6 +2361,86 @@
   </div>
 </section>
 
+<!-- ── 12b. PARTNER WAITLIST ───────────────────────────────────── -->
+<section class="section" id="partners">
+  <div class="container">
+    <div class="partner-card">
+      <div>
+        <span class="eyebrow">Marketplace partners</span>
+        <h2 class="serif">Become a Butlr partner.</h2>
+        <p class="lede">Service providers serving luxury hospitality &mdash; join our verified marketplace network. We connect your service to every Butlr venue and every guest who needs it.</p>
+        <ul class="partner-bullets">
+          <li>Verified partner badge across the network</li>
+          <li>Commission-based, no upfront fee</li>
+          <li>Marketed inside every Butlr venue&rsquo;s app</li>
+          <li>One contract, every property</li>
+        </ul>
+      </div>
+      <form class="partner-form" id="partnerForm">
+        <div class="field">
+          <label>Business name</label>
+          <input type="text" name="partnerName" required placeholder="Your business" />
+        </div>
+        <div class="field">
+          <label>Category</label>
+          <select name="partnerCategory" required>
+            <option value="">Select</option>
+            <option>Car rental</option>
+            <option>Yachts &amp; boats</option>
+            <option>Flowers</option>
+            <option>Experiences</option>
+            <option>Drivers</option>
+            <option>Restaurants</option>
+            <option>Luxury services</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Country</label>
+            <input type="text" name="partnerCountry" required placeholder="Country" />
+          </div>
+          <div class="field">
+            <label>City</label>
+            <input type="text" name="partnerCity" required placeholder="City" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Contact name</label>
+            <input type="text" name="partnerContact" required placeholder="Full name" />
+          </div>
+          <div class="field">
+            <label>Role</label>
+            <input type="text" name="partnerRole" placeholder="Founder / Manager" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Email</label>
+            <input type="email" name="partnerEmail" required placeholder="you@business.com" />
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <input type="tel" name="partnerPhone" required placeholder="Include country code" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Website or Instagram</label>
+          <input type="text" name="partnerLink" placeholder="https://... or @handle" />
+        </div>
+        <div class="field">
+          <label>Tell us about your service</label>
+          <textarea name="partnerMessage" placeholder="What you offer, who you serve, why you would be a great Butlr partner..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:10px;">Join waitlist &rarr;</button>
+        <div class="form-success" id="partnerSuccess">&check; You&rsquo;re on the waitlist. We&rsquo;ll be in touch.</div>
+        <div class="form-error" id="partnerError">Something went wrong. Please email info@onebutlr.com.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- ── 13. FAQ ─────────────────────────────────────────────────────── -->
 <section class="section" id="faq">
   <div class="container">
@@ -1864,7 +2449,39 @@
       <h2 class="serif">Frequently asked.</h2>
     </div>
     <div class="faq">
-            <div class="q">
+                  <div class="q">
+        <div class="q-head"><span class="qt">Do guests need a new account?</span><span class="plus">+</span></div>
+        <div class="q-body"><p>No. Guests download Butlr once. At each venue they visit, they connect via QR or access code &mdash; no new sign-up, no new password.</p></div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">Can Butlr work alongside our existing operations?</span><span class="plus">+</span></div>
+        <div class="q-body"><p>Yes. Butlr layers on top of however you run today. WhatsApp groups, phone calls, manual logs &mdash; replaced gradually as your team moves to the portal. No big-bang migration required.</p></div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">How long does setup take?</span><span class="plus">+</span></div>
+        <div class="q-body"><p>3&ndash;5 days for boutique properties. 7&ndash;14 days for full hotels and resorts. Elite and Enterprise tiers include dedicated onboarding.</p></div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">Can multiple departments use it at once?</span><span class="plus">+</span></div>
+        <div class="q-body"><p>Yes &mdash; that&rsquo;s the point. Housekeeping, kitchen, concierge, valet, spa, and front desk each get their own view. Requests route automatically based on type and room.</p></div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">Do I need special hardware?</span><span class="plus">+</span></div>
+        <div class="q-body"><p>No. Phones, iPads, and existing computers are enough. Printed QR codes for rooms and tables are the only physical artefacts.</p></div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">Can I enable only selected services?</span><span class="plus">+</span></div>
+        <div class="q-body"><p>Yes. Every module &mdash; dining, spa, laundry, transport, concierge, marketplace &mdash; is independently togglable from the portal.</p></div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">Can I disable marketplace services?</span><span class="plus">+</span></div>
+        <div class="q-body"><p>Absolutely. Marketplace is opt-in per venue. Run Butlr venue-only with zero external partners, and turn it on whenever you choose.</p></div>
+      </div>
+      <div class="q">
+        <div class="q-head"><span class="qt">What happens after approval?</span><span class="plus">+</span></div>
+        <div class="q-body"><p>Our team walks you through profile setup, menu configuration, staff invitations and your first test guest. You receive a Venue Portal login and printable QR codes the same day.</p></div>
+      </div>
+      <div class="q">
         <div class="q-head"><span class="qt">Do guests need a new app for every hotel?</span><span class="plus">+</span></div>
         <div class="q-body"><p>No. Guests use one Butlr app across all participating venues. Their preferences, allergies, language and history follow them everywhere.</p></div>
       </div>
@@ -1920,6 +2537,17 @@
   </div>
 </section>
 
+<!-- ── 14a. FINAL POWER STATEMENT ─────────────────────────────── -->
+<section class="section power-statement">
+  <div class="container">
+    <div class="power-card">
+      <h2 class="serif power-h">The hospitality industry never had a universal guest operating system.</h2>
+      <div class="power-tag">Until now.</div>
+      <a href="#apply" class="btn btn-gold">List your venue &rarr;</a>
+    </div>
+  </div>
+</section>
+
 <!-- ── 14. FOOTER ─────────────────────────────────────────────────── -->
 <footer>
   <div class="foot foot-grid">
@@ -1937,6 +2565,7 @@
     <div class="foot-col">
       <div class="foot-h">Venues</div>
       <a href="#apply">List your venue</a>
+      <a href="#partners">Become a partner</a>
       <a href="https://portal.onebutlr.com">Venue login</a>
       <a href="mailto:info@onebutlr.com?subject=Butlr Enterprise Inquiry">Enterprise</a>
     </div>
@@ -2037,6 +2666,34 @@
         })
         .finally(function(){
           if (submit) { submit.disabled = false; submit.textContent = 'Apply Now →'; }
+        });
+    });
+  }
+
+  // ── Partner waitlist form ──────────────────────────────────────
+  var partnerForm = document.querySelector('.partner-form');
+  if (partnerForm) {
+    var psuccess = document.getElementById('partnerSuccess');
+    var perror   = document.getElementById('partnerError');
+    var psubmit  = partnerForm.querySelector('button[type=submit]');
+    partnerForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (psuccess) psuccess.style.display = 'none';
+      if (perror)   perror.style.display   = 'none';
+      if (psubmit) { psubmit.disabled = true; psubmit.textContent = 'Sending…'; }
+      var fd = new FormData(partnerForm);
+      fd.append('applicationType', 'marketplacePartner');
+      fetch('https://portal.onebutlr.com/api/applications/submit', { method:'POST', body: fd })
+        .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+        .then(function(res){
+          if (res.ok) { if (psuccess) psuccess.style.display = 'block'; partnerForm.reset(); }
+          else { if (perror) { perror.textContent = (res.j && res.j.error) || 'Something went wrong.'; perror.style.display = 'block'; } }
+        })
+        .catch(function(){
+          if (perror) { perror.textContent = 'Network error. Please email info@onebutlr.com.'; perror.style.display = 'block'; }
+        })
+        .finally(function(){
+          if (psubmit) { psubmit.disabled = false; psubmit.textContent = 'Join waitlist →'; }
         });
     });
   }
