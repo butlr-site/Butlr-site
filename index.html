@@ -466,11 +466,15 @@
   }
   .why:hover{border-color:var(--gold); transform:translateY(-3px); background:rgba(201,169,97,.04);}
   .why-ico{
-    width:42px; height:42px; border-radius:50%;
+    width:46px; height:46px; border-radius:50%;
     display:flex; align-items:center; justify-content:center;
-    background:rgba(201,169,97,.1); color:var(--gold-2);
-    font-size:18px; margin-bottom:18px; font-weight:600;
+    background:rgba(201,169,97,.06); color:var(--gold-2);
+    border:1px solid rgba(201,169,97,.25);
+    margin-bottom:22px;
+    transition:border-color .25s, background .25s;
   }
+  .why-ico svg{width:22px; height:22px;}
+  .why:hover .why-ico{border-color:var(--gold); background:rgba(201,169,97,.10);}
   .why h4{
     font-family:'Bodoni Moda', Georgia, serif; font-weight:500;
     font-size:18px; color:var(--ivory); margin-bottom:8px;
@@ -489,7 +493,11 @@
     color:var(--ivory); font-size:14px;
     display:inline-flex; align-items:center; gap:10px;
   }
-  .mp span{font-size:18px;}
+  .mp .mp-ico{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:20px; height:20px; color:var(--gold-2);
+  }
+  .mp .mp-ico svg{width:18px; height:18px;}
 
   /* — Live experience flow (Section 7) ———————————————————— */
   .flow{
@@ -909,12 +917,12 @@
       <h2 class="serif">More revenue. Less friction. Better guest experience.</h2>
     </div>
     <div class="why-grid">
-      <div class="why"><div class="why-ico">↑</div><h4>Higher guest spend</h4><p>Ordering is one tap away &mdash; guests buy more when friction disappears.</p></div>
-      <div class="why"><div class="why-ico">✕</div><h4>No more WhatsApp chaos</h4><p>Every request lands in one organised inbox. No missed messages.</p></div>
-      <div class="why"><div class="why-ico">◉</div><h4>Track every request end-to-end</h4><p>Timestamps, owner, ETA &mdash; nothing falls through the cracks.</p></div>
-      <div class="why"><div class="why-ico">★</div><h4>Staff accountability</h4><p>Live leaderboards, response times, completion rates, real KPIs.</p></div>
-      <div class="why"><div class="why-ico">⊕</div><h4>Concierge without hiring</h4><p>Plug in our marketplace partners &mdash; cars, flowers, tours, dining.</p></div>
-      <div class="why"><div class="why-ico">$</div><h4>Marketplace revenue</h4><p>Every external booking earns commission for Butlr and optional revenue share for you.</p></div>
+      <div class="why"><div class="why-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,16 9,11 13,15 20,7"/><polyline points="14,7 20,7 20,13"/></svg></div><h4>Higher guest spend</h4><p>Ordering is one tap away &mdash; guests buy more when friction disappears.</p></div>
+      <div class="why"><div class="why-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></div><h4>No more WhatsApp chaos</h4><p>Every request lands in one organised inbox. No missed messages.</p></div>
+      <div class="why"><div class="why-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><polyline points="12,7 12,12 15,15"/></svg></div><h4>Track every request end-to-end</h4><p>Timestamps, owner, ETA &mdash; nothing falls through the cracks.</p></div>
+      <div class="why"><div class="why-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12,3 14.5,9 21,9.5 16,14 17.5,21 12,17.5 6.5,21 8,14 3,9.5 9.5,9"/></svg></div><h4>Staff accountability</h4><p>Live leaderboards, response times, completion rates, real KPIs.</p></div>
+      <div class="why"><div class="why-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div><h4>Concierge without hiring</h4><p>Plug in our marketplace partners &mdash; cars, flowers, tours, dining.</p></div>
+      <div class="why"><div class="why-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M9 14a3 3 0 0 0 3 2c1.7 0 3-1 3-2.3 0-1.4-1.3-1.7-3-2-1.7-.3-3-.7-3-2 0-1.4 1.3-2.3 3-2.3a3 3 0 0 1 3 2"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="18"/></svg></div><h4>Marketplace revenue</h4><p>Every external booking earns commission for Butlr and optional revenue share for you.</p></div>
     </div>
   </div>
 </section>
@@ -928,14 +936,14 @@
       <p class="lede">Butlr lets venues connect guests with trusted partners &mdash; car rentals, yacht bookings, flowers, restaurants, spa add-ons, airport transfers, tours, and luxury experiences. Every booking can generate commission for Butlr and optional revenue share for the venue.</p>
     </div>
     <div class="mp-grid">
-      <div class="mp"><span>🚗</span> Car rentals</div>
-      <div class="mp"><span>⛵</span> Yachts &amp; boats</div>
-      <div class="mp"><span>💐</span> Florists</div>
-      <div class="mp"><span>🍽</span> Restaurants</div>
-      <div class="mp"><span>🌿</span> Spa add-ons</div>
-      <div class="mp"><span>✈</span> Airport transfers</div>
-      <div class="mp"><span>🎭</span> Tours &amp; experiences</div>
-      <div class="mp"><span>🥂</span> Luxury services</div>
+      <div class="mp"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14l2-6h14l2 6"/><rect x="3" y="14" width="18" height="5" rx="1"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg></span> Car rentals</div>
+      <div class="mp"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18l1 2h16l1-2"/><path d="M5 17l1-7h12l1 7"/><line x1="12" y1="3" x2="12" y2="10"/><line x1="9" y1="6" x2="15" y2="6"/></svg></span> Yachts &amp; boats</div>
+      <div class="mp"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="2"/><circle cx="9" cy="11" r="1.8"/><circle cx="15" cy="11" r="1.8"/><circle cx="10" cy="14" r="1.8"/><circle cx="14" cy="14" r="1.8"/><line x1="12" y1="14" x2="12" y2="21"/></svg></span> Florists</div>
+      <div class="mp"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v9a2 2 0 0 0 2 2v7"/><line x1="9" y1="3" x2="9" y2="9"/><path d="M14 3c-2 0-3 2-3 4s1 4 3 4v10"/></svg></span> Restaurants</div>
+      <div class="mp"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20c0-7 5-12 12-12-.5 6.5-5 12-12 12z"/><path d="M6 20c2-3 5-6 9-8"/></svg></span> Spa add-ons</div>
+      <div class="mp"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14l8-2 3-7 2 0-1 6 6-1 0 2-7 2-2 5-2 0 0-4-5 1z"/></svg></span> Airport transfers</div>
+      <div class="mp"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="8" cy="14" r="1"/><circle cx="16" cy="14" r="1"/></svg></span> Tours &amp; experiences</div>
+      <div class="mp"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 13v6"/><path d="M15 13v6"/><line x1="6" y1="19" x2="12" y2="19"/><line x1="12" y1="19" x2="18" y2="19"/><path d="M7 4l2 9c0 0 1 1 3 1s3-1 3-1l2-9"/><line x1="7" y1="4" x2="17" y2="4"/></svg></span> Luxury services</div>
     </div>
   </div>
 </section>
