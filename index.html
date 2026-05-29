@@ -76,8 +76,12 @@
   .hero .eyebrow{margin-bottom:18px;}
   .hero h1{
     font-family:'Bodoni Moda',Georgia,serif; font-weight:500;
-    font-size:clamp(48px, 9vw, 116px); line-height:1; letter-spacing:-.02em;
+    font-size:clamp(34px, 6vw, 76px); line-height:1.05; letter-spacing:-.02em;
     color:var(--ivory); margin-bottom:8px;
+    white-space:nowrap;
+  }
+  @media (max-width:680px){
+    .hero h1{white-space:normal; font-size:clamp(34px, 9vw, 60px);}
   }
   .hero h1 em{font-style:italic; color:var(--gold-2);}
   .hero-lede{
@@ -649,7 +653,7 @@
 <!-- ── 1. HERO ─────────────────────────────────────────────────────── -->
 <section class="hero">
   <div class="eyebrow">The luxury guest experience platform</div>
-  <h1>Every stay.<br/><em>One butler.</em></h1>
+  <h1>Every stay. <em>One butler.</em></h1>
   <p class="hero-lede">
     Butlr is the luxury guest experience platform that connects guests, venues, staff, requests, payments, and concierge services in one app.
   </p>
