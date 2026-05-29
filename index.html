@@ -73,7 +73,13 @@
     pointer-events:none;
   }
   .hero > *{position:relative; z-index:1;}
-  .hero .eyebrow{margin-bottom:18px;}
+  .hero .eyebrow{
+    margin-bottom:18px;
+    font-size:9.5px;          /* smaller than default 11px */
+    letter-spacing:.24em;     /* tighter tracking */
+    color:var(--gold-2);
+    opacity:.9;
+  }
   .hero h1{
     font-family:'Bodoni Moda',Georgia,serif; font-weight:500;
     font-size:clamp(28px, 4vw, 54px); line-height:1.1; letter-spacing:-.015em;
