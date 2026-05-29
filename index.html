@@ -1750,6 +1750,30 @@
   /* Article H2 calmer */
   .article h2{font-size:clamp(28px, 3.4vw, 42px) !important; margin-top:90px !important;}
 
+
+  /* ── Softer headline color — easier on the eye ────────────────────── */
+  .page-hero-h,
+  .section-head h2,
+  .power-h,
+  .power-tag,
+  .vs-h, .cat-h,
+  .hero h1,
+  .article h2, .article h3{
+    color:#E8DCC2 !important;          /* warm cream, less harsh than ivory */
+    font-weight:400 !important;        /* a touch lighter, less aggressive */
+    text-shadow:0 1px 0 rgba(0,0,0,.15);  /* subtle softening shadow */
+  }
+
+  /* Italic accent stays gold so brand pops live */
+  .vs-h em, .power-tag, .cat-h em, .hero h1 em{
+    color:#E2C893 !important;
+  }
+
+  /* Body copy keeps its slightly brighter cream so paragraphs remain readable */
+  .lede, .section-head .lede, p, .article p{
+    color:#C7C0B0 !important;          /* warmer muted text */
+  }
+
 </style>
 </head>
 <body>
