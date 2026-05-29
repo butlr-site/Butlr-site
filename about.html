@@ -302,8 +302,10 @@
     display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr;
     gap:48px; align-items:flex-start;
   }
-  .foot-col{display:flex; flex-direction:column; gap:12px;}
-  .foot-col .brand{font-size:24px; margin-bottom:6px;}
+  .foot-col{display:flex; flex-direction:column; gap:14px;}
+  .foot-col a{display:block; line-height:1.4;}
+  .foot-col .brand{font-size:24px; margin-bottom:6px; letter-spacing:-.005em; white-space:nowrap;}
+  .foot-col .brand .r{margin-left:-.04em;}
   .foot-tag{font-size:13px; color:var(--muted); line-height:1.6; max-width:280px;}
   .foot-h{
     font-size:11px; letter-spacing:.22em; color:var(--gold-2);
@@ -723,7 +725,7 @@
   /* ═══════════════════════════════════════════════════════════════════
      V2 SECTIONS — luxury card-based layout system
      ════════════════════════════════════════════════════════════════ */
-  .brand .r{color:var(--gold-2);}  /* no italic — matches iOS wordmark exactly */
+  .brand .r{color:var(--gold-2); margin-left:-.04em;}  /* gold + tight kerning */
 
   .section{padding:160px 0; position:relative;}
   @media (max-width:760px){ .section{padding:90px 0;} }
