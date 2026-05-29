@@ -63,7 +63,7 @@
 
   /* ── HERO ────────────────────────────────────────────────────────── */
   .hero{
-    min-height:auto; padding:140px 24px 100px;
+    min-height:80vh; padding:180px 24px 140px;
     display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
     position:relative; overflow:hidden;
   }
@@ -74,9 +74,9 @@
   }
   .hero > *{position:relative; z-index:1;}
   .hero .eyebrow{
-    margin-bottom:22px;
-    font-size:9px;            /* smaller still */
-    letter-spacing:.34em;     /* restored wider luxury tracking */
+    margin-bottom:48px;
+    font-size:9px;
+    letter-spacing:.34em;
     color:var(--gold-2);
     font-weight:500;
     text-transform:uppercase;
@@ -92,12 +92,12 @@
   }
   .hero h1 em{font-style:normal; color:var(--gold-2);}
   .hero-lede{
-    margin-top:32px; max-width:600px;
+    margin-top:48px; max-width:600px;
     font-family:'Bodoni Moda', Georgia, serif;
     font-weight:400; font-size:clamp(15px, 1.3vw, 18px);
     color:var(--cream, #E8E1D0); line-height:1.7; letter-spacing:.005em;
   }
-  .hero-actions{margin-top:36px; display:flex; gap:14px; flex-wrap:wrap; justify-content:center;}
+  .hero-actions{margin-top:56px; display:flex; gap:16px; flex-wrap:wrap; justify-content:center;}
   .btn{
     display:inline-flex; align-items:center; gap:8px;
     padding:15px 28px; border-radius:12px;
@@ -112,8 +112,9 @@
   .btn-ghost{color:var(--ivory) !important; border:1px solid var(--line-2); background:rgba(255,255,255,.02);}
   .btn-ghost:hover{background:rgba(255,255,255,.04); border-color:var(--gold);}
   .hero-trust{
-    margin-top:46px; font-size:11px; letter-spacing:.18em;
-    color:var(--muted); text-transform:uppercase;
+    margin-top:80px; padding-top:36px; border-top:1px solid var(--line);
+    font-size:10.5px; letter-spacing:.22em;
+    color:var(--muted); text-transform:uppercase; max-width:760px; margin-left:auto; margin-right:auto;
   }
 
   /* ── SECTION SCAFFOLDING ────────────────────────────────────────── */
