@@ -1759,7 +1759,7 @@
       <a href="/venues.html">For venues</a>
       <a href="/about.html">About</a>
       <a href="/security.html">Security</a>
-      <a href="/apply.html" class="nav-cta">List your venue</a>
+      <a href="https://portal.onebutlr.com/list-your-venue" class="nav-cta">List your venue</a>
     </div>
   </div>
 </nav>
@@ -1793,6 +1793,14 @@
           <div class="eyebrow" style="margin-bottom:10px;">Already with Butlr?</div>
           <a href="https://portal.onebutlr.com" class="btn btn-outline" style="margin-top:8px;">Open the portal →</a>
         </div>
+      </div>
+      <!-- Ready-to-register banner — drives applicants to the full registration form -->
+      <div style="background:linear-gradient(135deg,rgba(212,165,90,0.12),rgba(212,165,90,0.04));border:1px solid rgba(212,165,90,0.35);border-radius:12px;padding:16px 18px;margin-bottom:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <div style="font-weight:600;color:#e8d9b8;font-size:14px;margin-bottom:2px;">Ready to register your venue?</div>
+          <div style="font-size:12px;color:#a8a097;">Upload your logo, photos & license — get credentials within 48 hours.</div>
+        </div>
+        <a href="https://portal.onebutlr.com/list-your-venue" style="background:#d4a55a;color:#1a1a1a;padding:10px 18px;border-radius:8px;font-weight:600;font-size:13px;text-decoration:none;white-space:nowrap;">Start full registration →</a>
       </div>
       <form class="apply-form" id="applyForm">
         <div class="field">
@@ -1905,6 +1913,10 @@
           <input type="checkbox" name="authConfirm" required />
           <span>I confirm this is a real hospitality venue and I am authorized to apply on its behalf.</span>
         </label>
+        
+        <!-- Honeypot — invisible to humans, bots fill it and get rejected -->
+        <input type="text" name="website_url" tabindex="-1" autocomplete="off"
+               style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true" />
         <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:10px;">Start your application →</button>
         <div class="form-success" id="formSuccess">
           ✓ Application received. Our team will be in touch within 48 hours.
@@ -1990,6 +2002,10 @@
           <label>Tell us about your service</label>
           <textarea name="partnerMessage" placeholder="What you offer, who you serve, why you would be a great Butlr partner..."></textarea>
         </div>
+        
+        <!-- Honeypot — invisible to humans, bots fill it and get rejected -->
+        <input type="text" name="website_url" tabindex="-1" autocomplete="off"
+               style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true" />
         <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:10px;">Join waitlist &rarr;</button>
         <div class="form-success" id="partnerSuccess">&check; You&rsquo;re on the waitlist. We&rsquo;ll be in touch.</div>
         <div class="form-error" id="partnerError">Something went wrong. Please email info@onebutlr.com.</div>
@@ -2113,7 +2129,7 @@
     </div>
     <div class="foot-col">
       <div class="foot-h">Venues</div>
-      <a href="/apply.html#apply">List your venue</a>
+      <a href="https://portal.onebutlr.com/list-your-venue">List your venue</a>
       <a href="/apply.html#partners">Become a partner</a>
       <a href="https://portal.onebutlr.com">Venue login</a>
       <a href="mailto:info@onebutlr.com?subject=Butlr Enterprise Inquiry">Enterprise</a>
@@ -2131,11 +2147,74 @@
 </footer>
 
 <!-- ── STICKY APPLY CTA ─────────────────────────────────────────── -->
-<a href="/apply.html#apply" class="sticky-cta" aria-label="List your venue">
+<a href="https://portal.onebutlr.com/list-your-venue" class="sticky-cta" aria-label="List your venue">
   <span>List your venue</span>
   <span class="sca">&rarr;</span>
 </a>
 
+
+
+<!-- Lead-capture wiring — without this, the forms reload the page on submit -->
+<script>
+(function () {
+  var ENDPOINT = "https://portal.onebutlr.com/api/leads/venue-inquiry";
+
+  function toJSON(formEl, kind) {
+    var fd = new FormData(formEl);
+    var out = { kind: kind };
+    fd.forEach(function (v, k) {
+      out[k] = typeof v === "string" ? v : "";
+    });
+    if (formEl.querySelector('input[name="authConfirm"]')) {
+      out.authConfirm = !!formEl.querySelector('input[name="authConfirm"]').checked;
+    }
+    return out;
+  }
+
+  function wire(formId, successId, errorId, kind, submittingLabel) {
+    var form = document.getElementById(formId);
+    if (!form) return;
+    var ok = document.getElementById(successId);
+    var bad = document.getElementById(errorId);
+    var btn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (ok) ok.style.display = "none";
+      if (bad) bad.style.display = "none";
+
+      var origLabel = btn ? btn.innerHTML : "";
+      if (btn) { btn.disabled = true; btn.innerHTML = submittingLabel; }
+
+      var payload = toJSON(form, kind);
+
+      fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          if (res.ok) {
+            if (ok) ok.style.display = "block";
+            form.reset();
+            if (btn) { btn.innerHTML = "✓ Sent"; }
+          } else {
+            if (bad) { bad.style.display = "block"; bad.textContent = (res.d && res.d.error) || "Something went wrong. Please email info@onebutlr.com."; }
+            if (btn) { btn.disabled = false; btn.innerHTML = origLabel; }
+          }
+        })
+        .catch(function () {
+          if (bad) bad.style.display = "block";
+          if (btn) { btn.disabled = false; btn.innerHTML = origLabel; }
+        });
+    });
+  }
+
+  wire("applyForm",   "formSuccess",    "formError",    "venue",   "Sending…");
+  wire("partnerForm", "partnerSuccess", "partnerError", "partner", "Sending…");
+})();
+</script>
 
 </body>
 </html>
