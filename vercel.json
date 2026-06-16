@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/list-your-venue",
+      "destination": "https://portal.onebutlr.com/list-your-venue",
+      "permanent": false
+    },
+    {
+      "source": "/list-your-venue/",
+      "destination": "https://portal.onebutlr.com/list-your-venue",
+      "permanent": false
+    }
+  ]
+}
