@@ -9,6 +9,16 @@
       "source": "/list-your-venue/",
       "destination": "https://portal.onebutlr.com/list-your-venue",
       "permanent": false
+    },
+    {
+      "source": "/godview",
+      "destination": "https://portal.onebutlr.com/godview",
+      "permanent": false
+    },
+    {
+      "source": "/godview/",
+      "destination": "https://portal.onebutlr.com/godview",
+      "permanent": false
     }
   ]
 }
