@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Become a Partner — Butlr</title>
+<title>Butlr — Luxury Guest Experience OS for Hotels &amp; Venues</title>
 <meta name="keywords" content="hotel guest app, hospitality OS, concierge app, hotel room service app, venue portal, resort guest experience, luxury hospitality software, beach club app, members club software" />
 <meta name="description" content="Butlr is a luxury hospitality operating system connecting guests, hotels, resorts, beach clubs and venues through one guest app and one live venue portal." />
 
@@ -355,6 +355,33 @@
   }
   .article li:before{content:"·"; position:absolute; left:6px; color:var(--gold-2); font-size:22px; line-height:1;}
 
+  /* ── Venue quality grid (8b) ──────────────────────────────────── */
+  .quality-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr);
+    gap:18px; margin-top:50px;
+  }
+  .quality{
+    padding:34px 28px; border:1px solid var(--gold);
+    border-radius:18px;
+    background:
+      radial-gradient(60% 80% at 0% 0%, rgba(201,169,97,.06), transparent 70%),
+      linear-gradient(180deg, rgba(20,28,46,.45), rgba(8,12,22,.85));
+  }
+  .quality-h{
+    font-family:'Bodoni Moda', Georgia, serif; font-size:18px;
+    color:var(--gold-2); margin-bottom:10px; font-weight:500; line-height:1.25;
+  }
+  .quality p{font-size:13.5px; color:var(--sub); line-height:1.65;}
+  @media (max-width:900px){ .quality-grid{grid-template-columns:1fr;} }
+
+  /* ── Footer email accent ─────────────────────────────────────── */
+  .foot-mail{
+    margin-top:14px; padding-top:14px;
+    border-top:1px solid var(--line);
+    color:var(--gold-2) !important;
+    font-family:'Bodoni Moda', Georgia, serif; font-size:15px !important;
+  }
+
   /* ── Investor positioning (1c) ────────────────────────────────── */
   .inv-card{
     text-align:center; max-width:880px; margin:0 auto;
@@ -553,8 +580,8 @@
     color:var(--ivory); padding-left:24px; position:relative;
     line-height:1.5;
   }
-  .ba-before li:before{content:"&times;"; position:absolute; left:0; color:#ff9b9b; font-size:18px;}
-  .ba-after  li:before{content:"\2713"; position:absolute; left:0; color:var(--gold-2); font-size:16px;}
+  .ba-before li:before{content:"\00d7"; position:absolute; left:0; color:#ff9b9b; font-size:20px; line-height:1;}
+  .ba-after  li:before{content:"\2713"; position:absolute; left:0; color:var(--gold-2); font-size:14px; line-height:1.2;}
   .ba-arrow{
     align-self:center; color:var(--gold); font-size:38px; opacity:.6;
   }
@@ -1044,7 +1071,9 @@
     border:1px solid var(--line); border-radius:18px;
     background:rgba(255,255,255,.02);
     display:flex; flex-direction:column; gap:18px;
+    height:100%;
   }
+  .pkgs{align-items:stretch;}
   .pkg.featured{
     border-color:var(--gold);
     background:linear-gradient(180deg, rgba(201,169,97,.06), rgba(201,169,97,.01));
@@ -1077,7 +1106,7 @@
     padding-top:16px; margin-top:8px; border-top:1px solid var(--line);
     font-size:11.5px; color:var(--muted); letter-spacing:.04em;
   }
-  .pkg .btn{justify-content:center; width:100%;}
+  .pkg .btn{justify-content:center; width:100%; margin-top:auto;}
   .btn-outline{
     border:1px solid var(--gold); color:var(--gold-2) !important;
     background:transparent;
@@ -1124,7 +1153,7 @@
     border-radius:16px; background:rgba(255,255,255,.02);
   }
   .cmp{
-    width:100%; border-collapse:collapse;
+    width:100%; min-width:720px; border-collapse:collapse;
     font-size:13.5px; color:var(--ivory);
   }
   .cmp thead th{
@@ -1745,21 +1774,11 @@
     color:#C7C0B0 !important;          /* warmer muted text */
   }
 
-
-  /* ── Magazine serif body for long-form article pages ─────────────── */
-  .article p, .article li{
-    font-family:'Bodoni Moda', Georgia, serif !important;
-    font-weight:400 !important;
-    font-size:19px !important;
-    line-height:1.75 !important;
-    letter-spacing:.005em !important;
-  }
-  .article li{padding-left:24px !important; font-size:17px !important;}
-
 </style>
 </head>
 <body>
 
+<!-- ─── NAV ─────────────────────────────────────────────────────────── -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="brand"><span class="bu">Butl</span><span class="r">r</span></a>
@@ -1775,49 +1794,94 @@
   </div>
 </nav>
 
-<!-- ── PAGE HERO ─────────────────────────────────────────────────── -->
-<section class="page-hero">
+<!-- ── 1. HERO ─────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="eyebrow">The luxury guest experience platform</div>
+  <h1>Every stay. <em>One butler.</em></h1>
+  <p class="hero-lede">
+    Butlr is the luxury guest experience platform that connects guests, venues, staff, requests, payments, and concierge services in one app.
+  </p>
+  <div class="hero-actions">
+    <a href="https://portal.onebutlr.com/list-your-venue" class="btn btn-gold">List your venue →</a>
+    <a href="https://apps.apple.com/app/id0000000000" class="btn btn-ghost" target="_blank" rel="noopener">
+      <span style="display:inline-flex; align-items:center; gap:8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19 17.4c-.5 1.2-1.1 2.3-1.9 3.3-1.1 1.4-2 2.4-2.8 2.9-.7.5-1.5.7-2.4.7-.7 0-1.4-.2-2.3-.6-.9-.4-1.7-.6-2.4-.6-.8 0-1.6.2-2.5.6-.9.4-1.6.6-2.2.6-.9 0-1.7-.4-2.6-1.1C-1 21.8-2 19.3-2 16.5c0-2.7.7-5 2-6.7C1.4 8.4 3 7.5 4.9 7.5c.7 0 1.6.2 2.7.7 1.1.4 1.8.7 2.1.7.2 0 1-.3 2.5-.8 1.3-.5 2.5-.7 3.4-.6 2.5.2 4.4 1.2 5.7 3-2.3 1.4-3.4 3.3-3.4 5.7 0 1.9.7 3.5 2 4.7.6.6 1.3 1 2 1.4-.2.5-.4.9-.6 1.3zM15.8 0c0 1.9-.7 3.7-2.2 5.4-1.7 2-3.7 3.1-5.9 2.9 0-.3 0-.5 0-.6 0-1.8.8-3.7 2.3-5.4.7-.8 1.7-1.5 2.8-2.1 1.1-.6 2.2-.9 3.2-1 0 .2 0 .5 0 .8z"/>
+        </svg>
+        Download on App Store
+      </span>
+    </a>
+  </div>
+  <div class="hero-badges">
+    <div class="hb">No integration required</div>
+    <div class="hb">Live in 7&ndash;14 days</div>
+    <div class="hb">Guest app + venue portal included</div>
+  </div>
+  <div class="hero-trust">Built for hotels · resorts · beach clubs · serviced apartments · members&rsquo; clubs · marinas · spas</div>
+</section>
+
+<!-- ── 1c. INVESTOR POSITIONING ─────────────────────────────────── -->
+<section class="section" style="padding:60px 0 0;">
   <div class="container">
-    <span class="eyebrow">Marketplace partners</span>
-    <h1 class="page-hero-h">Distribution to every Butlr venue.</h1>
-    <p class="page-hero-lede">One agreement, every property. Verified service providers reach guests inside every Butlr venue on earth.</p>
+    <div class="inv-card">
+      <div class="inv-h">Hospitality never had a universal guest layer.</div>
+      <div class="inv-tag">Butlr is building it.</div>
+    </div>
   </div>
 </section>
 
+<!-- ── 2. WHAT IS BUTLR (explanation block) ────────────────────────── -->
 <section class="section">
-  <div class="article">
-    <h2>Become a Butlr marketplace partner</h2>
-    <p>The Butlr marketplace lets trusted service providers reach guests inside every Butlr venue. One agreement, every property, real-time bookings, automated payouts.</p>
-
-    <h3>Who we partner with</h3>
-    <ul>
-      <li>Car rental and chauffeur services</li>
-      <li>Yacht and boat operators</li>
-      <li>Private drivers</li>
-      <li>Florists and gifting specialists</li>
-      <li>Experience curators (tours, private dining, events)</li>
-      <li>Restaurants accepting Butlr reservations</li>
-      <li>Luxury services (jets, jewellery, personal shopping)</li>
-    </ul>
-
-    <h3>How it works</h3>
-    <p>Apply through the form below. Our partnerships team reviews every applicant &mdash; we vet for quality, licensing, reliability, and luxury-standard service. Once approved, you receive a Partner Portal account where you manage availability, pricing, and bookings.</p>
-    <p>Guests discover your service directly inside the Butlr app, vouched for by the venue they&rsquo;re staying at. Every booking flows through Butlr, with revenue split between you, the venue, and the platform &mdash; transparent, automated, paid monthly.</p>
-
-    <h3>The advantage</h3>
-    <ul>
-      <li>One contract, distribution to every Butlr venue worldwide</li>
-      <li>No upfront listing fee &mdash; we earn only when you do</li>
-      <li>Verified partner badge that signals quality to high-net-worth guests</li>
-      <li>Real-time availability and booking confirmation</li>
-      <li>Automated payouts, monthly reconciliation, audit-ready records</li>
-    </ul>
-
-    <p style="margin-top:50px;"><a href="/#partners" class="btn btn-gold">Apply to join &rarr;</a></p>
+  <div class="container">
+    <div class="explain-card">
+      <div class="explain-eyebrow">How it actually works</div>
+      <p class="explain-body">
+        Guests download <em>one</em> Butlr app. When they check in, the hotel gives them a QR code or access code. The app instantly becomes their private butler for that stay &mdash; room service, housekeeping, laundry, concierge, spa, transport, bookings, payments, and live request tracking. One app, every venue they visit.
+      </p>
+    </div>
   </div>
 </section>
 
+<!-- ── 6e. VALUE STATEMENT ─────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="vs-card">
+      <h2 class="serif vs-h">One app for every guest.<br/>One system for every venue.</h2>
+      <p class="vs-body">Guests never learn a new hotel app again. Venues never rebuild the same infrastructure again. The whole industry, one shared layer.</p>
+    </div>
+  </div>
+</section>
 
+<!-- ─── FINAL CTA ───────────────────────────────────────────────────── -->
+<section class="final">
+  <div class="eyebrow">Begin</div>
+  <h2>Bring Butlr to your venue.</h2>
+  <p>Apply in five minutes. Our team reviews every venue personally — typically within 48 hours.</p>
+  <a href="https://portal.onebutlr.com/list-your-venue" class="btn btn-gold">List your venue →</a>
+</section>
+
+<!-- ── 13b. CATEGORY STATEMENT ─────────────────────────────────── -->
+<section class="section alt">
+  <div class="container">
+    <div class="cat-card">
+      <div class="cat-strike">Butlr is not a concierge app.</div>
+      <h2 class="serif cat-h">It is the operating system connecting guests, staff, venues, services and hospitality revenue into one platform.</h2>
+    </div>
+  </div>
+</section>
+
+<!-- ── 14a. FINAL POWER STATEMENT ─────────────────────────────── -->
+<section class="section power-statement">
+  <div class="container">
+    <div class="power-card">
+      <h2 class="serif power-h">The hospitality industry never had a universal guest operating system.</h2>
+      <div class="power-tag">Until now.</div>
+      <a href="/apply.html#apply" class="btn btn-gold">List your venue &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── 14. FOOTER ─────────────────────────────────────────────────── -->
 <footer>
   <div class="foot foot-grid">
     <div class="foot-col">
@@ -1840,22 +1904,205 @@
     </div>
     <div class="foot-col">
       <div class="foot-h">Company</div>
-      <a href="privacy.html">Privacy</a>
-      <a href="butlr-privacy-policy.html">Privacy policy</a>
+      <a href="/about.html">About</a>
+      <a href="/security.html">Security</a>
+      <a href="/partners.html">Become a partner</a>
+      <a href="butlr-privacy-policy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms</a>
       <a href="mailto:info@onebutlr.com">Contact</a>
       <a href="mailto:info@onebutlr.com?subject=Butlr Support">Support</a>
-      <a href="mailto:info@onebutlr.com">Terms</a>
+      <a href="mailto:info@onebutlr.com" class="foot-mail">info@onebutlr.com</a>
     </div>
   </div>
   <p class="legal">© 2026 Butlr · Every stay. One butler. · Kuwait City</p>
 </footer>
+
+
+<script>
+(function(){
+  // ── FAQ accordion ─────────────────────────────────────────────────
+  document.querySelectorAll('.q .q-head').forEach(function(h){
+    h.addEventListener('click', function(){
+      h.parentElement.classList.toggle('open');
+    });
+  });
+
+  // ── Package CTAs — prefill selectedPackage in the apply form ─────
+  document.querySelectorAll('.pkg-cta').forEach(function(a){
+    a.addEventListener('click', function(){
+      var pkg = a.getAttribute('data-package');
+      var sel = document.querySelector('select[name="selectedPackage"]');
+      if (sel && pkg) {
+        sel.value = pkg;
+        // Briefly flash the field so the user notices it was set
+        sel.style.transition = 'background .4s';
+        sel.style.background = 'rgba(201,169,97,.18)';
+        setTimeout(function(){ sel.style.background = ''; }, 900);
+      }
+    });
+  });
+
+  // ── Smooth scroll for in-page anchor links ────────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var href = a.getAttribute('href');
+      if (href === '#' || !href) return;
+      var t = document.querySelector(href);
+      if (!t) return;
+      e.preventDefault();
+      t.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // ── Apply form — submit to portal ──────────────────────────────────
+  var form = document.querySelector('.apply-form');
+  if (form) {
+    var success = form.querySelector('.form-success');
+    var error   = form.querySelector('.form-error');
+    var submit  = form.querySelector('button[type=submit]');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (success) success.style.display = 'none';
+      if (error)   error.style.display = 'none';
+      if (submit) { submit.disabled = true; submit.textContent = 'Sending…'; }
+
+      // ── Client-side validation: authorization checkbox ──────────────
+      var auth = form.querySelector('input[name="authConfirm"]');
+      if (auth && !auth.checked) {
+        if (error) {
+          error.textContent = 'Please confirm you are authorized to apply for this venue.';
+          error.style.display = 'block';
+        }
+        if (submit) { submit.disabled = false; submit.textContent = 'Start your application →'; }
+        return;
+      }
+
+      var fd = new FormData(form);
+      fetch('https://portal.onebutlr.com/api/applications/submit', {
+        method: 'POST',
+        body: fd,
+      }).then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+        .then(function(res){
+          if (res.ok) {
+            if (success) success.style.display = 'block';
+            form.reset();
+          } else {
+            if (error) {
+              error.textContent = (res.j && res.j.error) || 'Something went wrong submitting your application. Please email info@onebutlr.com.';
+              error.style.display = 'block';
+            }
+          }
+        })
+        .catch(function(){
+          if (error) {
+            error.textContent = 'Network error. Please try again or email info@onebutlr.com.';
+            error.style.display = 'block';
+          }
+        })
+        .finally(function(){
+          if (submit) { submit.disabled = false; submit.textContent = 'Start your application →'; }
+        });
+    });
+  }
+
+  // ── Partner waitlist form ──────────────────────────────────────
+  var partnerForm = document.querySelector('.partner-form');
+  if (partnerForm) {
+    var psuccess = document.getElementById('partnerSuccess');
+    var perror   = document.getElementById('partnerError');
+    var psubmit  = partnerForm.querySelector('button[type=submit]');
+    partnerForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (psuccess) psuccess.style.display = 'none';
+      if (perror)   perror.style.display   = 'none';
+      if (psubmit) { psubmit.disabled = true; psubmit.textContent = 'Sending…'; }
+      var fd = new FormData(partnerForm);
+      fd.append('applicationType', 'marketplacePartner');
+      fetch('https://portal.onebutlr.com/api/applications/submit', { method:'POST', body: fd })
+        .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+        .then(function(res){
+          if (res.ok) { if (psuccess) psuccess.style.display = 'block'; partnerForm.reset(); }
+          else { if (perror) { perror.textContent = (res.j && res.j.error) || 'Something went wrong.'; perror.style.display = 'block'; } }
+        })
+        .catch(function(){
+          if (perror) { perror.textContent = 'Network error. Please email info@onebutlr.com.'; perror.style.display = 'block'; }
+        })
+        .finally(function(){
+          if (psubmit) { psubmit.disabled = false; psubmit.textContent = 'Join waitlist →'; }
+        });
+    });
+  }
+
+  // ── Sticky CTA — show after the hero scrolls past ──────────────
+  var stickyCta = document.querySelector('.sticky-cta');
+  if (stickyCta) {
+    var hero = document.querySelector('.hero');
+    var onScroll = function(){
+      var heroBottom = hero ? hero.getBoundingClientRect().bottom : 0;
+      var apply = document.getElementById('apply');
+      var applyTop = apply ? apply.getBoundingClientRect().top : 99999;
+      // show after hero is gone, hide once user reaches apply form
+      if (heroBottom < 60 && applyTop > 200) stickyCta.classList.add('show');
+      else stickyCta.classList.remove('show');
+    };
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+  }
+
+  // ── Market size counter — count up when scrolled into view ─────
+  var msNumbers = document.querySelectorAll('.ms-n[data-target]');
+  if (msNumbers.length && 'IntersectionObserver' in window) {
+    var fmt = function(n){
+      if (n >= 1000) return Math.round(n/1000) + 'k+';
+      return Math.round(n) + '';
+    };
+    var counterIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting || e.target.dataset.done) return;
+        e.target.dataset.done = '1';
+        var target = parseInt(e.target.getAttribute('data-target'), 10) || 0;
+        var start = 0, dur = 1400, t0 = performance.now();
+        var tick = function(t){
+          var p = Math.min((t - t0) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          e.target.textContent = fmt(start + (target - start) * eased);
+          if (p < 1) requestAnimationFrame(tick);
+          else e.target.textContent = fmt(target);
+        };
+        requestAnimationFrame(tick);
+        counterIo.unobserve(e.target);
+      });
+    }, {threshold: 0.4});
+    msNumbers.forEach(function(n){ counterIo.observe(n); });
+  }
+
+  // ── Reveal-on-scroll for sections ──────────────────────────────────
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.12}) : null;
+  if (io) {
+    document.querySelectorAll('.section, .hero, section.final').forEach(function(s){
+      s.style.opacity = '0';
+      s.style.transform = 'translateY(20px)';
+      s.style.transition = 'opacity .7s ease, transform .7s ease';
+      io.observe(s);
+    });
+  }
+})();
+</script>
 
 <!-- ── STICKY APPLY CTA ─────────────────────────────────────────── -->
 <a href="https://portal.onebutlr.com/list-your-venue" class="sticky-cta" aria-label="List your venue">
   <span>List your venue</span>
   <span class="sca">&rarr;</span>
 </a>
-
 
 </body>
 </html>
