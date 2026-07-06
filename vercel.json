@@ -1,6 +1,21 @@
 {
   "redirects": [
     {
+      "source": "/portal",
+      "destination": "https://portal.onebutlr.com",
+      "permanent": true
+    },
+    {
+      "source": "/portal/index.html",
+      "destination": "https://portal.onebutlr.com",
+      "permanent": true
+    },
+    {
+      "source": "/portal/(.*)",
+      "destination": "https://portal.onebutlr.com",
+      "permanent": true
+    },
+    {
       "source": "/list-your-venue",
       "destination": "https://portal.onebutlr.com/list-your-venue",
       "permanent": false

@@ -1,14 +1,18 @@
 {
-  "name": "Butlr · Hotel Portal",
+  "name": "Butlr \u00b7 Hotel Portal",
   "short_name": "Butlr",
   "description": "Modern guest concierge platform for luxury hotels.",
-  "start_url": "./butlr-hotel-portal.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#070B14",
   "theme_color": "#0B1320",
-  "categories": ["business", "productivity", "lifestyle"],
+  "categories": [
+    "business",
+    "productivity",
+    "lifestyle"
+  ],
   "icons": [
     {
       "src": "butlr-icon-192.png",
