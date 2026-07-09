@@ -1,4 +1,14 @@
 {
+  "rewrites": [
+    {
+      "source": "/hotels",
+      "destination": "/hotels.html"
+    },
+    {
+      "source": "/hotels/:slug",
+      "destination": "/hotel.html"
+    }
+  ],
   "redirects": [
     {
       "source": "/portal",

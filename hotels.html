@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<!-- Served at /hotels via a rewrite — anchor all relative URLs to the root. -->
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Book a stay · Butlr</title>
+<meta name="description" content="Hotels, resorts and beach clubs on Butlr. Book your stay directly — no app, no account needed." />
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:title" content="Book a stay · Butlr" />
+<meta property="og:description" content="Hotels, resorts and beach clubs on Butlr. Book your stay directly." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Butlr" />
+<meta property="og:url" content="https://onebutlr.com/hotels" />
+<meta property="og:image" content="https://onebutlr.com/assets/og.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://portal.onebutlr.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Vogue Display';src:url('assets/fonts/vogue.woff2') format('woff2'),url('assets/fonts/vogue.otf') format('opentype'),url('assets/fonts/vogue.ttf') format('truetype');font-weight:400 700;font-style:normal;font-display:swap;}
+  :root{
+    --bg:#FBFAF7; --bg-2:#F3F0EA; --paper:#FFFFFF;
+    --ink:#15161A; --text:#44474F; --sub:#767984; --muted:#9aa0ab;
+    --gold:#A9812C; --gold-2:#C9A961;
+    --line:rgba(20,22,28,.14); --line-soft:rgba(20,22,28,.08);
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  [hidden]{display:none!important;}
+  html{scroll-behavior:smooth;background:var(--bg);}
+  body{font-family:'Hanken Grotesk','Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+  .kicker{font-size:11px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);}
+  h1,h2,h3{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',Didot,Georgia,serif;color:var(--ink);font-weight:400;}
+  h1{font-size:clamp(28px,4vw,44px);line-height:1.12;letter-spacing:-.01em;}
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;}}
+
+  /* nav — solid on inner pages */
+  nav{position:fixed;inset:0 0 auto 0;z-index:70;height:62px;background:rgba(251,250,247,.92);backdrop-filter:saturate(150%) blur(14px);border-bottom:1px solid var(--line-soft);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:100%;}
+  .mark{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',Didot,serif;font-size:26px;font-weight:400;letter-spacing:-.5px;color:var(--ink);}
+  .mark span{color:var(--gold);}
+  .nav-links{display:flex;gap:32px;align-items:center;}
+  .nav-links a{font-size:11.5px;letter-spacing:2.2px;text-transform:uppercase;color:var(--ink);}
+  .nav-links a:hover{opacity:.7;}
+  .nav-cta{color:var(--gold)!important;letter-spacing:.5px;}
+  .nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px;color:var(--ink);}
+  .nav-burger span{display:block;width:22px;height:2px;border-radius:2px;background:currentColor;transition:.25s;}
+
+  /* header */
+  .pagehead{padding:150px 0 44px;text-align:center;}
+  .pagehead .kicker{display:block;margin-bottom:14px;}
+  .pagehead .sub{margin-top:14px;color:var(--sub);font-size:14.5px;max-width:52ch;margin-left:auto;margin-right:auto;}
+
+  /* filter chips */
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:34px 0 8px;}
+  .chip{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text);border:1px solid var(--line);border-radius:100px;padding:9px 18px;cursor:pointer;background:transparent;transition:.25s;}
+  .chip:hover{border-color:var(--gold);color:var(--gold);}
+  .chip.on{background:var(--ink);border-color:var(--ink);color:#fff;}
+
+  /* venue grid */
+  .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding:44px 0 110px;}
+  .vcard{display:block;}
+  .vcard .img{aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line-soft);background:var(--bg-2);position:relative;}
+  .vcard .img img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1);}
+  .vcard:hover .img img{transform:scale(1.06);}
+  .vcard .loc{margin-top:16px;font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);}
+  .vcard h3{margin-top:5px;color:var(--ink);font-size:19px;}
+  .vcard .meta{font-size:13px;color:var(--sub);margin-top:4px;display:flex;align-items:center;gap:8px;}
+  .vcard .stars{color:var(--gold-2);letter-spacing:2px;font-size:11px;}
+  .vcard .book{display:inline-block;margin-top:10px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--gold);padding-bottom:2px;transition:.25s;}
+  .vcard:hover .book{color:var(--gold);}
+
+  /* states */
+  .state{padding:70px 0 130px;text-align:center;color:var(--sub);font-size:14.5px;}
+  .state .big{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',serif;color:var(--ink);font-size:22px;margin-bottom:10px;}
+  .spinner{width:26px;height:26px;border:2px solid var(--line);border-top-color:var(--gold);border-radius:50%;margin:0 auto 18px;animation:spin 1s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* footer */
+  footer{background:var(--bg);border-top:1px solid var(--line-soft);padding:60px 0 40px;}
+  .fbottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:12.5px;}
+
+  @media (max-width:880px){
+    .nav-burger{display:flex;}
+    .nav-links{position:absolute;top:100%;left:0;right:0;background:rgba(251,250,247,.98);backdrop-filter:saturate(150%) blur(14px);border-bottom:1px solid var(--line-soft);flex-direction:column;align-items:stretch;gap:0;padding:8px 24px 16px;display:none;}
+    nav.open .nav-links{display:flex;}
+    .nav-links a{padding:13px 2px;font-size:13px;letter-spacing:1.6px;border-bottom:1px solid var(--line-soft);}
+    .nav-cta{margin:12px 0 2px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px;}
+    .vgrid{grid-template-columns:1fr;gap:34px;}
+    .pagehead{padding:130px 0 30px;}
+  }
+  @media (min-width:881px) and (max-width:1080px){.vgrid{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap">
+    <a href="./" class="mark">Butl<span>r</span></a>
+    <div class="nav-links">
+      <a href="idea.html">About</a>
+      <a href="index.html#how">The App</a>
+      <a href="/hotels">Book a stay</a>
+      <a href="venues.html">For venues</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://portal.onebutlr.com/list-your-venue" class="nav-cta">List your venue</a>
+    </div>
+    <button class="nav-burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="pagehead">
+  <div class="wrap">
+    <span class="kicker reveal in">The Collection</span>
+    <h1 class="reveal in">Book a stay.</h1>
+    <p class="sub reveal in">Hotels, resorts and beach clubs on Butlr. Book directly with the venue — no app, no account needed.</p>
+    <div class="chips" id="chips" hidden></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="state" id="loading"><div class="spinner"></div>Finding places for you…</div>
+  <div class="state" id="empty" hidden>
+    <div class="big">Opening soon.</div>
+    The first venues are being onboarded now. In the meantime, explore the full collection in the Butlr app.
+  </div>
+  <div class="state" id="error" hidden>
+    <div class="big">Something went wrong.</div>
+    We couldn’t load the collection. Please try again in a moment.
+  </div>
+  <div class="vgrid" id="grid" hidden></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fbottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div><a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="terms.html">Terms</a> &nbsp;·&nbsp; info@onebutlr.com</div></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var API = window.BUTLR_API || "https://portal.onebutlr.com";
+
+  var TYPE_LABELS = {
+    hotel:"Hotel", resort:"Resort", boutique:"Boutique Hotel", villa:"Villas",
+    apartment:"Apartments", beachClub:"Beach Club", poolClub:"Pool Club",
+    countryClub:"Country Club", golfClub:"Golf Club", membersClub:"Members' Club",
+    marina:"Marina", skyLodge:"Sky Lodge", daySpa:"Day Spa", raceClub:"Race Club",
+    airportLounge:"Airport Lounge", coworking:"Coworking", premiumGym:"Gym"
+  };
+  var PLURALS = {
+    hotel:"Hotels", resort:"Resorts", beachClub:"Beach clubs", boutique:"Boutique hotels",
+    villa:"Villas", apartment:"Apartments", poolClub:"Pool clubs", countryClub:"Country clubs",
+    golfClub:"Golf clubs", membersClub:"Members' clubs", marina:"Marinas", skyLodge:"Sky lodges",
+    daySpa:"Day spas", raceClub:"Race clubs", airportLounge:"Lounges", coworking:"Coworking", premiumGym:"Gyms"
+  };
+
+  var venues = [];
+  var activeType = new URLSearchParams(location.search).get("type") || "all";
+
+  var $ = function(id){ return document.getElementById(id); };
+  // Attribute-safe escaper — quotes INCLUDED. Venue-controlled strings are
+  // interpolated into double-quoted attributes, so `"` must be escaped or a
+  // crafted room/venue field breaks out of the attribute (stored XSS).
+  function esc(s){
+    return String(s==null?"":s)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+  }
+  // Only http(s) URLs may reach an src attribute — anything else is dropped.
+  function safeImg(u){ u=String(u==null?"":u).trim(); return /^https?:\/\//i.test(u) ? u : ""; }
+  function stars(n){ n=Math.max(0,Math.min(5,Math.round(n||0))); return n? "★★★★★".slice(0,n) : ""; }
+
+  function renderChips(){
+    var types = {};
+    venues.forEach(function(v){ types[v.venueType||"hotel"]=1; });
+    var order = ["hotel","resort","beachClub"].concat(Object.keys(types).filter(function(t){return ["hotel","resort","beachClub"].indexOf(t)===-1;}).sort());
+    var present = order.filter(function(t){ return types[t]; });
+    if (present.length < 2) { $("chips").hidden = true; return; }
+    var html = '<button class="chip'+(activeType==="all"?" on":"")+'" data-t="all">All</button>';
+    present.forEach(function(t){
+      html += '<button class="chip'+(activeType===t?" on":"")+'" data-t="'+esc(t)+'">'+esc(PLURALS[t]||TYPE_LABELS[t]||t)+'</button>';
+    });
+    var el = $("chips");
+    el.innerHTML = html; el.hidden = false;
+    el.querySelectorAll(".chip").forEach(function(b){
+      b.addEventListener("click", function(){
+        activeType = b.getAttribute("data-t");
+        var u = new URL(location.href);
+        if (activeType==="all") u.searchParams.delete("type"); else u.searchParams.set("type", activeType);
+        history.replaceState(null,"",u);
+        renderChips(); renderGrid();
+      });
+    });
+  }
+
+  function renderGrid(){
+    var list = activeType==="all" ? venues : venues.filter(function(v){ return (v.venueType||"hotel")===activeType; });
+    var grid = $("grid");
+    if (!list.length){
+      grid.hidden = true; $("empty").hidden = false;
+      return;
+    }
+    $("empty").hidden = true;
+    grid.innerHTML = list.map(function(v){
+      var loc = [v.city, v.country].filter(Boolean).join(" · ");
+      var img = safeImg(v.imageURL);
+      return '<a class="vcard reveal in" href="/hotels/'+encodeURIComponent(v.slug)+'">'
+        + '<div class="img">'+(img?'<img src="'+esc(img)+'" alt="'+esc(v.name)+'" loading="lazy">':"")+'</div>'
+        + '<div class="loc">'+esc(loc)+'</div>'
+        + '<h3>'+esc(v.name)+'</h3>'
+        + '<div class="meta"><span>'+esc(TYPE_LABELS[v.venueType]||"Hotel")+'</span>'
+        + (v.starRating?'<span class="stars">'+stars(v.starRating)+'</span>':"")+'</div>'
+        + '<span class="book">Book a stay →</span>'
+        + '</a>';
+    }).join("");
+    grid.hidden = false;
+  }
+
+  fetch(API + "/api/web-booking/venues")
+    .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+    .then(function(j){
+      venues = (j && j.venues) || [];
+      $("loading").hidden = true;
+      renderChips();
+      renderGrid();
+    })
+    .catch(function(e){
+      console.error(e);
+      $("loading").hidden = true;
+      $("error").hidden = false;
+    });
+
+  document.querySelectorAll('#nav .nav-links a').forEach(function(a){a.addEventListener('click',function(){var n=document.getElementById('nav');n.classList.remove('open');var b=n.querySelector('.nav-burger');if(b)b.setAttribute('aria-expanded','false');});});
+})();
+</script>
+</body>
+</html>
