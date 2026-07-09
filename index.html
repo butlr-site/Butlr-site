@@ -77,7 +77,12 @@
 
   /* hero — animated "connections" concept */
   .hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 30px 86px;background:#070A12;overflow:hidden;}
-  .hero .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+  .hero .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;}
+  /* iOS shows a native ▶ start button over a poster when autoplay is blocked
+     (e.g. Low Power Mode). Hide it so the poster reads as an intentional
+     backdrop; the JS below retries play() on the first user gesture. */
+  .hero .hero-bg::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none;}
+  .hero .hero-bg::-webkit-media-controls{display:none!important;}
   #net{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
   #net path{fill:none;stroke:#C9A961;stroke-width:1;vector-effect:non-scaling-stroke;opacity:0;}
   #net .node{fill:#E2C893;}
@@ -225,7 +230,7 @@
 
 <!-- HERO -->
 <header class="hero">
-  <video class="hero-bg" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
+  <video class="hero-bg" id="heroVid" autoplay muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback poster="assets/hero-poster.jpg">
     <source src="assets/hero.mp4" type="video/mp4">
   </video>
   <div class="inner">
@@ -355,5 +360,24 @@
    els.forEach(function(e){io.observe(e);});})();
 </script>
 <script>document.querySelectorAll('#nav .nav-links a').forEach(function(a){a.addEventListener('click',function(){var n=document.getElementById('nav');n.classList.remove('open');var b=n.querySelector('.nav-burger');if(b)b.setAttribute('aria-expanded','false');});});</script>
+<script>
+// Hero video autoplay resilience. iOS blocks muted autoplay under Low Power
+// Mode and sometimes on first paint; when it does, the native ▶ button shows.
+// We keep the video muted+inline (so it's allowed to autoplay when possible)
+// and retry play() on the first user gesture, then stop listening.
+(function(){
+  var v = document.getElementById('heroVid');
+  if (!v) return;
+  v.muted = true; // ensure — a muted video is eligible for autoplay
+  function tryPlay(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+  tryPlay();
+  var opts = { once: true, passive: true };
+  ['touchstart','click','scroll','keydown'].forEach(function(ev){
+    window.addEventListener(ev, tryPlay, opts);
+  });
+  // Retry when the tab becomes visible again (returning from another app).
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) tryPlay(); });
+})();
+</script>
 </body>
 </html>
