@@ -8,7 +8,7 @@
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Book a stay · Butlr</title>
-<meta name="description" content="Book your stay directly with the venue on Butlr — no app, no account needed." />
+<meta name="description" content="Book your stay directly with the venue on Butlr · no app, no account needed." />
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -36,7 +36,7 @@
   .kicker{font-size:11px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);}
   h1,h2,h3{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',Didot,Georgia,serif;color:var(--ink);font-weight:400;}
 
-  /* nav — solid */
+  /* nav · solid */
   nav{position:fixed;inset:0 0 auto 0;z-index:70;height:62px;background:rgba(251,250,247,.92);backdrop-filter:saturate(150%) blur(14px);border-bottom:1px solid var(--line-soft);}
   nav .wrap{max-width:1180px;display:flex;align-items:center;justify-content:space-between;height:100%;}
   .mark{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',Didot,serif;font-size:26px;font-weight:400;letter-spacing:-.5px;color:var(--ink);}
@@ -222,7 +222,7 @@
       <div class="field"><label for="g-name">Full name</label><input id="g-name" type="text" autocomplete="name" required maxlength="120" placeholder="Your full name"></div>
       <div class="field"><label for="g-email">Email</label><input id="g-email" type="email" autocomplete="email" required maxlength="200" placeholder="you@example.com"></div>
       <div class="field"><label for="g-phone">Phone</label><input id="g-phone" type="tel" autocomplete="tel" required maxlength="40" placeholder="+965 …"></div>
-      <!-- honeypot — humans never see this. Deliberately meaningless
+      <!-- honeypot · humans never see this. Deliberately meaningless
            label/id so browser & extension autofill never match it. -->
       <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" id="hp-x" name="hp_x_7" tabindex="-1" autocomplete="one-time-code"></label></div>
       <div class="err" id="m-err"></div>
@@ -422,7 +422,7 @@
     loadVenue(true).then(function(){
       renderRooms();
       $("barNote").textContent = "Live availability for " + nights + " night" + (nights>1?"s":"") + ". Prices are set by the venue.";
-    }).catch(function(){ $("barNote").textContent = "Couldn’t check availability — try again."; })
+    }).catch(function(){ $("barNote").textContent = "Couldn’t check availability · try again."; })
       .finally(function(){ btn.disabled = false; btn.textContent = "Check availability"; });
   });
 
@@ -475,7 +475,7 @@
         // server's silent swallow) — NEVER show that as a real booking.
         if (!res.j.confirmationCode) throw new Error("Couldn’t send your request. Please refresh the page and try again.");
         $("s-code").textContent = res.j.confirmationCode;
-        $("s-copy").textContent = "We’ve emailed you a copy — " + venue.name + " confirms your booking by email.";
+        $("s-copy").textContent = "We’ve emailed you a copy · " + venue.name + " confirms your booking by email.";
         $("modalForm").hidden = true; $("modalDone").hidden = false;
       })
       .catch(function(err){

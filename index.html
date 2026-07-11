@@ -75,7 +75,7 @@
   .btn-dark{background:var(--ink);color:#fff;}.btn-dark:hover{background:#2a2d34;}
   .btn-line{border:1px solid rgba(255,255,255,.55);color:#fff;}.btn-line:hover{background:rgba(255,255,255,.12);}
 
-  /* hero — animated "connections" concept */
+  /* hero · animated "connections" concept */
   .hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 30px 86px;background:#070A12;overflow:hidden;}
   .hero .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;}
   /* iOS shows a native ▶ start button over a poster when autoplay is blocked
@@ -368,7 +368,7 @@
 (function(){
   var v = document.getElementById('heroVid');
   if (!v) return;
-  v.muted = true; // ensure — a muted video is eligible for autoplay
+  v.muted = true; // ensure · a muted video is eligible for autoplay
   function tryPlay(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
   tryPlay();
   var opts = { once: true, passive: true };
