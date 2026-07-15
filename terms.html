@@ -295,10 +295,33 @@
       <div class="fcol"><h4>Venues</h4><a href="venues.html">For venues</a><a href="https://portal.onebutlr.com/list-your-venue">List your venue</a></div>
       <div class="fcol"><h4>Company</h4><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
     </div>
-    <div class="fbottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div>info@onebutlr.com</div></div>
+    <div class="fbottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div><a href="mailto:info@onebutlr.com">info@onebutlr.com</a></div></div>
   </div>
 </footer>
 <script>var nav=document.getElementById('nav');if(nav){addEventListener('scroll',function(){nav.classList.toggle('solid',scrollY>10);});}</script>
 <script>document.querySelectorAll('#nav .nav-links a').forEach(function(a){a.addEventListener('click',function(){var n=document.getElementById('nav');n.classList.remove('open');var b=n.querySelector('.nav-burger');if(b)b.setAttribute('aria-expanded','false');});});</script>
+<script>
+/* Contact email: copy-to-clipboard with confirmation so pressing the address
+   always does something, even on devices with no configured mail app. The
+   mailto: still fires for users who have one (no preventDefault). */
+(function(){
+  function toast(msg){
+    var t=document.createElement('div');
+    t.textContent=msg;
+    t.style.cssText='position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:rgba(17,20,28,.95);color:#fff;padding:11px 18px;border-radius:10px;font:14px/1.2 -apple-system,system-ui,sans-serif;z-index:9999;opacity:0;transition:opacity .2s;box-shadow:0 8px 28px rgba(0,0,0,.35);';
+    document.body.appendChild(t);
+    requestAnimationFrame(function(){t.style.opacity='1';});
+    setTimeout(function(){t.style.opacity='0';setTimeout(function(){t.remove();},250);},1700);
+  }
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){
+    a.addEventListener('click',function(){
+      var email=(a.getAttribute('href')||'').replace(/^mailto:/,'').split('?')[0];
+      if(email&&navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(email).then(function(){toast('Email copied \u00b7 '+email);}).catch(function(){});
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
