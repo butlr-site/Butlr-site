@@ -98,13 +98,19 @@
     .pagehead{padding:130px 0 30px;}
   }
   @media (min-width:881px) and (max-width:1080px){.vgrid{grid-template-columns:repeat(2,1fr);}}
+
+  /* Butlr wordmark image mark */
+  .mark img{height:20px;width:auto;display:inline-block;vertical-align:middle;}
+  .mark .wm-dark{display:none;}
+  nav.solid .mark .wm-light{display:none;} nav.solid .mark .wm-dark{display:inline-block;}
+  .fabout .mark img{height:18px;} .fabout .mark .wm-light{display:none;} .fabout .mark .wm-dark{display:inline-block;}
 </style>
 </head>
 <body>
 
 <nav id="nav">
   <div class="wrap">
-    <a href="./" class="mark">Butl<span>r</span></a>
+    <a href="./" class="mark"><img class="wm-light" src="/butlr-wordmark.png" alt="Butlr"><img class="wm-dark" src="/butlr-wordmark-dark.png" alt="Butlr"></a>
     <div class="nav-links">
       <a href="idea.html">About</a>
       <a href="index.html#how">The App</a>
