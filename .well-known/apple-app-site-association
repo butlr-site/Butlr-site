@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "H8D89H4B82.com.bader.butlr.app",
+        "appID": "2ACY486FU6.com.bader.butlr.app",
         "paths": [ "/r/*", "/v/*" ],
         "components": [
           { "/": "/r/*" },
@@ -13,6 +13,6 @@
     ]
   },
   "webcredentials": {
-    "apps": [ "H8D89H4B82.com.bader.butlr.app" ]
+    "apps": [ "2ACY486FU6.com.bader.butlr.app" ]
   }
 }
