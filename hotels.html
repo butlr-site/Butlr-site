@@ -5,12 +5,12 @@
 <!-- Served at /hotels via a rewrite — anchor all relative URLs to the root. -->
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Book a stay · Butlr</title>
+<title>Book a stay | Butlr</title>
 <meta name="description" content="Hotels, resorts and beach clubs on Butlr. Book your stay directly — no app, no account needed." />
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta property="og:title" content="Book a stay · Butlr" />
+<meta property="og:title" content="Book a stay, Butlr" />
 <meta property="og:description" content="Hotels, resorts and beach clubs on Butlr. Book your stay directly." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Butlr" />
@@ -147,7 +147,7 @@
 
 <footer>
   <div class="wrap">
-    <div class="fbottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div><a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="terms.html">Terms</a> &nbsp;·&nbsp; info@onebutlr.com</div></div>
+    <div class="fbottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div><a href="privacy.html">Privacy</a> &nbsp;, &nbsp; <a href="terms.html">Terms</a> &nbsp;, &nbsp; info@onebutlr.com</div></div>
   </div>
 </footer>
 
@@ -217,7 +217,7 @@
     }
     $("empty").hidden = true;
     grid.innerHTML = list.map(function(v){
-      var loc = [v.city, v.country].filter(Boolean).join(" · ");
+      var loc = [v.city, v.country].filter(Boolean).join(", ");
       var img = safeImg(v.imageURL);
       return '<a class="vcard reveal in" href="/hotels/'+encodeURIComponent(v.slug)+'">'
         + '<div class="img">'+(img?'<img src="'+esc(img)+'" alt="'+esc(v.name)+'" loading="lazy">':"")+'</div>'
