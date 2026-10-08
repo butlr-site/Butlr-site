@@ -499,7 +499,12 @@
         // server's silent swallow) — NEVER show that as a real booking.
         if (!res.j.confirmationCode) throw new Error("Couldn’t send your request. Please refresh the page and try again.");
         $("s-code").textContent = res.j.confirmationCode;
-        $("s-copy").textContent = "We’ve emailed you a copy, " + venue.name + " confirms your booking by email.";
+        // The portal says whether the guest's copy went out (guestEmailSent,
+        // added in round 10); an older portal build does not, and then the
+        // copy is assumed sent as before. Never promise an e-mail that failed.
+        $("s-copy").textContent = res.j.guestEmailSent === false
+          ? "Keep this code, " + venue.name + " confirms your booking by email. We couldn’t e-mail you a copy of the request."
+          : "We’ve emailed you a copy, " + venue.name + " confirms your booking by email.";
         $("modalForm").hidden = true; $("modalDone").hidden = false;
       })
       .catch(function(err){
