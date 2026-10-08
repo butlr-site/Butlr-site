@@ -11,6 +11,7 @@ No build step: every page is a complete file.
 | `404.html` | Vercel's not-found page (served at the missing address, so it carries `<base href="/">`). |
 | `.well-known/apple-app-site-association` | Universal links for the iOS app (`applinks:onebutlr.com`). |
 | `sitemap.xml`, `robots.txt` | Search engines. |
+| `butlr-sw.js` | A retired service worker kept as a kill switch: an old page registered it for the whole site (cache first); this version clears its caches and unregisters itself. Never delete it. |
 | `preview-web-booking.sh` | Serves `/hotels` locally against a portal on `localhost:3000` (see its header). |
 
 Where the pages send people: **List your venue** → `portal.onebutlr.com/list-your-venue` (the
