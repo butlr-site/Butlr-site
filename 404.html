@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<!-- Vercel serves this page AT the missing address (/hotels/x/y, /r/abc, ...),
+     so without a base every relative link (idea.html, index.html, the fonts)
+     would resolve under that folder and land on this page again. -->
+<base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Page not found | Butlr</title>
 <meta name="description" content="The page you are looking for could not be found." />
