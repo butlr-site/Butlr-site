@@ -26,8 +26,8 @@
 <style>
   :root{
     --bg:#FBFAF7; --bg-2:#F3F0EA; --paper:#FFFFFF;
-    --ink:#15161A; --text:#44474F; --sub:#767984; --muted:#9aa0ab;
-    --gold:#A9812C; --gold-2:#C9A961;
+    --ink:#15161A; --text:#44474F; --sub:#696C76; --muted:#6B6E78;
+    --gold:#A9812C;--gold-ink:#876620; --gold-2:#C9A961;
     --line:rgba(20,22,28,.14); --line-soft:rgba(20,22,28,.08);
     --maxw:1180px;
   }
@@ -37,7 +37,7 @@
   a{color:inherit;text-decoration:none;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
   .vogue{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',Didot,Georgia,serif;}
-  .kicker{font-size:11px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);}
+  .kicker{font-size:11px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold-ink);}
   h1,h2,h3{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',Didot,Georgia,serif;color:var(--ink);font-weight:400;}
   h2{font-size:clamp(22px,2.7vw,32px);line-height:1.15;letter-spacing:-.01em;}
   h3{font-size:16px;line-height:1.2;}
@@ -52,7 +52,7 @@
   nav .mark,nav .nav-links a{color:#fff;}
   nav.solid{background:rgba(251,250,247,.92);backdrop-filter:saturate(150%) blur(14px);border-bottom:1px solid var(--line-soft);height:62px;}
   nav.solid .mark{color:var(--ink);} nav.solid .nav-links a{color:var(--ink);}
-  nav.solid .nav-cta{border-color:var(--line);}
+  nav.solid .nav-cta{border-color:var(--line);color:var(--gold-ink)!important;} nav.open .nav-cta{color:var(--gold-ink)!important;}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:100%;}
   .mark{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',Didot,serif;font-size:26px;font-weight:400;letter-spacing:-.5px;}
   .mark span{color:var(--gold-2);}
@@ -70,7 +70,7 @@
   .badge .b-small{font-size:9.5px;color:#cfd2d8;line-height:1;}
   .badge .b-big{font-size:15px;color:#fff;line-height:1.2;font-weight:500;}
   .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 30px;font-size:11.5px;font-weight:600;letter-spacing:2.2px;text-transform:uppercase;transition:.25s;border-radius:2px;}
-  .btn-gold{background:var(--gold);color:#fff;}.btn-gold:hover{background:#8f6c21;}
+  .btn-gold{background:#8f6c21;color:#fff;}.btn-gold:hover{background:#76581a;}
   .btn-dark{background:var(--ink);color:#fff;}.btn-dark:hover{background:#2a2d34;}
   .btn-line{border:1px solid rgba(255,255,255,.55);color:#fff;}.btn-line:hover{background:rgba(255,255,255,.12);}
 
@@ -110,7 +110,7 @@
   .vcard .img{aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line-soft);}
   .vcard .img img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1);}
   .vcard:hover .img img{transform:scale(1.06);}
-  .vcard .loc{margin-top:16px;font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);}
+  .vcard .loc{margin-top:16px;font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold-ink);}
   .vcard h3{margin-top:5px;color:var(--ink);font-size:18px;}
   .vcard .type{font-size:13.5px;color:var(--sub);margin-top:4px;}
 
@@ -119,7 +119,7 @@
   .wstep{text-align:center;}
   .phone{border-radius:34px;border:1px solid var(--line-soft);background:#0a0f1a;padding:7px;box-shadow:0 26px 60px rgba(20,22,28,.16);width:100%;max-width:224px;margin:0 auto 24px;}
   .phone img{width:100%;display:block;border-radius:28px;}
-  .wstep .k{font-size:10.5px;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);}
+  .wstep .k{font-size:10.5px;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold-ink);}
   .wstep h3{margin:10px 0 7px;color:var(--ink);font-size:19px;}
   .wstep p{font-size:13px;color:var(--sub);max-width:30ch;margin:0 auto;line-height:1.6;}
 
@@ -176,7 +176,7 @@
 
   /* venues band */
   .venues{text-align:center;padding:104px 0;background:#ffffff;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
-  .venues .kicker{color:var(--gold);}
+  .venues .kicker{color:var(--gold-ink);}
   .venues h2{color:var(--ink);margin-top:14px;}
   .venues p{color:var(--sub);max-width:46ch;margin:16px auto 30px;font-size:15px;}
 
@@ -186,7 +186,7 @@
   .fabout .mark{font-size:22px;color:var(--ink);}
   .fabout .mark span{color:var(--gold);}
   .fabout p{margin-top:14px;color:var(--sub);font-size:13.5px;line-height:1.7;max-width:30ch;}
-  .fcol h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+  .fcol h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-ink);margin-bottom:16px;}
   .fcol a{display:block;color:var(--sub);font-size:13px;letter-spacing:.2px;margin-bottom:12px;transition:color .2s;}.fcol a:hover{color:var(--ink);}
   .fbottom{margin-top:50px;padding-top:22px;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:12.5px;}
 
@@ -214,7 +214,7 @@
   body{background:var(--bg);}
   nav{background:rgba(251,250,247,.96)!important;backdrop-filter:saturate(150%) blur(14px);border-bottom:1px solid var(--line-soft)!important;}
   nav .mark{color:var(--ink)!important;} nav .mark span{color:var(--gold)!important;}
-  nav .nav-links a{color:var(--ink);} nav .nav-cta{color:var(--gold-2)!important;}
+  nav .nav-links a{color:var(--ink);} nav .nav-cta{color:var(--gold-ink)!important;}
   .phero{padding:150px 0 26px;text-align:center;}
   .phero .kicker{display:block;margin-bottom:16px;}
   .phero h1{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;font-size:clamp(26px,3.2vw,40px);line-height:1.08;color:var(--ink);letter-spacing:-.015em;max-width:none;margin:0 auto;}
@@ -225,12 +225,12 @@
   .head .sub{margin-top:14px;color:var(--sub);font-size:14px;}
   .cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px;}
   .card{border:1px solid var(--line-soft);border-radius:14px;padding:26px 22px;background:#fff;text-align:left;}
-  .card .ic{font-family:'Bodoni Moda',serif;font-size:20px;color:var(--gold);margin-bottom:12px;}
+  .card .ic{font-family:'Bodoni Moda',serif;font-size:20px;color:var(--gold-ink);margin-bottom:12px;}
   .card h3{color:var(--ink);font-size:16px;}
   .card p{margin-top:9px;font-size:13.5px;color:var(--sub);line-height:1.65;}
   .flow{display:flex;align-items:flex-start;justify-content:center;flex-wrap:wrap;margin-top:50px;}
   .flow .step{flex:1;min-width:140px;text-align:center;padding:0 12px;position:relative;}
-  .flow .step .n{font-family:'Bodoni Moda',serif;font-size:13px;letter-spacing:3px;color:var(--gold);}
+  .flow .step .n{font-family:'Bodoni Moda',serif;font-size:13px;letter-spacing:3px;color:var(--gold-ink);}
   .flow .step h4{margin-top:10px;font-size:15.5px;color:var(--ink);font-weight:600;letter-spacing:.2px;}
   .flow .step:not(:last-child)::after{content:"\2192";position:absolute;right:-7px;top:18px;color:var(--gold-2);font-size:15px;}
   .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
@@ -262,7 +262,7 @@
   <div class="wrap">
     <a href="index.html" class="mark"><img class="wm-light" src="/butlr-wordmark.png" alt="Butlr"><img class="wm-dark" src="/butlr-wordmark-dark.png" alt="Butlr"></a>
     <div class="nav-links">
-      <a href="idea.html" class="hide-sm" style="color:var(--gold);">About</a>
+      <a href="idea.html" class="hide-sm" style="color:var(--gold-ink);">About</a>
       <a href="index.html#how" class="hide-sm">The App</a>
       <a href="venues.html" class="hide-sm">For venues</a>
       <a href="contact.html" class="hide-sm">Contact</a>
