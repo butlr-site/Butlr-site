@@ -33,8 +33,8 @@
 <style>
   :root{
     --bg:#FBFAF7; --bg-2:#F3F0EA; --paper:#FFFFFF;
-    --ink:#15161A; --text:#44474F; --sub:#767984; --muted:#9aa0ab;
-    --gold:#A9812C; --gold-2:#C9A961;
+    --ink:#15161A; --text:#44474F; --sub:#696C76; --muted:#6B6E78;
+    --gold:#A9812C;--gold-ink:#876620; --gold-2:#C9A961;
     --line:rgba(20,22,28,.14); --line-soft:rgba(20,22,28,.08);
     --maxw:1080px;
   }
@@ -44,7 +44,7 @@
   body{font-family:'Hanken Grotesk','Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
   a{color:inherit;text-decoration:none;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
-  .kicker{font-size:11px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);}
+  .kicker{font-size:11px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold-ink);}
   h1,h2,h3{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',Didot,Georgia,serif;color:var(--ink);font-weight:400;}
 
   /* nav, solid */
@@ -55,7 +55,7 @@
   .nav-links{display:flex;gap:32px;align-items:center;}
   .nav-links a{font-size:11.5px;letter-spacing:2.2px;text-transform:uppercase;color:var(--ink);}
   .nav-links a:hover{opacity:.7;}
-  .nav-cta{color:var(--gold)!important;letter-spacing:.5px;}
+  .nav-cta{color:var(--gold-ink)!important;letter-spacing:.5px;}
   .nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px;color:var(--ink);}
   .nav-burger span{display:block;width:22px;height:2px;border-radius:2px;background:currentColor;transition:.25s;}
 
@@ -75,7 +75,7 @@
   .field input,.field select{width:100%;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font-family:inherit;font-size:14.5px;padding:11px 12px;outline:none;transition:border-color .2s;}
   .field input:focus,.field select:focus{border-color:var(--gold);}
   .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 26px;font-size:11.5px;font-weight:600;letter-spacing:2.2px;text-transform:uppercase;transition:.25s;border-radius:8px;border:0;cursor:pointer;font-family:inherit;}
-  .btn-gold{background:var(--gold);color:#fff;}.btn-gold:hover{background:#8f6c21;}
+  .btn-gold{background:#8f6c21;color:#fff;}.btn-gold:hover{background:#76581a;}
   .btn[disabled]{opacity:.55;cursor:default;}
   .bar-note{grid-column:1 / -1;font-size:12px;color:var(--muted);margin-top:2px;}
 
@@ -95,13 +95,13 @@
   .room .desc{font-size:13.5px;color:var(--sub);margin-top:10px;max-width:56ch;}
   .room .amen{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
   .room .amen span{font-size:11px;color:var(--text);border:1px solid var(--line-soft);border-radius:100px;padding:4px 11px;background:var(--bg);}
-  .room .amen button{font-size:11px;font-weight:600;color:var(--gold);border:1px solid var(--line-soft);border-radius:100px;padding:4px 11px;background:var(--bg);cursor:pointer;font-family:inherit;transition:border-color .2s,color .2s;}
+  .room .amen button{font-size:11px;font-weight:600;color:var(--gold-ink);border:1px solid var(--line-soft);border-radius:100px;padding:4px 11px;background:var(--bg);cursor:pointer;font-family:inherit;transition:border-color .2s,color .2s;}
   .room .amen button:hover{border-color:var(--gold);}
   .room .side{padding:22px;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;gap:8px;min-width:190px;text-align:right;border-left:1px solid var(--line-soft);}
   .room .price{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',serif;color:var(--ink);font-size:24px;line-height:1;}
   .room .per{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);}
   .room .total{font-size:12.5px;color:var(--sub);}
-  .room .left{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);}
+  .room .left{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold-ink);}
   .room .soldout{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#b3543f;}
 
   /* gallery */
@@ -131,7 +131,7 @@
   .success{text-align:center;padding:8px 4px;}
   .success .ok{width:58px;height:58px;border-radius:50%;background:rgba(169,129,44,.12);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:26px;margin:6px auto 18px;}
   .success h3{font-size:24px;}
-  .success .code{font-family:'Inter',monospace;font-size:20px;letter-spacing:3px;color:var(--gold);margin:16px 0 4px;}
+  .success .code{font-family:'Inter',monospace;font-size:20px;letter-spacing:3px;color:var(--gold-ink);margin:16px 0 4px;}
   .success p{font-size:14px;color:var(--sub);max-width:38ch;margin:10px auto 0;}
 
   /* states */
@@ -184,13 +184,13 @@
 <div class="state" id="loading"><div class="spinner"></div>Preparing your stay…</div>
 <div class="state" id="notfound" hidden>
   <div class="big">We couldn’t find that venue.</div>
-  It may not be taking web bookings yet. Venues on Butlr open in the app: <a href="https://apps.apple.com/app/butlr/id6769944247" style="color:var(--gold);border-bottom:1px solid var(--gold);">Get the Butlr app →</a>
-  <div style="margin-top:14px;"><a href="/hotels" style="color:var(--gold);border-bottom:1px solid var(--gold);">Browse the collection →</a></div>
+  It may not be taking web bookings yet. Venues on Butlr open in the app: <a href="https://apps.apple.com/app/butlr/id6769944247" style="color:var(--gold-ink);border-bottom:1px solid var(--gold);">Get the Butlr app →</a>
+  <div style="margin-top:14px;"><a href="/hotels" style="color:var(--gold-ink);border-bottom:1px solid var(--gold);">Browse the collection →</a></div>
 </div>
 <!-- A server or network failure is not "no such venue": say so, and offer a retry. -->
 <div class="state" id="failed" hidden>
   <div class="big">We couldn’t load this venue.</div>
-  Please try again in a moment. <a href="#" id="retry" style="color:var(--gold);border-bottom:1px solid var(--gold);">Try again →</a>
+  Please try again in a moment. <a href="#" id="retry" style="color:var(--gold-ink);border-bottom:1px solid var(--gold);">Try again →</a>
 </div>
 
 <div id="page" hidden>
@@ -224,7 +224,7 @@
     <!-- gallery -->
     <section class="sec" id="galSec" hidden>
       <div class="head"><span class="kicker">The Venue</span><h2>A closer look.</h2></div>
-      <div class="gal" id="gal"></div>
+      <div class="gal" id="gal" tabindex="0" role="region" aria-label="Photo gallery"></div>
     </section>
 
     <!-- facilities -->
