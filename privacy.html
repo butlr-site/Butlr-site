@@ -248,7 +248,7 @@
     <button class="nav-burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);"><span></span><span></span><span></span></button>
   </div>
 </nav>
-<header class="legal-hero"><div class="wrap"><span class="kicker">Privacy &middot; Butlr</span><h1>Privacy Policy</h1><p class="lede">Last updated 12 August 2026. This policy explains what information Butlr collects, how it is used, and the choices you have. We keep it short and in plain language because your privacy matters.</p></div></header>
+<header class="legal-hero"><div class="wrap"><span class="kicker">Privacy &middot; Butlr</span><h1>Privacy Policy</h1><p class="lede">Last updated 22 September 2026. This policy explains what information Butlr collects, how it is used, and the choices you have. We keep it short and in plain language because your privacy matters.</p></div></header>
 <main class="sec"><div class="wrap"><div class="legal">
   <h2>1. Who we are</h2>
   <p>Butlr ("we", "us", "our") is operated by Butlr Systems Establishment, a company registered in the Kingdom of Saudi Arabia. Butlr operates worldwide and is available to guests staying at every venue that joins our network, in any country. We are the data controller for the personal information processed in connection with the Butlr mobile application ("App") on a global basis. Privacy questions: <a href="mailto:info@onebutlr.com">info@onebutlr.com</a>.</p>
@@ -266,7 +266,7 @@
   <h3>2.2 Information we collect automatically</h3>
   <ul>
     <li><strong>Device information.</strong> iOS version, device model, app version, language preference and time zone, to help us diagnose problems.</li>
-    <li><strong>Location (optional).</strong> Only if you grant permission, and only for local context such as weather and time. The app works fully without it, and we do not track you outside a Butlr venue.</li>
+    <li><strong>Location (optional).</strong> Read once, only when you press the SOS button, so the venue team can find you. It is never read in the background and the app works fully without it.</li>
     <li><strong>App usage.</strong> Crash reports and anonymous diagnostics so we can fix bugs.</li>
   </ul>
   <h3>2.3 Information we do <em>not</em> collect</h3>
@@ -291,8 +291,8 @@
     <li><strong>Your venue, identity documents.</strong> If you upload a passport or ID in the app, it is shared with the venue you are checking in to so they can verify you. You choose whether to reuse it at other venues, and you can delete it at any time.</li>
     <li><strong>Your venue, service and check-in records.</strong> When you stay at a Butlr partner venue, the venue receives the requests you make so they can fulfill them. Any passport or other identity document you hand over at the desk is recorded by that venue as its own legal check-in record.</li>
     <li><strong>Apple.</strong> Sign in with Apple, Apple Pay, push notifications, and the Speech framework operate through Apple. Apple's privacy policy applies to that processing.</li>
-    <li><strong>Payment processors.</strong> When you pay via Apple Pay, your payment token is processed by our payment provider (Stripe, Inc.) under their privacy policy.</li>
-    <li><strong>Service providers.</strong> Hosting (AWS), error tracking (Sentry), product analytics (PostHog). All are bound by data-processing agreements and process data only on our instructions.</li>
+    <li><strong>Payments.</strong> Charges you make in the app are posted to your room folio and settled with the venue. Where an online payment is offered, it runs through MyFatoorah on their own payment page. Butlr never receives or stores card numbers.</li>
+    <li><strong>Service providers.</strong> Google Cloud (Firebase) for hosting and storage in the European Union, Vercel for the web portal, Sentry for error monitoring, Resend for email and Twilio for SMS. Each is bound by data-processing terms and processes data only on our instructions. The current list, with what each one receives and where it runs, is at <a href="subprocessors.html">onebutlr.com/subprocessors</a>.</li>
   </ul>
 
   <h2>5. Voice (Whisper) and microphone</h2>
@@ -304,6 +304,7 @@
   <h2>7. Data retention</h2>
   <p>We retain your account, stay history, preferences, and request history for as long as you have an active Butlr account so that we can deliver the service across multiple stays. Your Butlr Passport preferences would be useless if we deleted them between visits. We also retain:</p>
   <ul>
+    <li><strong>Identity documents you upload</strong> are readable by a venue only while it is hosting you. That access ends 24 hours after checkout and the document is cleared from our systems 30 days after checkout. You can delete it at any time in the app.</li>
     <li><strong>Stay records and folio history</strong> for the duration of your relationship with Butlr and our partner venues, to enable repeat-guest personalisation and loyalty benefits.</li>
     <li><strong>Aggregated, anonymised analytics</strong> indefinitely, to understand how Butlr is used and improve the service. This data cannot be linked back to you.</li>
     <li><strong>Financial records</strong> (orders, payments, invoices) for up to 10 years as required by applicable Saudi commercial, anti-money-laundering, tax and accounting laws, and the laws of other jurisdictions where Butlr operates or its partner venues are located.</li>
@@ -317,10 +318,10 @@
 
   <h2>9. International transfers and global operation</h2>
   <p>Butlr is a globally available service. Our partner venues are located in countries including (but not limited to) Saudi Arabia, the United Arab Emirates, the United Kingdom, France, Italy, Japan, the United States, Singapore, Hong Kong, the Maldives, and Oman. The list of partner venues grows over time and is not limited to any single region.</p>
-  <p>Butlr is operated from the Kingdom of Saudi Arabia, with cloud infrastructure in the Gulf Cooperation Council (GCC), European Union, and United States regions. When you use Butlr, your data may be transferred to and processed in any of these countries, as well as the country where your current Butlr partner venue is located, for the purpose of fulfilling your service requests. We use standard contractual clauses, encryption in transit and at rest, and other appropriate safeguards to ensure adequate protection regardless of where your data is processed.</p>
+  <p>Butlr is operated from the Kingdom of Saudi Arabia. Platform data is hosted on Google Cloud in the European Union (Belgium). Some service providers listed at <a href="subprocessors.html">onebutlr.com/subprocessors</a> run in the United States or Kuwait and receive only the categories stated there, never identity documents. When you use Butlr, your data may also be processed in the country where your current Butlr partner venue is located, for the purpose of fulfilling your service requests. We rely on the safeguards permitted by the Saudi Personal Data Protection Law and its Transfer Regulation, including data-processing terms with each provider, a documented transfer risk assessment, and encryption in transit and at rest.</p>
 
   <h2>10. Security</h2>
-  <p>All data is encrypted in transit (TLS 1.3) and at rest (AES-256). Payment data is never stored on our servers; we use tokenized payments via Apple Pay and Stripe. Identity documents you upload are encrypted and access-restricted so that only you and the venue you are checking into can view them; no other venue or guest can access them. We limit employee access to personal data on a strict need-to-know basis.</p>
+  <p>All data is encrypted in transit (TLS 1.2 or higher) and at rest (AES-256). Card numbers never reach our servers. Identity documents you upload are encrypted and access-restricted so that only you and the venue currently hosting you can view them; every time a venue opens your document it is recorded, and you can see that record in the app. No other venue or guest can access them. Access by Butlr staff is limited to named administrators on a need-to-know basis. Our security measures are summarised at <a href="security.html">onebutlr.com/security</a>.</p>
 
   <h2>11. Changes to this policy</h2>
   <p>Butlr is an evolving product. We reserve the right to update this Privacy Policy at any time to reflect new features (such as Sign in with Apple, Apple Pay, voice features, expanded venue partnerships), to comply with new laws, or to reflect changes in how we operate. The "Last updated" date at the top of this page always reflects the current version.</p>
@@ -329,7 +330,7 @@
 
   <h2>12. Contact</h2>
   <p>Privacy questions: <a href="mailto:info@onebutlr.com">info@onebutlr.com</a><br>Butlr Systems Establishment, Kingdom of Saudi Arabia</p>
-  <div class="legal-end">&copy; 2026 Butlr. Effective from 12 August 2026.</div>
+  <div class="legal-end">&copy; 2026 Butlr. Effective from 22 September 2026.</div>
 </div></div></main>
 <footer>
   <div class="wrap">
@@ -337,7 +338,7 @@
       <div class="fabout"><a href="./" class="mark"><img class="wm-light" src="/butlr-wordmark.png" alt="Butlr"><img class="wm-dark" src="/butlr-wordmark-dark.png" alt="Butlr"></a><p>Connecting people to the places they stay and visit. One app, one identity, every venue.</p></div>
       <div class="fcol"><h4>Guests</h4><a href="index.html#how">The App</a><a href="index.html#collection">The Collection</a><a href="idea.html">About</a></div>
       <div class="fcol"><h4>Venues</h4><a href="venues.html">For venues</a><a href="https://portal.onebutlr.com/list-your-venue">List your venue</a></div>
-      <div class="fcol"><h4>Company</h4><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+      <div class="fcol"><h4>Company</h4><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="security.html">Security</a></div>
     </div>
     <div class="fbottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div><a href="mailto:info@onebutlr.com">info@onebutlr.com</a></div></div>
   </div>

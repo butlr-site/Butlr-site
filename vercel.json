@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/bader",
+      "destination": "/bader.html"
+    },
+    {
       "source": "/hotels",
       "destination": "/hotels.html"
     },
@@ -44,6 +48,21 @@
       "source": "/godview/",
       "destination": "https://portal.onebutlr.com/godview",
       "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/bader.vcf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/vcard; charset=utf-8"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"Bader-Butlr.vcf\""
+        }
+      ]
     }
   ]
 }

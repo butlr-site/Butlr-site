@@ -7,4 +7,6 @@
   <url><loc>https://onebutlr.com/contact.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
   <url><loc>https://onebutlr.com/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://onebutlr.com/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://onebutlr.com/security.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://onebutlr.com/subprocessors.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 </urlset>
