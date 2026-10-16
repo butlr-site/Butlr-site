@@ -1,3 +1,4 @@
+
 {
   "rewrites": [
     {
@@ -14,6 +15,11 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/download",
+      "destination": "https://apps.apple.com/kw/app/butlr/id6769944247",
+      "permanent": false
+    },
     {
       "source": "/portal",
       "destination": "https://portal.onebutlr.com",
