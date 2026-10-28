@@ -297,3 +297,23 @@ body.pro{font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Helvetic
 .faq-p summary{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;font-size:20px;letter-spacing:.005em;}
 .pf h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--brass);}
 .statement{max-width:26ch;}
+
+/* Phones always shown whole (no bottom crop) */
+.fan{align-items:center;padding-bottom:110px;}
+.fan .phone-f{border-radius:40px!important;padding:9px!important;}
+.fan .phone-f img{border-radius:32px!important;}
+.fan .phone-f.side{transform:translateY(36px);}
+.tile-b .art{padding-bottom:48px;}
+.tile-b .phones{align-items:center;}
+.tile-b .phones .phone-f{border-radius:32px!important;padding:7px!important;}
+.tile-b .phones .phone-f img{border-radius:26px!important;}
+.tile-b .phones .phone-f:nth-child(2){transform:translateY(28px);}
+.tile-b .art .screen{border-radius:12px!important;}
+.tile-b.black .art{padding-left:4px;padding-right:4px;}
+@media (max-width:860px){
+  .fan{padding-bottom:64px;}
+  .fan .phone-f{border-radius:24px!important;padding:5px!important;} .fan .phone-f img{border-radius:20px!important;}
+  .fan .phone-f.side{transform:translateY(20px);}
+  .tile-b .art{padding-bottom:32px;}
+}
+.tile-b .art{margin-top:auto;margin-bottom:auto;} .tile-b{min-height:0;}
