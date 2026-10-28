@@ -233,7 +233,7 @@
     go();
   };
   var s = document.createElement('script');
-  s.src = '/assets/i18n-ar.js?v=1';
+  s.src = '/assets/i18n-ar.js?v=2';
   s.onerror = function () { clearTimeout(safety); reveal(); };
   document.head.appendChild(s);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
