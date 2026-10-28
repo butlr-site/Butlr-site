@@ -422,3 +422,8 @@ body.pro{font-size:15.5px;}
 
 /* Headlines break into even lines, never one word left alone */
 .pro h1,.pro h2,.pro h3,.legacy h1,.legacy h2{text-wrap:balance;}
+
+/* Sentences under headlines break into even lines too */
+.lead,.statement-sub,.tile-b p,.ptile p{text-wrap:balance;}
+.pro p,.pro li{text-wrap:pretty;}
+.pro .lead,.pro .statement-sub,.pro .tile-b p,.pro .ptile p,.legacy .lead{text-wrap:balance;}
