@@ -364,3 +364,13 @@ body.pro{font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Helvetic
   .stage .phone-f img{border-radius:13px;}
   .stage .phone-f::before{top:6px;height:6px;}
 }
+
+/* Body text in the same family as the titles (Bodoni Moda, small optical size) */
+body.pro,body.legacy{font-family:'Bodoni Moda',Didot,Georgia,serif;font-optical-sizing:auto;font-weight:400;}
+.pro p,.pro li,.pro .lead,.pro .fine,.pro figcaption,.pro span:not(.eyebrow):not(.n),.pro summary,.pro details p,.legacy p,.legacy li{font-family:'Bodoni Moda',Didot,Georgia,serif;font-optical-sizing:auto;}
+.lead{font-size:clamp(18px,1.7vw,21px);line-height:1.6;font-weight:400;color:#5b5b60;}
+.on-black .lead{color:#b4b4b9;}
+.pro p{line-height:1.65;}
+/* small labels, menu and buttons stay in the tracked sans, like the hero */
+.eyebrow,.pn,.pn a,.pbar nav a,.b-pill,.b-link,.b-ghost,.clock h3,.facts span,.pf h4,.legacy .kicker,.legacy .btn{font-family:'Hanken Grotesk',-apple-system,sans-serif!important;}
+.lead{font-weight:450;color:#4a4a4f;} .on-black .lead{color:#c2c2c7;} .pro p{font-weight:420;}
