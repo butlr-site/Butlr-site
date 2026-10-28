@@ -374,3 +374,33 @@ body.pro,body.legacy{font-family:'Bodoni Moda',Didot,Georgia,serif;font-optical-
 /* small labels, menu and buttons stay in the tracked sans, like the hero */
 .eyebrow,.pn,.pn a,.pbar nav a,.b-pill,.b-link,.b-ghost,.clock h3,.facts span,.pf h4,.legacy .kicker,.legacy .btn{font-family:'Hanken Grotesk',-apple-system,sans-serif!important;}
 .lead{font-weight:450;color:#4a4a4f;} .on-black .lead{color:#c2c2c7;} .pro p{font-weight:420;}
+
+/* Calmer scale (about 20% smaller everywhere) */
+body.pro{font-size:15.5px;}
+.d1{font-size:clamp(26px,3.3vw,42px)!important;}
+.d2{font-size:clamp(22px,2.5vw,32px)!important;}
+.d3{font-size:clamp(19px,1.8vw,23px)!important;}
+.lead{font-size:clamp(15.5px,1.25vw,17px)!important;max-width:40em;}
+.pro p{font-size:15px;}
+.eyebrow{font-size:10px!important;letter-spacing:3.2px!important;margin-bottom:14px!important;}
+.s{padding:88px 0;} .s.tight{padding:60px 0;}
+.hero-p{padding:72px 0 0;}
+.stage{max-width:940px;}
+.chap .shotwrap{max-width:900px;}
+.pw{max-width:1040px;}
+.pn{height:46px;} .pn .links{gap:26px;} .pn .links a{font-size:10.5px;letter-spacing:2px;} .pn .links a.cta{font-size:9.5px;padding:7px 13px;} .pn .logo img{height:16px;}
+.pbar{top:46px;height:44px;} .pbar .name{font-size:15.5px;} .pbar nav a{font-size:9.5px;} .pbar nav a.pill{padding:5px 11px;}
+.b-pill{font-size:10.5px;padding:12px 22px;} .b-link{font-size:10.5px;}
+.btns{margin-top:24px;}
+.every{margin-top:48px;} .every h3{font-size:19px!important;} .every li{font-size:14px;}
+.clock{padding:34px 32px;} .clock .big{font-size:clamp(38px,4.4vw,56px);} .clocks{margin-top:48px;}
+.seq{margin-top:48px;} .seq h3{font-size:18px!important;} .seq p{font-size:14px;}
+.outs h3{font-size:18px!important;} .outs p{font-size:14.5px;}
+.faq-p summary{font-size:17px;padding:20px 0;} .faq-p details p{font-size:15px;}
+.facts-p b{font-size:clamp(18px,1.8vw,22px);} .facts-p span{font-size:13.5px;}
+.ptile{padding:40px 34px 0;} .ptile p{font-size:15px;}
+.tile-b{padding:46px 36px 0;} .tile-b p{font-size:16px;}
+.tcopy p{font-size:16.5px;} .tcopy li{font-size:14.5px;}
+.twin{max-width:520px;}
+.fan{max-width:760px;margin-top:48px;}
+@media (max-width:860px){ .s{padding:64px 0;} .s.tight{padding:46px 0;} .hero-p{padding:56px 0 0;} .pn .links a{font-size:14px;} }
