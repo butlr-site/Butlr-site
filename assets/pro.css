@@ -350,3 +350,17 @@ body.pro{font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Helvetic
   .stage .phone-f::before{top:9px;height:9px;border-radius:9px;}
   .stage-cut{height:40px;}
 }
+
+/* Phone at a natural size next to the tablet, dropping slightly below its edge */
+.stage{align-items:flex-end;padding:20px 0 50px;}
+.stage .screen{flex:0 0 72%;}
+.stage .phone-f{flex:0 0 20%;width:20%!important;margin-left:-2.5%;transform:translateY(40px);border-radius:38px;padding:8px;}
+.stage .phone-f img{border-radius:31px;}
+.stage .phone-f::before{top:14px;height:15px;border-radius:15px;}
+@media (max-width:860px){
+  .stage{padding:10px 0 26px;}
+  .stage .screen{flex-basis:74%;}
+  .stage .phone-f{flex-basis:22%;width:22%!important;transform:translateY(18px);border-radius:16px;padding:3px;}
+  .stage .phone-f img{border-radius:13px;}
+  .stage .phone-f::before{top:6px;height:6px;}
+}
