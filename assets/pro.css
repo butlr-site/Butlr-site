@@ -413,3 +413,9 @@ body.pro{font-size:15.5px;}
 .statement{max-width:30ch;}
 /* the hero itself stays exactly as approved */
 .hero .kick,.hero .lede{font-family:'Hanken Grotesk','Inter',sans-serif!important;}
+
+/* Smaller text under titles */
+.lead{font-size:clamp(14px,1.05vw,15px)!important;line-height:1.65!important;max-width:36em;}
+.pro p,.tile-b p,.ptile p,.tcopy p{font-size:14px!important;}
+.every li,.seq p,.outs p,.facts-p span,.faq-p details p,.tcopy li{font-size:13.5px!important;}
+.d1+.lead,.d2+.lead,.d3+.lead{margin-top:14px;}
