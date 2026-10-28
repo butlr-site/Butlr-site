@@ -24,392 +24,113 @@
 <meta name="twitter:image" content="https://onebutlr.com/assets/og.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/sections.css?v=1">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/pro.css?v=2">
 <style>
-  :root{
-    --bg:#FBFAF7; --bg-2:#F3F0EA; --paper:#FFFFFF;
-    --ink:#15161A; --text:#44474F; --sub:#696C76; --muted:#6B6E78;
-    --gold:#A9812C;--gold-ink:#876620; --gold-2:#C9A961;
-    --line:rgba(20,22,28,.14); --line-soft:rgba(20,22,28,.08);
-    --maxw:1180px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;background:var(--bg);}
-  body{font-family:'Hanken Grotesk','Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-  a{color:inherit;text-decoration:none;}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
-  .vogue{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',Didot,Georgia,serif;}
-  .kicker{font-size:11px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold-ink);}
-  h1,h2,h3{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',Didot,Georgia,serif;color:var(--ink);font-weight:400;}
-  h2{font-size:clamp(22px,2.7vw,32px);line-height:1.15;letter-spacing:-.01em;}
-  h3{font-size:16px;line-height:1.2;}
-  html{scroll-behavior:smooth;background:var(--bg);}
-  section[id]{scroll-margin-top:88px;}
-  .reveal{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease;}
-  .reveal.in{opacity:1;transform:none;}
-  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;}}
-
-  /* nav */
-  nav{position:fixed;inset:0 0 auto 0;z-index:70;height:72px;background:transparent;transition:.4s;border-bottom:1px solid transparent;}
-  nav .mark,nav .nav-links a{color:#fff;}
-  nav.solid{background:rgba(251,250,247,.92);backdrop-filter:saturate(150%) blur(14px);border-bottom:1px solid var(--line-soft);height:62px;}
-  nav.solid .mark{color:var(--ink);} nav.solid .nav-links a{color:var(--ink);}
-  nav.solid .nav-cta{border-color:var(--line);color:var(--gold-ink)!important;} nav.open .nav-cta{color:var(--gold-ink)!important;}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:100%;}
-  .mark{font-family:'DM Serif Display','Bodoni Moda',Didot,serif;font-size:26px;font-weight:400;letter-spacing:-.5px;}
-  .mark span{color:var(--gold-2);}
-  .nav-links{display:flex;gap:32px;align-items:center;}
-  .nav-links a{font-size:11.5px;letter-spacing:2.2px;text-transform:uppercase;}
-  .nav-links a:hover{opacity:.7;}
-  .nav-cta{color:var(--gold-2)!important;letter-spacing:.5px;}
-  .nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px;color:#fff;}
-  nav.solid .nav-burger{color:var(--ink);}
-  .nav-burger span{display:block;width:22px;height:2px;border-radius:2px;background:currentColor;transition:.25s;}
-
-  /* buttons */
-  .badge{display:inline-flex;align-items:center;gap:10px;background:#0A0E16;border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:11px 18px;}
-  .badge svg{width:20px;height:20px;fill:#fff;}
-  .badge .b-small{font-size:9.5px;color:#cfd2d8;line-height:1;}
-  .badge .b-big{font-size:15px;color:#fff;line-height:1.2;font-weight:500;}
-  .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 30px;font-size:11.5px;font-weight:600;letter-spacing:2.2px;text-transform:uppercase;transition:.25s;border-radius:2px;}
-  .btn-gold{background:#8f6c21;color:#fff;}.btn-gold:hover{background:#76581a;}
-  .btn-dark{background:var(--ink);color:#fff;}.btn-dark:hover{background:#2a2d34;}
-  .btn-line{border:1px solid rgba(255,255,255,.55);color:#fff;}.btn-line:hover{background:rgba(255,255,255,.12);}
-
-  /* hero, animated "connections" concept */
-  .hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 30px 86px;background:#070A12;overflow:hidden;}
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 30px 86px;background:#070A12;overflow:hidden;color:#fff;}
   .hero .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;}
-  /* iOS shows a native ▶ start button over a poster when autoplay is blocked
-     (e.g. Low Power Mode). Hide it so the poster reads as an intentional
-     backdrop; the JS below retries play() on the first user gesture. */
   .hero .hero-bg::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none;}
   .hero .hero-bg::-webkit-media-controls{display:none!important;}
-  #net{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
-  #net path{fill:none;stroke:#C9A961;stroke-width:1;vector-effect:non-scaling-stroke;opacity:0;}
-  #net .node{fill:#E2C893;}
-  #net .ring{fill:none;stroke:#C9A961;stroke-width:1;transform-box:fill-box;transform-origin:center;opacity:.6;}
   .hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,10,18,.5),rgba(7,10,18,.4) 45%,rgba(7,10,18,.6)),radial-gradient(70% 62% at 50% 48%,rgba(7,10,18,.12),rgba(7,10,18,.55));}
   .hero .inner{position:relative;z-index:2;}
-  .hero .kicker{margin-bottom:20px;color:var(--gold-2);}
-  .hero h1{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;font-size:clamp(22px,2.6vw,33px);line-height:1.18;color:#fff;letter-spacing:.01em;text-transform:uppercase;}
+  .hero .kick{font-size:11px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:#C9A961;margin-bottom:20px;}
+  .hero h1.hh{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;font-size:clamp(22px,2.6vw,33px);line-height:1.18;color:#fff;letter-spacing:.01em;text-transform:uppercase;}
   .hero .lede{margin:18px auto 0;font-size:clamp(10.5px,.85vw,12px);letter-spacing:1.6px;text-transform:uppercase;line-height:2.1;color:#dfe2ea;max-width:60ch;}
-  .hero .cta-row{position:absolute;left:0;right:0;bottom:40px;z-index:2;display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center;}
-  .hero .cta-row .appstore{height:42px;display:inline-flex;}
-  .hero .cta-row .appstore svg{height:100%;width:auto;display:block;}
-  .hero .cta-row .btn{height:42px;box-sizing:border-box;border-radius:8px;padding:0 16px;font-size:10px;letter-spacing:1.6px;display:inline-flex;align-items:center;}
-  @keyframes drawline{from{stroke-dashoffset:var(--len);opacity:0}12%{opacity:.45}to{stroke-dashoffset:0;opacity:.45}}
-  @keyframes breathe{0%,100%{opacity:.16}50%{opacity:.46}}
-  @keyframes pulsering{0%{transform:scale(.5);opacity:.65}100%{transform:scale(3.2);opacity:0}}
-
-  /* sections */
-  .sec{padding:104px 0;}
-  .sec.line{border-top:1px solid var(--line-soft);}
-  .head{text-align:center;max-width:640px;margin:0 auto;}
-  .head .kicker{display:block;margin-bottom:14px;}
-  .head .sub{margin-top:14px;color:var(--sub);font-size:14px;}
-
-  /* about brief */
-  .about{text-align:center;}
-  .about p{font-family:'Vogue Display','DM Serif Display','Bodoni Moda',Didot,serif;font-weight:400;font-size:clamp(22px,2.7vw,32px);line-height:1.25;letter-spacing:-.01em;color:var(--ink);max-width:680px;margin:0 auto;text-align:center;text-wrap:balance;}
-  .about .note{font-family:'Inter',sans-serif;font-size:13.5px;color:var(--sub);margin-top:20px;max-width:56ch;margin-left:auto;margin-right:auto;text-wrap:balance;}
-
-  /* collection */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
-  .vcard .img{aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line-soft);}
-  .vcard .img img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1);}
-  .vcard:hover .img img{transform:scale(1.06);}
-  .vcard .loc{margin-top:16px;font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold-ink);}
-  .vcard h3{margin-top:5px;color:var(--ink);font-size:18px;}
-  .vcard .type{font-size:13.5px;color:var(--sub);margin-top:4px;}
-
-  /* walkthrough (phones) */
-  .walk{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:60px;align-items:start;}
-  .wstep{text-align:center;}
-  .phone{border-radius:34px;border:1px solid var(--line-soft);background:#0a0f1a;padding:7px;box-shadow:0 26px 60px rgba(20,22,28,.16);width:100%;max-width:224px;margin:0 auto 24px;}
-  .phone img{width:100%;display:block;border-radius:28px;}
-  .wstep .k{font-size:10.5px;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold-ink);}
-  .wstep h3{margin:10px 0 7px;color:var(--ink);font-size:19px;}
-  .wstep p{font-size:13px;color:var(--sub);max-width:30ch;margin:0 auto;line-height:1.6;}
-
-  /* portal split */
-  .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
-  .split .copy .kicker{display:block;margin-bottom:14px;}
-  .split .copy p{margin-top:14px;color:var(--text);max-width:42ch;}
-  .split ul{margin-top:18px;list-style:none;display:flex;flex-direction:column;gap:9px;}
-  .split li{font-size:15px;color:var(--ink);display:flex;gap:10px;}.split li::before{content:"";flex:none;width:14px;height:1px;margin-top:.8em;background:var(--gold);}
-  .split .cta{margin-top:24px;}
-  .portal-img{width:100%;border:1px solid var(--line);box-shadow:0 26px 60px rgba(20,22,28,.14);}
-  .browser{border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 26px 60px rgba(20,22,28,.16);background:#fff;}
-  .browser .bar{height:34px;background:#f1efe9;display:flex;align-items:center;gap:7px;padding:0 13px;border-bottom:1px solid var(--line-soft);}
-  .browser .bar i{width:10px;height:10px;border-radius:50%;background:#d7d2c6;display:inline-block;}
-  .browser img{width:100%;display:block;}
-  /* venue portal dashboard mock */
-  .browser .bar .url{margin-left:10px;font-family:'Inter',sans-serif;font-size:11px;color:#9c968a;letter-spacing:.2px;}
-  .pdash{display:flex;background:#0B1320;color:#EAE7DF;font-family:'Inter',sans-serif;min-height:340px;}
-  .pd-side{width:150px;flex:none;background:#0a1019;border-right:1px solid rgba(255,255,255,.06);padding:16px 12px;}
-  .pd-brand{font-family:'Bodoni Moda',Georgia,serif;font-size:18px;color:#fff;margin:2px 4px 18px;}
-  .pd-brand span{color:var(--gold-2);}
-  .pd-nav{display:flex;flex-direction:column;gap:2px;}
-    .pd-nav a{font-size:11.5px;color:#8b92a3;padding:7px 9px;border-radius:7px;letter-spacing:.2px;}
-    .pd-nav a.on{background:rgba(201,169,97,.14);color:var(--gold-2);}
-  .pd-main{flex:1;padding:16px 18px;min-width:0;}
-  .pd-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;}
-  .pd-venue{font-family:'Bodoni Moda',Georgia,serif;font-size:18px;color:#fff;}
-  .pd-sub{font-size:10.5px;color:#7B8294;margin-top:3px;letter-spacing:.2px;}
-  .pd-live{font-size:10px;color:#7fd6a3;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;}
-  .pd-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:14px;}
-  .pd-kpi{background:#121a28;border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:11px 12px;}
-  .pd-kpi span{display:block;font-size:9.5px;color:#7B8294;text-transform:uppercase;letter-spacing:.7px;}
-  .pd-kpi b{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;font-size:21px;color:#fff;margin-top:5px;display:block;}
-  .pd-kpi b i{font-size:11px;color:#7B8294;font-style:normal;}
-  .pd-feed{background:#121a28;border:1px solid rgba(255,255,255,.06);border-radius:10px;overflow:hidden;}
-  .pd-feed-h{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#7B8294;padding:11px 13px;border-bottom:1px solid rgba(255,255,255,.06);}
-  .pd-row{display:flex;align-items:center;gap:10px;padding:9px 13px;border-bottom:1px solid rgba(255,255,255,.045);font-size:11.5px;}
-  .pd-row:last-child{border-bottom:0;}
-  .pd-rm{color:#EAE7DF;width:74px;flex:none;}
-  .pd-svc{color:#9aa1b1;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .pd-time{color:#5f6675;font-size:10px;}
-  .pd-st{font-size:9px;letter-spacing:.6px;text-transform:uppercase;padding:3px 8px;border-radius:20px;flex:none;}
-  .pd-st.new{background:rgba(201,169,97,.16);color:var(--gold-2);}
-  .pd-st.prog{background:rgba(126,180,214,.16);color:#9cc7e0;}
-  .pd-st.done{background:rgba(127,214,163,.14);color:#8fd9b0;}
-  @media (max-width:720px){
-    .pd-side{display:none;}
-    .pd-kpis{grid-template-columns:repeat(2,1fr);}
-  }
-
-  /* services */
-  .svc{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 30px;margin-top:44px;max-width:820px;margin-left:auto;margin-right:auto;}
-  .svc span{font-size:12.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--text);}
-
-  /* venues band */
-  .venues{text-align:center;padding:104px 0;background:#ffffff;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
-  .venues .kicker{color:var(--gold-ink);}
-  .venues h2{color:var(--ink);margin-top:14px;}
-  .venues p{color:var(--sub);max-width:46ch;margin:16px auto 30px;font-size:15px;}
-
-  /* footer */
-  footer{background:var(--bg);border-top:1px solid var(--line-soft);padding:72px 0 40px;}
-  .fgrid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:40px;}
-  .fabout .mark{font-size:22px;color:var(--ink);}
-  .fabout .mark span{color:var(--gold);}
-  .fabout p{margin-top:14px;color:var(--sub);font-size:13.5px;line-height:1.7;max-width:30ch;}
-  .fcol h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-ink);margin-bottom:16px;}
-  .fcol a{display:block;color:var(--sub);font-size:13px;letter-spacing:.2px;margin-bottom:12px;transition:color .2s;}.fcol a:hover{color:var(--ink);}
-  .fbottom{margin-top:50px;padding-top:22px;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:12.5px;}
-
-  @media (max-width:880px){
-    .nav-burger{display:flex;}
-    .nav-links{position:absolute;top:100%;left:0;right:0;background:#FBFAF7;border-bottom:1px solid var(--line-soft);flex-direction:column;align-items:stretch;gap:0;padding:8px 24px 16px;display:none;}
-    nav.open .nav-links{display:flex;}
-    .nav-links a.hide-sm{display:block;color:var(--ink)!important;padding:13px 2px;font-size:13px;letter-spacing:1.6px;border-bottom:1px solid var(--line-soft);}
-    .nav-cta{margin:12px 0 2px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px;}
-    .grid{grid-template-columns:1fr;gap:30px;}
-    .walk{grid-template-columns:1fr;gap:50px;max-width:300px;margin-left:auto;margin-right:auto;}
-    .split{grid-template-columns:1fr;gap:34px;text-align:center;}.split ul{align-items:center;}.split .copy p{margin:14px auto 0;}
-    .fgrid{grid-template-columns:1fr 1fr;gap:30px;}.fabout{grid-column:1 / -1;}
-    .sec{padding:72px 0;}.hero{padding:120px 0 70px;}
-  }
-
-  /* Butlr wordmark image mark */
-  .mark img{height:20px;width:auto;display:inline-block;vertical-align:middle;}
-  .mark .wm-dark{display:none;}
-  nav.solid .mark .wm-light{display:none;} nav.solid .mark .wm-dark{display:inline-block;}
-  .fabout .mark img{height:18px;} .fabout .mark .wm-light{display:none;} .fabout .mark .wm-dark{display:inline-block;}
+  .hero .cta-row{position:absolute;left:0;right:0;bottom:40px;z-index:2;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;padding:0 16px;}
+  .hero .cta-row .appstore-b{height:44px;}
+  .hero .cta-row .b-pill{font-size:15px;padding:11px 20px;}
+  .hero .cta-row .b-ghost{font-size:15px;font-weight:600;color:#fff;padding:10px 20px;border-radius:980px;border:1px solid rgba(255,255,255,.6);}
+  .hero .cta-row .b-ghost:hover{background:rgba(255,255,255,.12);}
 </style>
 </head>
-<body>
-
-<nav id="nav">
-  <div class="wrap">
-    <a href="./" class="mark"><img class="wm-light" src="/butlr-wordmark.png" alt="Butlr"><img class="wm-dark" src="/butlr-wordmark-dark.png" alt="Butlr"></a>
-    <div class="nav-links">
-      <a href="venues.html" class="hide-sm">For hotels</a>
-      <a href="app.html" class="hide-sm">For travelers</a>
-      <a href="/hotels" class="hide-sm">Book a stay</a>
-      <a href="idea.html" class="hide-sm">About</a>
-      <a href="contact.html" class="hide-sm">Contact</a>
-      <a href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener" class="nav-cta">Book a demo</a>
+<body class="pro">
+<div class="pn dark" id="pn" role="navigation" aria-label="Main">
+  <div class="pw">
+    <a href="./" class="logo" aria-label="Butlr home"><img class="on-light" src="/butlr-wordmark-dark.png" alt="Butlr"><img class="on-dark" src="/butlr-wordmark.png" alt="Butlr"></a>
+    <div class="links" id="pn-links">
+      <a href="venues.html">For hotels</a>
+      <a href="app.html">For travelers</a>
+      <a href="/hotels">Book a stay</a>
+      <a href="idea.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener" class="cta">Book a demo</a>
     </div>
-    <button class="nav-burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);"><span></span><span></span><span></span></button>
+    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="pn-links" onclick="var n=document.getElementById('pn');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';"><span></span><span></span></button>
   </div>
-</nav>
-
-<!-- HERO -->
+</div>
 <header class="hero">
-  <video class="hero-bg" id="heroVid" autoplay muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback poster="assets/hero-poster.jpg">
-    <source src="assets/hero.mp4" type="video/mp4">
-  </video>
+  <video class="hero-bg" id="heroVid" autoplay muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback poster="assets/hero-poster.jpg"><source src="assets/hero.mp4" type="video/mp4"></video>
   <div class="inner" data-no-i18n dir="ltr">
-    <div class="kicker reveal in">One Butlr. Everywhere.</div>
-    <h1 class="reveal in">Connecting people to places.</h1>
-    <p class="lede reveal in">One app for the places you stay and visit.<br>Order, discover, book, and experience more.</p>
+    <div class="kick">One Butlr. Everywhere.</div>
+    <h1 class="hh">Connecting people to places.</h1>
+    <p class="lede">One app for the places you stay and visit.<br>Order, discover, book, and experience more.</p>
   </div>
-  <div class="cta-row reveal in">
-      <a class="btn btn-gold" href="venues.html">For hotels</a>
-      <a class="appstore" href="https://apps.apple.com/app/butlr/id6769944247" aria-label="Download on the App Store">
-        <svg viewBox="0 0 120 40" role="img" aria-hidden="true">
-          <rect x="0.5" y="0.5" width="119" height="39" rx="8.5" fill="none" stroke="#ffffff" stroke-opacity="0.55"/>
-          <g transform="translate(15,9.2) scale(0.95)" fill="#fff"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.04.28.04.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></g>
-          <text x="38.5" y="16.5" fill="#fff" font-family="-apple-system,Helvetica Neue,Arial,sans-serif" font-size="6.6" textLength="47" lengthAdjust="spacingAndGlyphs">Download on the</text>
-          <text x="38" y="30.5" fill="#fff" font-family="-apple-system,Helvetica Neue,Arial,sans-serif" font-size="15" font-weight="600" textLength="67" lengthAdjust="spacingAndGlyphs">App Store</text>
-        </svg>
-      </a>
-    <a class="btn btn-line" href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener">Book a demo</a>
-  </div>
+  <div class="cta-row"><a class="b-pill" href="venues.html">For hotels</a><a class="appstore-b" href="https://apps.apple.com/app/butlr/id6769944247" aria-label="Download on the App Store"><svg viewBox="0 0 120 40" role="img" aria-hidden="true"><rect x="0.5" y="0.5" width="119" height="39" rx="8.5" fill="#000" stroke="#a6a6a6"/><g transform="translate(15,9.2) scale(0.95)" fill="#fff"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.150.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.04.28.04.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.710-3.43 2.71-1.517 0-1.9-.88-3.630-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.630-2.323-7.28 0-4.280 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></g><text x="38.5" y="16.5" fill="#fff" font-family="-apple-system,Helvetica Neue,Arial,sans-serif" font-size="6.6" textLength="47" lengthAdjust="spacingAndGlyphs">Download on the</text><text x="38" y="30.5" fill="#fff" font-family="-apple-system,Helvetica Neue,Arial,sans-serif" font-size="15" font-weight="600" textLength="67" lengthAdjust="spacingAndGlyphs">App Store</text></svg></a><a class="b-ghost" href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener">Book a demo</a></div>
 </header>
 
-<!-- WHAT IS BUTLR -->
-<section class="sec about center" id="about">
-  <div class="wrap">
-    <div class="kicker reveal" style="display:block;margin-bottom:14px;">What is Butlr</div>
-    <p class="reveal">The hospitality operating system.</p>
-    <p class="note reveal">One app for travelers. One operating environment for hotels. Butlr runs every department, request, stay and bill from one place, and puts the whole property in the guest&rsquo;s hand.</p>
-  </div>
-</section>
+<section class="s"><div class="pw center">
+  <h2 class="d1" style="max-width:13ch;margin:0 auto">The hospitality operating system.</h2>
+  <p class="lead" style="margin-top:24px">One app for travelers. One operating environment for hotels. Every request moves between them, live.</p>
+</div></section>
 
-<!-- THREE PARTS -->
-<section class="sec line center" id="parts">
-  <div class="wrap">
-    <div class="head reveal"><span class="kicker">One system, three parts</span><h2>The hotel side, the guest side, and the line between them.</h2></div>
-    <div class="trio" style="text-align:left;">
-      <div class="col reveal"><span class="kicker">01 &middot; The Portal</span><h3>Your team&rsquo;s command centre.</h3><p>Where you build the entire hotel: dining, housekeeping, spa, the beach club, anything you run. Stand up a new department in an afternoon, then choose what your guests see.</p><a class="more" href="venues.html">For hotels</a></div>
-      <div class="col reveal"><span class="kicker">02 &middot; The App</span><h3>The whole hotel in the guest&rsquo;s hand.</h3><p>They open their stay, order, book, message the team and follow their bill without leaving their chair. Known by name, answered in a tap, from arrival to checkout.</p><a class="more" href="app.html">For travelers</a></div>
-      <div class="col reveal"><span class="kicker">03 &middot; The Thread</span><h3>Both sides, one conversation.</h3><p>A guest taps and it lands on the right team&rsquo;s screen before the phone could have rung. The team accepts and the guest&rsquo;s tracker moves. If it happens in your hotel, it shows on both screens.</p><a class="more" href="venues.html#how">How it works</a></div>
-    </div>
-    <div class="reveal" style="margin-top:52px;"><div class="shot"><div class="bar"><i></i><i></i><i></i><span>portal.onebutlr.com</span></div><img src="assets/portal/dashboard.jpg" alt="The Butlr portal dashboard" loading="lazy" width="1600" height="959"></div><p class="cap">The Portal: the whole hotel on one screen.</p></div>
-  </div>
-</section>
-
-<!-- THE DINNER -->
-<section class="sec line center" id="story">
-  <div class="wrap">
-    <div class="head reveal"><span class="kicker">The difference</span><h2>One dinner, two hotels.</h2></div>
-    <div class="twoway" style="text-align:left;">
-      <div class="way reveal"><span class="kicker">Without Butlr</span><h3>Calls, relays and waiting.</h3><ol>
-        <li><b>9:12</b>She calls the front desk. It rings, and rings.</li>
-        <li><b>9:15</b>The desk relays the order to the kitchen.</li>
-        <li><b>9:45</b>She waits with no word. Is it even coming?</li>
-        <li><b>9:50</b>She calls the desk again to check.</li></ol></div>
-      <div class="way good reveal"><span class="kicker">With Butlr</span><h3>Straight through.</h3><ol>
-        <li><b>9:12</b>She orders dinner in the app. One tap.</li>
-        <li><b>9:12</b>It lands on the kitchen&rsquo;s screen.</li>
-        <li><b>9:13</b>Accepted. She watches it: preparing.</li>
-        <li><b>9:31</b>On its way. A knock, right on time.</li></ol></div>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT A HOTEL GETS -->
-<section class="sec line center" id="gets">
-  <div class="wrap">
-    <div class="head reveal"><span class="kicker">For hotels</span><h2>What changes when a hotel runs on Butlr.</h2></div>
-    <div class="tiles" style="text-align:left;">
-      <div class="tile reveal"><span class="n">01</span><h3>Fewer phone calls</h3><p>Requests arrive as taps, not calls, so the front desk is free to serve the guest in front of it.</p></div>
-      <div class="tile reveal"><span class="n">02</span><h3>Faster response</h3><p>Every request is timed and lands on the team that does it, with no relay in between.</p></div>
-      <div class="tile reveal"><span class="n">03</span><h3>Real accountability</h3><p>Every request owned, every step on record. Nothing dropped between shifts.</p></div>
-      <div class="tile reveal"><span class="n">04</span><h3>Happier guests</h3><p>They see what is happening, in their language, and rate it in one tap. You see it live.</p></div>
-      <div class="tile reveal"><span class="n">05</span><h3>More direct revenue</h3><p>Menus and services one tap away, direct bookings without commission, and missed orders made visible.</p></div>
-      <div class="tile reveal"><span class="n">06</span><h3>No project to start</h3><p>No hardware and no integration. A browser on the devices you own, live within days.</p></div>
-    </div>
-    <div class="reveal" style="margin-top:40px;text-align:center;"><a class="btn btn-dark" href="venues.html">See everything for hotels</a></div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS (the app) -->
-<section class="sec line center" id="how">
-  <div class="wrap">
-    <div class="head reveal"><span class="kicker">For travelers</span><h2>From download to checkout.</h2><p class="sub">One app for every place you stay. Everything your stay needs, a tap away.</p></div>
-    <div class="walk">
-      <div class="wstep reveal"><div class="phone"><img src="assets/tour/stay.jpg" alt="Open your stay" loading="lazy"></div><div class="k">01</div><h3>Open your stay</h3><p>Your room, your dates and every service of the venue, together on one screen.</p></div>
-      <div class="wstep reveal"><div class="phone"><img src="assets/tour/dish.jpg" alt="Order to your room" loading="lazy"></div><div class="k">02</div><h3>Order to your room</h3><p>Browse the menu, choose how you like it and order in a few taps.</p></div>
-      <div class="wstep reveal"><div class="phone"><img src="assets/tour/ontheway.jpg" alt="Follow it to your door" loading="lazy"></div><div class="k">03</div><h3>Follow it to your door</h3><p>Confirmed, preparing, on its way. See every step and the time it arrives.</p></div>
-      <div class="wstep reveal"><div class="phone"><img src="assets/tour/concierge.jpg" alt="Ask the concierge" loading="lazy"></div><div class="k">04</div><h3>Ask the concierge</h3><p>A table for tonight, a driver, flowers. Message your butler and it is arranged.</p></div>
-      <div class="wstep reveal"><div class="phone"><img src="assets/tour/manage.jpg" alt="Manage your stay" loading="lazy"></div><div class="k">05</div><h3>Manage your stay</h3><p>Ask for a key, follow your live bill, add nights or have your luggage collected.</p></div>
-      <div class="wstep reveal"><div class="phone"><img src="assets/tour/passport.jpg" alt="Your Butlr Passport" loading="lazy"></div><div class="k">06</div><h3>Your Butlr Passport</h3><p>Your preferences travel with you, so every venue knows how you like your stay.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- INVITE -->
-<section class="invite" id="portal"><div class="wrap">
-  <span class="kicker reveal">For hotels</span>
-  <h2 class="reveal">See Butlr running in your hotel.</h2>
-  <p class="reveal">A live walkthrough takes twenty minutes. We show you the Portal and the App working together, then set it up around your property.</p>
-  <div class="row reveal">
-    <a class="btn btn-gold" href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener">Book a live walkthrough</a>
-    <a class="btn btn-line" href="https://portal.onebutlr.com/list-your-venue">List your venue</a>
+<section style="padding:0 0 20px"><div class="pw" style="max-width:1240px">
+  <div class="duo">
+    <a class="tile-b black" href="venues.html"><span class="eyebrow">For hotels</span><h2 class="d3">Run the whole hotel from one screen.</h2><p>Every department, request, stay and bill, live.</p><div class="btns"><span class="b-link">Butlr for hotels</span></div><div class="art"><div class="screen flat"><img src="assets/portal/dashboard.jpg" alt="The Butlr Portal" width="1600" height="959" loading="lazy"></div></div></a>
+    <a class="tile-b mist" href="app.html"><span class="eyebrow">For travelers</span><h2 class="d3">Your whole stay, in your hand.</h2><p>Order, message, follow your bill, book your next stay.</p><div class="btns"><span class="b-link">Butlr for travelers</span></div><div class="art"><div class="phones"><div class="phone-f "><img src="assets/tour/stay.jpg" alt="Your stay" width="640" height="1391" loading="lazy"></div><div class="phone-f "><img src="assets/tour/ontheway.jpg" alt="Following an order" width="640" height="1391" loading="lazy"></div></div></div></a>
   </div>
 </div></section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="wrap">
-    <div class="fgrid">
-      <div class="fabout"><a href="./" class="mark"><img class="wm-light" src="/butlr-wordmark.png" alt="Butlr"><img class="wm-dark" src="/butlr-wordmark-dark.png" alt="Butlr"></a><p>The hospitality operating system. One app for travelers, one operating environment for hotels.</p></div>
-      <div class="fcol"><h4>Hotels</h4><a href="venues.html">For hotels</a><a href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener">Book a demo</a><a href="https://portal.onebutlr.com/list-your-venue">List your venue</a></div>
-      <div class="fcol"><h4>Travelers</h4><a href="app.html">The App</a><a href="/hotels">Book a stay</a><a href="idea.html">About</a></div>
-      <div class="fcol"><h4>Company</h4><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="security.html">Security</a><a href="subprocessors.html">Subprocessors</a></div>
-    </div>
-    <div class="fbottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div><a href="mailto:info@onebutlr.com">info@onebutlr.com</a>&emsp;&ensp;<a href="https://wa.me/447553773576" target="_blank" rel="noopener" dir="ltr" style="white-space:nowrap" aria-label="WhatsApp +44 7553 773576">+44 7553 773576</a></div></div>
-  </div>
-</footer>
+<section class="s"><div class="pw center">
+  <span class="eyebrow">The Thread</span>
+  <h2 class="d2">A tap on the guest&rsquo;s phone.<br>Live on your team&rsquo;s screen.</h2>
+  <p class="lead">The guest orders, and it lands on the right department before a phone could have rung. The team accepts, and the guest watches it happen.</p>
+  <div class="stage"><div class="screen"><img src="assets/portal/orders.jpg" alt="An order on the kitchen's live board" width="1600" height="912" loading="lazy"></div><div class="phone-f "><img src="assets/tour/ontheway.jpg" alt="The same order on the guest's phone" width="640" height="1391" loading="lazy"></div></div>
+  <div class="stage-cut"></div>
+</div></section>
 
+<section class="s on-mist"><div class="pw center">
+  <h2 class="d2">Same dinner. No phone calls.</h2>
+  <div class="clocks" style="text-align:left">
+    <div class="clock"><h3>Without Butlr</h3><div class="big">9:50</div><div class="big-sub">and still waiting, after two calls</div></div>
+    <div class="clock win"><h3>With Butlr</h3><div class="big">9:31</div><div class="big-sub">at the door, ordered at 9:12 in one tap</div></div>
+  </div>
+  <div class="btns"><a class="b-link" href="venues.html#how">See how a request moves</a></div>
+</div></section>
+
+<section class="s"><div class="pw">
+  <h2 class="d2" style="max-width:16ch">What changes when a hotel runs on Butlr.</h2>
+  <div class="outs">
+    <div><h3>Fewer phone calls</h3><p>Requests arrive as taps, so the front desk serves the guest in front of it.</p></div>
+    <div><h3>Faster service</h3><p>Every request is timed and goes straight to the team that does it.</p></div>
+    <div><h3>Nothing dropped</h3><p>Every request has an owner and a record, across every shift.</p></div>
+    <div><h3>Happier guests</h3><p>They see what is happening, in their language, and rate it in one tap.</p></div>
+    <div><h3>More direct revenue</h3><p>Menus a tap away, direct bookings, and missed orders made visible.</p></div>
+    <div><h3>Nothing to install</h3><p>No hardware and no integration project. Live within days.</p></div>
+  </div>
+</div></section>
+
+<section class="s on-black"><div class="pw center">
+  <h2 class="d2" style="max-width:18ch;margin:0 auto">See Butlr running in your hotel.</h2>
+  <p class="lead" style="margin-top:20px">A live walkthrough takes twenty minutes.</p>
+  <div class="btns"><a class="b-pill" href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener">Book a live walkthrough</a><a class="b-link" href="https://portal.onebutlr.com/list-your-venue">List your venue</a></div>
+</div></section>
+<div class="pf" role="contentinfo">
+  <div class="pw">
+    <div class="top">
+      <div class="about"><img src="/butlr-wordmark-dark.png" alt="Butlr"><p>The hospitality operating system. One app for travelers, one operating environment for hotels.</p></div>
+      <div class="col"><h4>Hotels</h4><a href="venues.html">For hotels</a><a href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener">Book a demo</a><a href="https://portal.onebutlr.com/list-your-venue">List your venue</a></div>
+      <div class="col"><h4>Travelers</h4><a href="app.html">The App</a><a href="/hotels">Book a stay</a><a href="idea.html">About</a></div>
+      <div class="col"><h4>Company</h4><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="security.html">Security</a><a href="subprocessors.html">Subprocessors</a></div>
+    </div>
+    <div class="bottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div><a href="mailto:info@onebutlr.com">info@onebutlr.com</a>&emsp;&ensp;<a href="https://wa.me/447553773576" target="_blank" rel="noopener" dir="ltr" style="white-space:nowrap" aria-label="WhatsApp +44 7553 773576">+44 7553 773576</a></div></div>
+  </div>
+</div>
+<script>document.querySelectorAll('#pn-links a').forEach(function(a){a.addEventListener('click',function(){var n=document.getElementById('pn');n.classList.remove('open');document.body.style.overflow='';});});</script>
 <script>
-  // animated connections hero
-  (function(){
-    var svg=document.getElementById('net'); if(!svg) return;
-    var NS='http://www.w3.org/2000/svg';
-    var pts=[[140,170],[350,110],[565,235],[820,125],[1055,200],[250,450],[520,545],[775,470],[995,525],[645,330]];
-    var edges=[[0,2],[2,3],[3,4],[1,2],[5,6],[6,7],[7,8],[2,6],[3,7],[0,5],[2,9],[9,7],[4,8]];
-    edges.forEach(function(e,i){
-      var a=pts[e[0]],b=pts[e[1]];
-      var mx=(a[0]+b[0])/2, my=(a[1]+b[1])/2-70;
-      var p=document.createElementNS(NS,'path');
-      p.setAttribute('d','M'+a[0]+' '+a[1]+' Q'+mx+' '+my+' '+b[0]+' '+b[1]);
-      svg.appendChild(p);
-      var len=p.getTotalLength();
-      p.style.setProperty('--len',len);
-      p.style.strokeDasharray=len; p.style.strokeDashoffset=len;
-      p.style.animation='drawline 2.4s ease '+(i*0.22).toFixed(2)+'s forwards, breathe 8s ease-in-out '+(2.6+i*0.22).toFixed(2)+'s infinite';
-    });
-    pts.forEach(function(pt,i){
-      var ring=document.createElementNS(NS,'circle');
-      ring.setAttribute('cx',pt[0]);ring.setAttribute('cy',pt[1]);ring.setAttribute('r',8);ring.setAttribute('class','ring');
-      ring.style.animation='pulsering '+(3.6+(i%4)*0.6).toFixed(1)+'s ease-out '+(i*0.5).toFixed(1)+'s infinite';
-      svg.appendChild(ring);
-      var c=document.createElementNS(NS,'circle');
-      c.setAttribute('cx',pt[0]);c.setAttribute('cy',pt[1]);c.setAttribute('r',2.6);c.setAttribute('class','node');
-      svg.appendChild(c);
-    });
-  })();
-  var nav=document.getElementById('nav');
-  addEventListener('scroll',function(){nav.classList.toggle('solid',scrollY>40);});
-  (function(){var els=document.querySelectorAll('.reveal:not(.in)');
-   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
-   var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12});
-   els.forEach(function(e){io.observe(e);});})();
-</script>
-<script>document.querySelectorAll('#nav .nav-links a').forEach(function(a){a.addEventListener('click',function(){var n=document.getElementById('nav');n.classList.remove('open');var b=n.querySelector('.nav-burger');if(b)b.setAttribute('aria-expanded','false');});});</script>
-<script>
-// Hero video autoplay resilience. iOS blocks muted autoplay under Low Power
-// Mode and sometimes on first paint; when it does, the native ▶ button shows.
-// We keep the video muted+inline (so it's allowed to autoplay when possible)
-// and retry play() on the first user gesture, then stop listening.
-(function(){
-  var v = document.getElementById('heroVid');
-  if (!v) return;
-  v.muted = true; // ensure, a muted video is eligible for autoplay
-  function tryPlay(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
-  tryPlay();
-  var opts = { once: true, passive: true };
-  ['touchstart','click','scroll','keydown'].forEach(function(ev){
-    window.addEventListener(ev, tryPlay, opts);
-  });
-  // Retry when the tab becomes visible again (returning from another app).
-  document.addEventListener('visibilitychange', function(){ if (!document.hidden) tryPlay(); });
-})();
+(function(){var v=document.getElementById('heroVid');if(!v)return;v.muted=true;function t(){var p=v.play();if(p&&p.catch)p.catch(function(){});}t();
+['touchstart','click','scroll','keydown'].forEach(function(e){window.addEventListener(e,t,{once:true,passive:true});});
+document.addEventListener('visibilitychange',function(){if(!document.hidden)t();});})();
+(function(){var n=document.getElementById('pn');function s(){n.classList.toggle('dark',scrollY<innerHeight-80);}s();addEventListener('scroll',s,{passive:true});})();
 </script>
 </body>
 </html>
