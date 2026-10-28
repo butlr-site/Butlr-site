@@ -404,3 +404,12 @@ body.pro{font-size:15.5px;}
 .twin{max-width:520px;}
 .fan{max-width:760px;margin-top:48px;}
 @media (max-width:860px){ .s{padding:64px 0;} .s.tight{padding:46px 0;} .hero-p{padding:56px 0 0;} .pn .links a{font-size:14px;} }
+
+/* Headline sizes matched to the hero "Connecting people to places" (max 33px) */
+.d1{font-size:clamp(22px,2.6vw,33px)!important;line-height:1.18!important;}
+.d2{font-size:clamp(20px,2.2vw,28px)!important;line-height:1.2!important;}
+.d3{font-size:clamp(17px,1.6vw,21px)!important;}
+.clock .big{font-size:clamp(32px,3.4vw,44px);}
+.statement{max-width:30ch;}
+/* the hero itself stays exactly as approved */
+.hero .kick,.hero .lede{font-family:'Hanken Grotesk','Inter',sans-serif!important;}
