@@ -317,3 +317,4 @@ body.pro{font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Helvetic
   .tile-b .art{padding-bottom:32px;}
 }
 .tile-b .art{margin-top:auto;margin-bottom:auto;} .tile-b{min-height:0;}
+.seq.three{grid-template-columns:repeat(3,1fr);} @media (max-width:860px){.seq.three{grid-template-columns:1fr;}}
