@@ -20,3 +20,14 @@ inbox form (falls back to a `mailto:` when no key is configured). `/portal/*` re
 portal; the legacy single-file portal under `portal/` is kept only as history and is never served.
 
 House style: titles use a pipe (`Page | Butlr`), copy uses commas (no middle dots, no em dashes).
+
+## Arabic (English / العربية)
+
+Every page loads `assets/i18n.js` in its `<head>`. Arabic is chosen by
+`?lang=ar` (shareable link), then the visitor's saved choice, then a browser
+set to Arabic; the switch is added to the menu and the footer automatically.
+In Arabic the page turns right to left and each block of text whose English
+matches a line in `assets/i18n-ar.js` is replaced. **When you change English
+copy on a page, change the same line in `assets/i18n-ar.js`**, or that block
+shows in English on the Arabic page. Legal pages keep their text in English
+(the binding version) with an Arabic note; only their headings are translated.

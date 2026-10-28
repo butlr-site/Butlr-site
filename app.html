@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<link rel="canonical" href="https://onebutlr.com/app.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script src="/assets/i18n.js?v=1"></script>
 <title>The App | Butlr</title>
-<meta name="description" content="Butlr puts your whole stay in one app: digital key, ordering, housekeeping, live bill, express check-out, and discovery across venues." />
-<meta property="og:title" content="The App, Butlr" />
-<meta property="og:description" content="Butlr puts your whole stay in one app: digital key, ordering, housekeeping, live bill, express check-out, and discovery across venues." />
+<meta name="description" content="Butlr puts your whole stay in one app: ordering, housekeeping, concierge chat, room keys, a live bill and discovery across venues." />
+<meta property="og:title" content="The App | Butlr" />
+<meta property="og:description" content="Butlr puts your whole stay in one app: ordering, housekeeping, concierge chat, room keys, a live bill and discovery across venues." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Butlr" />
 <meta property="og:url" content="https://onebutlr.com/app.html" />
@@ -14,8 +16,8 @@
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="The App, Butlr" />
-<meta name="twitter:description" content="Butlr puts your whole stay in one app: digital key, ordering, housekeeping, live bill, express check-out, and discovery across venues." />
+<meta name="twitter:title" content="The App | Butlr" />
+<meta name="twitter:description" content="Butlr puts your whole stay in one app: ordering, housekeeping, concierge chat, room keys, a live bill and discovery across venues." />
 <meta name="twitter:image" content="https://onebutlr.com/assets/og.jpg" />
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -126,7 +128,7 @@
   .split .copy .kicker{display:block;margin-bottom:14px;}
   .split .copy p{margin-top:14px;color:var(--text);max-width:42ch;}
   .split ul{margin-top:18px;list-style:none;display:flex;flex-direction:column;gap:9px;}
-  .split li{font-size:15px;color:var(--ink);display:flex;gap:10px;}.split li::before{content:", ";color:var(--gold);}
+  .split li{font-size:15px;color:var(--ink);display:flex;gap:10px;}.split li::before{content:"";flex:none;width:14px;height:1px;margin-top:.8em;background:var(--gold);}
   .split .cta{margin-top:24px;}
   .portal-img{width:100%;border:1px solid var(--line);box-shadow:0 26px 60px rgba(20,22,28,.14);}
 
@@ -155,7 +157,7 @@
 
   @media (max-width:880px){
     .nav-burger{display:flex;}
-    .nav-links{position:absolute;top:100%;left:0;right:0;background:rgba(251,250,247,.98);backdrop-filter:saturate(150%) blur(14px);border-bottom:1px solid var(--line-soft);flex-direction:column;align-items:stretch;gap:0;padding:8px 24px 16px;display:none;}
+    .nav-links{position:absolute;top:100%;left:0;right:0;background:#FBFAF7;border-bottom:1px solid var(--line-soft);flex-direction:column;align-items:stretch;gap:0;padding:8px 24px 16px;display:none;}
     nav.open .nav-links{display:flex;}
     .nav-links a.hide-sm{display:block;color:var(--ink)!important;padding:13px 2px;font-size:13px;letter-spacing:1.6px;border-bottom:1px solid var(--line-soft);}
     .nav-cta{margin:12px 0 2px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:12px;}
@@ -180,6 +182,7 @@
   .ph-hero h1{max-width:16ch;margin:16px auto 0;font-size:clamp(22px,2.6vw,32px);}
   .ph-hero .lead{margin:22px auto 0;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:var(--sub);max-width:50ch;}
   .split .phonewrap{display:flex;justify-content:center;}
+  @media (min-width:881px){.split.alt .copy{order:2;}}
   .split .phonewrap .phone{max-width:250px;}
 </style>
 </head>
@@ -190,7 +193,7 @@
     <div class="nav-links">
       <a href="idea.html" class="hide-sm">About</a>
       <a href="index.html#how" class="hide-sm">The App</a>
-      
+      <a href="/hotels" class="hide-sm">Book a stay</a>
       <a href="venues.html" class="hide-sm">For venues</a>
       <a href="contact.html" class="hide-sm">Contact</a>
       <a href="https://portal.onebutlr.com/list-your-venue" class="nav-cta">List your venue</a>
@@ -206,36 +209,45 @@
     <div class="reveal in" style="margin-top:28px;"><a class="appstore" href="https://apps.apple.com/app/butlr/id6769944247" aria-label="Download on the App Store" style="height:48px;display:inline-flex;">
   <svg viewBox="0 0 120 40" role="img" aria-hidden="true" style="height:100%;width:auto;display:block;">
     <rect x="0.5" y="0.5" width="119" height="39" rx="8.5" fill="#0A0E16"/>
-    <g transform="translate(10.5,9.2) scale(0.95)" fill="#fff"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.04.28.04.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></g>
-    <text x="34" y="16.5" fill="#fff" font-family="-apple-system,Helvetica Neue,Arial,sans-serif" font-size="6.6" letter-spacing="0.2">Download on the</text>
-    <text x="33.5" y="30.5" fill="#fff" font-family="-apple-system,Helvetica Neue,Arial,sans-serif" font-size="15" font-weight="600" letter-spacing="-0.4">App Store</text>
+    <g transform="translate(15,9.2) scale(0.95)" fill="#fff"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.04.28.04.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></g>
+    <text x="38.5" y="16.5" fill="#fff" font-family="-apple-system,Helvetica Neue,Arial,sans-serif" font-size="6.6" textLength="47" lengthAdjust="spacingAndGlyphs">Download on the</text>
+    <text x="38" y="30.5" fill="#fff" font-family="-apple-system,Helvetica Neue,Arial,sans-serif" font-size="15" font-weight="600" textLength="67" lengthAdjust="spacingAndGlyphs">App Store</text>
   </svg></a></div>
   </div>
 </header>
 <section class="sec line"><div class="wrap"><div class="split">
-      <div class="copy reveal"><span class="kicker">Step 01</span><h2>Open your stay</h2><p>The moment you check in, your room, a note from your host and everything you need appear on one screen.</p></div>
-      <div class="phonewrap reveal"><div class="phone"><img src="assets/app/stay.jpg" alt="Open your stay" loading="lazy"></div></div>
+      <div class="copy reveal"><span class="kicker">Step 01</span><h2>Get started</h2><p>Download Butlr and create your account in a minute, or browse hotels and venues first.</p></div>
+      <div class="phonewrap reveal"><div class="phone"><img src="assets/tour/welcome.jpg" alt="Get started" loading="lazy"></div></div>
     </div></div></section><section class="sec line"><div class="wrap"><div class="split alt">
-      <div class="copy reveal"><span class="kicker">Step 02</span><h2>Everything, at your service</h2><p>In-room dining, housekeeping, spa, laundry and more, every service a tap away on your stay screen.</p></div>
-      <div class="phonewrap reveal"><div class="phone"><img src="assets/app/services.jpg" alt="Everything, at your service" loading="lazy"></div></div>
+      <div class="copy reveal"><span class="kicker">Step 02</span><h2>Open your stay</h2><p>Arrive to find your room, your dates and every service of the venue on one screen.</p></div>
+      <div class="phonewrap reveal"><div class="phone"><img src="assets/tour/stay.jpg" alt="Open your stay" loading="lazy"></div></div>
     </div></div></section><section class="sec line"><div class="wrap"><div class="split">
-      <div class="copy reveal"><span class="kicker">Step 03</span><h2>Order in-room dining</h2><p>Browse the full menu and order to your room or your sunbed in seconds.</p></div>
-      <div class="phonewrap reveal"><div class="phone"><img src="assets/app/dining.jpg" alt="Order in-room dining" loading="lazy"></div></div>
+      <div class="copy reveal"><span class="kicker">Step 03</span><h2>Order in-room dining</h2><p>Browse the menu with photos, choose your options and add a note for the kitchen.</p></div>
+      <div class="phonewrap reveal"><div class="phone"><img src="assets/tour/dish.jpg" alt="Order in-room dining" loading="lazy"></div></div>
     </div></div></section><section class="sec line"><div class="wrap"><div class="split alt">
-      <div class="copy reveal"><span class="kicker">Step 04</span><h2>Your key, your bill, your check-out</h2><p>Unlock your door with a digital key, watch a live bill you can settle anytime, and check out in a tap.</p></div>
-      <div class="phonewrap reveal"><div class="phone"><img src="assets/app/manage.jpg" alt="Your key, your bill, your check-out" loading="lazy"></div></div>
+      <div class="copy reveal"><span class="kicker">Step 04</span><h2>Your order, your way</h2><p>Tell the kitchen about allergies, ask for cutlery or napkins, then place your order in one tap.</p></div>
+      <div class="phonewrap reveal"><div class="phone"><img src="assets/tour/order.jpg" alt="Your order, your way" loading="lazy"></div></div>
     </div></div></section><section class="sec line"><div class="wrap"><div class="split">
-      <div class="copy reveal"><span class="kicker">Step 05</span><h2>A spotless room, on your time</h2><p>Pick a time and your room is refreshed. Housekeeping that fits your day.</p></div>
-      <div class="phonewrap reveal"><div class="phone"><img src="assets/app/clean.jpg" alt="A spotless room, on your time" loading="lazy"></div></div>
+      <div class="copy reveal"><span class="kicker">Step 05</span><h2>Follow it live</h2><p>Confirmed, preparing, on its way. Watch every step, with the time it arrives.</p></div>
+      <div class="phonewrap reveal"><div class="phone"><img src="assets/tour/ontheway.jpg" alt="Follow it live" loading="lazy"></div></div>
     </div></div></section><section class="sec line"><div class="wrap"><div class="split alt">
-      <div class="copy reveal"><span class="kicker">Step 06</span><h2>Help, the moment you need it</h2><p>Discreet SOS sends for medical, security or maintenance help, quietly and fast.</p></div>
-      <div class="phonewrap reveal"><div class="phone"><img src="assets/app/sos.jpg" alt="Help, the moment you need it" loading="lazy"></div></div>
+      <div class="copy reveal"><span class="kicker">Step 06</span><h2>Knock, knock</h2><p>Your phone tells you the moment your order is at the door.</p></div>
+      <div class="phonewrap reveal"><div class="phone"><img src="assets/tour/door.jpg" alt="Knock, knock" loading="lazy"></div></div>
     </div></div></section><section class="sec line"><div class="wrap"><div class="split">
-      <div class="copy reveal"><span class="kicker">Step 07</span><h2>Discover your next place</h2><p>Browse Butlr hotels, resorts and beach clubs, and book your next stay in a few taps.</p></div>
-      <div class="phonewrap reveal"><div class="phone"><img src="assets/app/collection.jpg" alt="Discover your next place" loading="lazy"></div></div>
+      <div class="copy reveal"><span class="kicker">Step 07</span><h2>Delivered, then rated</h2><p>Every step is timed, and one tap tells the venue how it went.</p></div>
+      <div class="phonewrap reveal"><div class="phone"><img src="assets/tour/delivered.jpg" alt="Delivered, then rated" loading="lazy"></div></div>
     </div></div></section><section class="sec line"><div class="wrap"><div class="split alt">
-      <div class="copy reveal"><span class="kicker">Step 08</span><h2>One profile, every place</h2><p>Your Butlr ID and preferences travel with you, so every venue already knows you.</p></div>
-      <div class="phonewrap reveal"><div class="phone"><img src="assets/app/profile.jpg" alt="One profile, every place" loading="lazy"></div></div>
+      <div class="copy reveal"><span class="kicker">Step 08</span><h2>Your concierge, on chat</h2><p>A table for tonight, a driver, flowers or a translator. Ask, and your butler arranges it.</p></div>
+      <div class="phonewrap reveal"><div class="phone"><img src="assets/tour/concierge.jpg" alt="Your concierge, on chat" loading="lazy"></div></div>
+    </div></div></section><section class="sec line"><div class="wrap"><div class="split">
+      <div class="copy reveal"><span class="kicker">Step 09</span><h2>Manage your stay</h2><p>Ask for a key, follow your live bill, add nights or have your luggage collected from your room.</p></div>
+      <div class="phonewrap reveal"><div class="phone"><img src="assets/tour/manage.jpg" alt="Manage your stay" loading="lazy"></div></div>
+    </div></div></section><section class="sec line"><div class="wrap"><div class="split alt">
+      <div class="copy reveal"><span class="kicker">Step 10</span><h2>Discover your next place</h2><p>Browse hotels, resorts and beach clubs on Butlr, and save the ones you love.</p></div>
+      <div class="phonewrap reveal"><div class="phone"><img src="assets/tour/explore.jpg" alt="Discover your next place" loading="lazy"></div></div>
+    </div></div></section><section class="sec line"><div class="wrap"><div class="split">
+      <div class="copy reveal"><span class="kicker">Step 11</span><h2>Your Butlr Passport</h2><p>One ID with your preferences, so every venue knows how you like your stay.</p></div>
+      <div class="phonewrap reveal"><div class="phone"><img src="assets/tour/passport.jpg" alt="Your Butlr Passport" loading="lazy"></div></div>
     </div></div></section>
 <section class="sec line closing" style="text-align:center;">
   <div class="wrap">
@@ -245,9 +257,9 @@
     <div class="reveal" style="display:flex;justify-content:center;"><a class="appstore" href="https://apps.apple.com/app/butlr/id6769944247" aria-label="Download on the App Store" style="height:48px;display:inline-flex;">
   <svg viewBox="0 0 120 40" role="img" aria-hidden="true" style="height:100%;width:auto;display:block;">
     <rect x="0.5" y="0.5" width="119" height="39" rx="8.5" fill="#0A0E16"/>
-    <g transform="translate(10.5,9.2) scale(0.95)" fill="#fff"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.04.28.04.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></g>
-    <text x="34" y="16.5" fill="#fff" font-family="-apple-system,Helvetica Neue,Arial,sans-serif" font-size="6.6" letter-spacing="0.2">Download on the</text>
-    <text x="33.5" y="30.5" fill="#fff" font-family="-apple-system,Helvetica Neue,Arial,sans-serif" font-size="15" font-weight="600" letter-spacing="-0.4">App Store</text>
+    <g transform="translate(15,9.2) scale(0.95)" fill="#fff"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.04.28.04.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></g>
+    <text x="38.5" y="16.5" fill="#fff" font-family="-apple-system,Helvetica Neue,Arial,sans-serif" font-size="6.6" textLength="47" lengthAdjust="spacingAndGlyphs">Download on the</text>
+    <text x="38" y="30.5" fill="#fff" font-family="-apple-system,Helvetica Neue,Arial,sans-serif" font-size="15" font-weight="600" textLength="67" lengthAdjust="spacingAndGlyphs">App Store</text>
   </svg></a></div>
   </div>
 </section>
@@ -256,11 +268,11 @@
   <div class="wrap">
     <div class="fgrid">
       <div class="fabout"><a href="./" class="mark"><img class="wm-light" src="/butlr-wordmark.png" alt="Butlr"><img class="wm-dark" src="/butlr-wordmark-dark.png" alt="Butlr"></a><p>Connecting people to the places they stay and visit. One app, one identity, every venue.</p></div>
-      <div class="fcol"><h4>Guests</h4><a href="index.html#how">The App</a><a href="index.html#collection">The Collection</a><a href="idea.html">About</a></div>
+      <div class="fcol"><h4>Guests</h4><a href="index.html#how">The App</a><a href="app.html">App tour</a><a href="/hotels">Book a stay</a><a href="idea.html">About</a></div>
       <div class="fcol"><h4>Venues</h4><a href="venues.html">For venues</a><a href="https://portal.onebutlr.com/list-your-venue">List your venue</a></div>
-      <div class="fcol"><h4>Company</h4><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="security.html">Security</a></div>
+      <div class="fcol"><h4>Company</h4><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="security.html">Security</a><a href="subprocessors.html">Subprocessors</a></div>
     </div>
-    <div class="fbottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div>info@onebutlr.com</div></div>
+    <div class="fbottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div><a href="mailto:info@onebutlr.com">info@onebutlr.com</a>&emsp;&ensp;<a href="tel:+447553773576" dir="ltr" style="white-space:nowrap">+44 7553 773576</a></div></div>
   </div>
 </footer>
 <script>

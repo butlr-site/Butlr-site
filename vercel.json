@@ -12,6 +12,38 @@
     {
       "source": "/hotels/:slug",
       "destination": "/hotel.html"
+    },
+    {
+      "source": "/app",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/idea",
+      "destination": "/idea.html"
+    },
+    {
+      "source": "/venues",
+      "destination": "/venues.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/security",
+      "destination": "/security.html"
+    },
+    {
+      "source": "/subprocessors",
+      "destination": "/subprocessors.html"
     }
   ],
   "redirects": [
