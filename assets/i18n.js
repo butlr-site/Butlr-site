@@ -10,12 +10,16 @@
  */
 (function () {
   var KEY = 'butlr.lang';
+  // 2026-10-28 (owner): Arabic is hidden for now. No switch in the menu, no
+  // automatic Arabic for Arabic browsers, no remembered choice; ?lang=ar
+  // still opens it, for review. Set to true to launch it.
+  var SHOW_SWITCH = false;
   var doc = document.documentElement;
   var lang = 'en';
   try {
     var q = new URLSearchParams(location.search).get('lang');
-    if (q === 'ar' || q === 'en') { lang = q; localStorage.setItem(KEY, q); }
-    else {
+    if (q === 'ar' || q === 'en') { lang = q; if (SHOW_SWITCH) localStorage.setItem(KEY, q); }
+    else if (SHOW_SWITCH) {
       var saved = localStorage.getItem(KEY);
       if (saved === 'ar' || saved === 'en') lang = saved;
       else if (/^ar\b/i.test(navigator.language || '')) lang = 'ar';
@@ -129,6 +133,7 @@
   }
 
   function switcher() {
+    if (!SHOW_SWITCH) return;
     var other = lang === 'ar' ? 'en' : 'ar';
     var href = function () {
       var u = new URL(location.href); u.searchParams.set('lang', other); return u.pathname + u.search + u.hash;
