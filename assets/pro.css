@@ -318,3 +318,15 @@ body.pro{font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Helvetic
 }
 .tile-b .art{margin-top:auto;margin-bottom:auto;} .tile-b{min-height:0;}
 .seq.three{grid-template-columns:repeat(3,1fr);} @media (max-width:860px){.seq.three{grid-template-columns:1fr;}}
+
+/* Board and phone side by side, nothing overlaps */
+.stage{display:flex;align-items:center;justify-content:center;gap:40px;max-width:1120px;}
+.stage .screen{flex:1 1 auto;min-width:0;}
+.stage .phone-f{position:static!important;flex:0 0 22%;width:22%!important;right:auto;bottom:auto;}
+.stage-cut{height:96px;}
+@media (max-width:860px){
+  .stage{gap:14px;}
+  .stage .phone-f{flex-basis:27%;width:27%!important;border-radius:22px;padding:5px;}
+  .stage .phone-f img{border-radius:18px;}
+  .stage-cut{height:56px;}
+}
