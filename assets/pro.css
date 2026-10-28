@@ -330,3 +330,23 @@ body.pro{font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Helvetic
   .stage .phone-f img{border-radius:18px;}
   .stage-cut{height:56px;}
 }
+
+/* Device composition: the Portal on an iPad-style tablet, the guest's iPhone standing beside it */
+.stage{display:flex;align-items:center;justify-content:center;gap:0;max-width:1100px;margin-left:auto;margin-right:auto;padding:30px 0;}
+.stage .screen{flex:0 0 68%;position:relative;background:#0e0e11;padding:13px;border-radius:30px;box-shadow:0 0 0 1px #2c2c31, 0 0 0 2px #0a0a0c, 0 40px 90px -25px rgba(0,0,0,.45);overflow:visible;}
+.stage .screen img{border-radius:17px;}
+.stage .screen::before{content:"";position:absolute;top:5px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#26262b;}
+.stage .phone-f{position:relative!important;flex:0 0 30.5%;width:30.5%!important;margin-left:-3%;z-index:2;border-radius:52px;padding:11px;background:#0a0a0c;box-shadow:0 0 0 1px #2c2c31,0 0 0 2.5px #0a0a0c,0 44px 90px -20px rgba(0,0,0,.55);}
+.stage .phone-f img{border-radius:42px;}
+.stage .phone-f::before{content:"";position:absolute;top:20px;left:50%;width:30%;height:22px;margin-left:-15%;border-radius:20px;background:#000;z-index:3;}
+.stage-cut{height:70px;}
+@media (max-width:860px){
+  .stage{padding:16px 0;}
+  .stage .screen{padding:6px;border-radius:16px;}
+  .stage .screen img{border-radius:10px;}
+  .stage .screen::before{display:none;}
+  .stage .phone-f{flex-basis:31%;width:31%!important;border-radius:24px;padding:5px;margin-left:-3%;}
+  .stage .phone-f img{border-radius:19px;}
+  .stage .phone-f::before{top:9px;height:9px;border-radius:9px;}
+  .stage-cut{height:40px;}
+}
