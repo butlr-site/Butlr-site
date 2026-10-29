@@ -451,3 +451,8 @@ body.pro{font-size:15.5px;}
   .pn .links{position:absolute!important;top:100%!important;left:0;right:0;bottom:auto!important;height:calc(100vh - 52px);height:calc(100dvh - 52px);z-index:101;}
 }
 @media (max-width:860px){ .pn .links a.cta{padding:15px!important;font-size:12px!important;margin-top:26px!important;} }
+
+/* Request chips above the two cards */
+.reqs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:760px;margin:26px auto 0;}
+.reqs span{font-family:'Hanken Grotesk',sans-serif!important;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ink);background:#fff;border:1px solid var(--hair);border-radius:980px;padding:8px 14px;}
+.clock .big-sub{max-width:34em;line-height:1.6;}
