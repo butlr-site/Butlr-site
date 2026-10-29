@@ -532,3 +532,24 @@ body.pro{font-size:15.5px;}
 .sys6 .sys-card p{font-size:15px!important;color:var(--slate)!important;line-height:1.5;margin:0;}
 .sys6 .sys-card h3{margin-bottom:8px!important;}
 .sys6{margin-top:48px;}
+
+/* Audit fixes */
+.pf .about p{font-family:'Hanken Grotesk',sans-serif!important;font-size:12.5px!important;line-height:1.6!important;color:var(--slate)!important;max-width:30ch;text-wrap:wrap!important;}
+.pf a,.pf div{font-family:'Hanken Grotesk',sans-serif!important;}
+body.legacy{background:#fff!important;}
+.legacy .legal-hero,.legacy .phero{background:#fff!important;}
+.legacy .legal-hero h1,.legacy .phero h1{font-family:'Bodoni Moda',Georgia,serif!important;text-transform:uppercase!important;font-weight:500!important;letter-spacing:.01em!important;font-size:clamp(26px,3vw,40px)!important;}
+.legacy table{width:100%;}
+.legacy .tscroll,.legacy table{max-width:100%;}
+@media (max-width:860px){ .legacy table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;} .legacy .tscroll table{display:table;} }
+.legacy{padding-top:0;}
+/* Audit, round 2 */
+html{background:#fff!important;}
+.pf,.pf .top,.pf .bottom,.pf .col,.pf .about{text-align:left!important;}
+.legacy .legal-hero{padding:120px 0 28px!important;}
+.legacy main.sec{padding-top:48px!important;}
+.legacy h1{font-family:'Bodoni Moda',Georgia,serif!important;text-transform:uppercase!important;font-weight:500!important;letter-spacing:.01em!important;}
+@media (max-width:860px){ .legacy .legal-hero{padding:92px 0 22px!important;} .legacy main.sec{padding-top:32px!important;} }
+.pf .about p{text-align:left!important;margin-left:0!important;margin-right:0!important;}
+.legacy .legal{padding-top:0!important;}
+.legacy .legal h2:first-child,.legacy .legal>*:first-child{margin-top:0!important;}

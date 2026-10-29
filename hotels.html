@@ -106,23 +106,24 @@
   nav.solid .mark .wm-light{display:none;} nav.solid .mark .wm-dark{display:inline-block;}
   .fabout .mark img{height:18px;} .fabout .mark .wm-light{display:none;} .fabout .mark .wm-dark{display:inline-block;}
 </style>
+<link rel="stylesheet" href="/assets/pro.css?v=32">
 </head>
-<body>
+<body class="legacy">
 
-<nav id="nav" class="solid">
-  <div class="wrap">
-    <a href="./" class="mark"><img class="wm-light" src="/butlr-wordmark.png" alt="Butlr"><img class="wm-dark" src="/butlr-wordmark-dark.png" alt="Butlr"></a>
-    <div class="nav-links">
-      <a href="venues.html" class="hide-sm">For hotels</a>
-      <a href="app.html" class="hide-sm">For travelers</a>
-      <a href="/hotels" class="hide-sm">Book a stay</a>
-      <a href="idea.html" class="hide-sm">About</a>
-      <a href="contact.html" class="hide-sm">Contact</a>
-      <a href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener" class="nav-cta">Book a demo</a>
+<div class="pn" id="pn" role="navigation" aria-label="Main">
+  <div class="pw">
+    <a href="./" class="logo" aria-label="Butlr home"><img class="on-light" src="/butlr-wordmark-dark.png" alt="Butlr"><img class="on-dark" src="/butlr-wordmark.png" alt="Butlr"></a>
+    <div class="links" id="pn-links">
+      <a href="venues.html">For hotels</a>
+      <a href="app.html">For travelers</a>
+      <a href="/hotels">Book a stay</a>
+      <a href="idea.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener" class="cta">Book a demo</a>
     </div>
-    <button class="nav-burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);"><span></span><span></span><span></span></button>
+    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="pn-links" onclick="var n=document.getElementById('pn');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';"><span></span><span></span></button>
   </div>
-</nav>
+</div>
 
 <header class="pagehead">
   <div class="wrap">
@@ -146,11 +147,17 @@
   <div class="vgrid" id="grid" hidden></div>
 </main>
 
-<footer>
-  <div class="wrap">
-    <div class="fbottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div><a href="privacy.html">Privacy</a>&emsp;&ensp;<a href="terms.html">Terms</a>&emsp;&ensp;<a href="mailto:info@onebutlr.com">info@onebutlr.com</a>&emsp;&ensp;<a href="https://wa.me/447553773576" target="_blank" rel="noopener" dir="ltr" style="white-space:nowrap" aria-label="WhatsApp +44 7553 773576">+44 7553 773576</a></div></div>
+<div class="pf" role="contentinfo">
+  <div class="pw">
+    <div class="top">
+      <div class="about"><img src="/butlr-wordmark-dark.png" alt="Butlr"><p>The hospitality operating system. One app for travelers, one operating environment for hotels.</p></div>
+      <div class="col"><h4>Hotels</h4><a href="venues.html">For hotels</a><a href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener">Book a demo</a><a href="https://portal.onebutlr.com/list-your-venue">List your venue</a></div>
+      <div class="col"><h4>Travelers</h4><a href="app.html">For travelers</a><a href="/hotels">Book a stay</a><a href="idea.html">About</a></div>
+      <div class="col"><h4>Company</h4><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="security.html">Security</a><a href="subprocessors.html">Subprocessors</a></div>
+    </div>
+    <div class="bottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div><a href="mailto:info@onebutlr.com">info@onebutlr.com</a>&emsp;&ensp;<a href="https://wa.me/447553773576" target="_blank" rel="noopener" dir="ltr" style="white-space:nowrap" aria-label="WhatsApp +44 7553 773576">+44 7553 773576</a></div></div>
   </div>
-</footer>
+</div>
 
 <script>
 (function(){
@@ -249,5 +256,6 @@
   document.querySelectorAll('#nav .nav-links a').forEach(function(a){a.addEventListener('click',function(){var n=document.getElementById('nav');n.classList.remove('open');var b=n.querySelector('.nav-burger');if(b)b.setAttribute('aria-expanded','false');});});
 })();
 </script>
+<script>document.querySelectorAll('#pn-links a').forEach(function(a){a.addEventListener('click',function(){var n=document.getElementById('pn');n.classList.remove('open');document.body.style.overflow='';});});</script>
 </body>
 </html>
