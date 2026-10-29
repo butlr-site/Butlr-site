@@ -456,3 +456,16 @@ body.pro{font-size:15.5px;}
 .reqs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:760px;margin:26px auto 0;}
 .reqs span{font-family:'Hanken Grotesk',sans-serif!important;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ink);background:#fff;border:1px solid var(--hair);border-radius:980px;padding:8px 14px;}
 .clock .big-sub{max-width:34em;line-height:1.6;}
+
+/* Requests: a quiet grid of what guests actually ask, department above, their words below */
+.reqs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1000px;margin:40px auto 0;text-align:left;border-top:1px solid var(--hair);}
+.reqs>div{padding:22px 22px 22px 0;border-bottom:1px solid var(--hair);}
+.reqs>div:not(:nth-child(4n+1)){padding-left:22px;border-left:1px solid var(--hair);}
+.reqs b{display:block;font-family:'Hanken Grotesk',sans-serif!important;font-size:10px;font-weight:600;letter-spacing:2.4px;text-transform:uppercase;color:var(--brass);margin-bottom:8px;}
+.reqs span{display:block;font-family:'Bodoni Moda',Georgia,serif!important;font-style:italic;font-size:16px;line-height:1.4;color:var(--ink);border:0!important;background:none!important;padding:0!important;letter-spacing:0!important;text-transform:none!important;}
+@media (max-width:860px){
+  .reqs{grid-template-columns:1fr 1fr;}
+  .reqs>div{padding:18px 14px 18px 0!important;border-left:0!important;}
+  .reqs>div:nth-child(2n){padding-left:14px!important;border-left:1px solid var(--hair)!important;}
+  .reqs span{font-size:15px;}
+}
