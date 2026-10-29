@@ -499,3 +499,10 @@ body.pro{font-size:15.5px;}
 .reqs2 p{font-size:16px!important;line-height:1.45;color:var(--ink)!important;margin:0;text-wrap:pretty;}
 .clocks{max-width:1120px;margin-left:auto;margin-right:auto;}
 @media (max-width:960px){ .reqs2{grid-template-columns:1fr 1fr;gap:12px;} .reqs2>div{padding:22px 18px;border-radius:20px;} .reqs2 p{font-size:15px!important;} }
+
+/* "What changes": an editorial list, no icons or cards, so it reads differently from the card sections */
+.wins2{max-width:900px;margin:48px auto 0;border-top:1px solid var(--ink);}
+.wins2>div{display:grid;grid-template-columns:1fr 1.3fr;gap:32px;align-items:baseline;padding:26px 0;border-bottom:1px solid var(--hair);}
+.wins2 h3{font-size:clamp(22px,2.4vw,30px)!important;letter-spacing:.005em!important;}
+.wins2 p{font-size:16px!important;color:var(--slate)!important;margin:0;}
+@media (max-width:860px){ .wins2>div{grid-template-columns:1fr;gap:6px;padding:20px 0;} .wins2 h3{font-size:21px!important;} .wins2 p{font-size:14.5px!important;} }
