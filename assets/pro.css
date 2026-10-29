@@ -427,3 +427,9 @@ body.pro{font-size:15.5px;}
 .lead,.statement-sub,.tile-b p,.ptile p{text-wrap:balance;}
 .pro p,.pro li{text-wrap:pretty;}
 .pro .lead,.pro .statement-sub,.pro .tile-b p,.pro .ptile p,.legacy .lead{text-wrap:balance;}
+
+/* Hero line under "Connecting people to places" exactly as approved: small tracked capitals */
+.hero .lede{font-size:clamp(10.5px,.85vw,12px)!important;line-height:2.1!important;letter-spacing:1.6px!important;text-transform:uppercase!important;font-weight:400!important;max-width:60ch!important;text-wrap:wrap!important;}
+.hero .kick{font-size:11px!important;letter-spacing:3.5px!important;}
+/* The two home tiles: same text block on both sides */
+.tile-b p{max-width:28em;margin-left:auto;margin-right:auto;}
