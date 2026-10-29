@@ -469,3 +469,8 @@ body.pro{font-size:15.5px;}
   .reqs>div:nth-child(2n){padding-left:14px!important;border-left:1px solid var(--hair)!important;}
   .reqs span{font-size:15px;}
 }
+/* Request grid without lines */
+.reqs,.reqs>div,.reqs>div:not(:nth-child(4n+1)){border:0!important;}
+.reqs{gap:30px 40px;}
+.reqs>div,.reqs>div:not(:nth-child(4n+1)){padding:0!important;}
+@media (max-width:860px){ .reqs{gap:24px 20px;} .reqs>div,.reqs>div:nth-child(2n){padding:0!important;border:0!important;} }
