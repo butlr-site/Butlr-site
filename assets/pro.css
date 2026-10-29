@@ -437,3 +437,8 @@ body.pro{font-size:15.5px;}
 /* Home: the menu bar is see-through over the hero video, as before; it turns solid once you scroll past it */
 .pn.dark{background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,0))!important;border-bottom-color:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transition:background .3s,border-color .3s;}
 .pn.dark.open{background:#000!important;}
+/* No band, no line: fully clear over the video */
+.pn.dark{background:none!important;border-bottom:0!important;box-shadow:none!important;}
+.pn.dark::before,.pn.dark::after{display:none!important;}
+.pn.dark .logo img{filter:drop-shadow(0 1px 6px rgba(0,0,0,.35));}
+.pn.dark.open{background:#000!important;}
