@@ -7,7 +7,7 @@
      and land back on this page as a bogus slug. base fixes them all. -->
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script src="/assets/i18n.js?v=4"></script>
+<script src="/assets/i18n.js?v=6"></script>
 <title>Book a stay | Butlr</title>
 <meta name="description" content="Book your stay directly with the venue on Butlr, no app, no account needed." />
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -407,9 +407,9 @@
       }
       return '<article class="room">'
         + '<div class="img">'+(photo?'<img src="'+esc(photo)+'" alt="'+esc(rt.name)+'" loading="lazy">':"")+'</div>'
-        + '<div class="body"><h3>'+esc(rt.name)+'</h3>'
+        + '<div class="body"><h3><bdi>'+esc(rt.name)+'</bdi></h3>'
         + '<div class="specs">'+specs.map(esc).join(", ")+'</div>'
-        + (rt.description?'<p class="desc">'+esc(rt.description)+'</p>':"")
+        + (rt.description?'<p class="desc"><bdi>'+esc(rt.description)+'</bdi></p>':"")
         + (amen?'<div class="amen">'+amen+'</div>':"")
         + '</div>'
         + '<div class="side">'+side+'</div>'
@@ -508,7 +508,7 @@
     var cur = venue.currency;
     $("m-sum").innerHTML =
       '<div class="row"><span>'+esc(venue.name)+'</span><b>'+esc([venue.city,venue.country].filter(Boolean).join(", "))+'</b></div>'
-      + '<div class="row"><span>Dates</span><b>'+esc($("d-in").value)+' → '+esc($("d-out").value)+'</b></div>'
+      + '<div class="row"><span>Dates</span><b>'+datesText()+'</b></div>'
       + '<div class="row"><span>Guests</span><b>'+guests+'</b></div>'
       + '<div class="row"><span>'+nights+' night'+(nights>1?"s":"")+' × '+money(sel.nightlyRate,cur)+'</span><b>'+money(sel.nightlyRate*nights,cur)+'</b></div>';
     $("m-err").style.display = "none";
@@ -517,6 +517,18 @@
     opener = document.activeElement;
     showTurnstile();
     setTimeout(function(){ try { $("g-name").focus(); } catch(e){} }, 30);
+  }
+  // The stay's dates as the summary shows them: as typed in English; in
+  // Arabic, written out (31 أكتوبر 2026) with the arrow pointing the Arabic way.
+  function datesText(){
+    var vi = $("d-in").value, vo = $("d-out").value;
+    var ar = window.ButlrI18n && ButlrI18n.lang === "ar";
+    if (!ar) return esc(vi)+' → '+esc(vo);
+    var f = function(v){
+      try { var p = v.split("-").map(Number); return new Date(p[0], p[1]-1, p[2], 12).toLocaleDateString("ar-u-nu-latn", { day:"numeric", month:"long", year:"numeric" }).replace(/[\u200e\u200f\u061c]/g, ""); }
+      catch(e){ return v; }
+    };
+    return '<bdi>'+esc(f(vi))+'</bdi> ← <bdi>'+esc(f(vo))+'</bdi>';
   }
   function closeModal(){
     $("overlay").classList.remove("open");
@@ -569,7 +581,10 @@
         $("modalForm").hidden = true; $("modalDone").hidden = false;
       })
       .catch(function(err){
-        var el = $("m-err"); el.textContent = err.message || String(err); el.style.display = "block";
+        var msg = err.message || String(err);
+        // In Arabic, a server message the dictionary does not know is shown as the general Arabic one.
+        if (window.ButlrI18n && ButlrI18n.lang === "ar" && ButlrI18n.t(msg) == null) msg = "Couldn’t send your request. Try again.";
+        var el = $("m-err"); el.textContent = msg; el.style.display = "block";
       })
       .finally(function(){
         btn.disabled = false; btn.textContent = "Request booking";
