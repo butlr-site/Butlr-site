@@ -283,6 +283,8 @@ window.__butlrArabic({
 "Privacy Policy": "سياسة الخصوصية",
 "Terms of Service | Butlr": "شروط الخدمة | Butlr",
 "Terms of service.": "شروط الخدمة.",
+"Terms of Service": "شروط الخدمة",
+"Please complete the security check above, then send your request.": "يُرجى إكمال التحقق الأمني أعلاه، ثم إرسال طلبك.",
 "Security | Butlr": "الأمان | Butlr",
 "Security at Butlr": "الأمان في Butlr",
 "Subprocessors | Butlr": "مزوّدو المعالجة | Butlr",

@@ -1,7 +1,11 @@
 # onebutlr.com — the Butlr public website
 
-Static HTML, deployed by Vercel from `main` (`vercel.json` holds the rewrites and redirects).
-No build step: every page is a complete file.
+Static HTML, deployed by Vercel from `main` (`vercel.json` holds the rewrites, redirects and
+security headers). No build step: every page is a complete file.
+
+The Content-Security-Policy in `vercel.json` lists every outside host the pages use (Google Fonts,
+the portal API, Web3Forms, Cloudflare Turnstile). A page that starts loading a script, font, frame or
+API from a new host needs that host added there, or the browser blocks it.
 
 | File | What it is |
 |---|---|

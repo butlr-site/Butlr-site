@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <link rel="canonical" href="https://onebutlr.com/privacy.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script src="/assets/i18n.js?v=3"></script>
+<script src="/assets/i18n.js?v=4"></script>
 <title>Privacy Policy | Butlr</title>
 <meta name="description" content="How Butlr collects, uses and protects your information, in plain language, because your privacy matters." />
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -234,7 +234,7 @@
   .legal strong{color:var(--ink);font-weight:600;}
   .legal-end{margin-top:48px;padding-top:24px;border-top:1px solid var(--line-soft);color:var(--muted);font-size:13px;}
 </style>
-<link rel="stylesheet" href="/assets/pro.css?v=32">
+<link rel="stylesheet" href="/assets/pro.css?v=33">
 </head>
 <body class="legacy">
 <div class="pn" id="pn" role="navigation" aria-label="Main">
@@ -251,7 +251,7 @@
     <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="pn-links" onclick="var n=document.getElementById('pn');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';"><span></span><span></span></button>
   </div>
 </div>
-<header class="legal-hero"><div class="wrap"><span class="kicker">Privacy</span><h1>Privacy Policy</h1><p class="lede">Last updated 28 October 2026. This policy explains what information Butlr collects, how it is used, and the choices you have. We keep it short and in plain language because your privacy matters.</p></div></header>
+<header class="legal-hero"><div class="wrap"><span class="kicker">Privacy</span><h1>Privacy Policy</h1><p class="lede">Last updated 30 October 2026. This policy explains what information Butlr collects, how it is used, and the choices you have. We keep it short and in plain language because your privacy matters.</p></div></header>
 <main class="sec"><div class="wrap"><div class="legal">
   <h2>1. Who we are</h2>
   <p>Butlr ("we", "us", "our") is operated by Butlr Systems Establishment, a company registered in the Kingdom of Saudi Arabia. Butlr operates worldwide and is available to guests staying at every venue that joins our network, in any country. We are the data controller for the personal information processed in connection with the Butlr mobile application ("App") on a global basis. Privacy questions: <a href="mailto:info@onebutlr.com">info@onebutlr.com</a>.</p>
@@ -295,7 +295,7 @@
     <li><strong>Your venue, service and check-in records.</strong> When you stay at a Butlr partner venue, the venue receives the requests you make so they can fulfill them. Any passport or other identity document you hand over at the desk is recorded by that venue as its own legal check-in record.</li>
     <li><strong>Apple.</strong> Sign in with Apple, Apple Pay, push notifications, and the Speech framework operate through Apple. Apple's privacy policy applies to that processing.</li>
     <li><strong>Payments.</strong> Charges you make in the app are posted to your room folio and settled with the venue. Where an online payment is offered, it runs through MyFatoorah on their own payment page. Butlr never receives or stores card numbers.</li>
-    <li><strong>Service providers.</strong> Google Cloud (Firebase) for hosting and storage in the European Union, Vercel for the web portal, Sentry for error monitoring, Resend for email and Twilio for SMS. Each is bound by data-processing terms and processes data only on our instructions. The current list, with what each one receives and where it runs, is at <a href="subprocessors.html">onebutlr.com/subprocessors</a>.</li>
+    <li><strong>Service providers.</strong> Google Cloud (Firebase) for hosting and storage in the European Union, Vercel for the web portal and website, Sentry for error monitoring, Resend for email, Twilio for SMS, Anthropic for translating chat messages and answering guest questions in the venue chat, and Cloudflare for the bot check on the website booking form. Each is bound by data-processing terms and processes data only on our instructions. The current list, with what each one receives and where it runs, is at <a href="subprocessors.html">onebutlr.com/subprocessors</a>.</li>
   </ul>
 
   <h2>5. Voice (Whisper) and microphone</h2>
@@ -320,7 +320,7 @@
   <p>The Butlr app is for adults aged 18 and over. Children can be part of an adult’s stay, but cannot hold their own account, and we do not knowingly collect personal data from anyone under 18 through the app. If you believe a child has created an account or given us personal data, please contact us and we will delete it.</p>
 
   <h2>9. International transfers and global operation</h2>
-  <p>Butlr is a globally available service. Our partner venues are located in countries including (but not limited to) Saudi Arabia, the United Arab Emirates, the United Kingdom, France, Italy, Japan, the United States, Singapore, Hong Kong, the Maldives, and Oman. The list of partner venues grows over time and is not limited to any single region.</p>
+  <p>Butlr is a globally available service. Our partner venues may be located in any country. The list of partner venues grows over time and is not limited to any single region.</p>
   <p>Butlr is operated from the Kingdom of Saudi Arabia. Platform data is hosted on Google Cloud in the European Union (Belgium). Some service providers listed at <a href="subprocessors.html">onebutlr.com/subprocessors</a> run in the United States or Kuwait and receive only the categories stated there, never identity documents. When you use Butlr, your data may also be processed in the country where your current Butlr partner venue is located, for the purpose of fulfilling your service requests. We rely on the safeguards permitted by the Saudi Personal Data Protection Law and its Transfer Regulation, including data-processing terms with each provider, a documented transfer risk assessment, and encryption in transit and at rest.</p>
 
   <h2>10. Security</h2>
@@ -365,7 +365,7 @@
     a.addEventListener('click',function(){
       var email=(a.getAttribute('href')||'').replace(/^mailto:/,'').split('?')[0];
       if(email&&navigator.clipboard&&navigator.clipboard.writeText){
-        navigator.clipboard.writeText(email).then(function(){toast('Email copied \u00b7 '+email);}).catch(function(){});
+        navigator.clipboard.writeText(email).then(function(){toast('Email copied: '+email);}).catch(function(){});
       }
     });
   });

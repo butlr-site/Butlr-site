@@ -553,3 +553,5 @@ html{background:#fff!important;}
 .pf .about p{text-align:left!important;margin-left:0!important;margin-right:0!important;}
 .legacy .legal{padding-top:0!important;}
 .legacy .legal h2:first-child,.legacy .legal>*:first-child{margin-top:0!important;}
+/* In-page links land below the fixed menu (46px) and the sticky page bar (44px) */
+.pro [id],.legacy [id]{scroll-margin-top:100px;}

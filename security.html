@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <link rel="canonical" href="https://onebutlr.com/security.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script src="/assets/i18n.js?v=3"></script>
+<script src="/assets/i18n.js?v=4"></script>
 <title>Security | Butlr</title>
 <meta name="description" content="How Butlr protects guest and property data: isolation, encryption, access, backups, retention." />
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -240,7 +240,7 @@
 .legal th{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink)}
 .legal .ok{color:#1F7A3D;font-weight:600}
 </style>
-<link rel="stylesheet" href="/assets/pro.css?v=32">
+<link rel="stylesheet" href="/assets/pro.css?v=33">
 </head>
 <body class="legacy">
 <div class="pn" id="pn" role="navigation" aria-label="Main">
@@ -257,7 +257,7 @@
     <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="pn-links" onclick="var n=document.getElementById('pn');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';"><span></span><span></span></button>
   </div>
 </div>
-<header class="legal-hero"><div class="wrap"><span class="kicker">Security</span><h1>Security at Butlr</h1><p class="lede">What we hold, what we never hold, and the controls around it. Version 1.0, 22 September 2026.</p></div></header>
+<header class="legal-hero"><div class="wrap"><span class="kicker">Security</span><h1>Security at Butlr</h1><p class="lede">What we hold, what we never hold, and the controls around it. Version 1.1, 30 October 2026.</p></div></header>
 <main class="sec"><div class="wrap"><div class="legal">
 
   <p>Butlr is a guest-owned account (the Butlr ID) plus a per-property operations portal. The guest registers in the Butlr app and accepts our privacy policy and terms before any hotel sees them. At check-in the guest presents their Butlr ID, and from that moment the hosting property can see that guest, for that stay. Data flows from the guest to Butlr and from Butlr to the property, never from the property's systems into Butlr.</p>
@@ -285,7 +285,7 @@
   </table>
 
   <h2>Where data lives</h2>
-  <p>Platform data is hosted on Google Cloud in europe-west1 (Belgium). Web hosting and API routes run on Vercel. Error monitoring, transactional email and SMS providers run in the United States and receive identifiers and message content only, never identity documents. The full list is at <a href="subprocessors.html">onebutlr.com/subprocessors</a>.</p>
+  <p>Platform data is hosted on Google Cloud in europe-west1 (Belgium). Web hosting and API routes run on Vercel. Error monitoring, transactional email, SMS and chat translation providers run in the United States and receive identifiers and message content only, never identity documents. The full list is at <a href="subprocessors.html">onebutlr.com/subprocessors</a>.</p>
 
   <h2>Compliance</h2>
   <p>Butlr Systems Establishment is the controller of guest accounts under the Saudi Personal Data Protection Law (PDPL). A data processing agreement is available for every property. Affected properties are notified within 72 hours of a confirmed breach. An independent penetration test is planned for 2027 and a summary letter will be provided to properties on request.</p>
@@ -293,7 +293,7 @@
   <h2>Questions</h2>
   <p>Security questions and vulnerability reports: <a href="mailto:info@onebutlr.com">info@onebutlr.com</a>. We reply to every report.</p>
 
-  <div class="legal-end">&copy; 2026 Butlr. Version 1.0, 22 September 2026.</div>
+  <div class="legal-end">&copy; 2026 Butlr. Version 1.1, 30 October 2026.</div>
 </div></div></main>
 <div class="pf" role="contentinfo">
   <div class="pw">
@@ -325,7 +325,7 @@
     a.addEventListener('click',function(){
       var email=(a.getAttribute('href')||'').replace(/^mailto:/,'').split('?')[0];
       if(email&&navigator.clipboard&&navigator.clipboard.writeText){
-        navigator.clipboard.writeText(email).then(function(){toast('Email copied \u00b7 '+email);}).catch(function(){});
+        navigator.clipboard.writeText(email).then(function(){toast('Email copied: '+email);}).catch(function(){});
       }
     });
   });

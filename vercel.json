@@ -81,9 +81,123 @@
       "source": "/godview/",
       "destination": "https://portal.onebutlr.com/godview",
       "permanent": false
+    },
+    {
+      "source": "/about",
+      "destination": "/idea.html",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/idea.html",
+      "permanent": true
+    },
+    {
+      "source": "/apply",
+      "destination": "https://portal.onebutlr.com/list-your-venue",
+      "permanent": false
+    },
+    {
+      "source": "/apply.html",
+      "destination": "https://portal.onebutlr.com/list-your-venue",
+      "permanent": false
+    },
+    {
+      "source": "/pricing",
+      "destination": "/venues.html",
+      "permanent": false
+    },
+    {
+      "source": "/pricing.html",
+      "destination": "/venues.html",
+      "permanent": false
+    },
+    {
+      "source": "/packages",
+      "destination": "/venues.html",
+      "permanent": false
+    },
+    {
+      "source": "/packages.html",
+      "destination": "/venues.html",
+      "permanent": false
+    },
+    {
+      "source": "/product",
+      "destination": "/venues.html",
+      "permanent": false
+    },
+    {
+      "source": "/product.html",
+      "destination": "/venues.html",
+      "permanent": false
+    },
+    {
+      "source": "/partners",
+      "destination": "/venues.html",
+      "permanent": false
+    },
+    {
+      "source": "/partners.html",
+      "destination": "/venues.html",
+      "permanent": false
+    },
+    {
+      "source": "/butlr-privacy-policy.html",
+      "destination": "/privacy.html",
+      "permanent": true
+    },
+    {
+      "source": "/butlr-hotel-portal.html",
+      "destination": "https://portal.onebutlr.com",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/hotels/",
+      "destination": "/hotels",
+      "permanent": true
     }
   ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://portal.onebutlr.com https://api.web3forms.com; frame-src https://challenges.cloudflare.com; worker-src 'self'; manifest-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+        }
+      ]
+    },
+    {
+      "source": "/butlr-sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
     {
       "source": "/.well-known/apple-app-site-association",
       "headers": [

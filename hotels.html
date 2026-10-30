@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <link rel="canonical" href="https://onebutlr.com/hotels" />
-<!-- Served at /hotels via a rewrite — anchor all relative URLs to the root. -->
+<!-- Served at /hotels via a rewrite: anchor all relative URLs to the root. -->
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script src="/assets/i18n.js?v=3"></script>
+<script src="/assets/i18n.js?v=4"></script>
 <title>Book a stay | Butlr</title>
 <meta name="description" content="Hotels, resorts and beach clubs on Butlr. Book your stay directly, no app, no account needed." />
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -18,6 +18,12 @@
 <meta property="og:site_name" content="Butlr" />
 <meta property="og:url" content="https://onebutlr.com/hotels" />
 <meta property="og:image" content="https://onebutlr.com/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Book a stay | Butlr" />
+<meta name="twitter:description" content="Hotels, resorts and beach clubs on Butlr. Book your stay directly." />
+<meta name="twitter:image" content="https://onebutlr.com/assets/og.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://portal.onebutlr.com" crossorigin>
@@ -106,7 +112,7 @@
   nav.solid .mark .wm-light{display:none;} nav.solid .mark .wm-dark{display:inline-block;}
   .fabout .mark img{height:18px;} .fabout .mark .wm-light{display:none;} .fabout .mark .wm-dark{display:inline-block;}
 </style>
-<link rel="stylesheet" href="/assets/pro.css?v=32">
+<link rel="stylesheet" href="/assets/pro.css?v=33">
 </head>
 <body class="legacy">
 
@@ -198,10 +204,12 @@
     venues.forEach(function(v){ types[v.venueType||"hotel"]=1; });
     var order = ["hotel","resort","beachClub"].concat(Object.keys(types).filter(function(t){return ["hotel","resort","beachClub"].indexOf(t)===-1;}).sort());
     var present = order.filter(function(t){ return types[t]; });
+    // A shared ?type= link for a type no venue has right now shows them all, not "Opening soon".
+    if (activeType !== "all" && present.indexOf(activeType) === -1) activeType = "all";
     if (present.length < 2) { $("chips").hidden = true; return; }
-    var html = '<button class="chip'+(activeType==="all"?" on":"")+'" data-t="all">All</button>';
+    var html = '<button type="button" class="chip'+(activeType==="all"?" on":"")+'" aria-pressed="'+(activeType==="all")+'" data-t="all">All</button>';
     present.forEach(function(t){
-      html += '<button class="chip'+(activeType===t?" on":"")+'" data-t="'+esc(t)+'">'+esc(PLURALS[t]||TYPE_LABELS[t]||t)+'</button>';
+      html += '<button type="button" class="chip'+(activeType===t?" on":"")+'" aria-pressed="'+(activeType===t)+'" data-t="'+esc(t)+'">'+esc(PLURALS[t]||TYPE_LABELS[t]||t)+'</button>';
     });
     var el = $("chips");
     el.innerHTML = html; el.hidden = false;

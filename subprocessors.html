@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <link rel="canonical" href="https://onebutlr.com/subprocessors.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script src="/assets/i18n.js?v=3"></script>
+<script src="/assets/i18n.js?v=4"></script>
 <title>Subprocessors | Butlr</title>
 <meta name="description" content="The service providers that process data on Butlr's behalf, with purpose, data and region." />
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -240,7 +240,7 @@
 .legal th{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink)}
 .legal .ok{color:#1F7A3D;font-weight:600}
 </style>
-<link rel="stylesheet" href="/assets/pro.css?v=32">
+<link rel="stylesheet" href="/assets/pro.css?v=33">
 </head>
 <body class="legacy">
 <div class="pn" id="pn" role="navigation" aria-label="Main">
@@ -257,10 +257,10 @@
     <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="pn-links" onclick="var n=document.getElementById('pn');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';"><span></span><span></span></button>
   </div>
 </div>
-<header class="legal-hero"><div class="wrap"><span class="kicker">Legal</span><h1>Subprocessors</h1><p class="lede">The service providers behind Butlr, what each one receives, and where it runs. Version 1.0, 22 September 2026.</p></div></header>
+<header class="legal-hero"><div class="wrap"><span class="kicker">Legal</span><h1>Subprocessors</h1><p class="lede">The service providers behind Butlr, what each one receives, and where it runs. Version 1.1, 30 October 2026.</p></div></header>
 <main class="sec"><div class="wrap"><div class="legal">
 
-  <p>These are the companies that process data on Butlr's behalf. Each is bound by data-processing terms and processes data only on our instructions. No subprocessor receives guest identity documents, and none may use Butlr data for its own purposes. Properties on Butlr are notified 30 days before a provider is added or replaced.</p>
+  <p>These are the companies that process data on Butlr's behalf. Each is bound by data-processing terms and processes data only on our instructions. Apart from Google Cloud, which hosts the platform, no subprocessor receives guest identity documents, and none may use Butlr data for its own purposes. Properties on Butlr are notified 30 days before a provider is added or replaced.</p>
   <div class="tscroll" style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table>
     <tr><th>Provider</th><th>Purpose</th><th>Data received</th><th>Region</th></tr>
     <tr><td>Google Cloud / Firebase</td><td>Authentication, database, file storage, server functions</td><td>All platform data</td><td>europe-west1, Belgium</td></tr>
@@ -268,13 +268,15 @@
     <tr><td>Sentry</td><td>Error monitoring</td><td>Error events with property, role and user identifiers; personal content excluded</td><td>United States</td></tr>
     <tr><td>Resend</td><td>Transactional email</td><td>Email addresses and message content</td><td>United States</td></tr>
     <tr><td>Twilio</td><td>SMS</td><td>Phone numbers and message content</td><td>United States</td></tr>
+    <tr><td>Anthropic</td><td>Translation of chat messages between guests and venue teams, and automatic answers to guest questions in the venue chat</td><td>Message text, the venue's published information and the guest's check-out time</td><td>United States</td></tr>
+    <tr><td>Cloudflare</td><td>Bot check (Turnstile) on the website booking form</td><td>IP address and browser signals of the person booking</td><td>Global</td></tr>
     <tr><td>MyFatoorah</td><td>Online payment pages and invoices</td><td>Amount, invoice reference, details entered on MyFatoorah's own page</td><td>Kuwait</td></tr>
     <tr><td>Apple</td><td>Push notifications to iOS, Sign in with Apple</td><td>Device push tokens, sign-in identifiers</td><td>Global</td></tr>
     <tr><td>Google</td><td>Push notifications to Android</td><td>Device push tokens</td><td>Global</td></tr>
   </table></div>
   <p>Questions: <a href="mailto:info@onebutlr.com">info@onebutlr.com</a>. See also our <a href="security.html">security summary</a> and <a href="privacy.html">privacy policy</a>.</p>
 
-  <div class="legal-end">&copy; 2026 Butlr. Version 1.0, 22 September 2026.</div>
+  <div class="legal-end">&copy; 2026 Butlr. Version 1.1, 30 October 2026.</div>
 </div></div></main>
 <div class="pf" role="contentinfo">
   <div class="pw">
@@ -306,7 +308,7 @@
     a.addEventListener('click',function(){
       var email=(a.getAttribute('href')||'').replace(/^mailto:/,'').split('?')[0];
       if(email&&navigator.clipboard&&navigator.clipboard.writeText){
-        navigator.clipboard.writeText(email).then(function(){toast('Email copied \u00b7 '+email);}).catch(function(){});
+        navigator.clipboard.writeText(email).then(function(){toast('Email copied: '+email);}).catch(function(){});
       }
     });
   });

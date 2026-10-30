@@ -146,12 +146,13 @@
       a.addEventListener('click', function () { try { localStorage.setItem(KEY, other); } catch (e) {} });
       return a;
     };
-    var links = document.querySelector('#nav .nav-links');
+    // The menu and footer of the current design (#pn, .pf), or the older one.
+    var links = document.querySelector('#pn .links') || document.querySelector('#nav .nav-links');
     if (links) {
-      var cta = links.querySelector('.nav-cta');
+      var cta = links.querySelector('.cta, .nav-cta');
       links.insertBefore(mk('hide-sm lang-switch'), cta || null);
     }
-    var fb = document.querySelector('footer .fbottom');
+    var fb = document.querySelector('.pf .bottom') || document.querySelector('footer .fbottom');
     if (fb) { var d = document.createElement('div'); d.appendChild(mk('lang-switch-foot')); fb.appendChild(d); }
     var card = document.querySelector('[data-lang-slot]');
     if (card) card.appendChild(mk('lang-switch-card'));
@@ -238,7 +239,7 @@
     go();
   };
   var s = document.createElement('script');
-  s.src = '/assets/i18n-ar.js?v=2';
+  s.src = '/assets/i18n-ar.js?v=3';
   s.onerror = function () { clearTimeout(safety); reveal(); };
   document.head.appendChild(s);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();

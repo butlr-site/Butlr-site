@@ -7,7 +7,7 @@
      and land back on this page as a bogus slug. base fixes them all. -->
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script src="/assets/i18n.js?v=3"></script>
+<script src="/assets/i18n.js?v=4"></script>
 <title>Book a stay | Butlr</title>
 <meta name="description" content="Book your stay directly with the venue on Butlr, no app, no account needed." />
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -64,7 +64,7 @@
   .vhero{position:relative;min-height:56svh;display:flex;align-items:flex-end;background:#0a0e16;overflow:hidden;margin-top:62px;}
   .vhero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
   .vhero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,10,18,.18),rgba(7,10,18,.08) 40%,rgba(7,10,18,.72));}
-  .vhero .inner{position:relative;z-index:2;width:100%;padding:110px 0 42px;}
+  .vhero .inner{position:relative;z-index:2;width:100%;padding:110px 32px 42px;}
   .vhero .kicker{color:var(--gold-2);}
   .vhero h1{color:#fff;font-size:clamp(30px,4.6vw,52px);line-height:1.08;margin-top:10px;}
   .vhero .sub{color:#e8e5dc;font-size:13px;letter-spacing:1.6px;text-transform:uppercase;margin-top:12px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
@@ -114,7 +114,7 @@
   .fac span{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text);border:1px solid var(--line-soft);border-radius:100px;padding:8px 16px;background:var(--paper);}
 
   /* modal */
-  .overlay{position:fixed;inset:0;z-index:90;background:rgba(11,13,18,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;}
+  .overlay{position:fixed;inset:0;z-index:120;background:rgba(11,13,18,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;}
   .overlay.open{display:flex;}
   .modal{background:var(--paper);border-radius:16px;max-width:480px;width:100%;max-height:92svh;overflow:auto;padding:30px;box-shadow:0 40px 90px rgba(10,12,18,.35);}
   .modal .kicker{display:block;margin-bottom:6px;}
@@ -164,7 +164,7 @@
   nav.solid .mark .wm-light{display:none;} nav.solid .mark .wm-dark{display:inline-block;}
   .fabout .mark img{height:18px;} .fabout .mark .wm-light{display:none;} .fabout .mark .wm-dark{display:inline-block;}
 </style>
-<link rel="stylesheet" href="/assets/pro.css?v=32">
+<link rel="stylesheet" href="/assets/pro.css?v=33">
 </head>
 <body class="legacy">
 
@@ -238,7 +238,7 @@
 </div>
 
 <!-- booking modal -->
-<div class="overlay" id="overlay">
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="m-room">
   <div class="modal" id="modalForm">
     <span class="kicker">Request a stay</span>
     <h3 id="m-room"></h3>
@@ -246,11 +246,13 @@
     <form id="bookForm">
       <div class="field"><label for="g-name">Full name</label><input id="g-name" type="text" autocomplete="name" required maxlength="120" placeholder="Your full name"></div>
       <div class="field"><label for="g-email">Email</label><input id="g-email" type="email" autocomplete="email" required maxlength="200" placeholder="you@example.com"></div>
-      <div class="field"><label for="g-phone">Phone</label><input id="g-phone" type="tel" autocomplete="tel" required maxlength="40" placeholder="+965 …"></div>
+      <div class="field"><label for="g-phone">Phone</label><input id="g-phone" type="tel" autocomplete="tel" required maxlength="40" placeholder="+44 20 7946 0123"></div>
       <!-- honeypot, humans never see this. Deliberately meaningless
            label/id so browser & extension autofill never match it. -->
       <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" id="hp-x" name="hp_x_7" tabindex="-1" autocomplete="one-time-code"></label></div>
-      <div class="err" id="m-err"></div>
+      <!-- Cloudflare Turnstile: drawn here only when the portal returns a site key (turnstileSiteKey). -->
+      <div id="ts-box" style="margin-top:4px;min-height:0;" hidden></div>
+      <div class="err" id="m-err" role="alert"></div>
       <div class="m-actions">
         <button type="button" class="btn btn-ghost" id="m-cancel">Cancel</button>
         <button type="submit" class="btn btn-gold" id="m-submit">Request booking</button>
@@ -311,7 +313,15 @@
   // Only http(s) URLs may reach an src attribute — anything else is dropped.
   function safeImg(u){ u=String(u==null?"":u).trim(); return /^https?:\/\//i.test(u) ? u : ""; }
   function stars(n){ n=Math.max(0,Math.min(5,Math.round(n||0))); return n? "★★★★★".slice(0,n) : ""; }
-  function money(n, cur){ return (cur||"") + " " + Number(n||0).toLocaleString(undefined,{maximumFractionDigits:2}); }
+  // Prices at the venue's own precision (KWD, BHD and OMR have 3 decimals:
+  // the portal sends currencyDecimals). Whole amounts print without decimals.
+  function money(n, cur){
+    var v = Number(n||0);
+    var d = venue && isFinite(+venue.currencyDecimals) ? Math.max(0, Math.min(3, Math.round(+venue.currencyDecimals))) : 2;
+    var f = Math.round(v) === v ? 0 : d;
+    var t = v.toLocaleString("en-US", { minimumFractionDigits: f, maximumFractionDigits: f });
+    return cur ? cur + " " + t : t;
+  }
 
   var venue = null, rooms = [], nights = null, sel = null;
   var checkInMs = null, checkOutMs = null;
@@ -343,7 +353,10 @@
   function isoPlus(days){ var d=new Date(Date.now()+days*86400000); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
 
   function renderVenue(){
-    document.title = venue.name + ", Book a stay, Butlr";
+    document.title = venue.name + " | Butlr";
+    // One address per venue for search engines: the venue's public link.
+    var canon = document.querySelector('link[rel="canonical"]') || document.head.appendChild(Object.assign(document.createElement("link"), { rel: "canonical" }));
+    canon.href = "https://onebutlr.com/hotels/" + encodeURIComponent(venue.slug || slug);
     $("h-loc").textContent = [venue.city, venue.country].filter(Boolean).join(", ");
     $("h-name").textContent = venue.name;
     $("h-type").textContent = TYPE_LABELS[venue.venueType] || "Hotel";
@@ -431,6 +444,7 @@
       .then(function(r){ if (r.status===404) throw new Error("notfound"); if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
       .then(function(j){
         venue = j.venue; rooms = j.roomTypes || []; nights = j.nights;
+        tsKey = (typeof j.turnstileSiteKey === "string" && j.turnstileSiteKey) ? j.turnstileSiteKey : null;
       });
   }
 
@@ -457,7 +471,35 @@
       .finally(function(){ btn.disabled = false; btn.textContent = "Check availability"; });
   });
 
+  // Cloudflare Turnstile. The portal returns its public site key when the
+  // owner has switched the check on; the booking route then refuses a request
+  // without a token, so the widget is drawn in the form and its token sent as
+  // turnstileToken (action "book", the one the route expects).
+  var tsKey = null, tsWidget = null, tsToken = "";
+  function withTurnstile(cb){
+    if (window.turnstile) return cb();
+    var s = document.createElement("script");
+    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    s.async = true; s.onload = cb;
+    document.head.appendChild(s);
+  }
+  function showTurnstile(){
+    if (!tsKey) return;
+    var box = $("ts-box"); box.hidden = false;
+    withTurnstile(function(){
+      if (tsWidget !== null){ try { window.turnstile.reset(tsWidget); } catch(e){} tsToken = ""; return; }
+      tsWidget = window.turnstile.render(box, {
+        sitekey: tsKey, action: "book",
+        size: box.offsetWidth && box.offsetWidth < 300 ? "compact" : "normal",
+        callback: function(t){ tsToken = t; },
+        "expired-callback": function(){ tsToken = ""; },
+        "error-callback": function(){ tsToken = ""; }
+      });
+    });
+  }
+
   // modal
+  var opener = null;
   function openModal(rt){
     sel = rt;
     $("m-room").textContent = rt.name;
@@ -472,8 +514,15 @@
     $("m-err").style.display = "none";
     $("modalForm").hidden = false; $("modalDone").hidden = true;
     $("overlay").classList.add("open");
+    opener = document.activeElement;
+    showTurnstile();
+    setTimeout(function(){ try { $("g-name").focus(); } catch(e){} }, 30);
   }
-  function closeModal(){ $("overlay").classList.remove("open"); }
+  function closeModal(){
+    $("overlay").classList.remove("open");
+    if (opener && opener.focus) { try { opener.focus(); } catch(e){} }
+  }
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && $("overlay").classList.contains("open")) closeModal(); });
   $("m-cancel").addEventListener("click", closeModal);
   $("s-close").addEventListener("click", closeModal);
   $("overlay").addEventListener("click", function(e){ if (e.target === $("overlay")) closeModal(); });
@@ -481,6 +530,10 @@
   $("bookForm").addEventListener("submit", function(e){
     e.preventDefault();
     if (!sel) return;
+    if (tsKey && !tsToken){
+      var te = $("m-err"); te.textContent = "Please complete the security check above, then send your request."; te.style.display = "block";
+      return;
+    }
     var btn = $("m-submit"); btn.disabled = true; btn.textContent = "Sending…";
     $("m-err").style.display = "none";
     var guests = Math.min(+$("d-guests").value || 2, sel.capacity);
@@ -496,9 +549,10 @@
         guestName: $("g-name").value.trim(),
         guestEmail: $("g-email").value.trim(),
         guestPhone: $("g-phone").value.trim(),
-        website: $("hp-x").value
+        website: $("hp-x").value,
+        turnstileToken: tsToken || undefined
       })
-    }).then(function(r){ return r.json().then(function(j){ return { ok: r.ok, j: j }; }); })
+    }).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return { ok: r.ok, j: j || {} }; }); })
       .then(function(res){
         if (!res.ok || !res.j.ok) throw new Error(res.j && res.j.error || "Couldn’t send your request. Try again.");
         // A "success" with no confirmation code means no booking was
@@ -517,7 +571,11 @@
       .catch(function(err){
         var el = $("m-err"); el.textContent = err.message || String(err); el.style.display = "block";
       })
-      .finally(function(){ btn.disabled = false; btn.textContent = "Request booking"; });
+      .finally(function(){
+        btn.disabled = false; btn.textContent = "Request booking";
+        // A Turnstile token is good for one request: draw a fresh check for the next one.
+        if (tsKey && tsWidget !== null && window.turnstile){ try { window.turnstile.reset(tsWidget); } catch(e){} tsToken = ""; }
+      });
   });
 
   // boot
@@ -530,14 +588,16 @@
       $("loading").hidden = true;
       // 404 is "no such venue" (or not taking web bookings); anything else
       // (the portal down, no network) is a failure to load, with a retry.
-      if (String(e.message)==="notfound") { $("notfound").hidden = false; return; }
+      if (String(e.message)==="notfound") { $("notfound").hidden = false; noindex(); return; }
       console.error(e);
       $("failed").hidden = false;
     });
   }
   $("retry").addEventListener("click", function(e){ e.preventDefault(); boot(); });
+  // An address with no venue behind it is not a page for search engines.
+  function noindex(){ var m = document.createElement("meta"); m.name = "robots"; m.content = "noindex"; document.head.appendChild(m); }
   if (!slug){
-    $("loading").hidden = true; $("notfound").hidden = false;
+    $("loading").hidden = true; $("notfound").hidden = false; noindex();
   } else {
     boot();
   }
