@@ -4,11 +4,12 @@
     "details": [
       {
         "appID": "2ACY486FU6.com.bader.butlr.app",
-        "paths": [ "/r/*", "/v/*", "/hotels/*" ],
+        "paths": [ "/r/*", "/v/*", "/hotels/*", "/o/*" ],
         "components": [
           { "/": "/r/*" },
           { "/": "/v/*" },
-          { "/": "/hotels/*" }
+          { "/": "/hotels/*" },
+          { "/": "/o/*" }
         ]
       }
     ]
