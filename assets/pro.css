@@ -1,7 +1,7 @@
 /* Butlr site, pro system (2026-10-29). Clean, product-first, one typeface. */
 :root{
   --white:#ffffff; --mist:#f5f5f7; --ink:#1d1d1f; --black:#000000;
-  --slate:#6e6e73; --hair:#d2d2d7; --brass:#8f6c21; --brass-lt:#c9a961;
+  --slate:#6e6e73; --hair:#d2d2d7; --brass:#85641e; --brass-lt:#c9a961;
   --navy:#0b1320; --w:1120px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -241,7 +241,7 @@ body.pro{font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Helvetic
 .pf .top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px;padding-bottom:28px;border-bottom:1px solid var(--hair);}
 .pf .about img{height:16px;width:auto;margin-bottom:12px;}
 .pf .about p{max-width:30ch;line-height:1.6;}
-.pf h4{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:12px;letter-spacing:0;text-transform:none;}
+.pf h4,.pf .fh{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:12px;letter-spacing:0;text-transform:none;}
 .pf .col a{display:block;margin-bottom:9px;color:var(--slate);} .pf .col a:hover{color:var(--ink);text-decoration:underline;}
 .pf .bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:20px;}
 .pf .bottom a:hover{text-decoration:underline;}
@@ -295,7 +295,7 @@ body.pro{font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,'Helvetic
 .facts-p b{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;letter-spacing:.005em;font-size:clamp(21px,2.2vw,27px);}
 .chap .points b{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;font-size:18px;letter-spacing:.005em;}
 .faq-p summary{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;font-size:20px;letter-spacing:.005em;}
-.pf h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--brass);}
+.pf h4,.pf .fh{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--brass);}
 .statement{max-width:26ch;}
 
 /* Phones always shown whole (no bottom crop) */
@@ -372,7 +372,7 @@ body.pro,body.legacy{font-family:'Bodoni Moda',Didot,Georgia,serif;font-optical-
 .on-black .lead{color:#b4b4b9;}
 .pro p{line-height:1.65;}
 /* small labels, menu and buttons stay in the tracked sans, like the hero */
-.eyebrow,.pn,.pn a,.pbar nav a,.b-pill,.b-link,.b-ghost,.clock h3,.facts span,.pf h4,.legacy .kicker,.legacy .btn{font-family:'Hanken Grotesk',-apple-system,sans-serif!important;}
+.eyebrow,.pn,.pn a,.pbar nav a,.b-pill,.b-link,.b-ghost,.clock h3,.facts span,.pf h4,.pf .fh,.skip,.legacy .kicker,.legacy .btn{font-family:'Hanken Grotesk',-apple-system,sans-serif!important;}
 .lead{font-weight:450;color:#4a4a4f;} .on-black .lead{color:#c2c2c7;} .pro p{font-weight:420;}
 
 /* Calmer scale (about 20% smaller everywhere) */
@@ -555,3 +555,27 @@ html{background:#fff!important;}
 .legacy .legal h2:first-child,.legacy .legal>*:first-child{margin-top:0!important;}
 /* In-page links land below the fixed menu (46px) and the sticky page bar (44px) */
 .pro [id],.legacy [id]{scroll-margin-top:100px;}
+
+/* 2026-11-03 site audit (S14) ------------------------------------------------
+   Brand: dark surfaces use the Butlr navy (the portal's ink #0B1320), never pure black.
+   Contrast: --brass darkened to #85641e (5.0:1 on mist, 5.5:1 on white; AA for the small tracked labels).
+   iPad portrait (600 to 860 px): grids keep two or three columns instead of one stretched phone column. */
+.on-black,.tile-b.black,.clock.win,.ptile.black{background:var(--navy)!important;}
+@media (max-width:860px){ .pn.dark.open,.pn.dark.open .links{background:var(--navy)!important;} }
+.skip{position:absolute;left:12px;top:-60px;z-index:1000;background:var(--navy);color:#fff!important;padding:10px 16px;border-radius:8px;font-size:14px;font-weight:600;transition:top .15s;}
+.skip:focus{top:10px;outline:2px solid var(--brass-lt);outline-offset:2px;}
+main:focus,[id=content]:focus{outline:none;}
+.pf .fh{margin:0 0 12px;}
+@media (min-width:600px) and (max-width:860px){
+  .sys:not(.sys6){grid-template-columns:1fr 1fr;}
+  .sys:not(.sys6)>.sys-card:last-child{grid-column:1 / -1;}
+  .sys:not(.sys6)>.sys-card:last-child ul{display:grid!important;grid-template-columns:1fr 1fr;column-gap:28px;}
+  .sys:not(.sys6)>.sys-card:last-child li:nth-child(2){border-top:0;padding-top:0;}
+  .sys6{grid-template-columns:repeat(3,1fr)!important;}
+  .clocks{grid-template-columns:1fr 1fr!important;}
+  .clock{padding:34px 28px;}
+  .reqs2{grid-template-columns:repeat(4,1fr)!important;}
+  .reqs2>div{padding:20px 16px!important;}
+}
+@media (min-width:600px) and (max-width:700px){ .sys6{grid-template-columns:1fr 1fr!important;} .reqs2{grid-template-columns:repeat(2,1fr)!important;} }
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;} }

@@ -3,5 +3,8 @@ Allow: /
 Disallow: /.well-known/
 Disallow: /portal
 Disallow: /portal/
+Disallow: /r/
+Disallow: /o/
+Disallow: /v/
 
 Sitemap: https://onebutlr.com/sitemap.xml

@@ -380,7 +380,15 @@ window.__butlrArabic({
 "We’ve received several messages from this connection. Please try again in an hour, or email us.": "تلقّينا عدة رسائل من هذا الاتصال. يُرجى المحاولة مرة أخرى بعد ساعة، أو مراسلتنا عبر البريد الإلكتروني.",
 "Your message could not be sent just now. Please try again, or email us.": "تعذّر إرسال رسالتك الآن. يُرجى المحاولة مرة أخرى، أو مراسلتنا عبر البريد الإلكتروني.",
 "Your message could not be read. Please refresh the page and try again.": "تعذّرت قراءة رسالتك. يُرجى تحديث الصفحة والمحاولة مرة أخرى.",
-"Your message could not be sent. Please refresh the page and try again.": "تعذّر إرسال رسالتك. يُرجى تحديث الصفحة والمحاولة مرة أخرى."
+"Your message could not be sent. Please refresh the page and try again.": "تعذّر إرسال رسالتك. يُرجى تحديث الصفحة والمحاولة مرة أخرى.",
+// 2026-11-03 site audit (S14): skip link and the open-in-app page (open.html)
+"Skip to content": "انتقل إلى المحتوى",
+"Subprocessors table": "جدول المعالجين الفرعيين",
+"Open in the Butlr app | Butlr": "افتح في تطبيق Butlr | Butlr",
+"This link opens in the Butlr app. Download Butlr on the App Store, then tap the link again.": "يُفتح هذا الرابط في تطبيق Butlr. حمّل Butlr من App Store، ثم اضغط على الرابط مرة أخرى.",
+"Butlr app": "تطبيق Butlr",
+"This link opens in the Butlr app.": "يُفتح هذا الرابط في تطبيق Butlr.",
+"Stays, orders and venue codes open in the app. If it did not open, download Butlr, then tap the link again.": "تُفتح الإقامات والطلبات ورموز المنشآت في التطبيق. إن لم يُفتح، حمّل Butlr ثم اضغط على الرابط مرة أخرى."
 }, [
   [/(^|, )Up to (\d+) guests?$/, function (m, a, n) { return (a ? '، ' : '') + 'يتّسع ' + guests(n, 'ل'); }],
   [/^(\d+) nights?,/, function (m, n) { return nights(n) + '،'; }],

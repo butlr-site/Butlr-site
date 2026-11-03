@@ -7,11 +7,18 @@ The Content-Security-Policy in `vercel.json` lists every outside host the pages 
 the portal API, Cloudflare Turnstile). A page that starts loading a script, font, frame or
 API from a new host needs that host added there, or the browser blocks it.
 
+**No inline script.** The policy has no `'unsafe-inline'` for scripts (2026-11-03): every page loads
+`assets/site.js` (menu, hero film, legal mail copy) and page code lives in files (`assets/contact.js`,
+`assets/hotels.js`, `assets/hotel.js`). Never add an inline `<script>` or an `onclick=`-style
+attribute; the browser refuses it. JSON-LD (`type="application/ld+json"`) is data and is fine.
+
 | File | What it is |
 |---|---|
 | `index.html`, `idea.html`, `app.html`, `venues.html`, `contact.html` | The marketing pages (English). |
 | `privacy.html`, `terms.html` | The legal pages the App Store and the portal link to. |
 | `hotels.html` → `/hotels`, `hotel.html` → `/hotels/{venue}` | Web booking: both read the portal's public API (`portal.onebutlr.com/api/web-booking/*`). |
+| `open.html` | Served at `/r/*`, `/o/*`, `/v/*` (the app's stay, order and venue-code links): the iPhone app opens these itself; a browser without the app gets "This link opens in the Butlr app" and the App Store button. Never shows the code in the address; noindex. |
+| `assets/site.js` | Shared behaviour for every page (see the CSP note). |
 | `404.html` | Vercel's not-found page (served at the missing address, so it carries `<base href="/">`). |
 | `.well-known/apple-app-site-association` | Universal links for the iOS app (`applinks:onebutlr.com`). |
 | `sitemap.xml`, `robots.txt` | Search engines. |

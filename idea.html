@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <link rel="canonical" href="https://onebutlr.com/idea.html" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script src="/assets/i18n.js?v=6"></script>
+<script src="/assets/i18n.js?v=7"></script>
 <title>About | Butlr</title>
 <meta name="description" content="Butlr is the hospitality operating system: one app for travelers and one operating environment for hotels, connected live." />
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -25,12 +25,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/pro.css?v=33">
+<link rel="stylesheet" href="/assets/pro.css?v=34">
 </head>
 <body class="pro">
+<a class="skip" href="#content">Skip to content</a>
 <div class="pn" id="pn" role="navigation" aria-label="Main">
   <div class="pw">
-    <a href="./" class="logo" aria-label="Butlr home"><img class="on-light" src="/butlr-wordmark-dark.png" alt="Butlr"><img class="on-dark" src="/butlr-wordmark.png" alt="Butlr"></a>
+    <a href="./" class="logo" aria-label="Butlr home"><img class="on-light" src="/butlr-wordmark-dark.png" alt="Butlr" width="296" height="96"><img class="on-dark" src="/butlr-wordmark.png" alt="Butlr" width="296" height="96"></a>
     <div class="links" id="pn-links">
       <a href="venues.html">For hotels</a>
       <a href="app.html">For travelers</a>
@@ -39,9 +40,10 @@
       <a href="contact.html">Contact</a>
       <a href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener" class="cta">Book a demo</a>
     </div>
-    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="pn-links" onclick="var n=document.getElementById('pn');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';"><span></span><span></span></button>
+    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="pn-links"><span></span><span></span></button>
   </div>
 </div>
+<main id="content" tabindex="-1">
 <div style="height:52px"></div>
 <header class="hero-p" style="padding-bottom:20px"><div class="pw">
   <span class="eyebrow">About Butlr</span>
@@ -70,17 +72,18 @@
   <p class="lead" style="margin:20px auto 0">Butlr is built by Butlr Systems Establishment in Riyadh, Kingdom of Saudi Arabia, in Arabic and English from day one.</p>
   <div class="btns"><a class="b-pill" href="venues.html">Butlr for hotels</a><a class="b-link" href="app.html">Butlr for travelers</a></div>
 </div></section>
+</main>
 <div class="pf" role="contentinfo">
   <div class="pw">
     <div class="top">
-      <div class="about"><img src="/butlr-wordmark-dark.png" alt="Butlr"><p>The hospitality operating system. One app for travelers, one operating environment for hotels.</p></div>
-      <div class="col"><h4>Hotels</h4><a href="venues.html">For hotels</a><a href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener">Book a demo</a><a href="https://portal.onebutlr.com/list-your-venue">List your venue</a></div>
-      <div class="col"><h4>Travelers</h4><a href="app.html">For travelers</a><a href="/hotels">Book a stay</a><a href="idea.html">About</a></div>
-      <div class="col"><h4>Company</h4><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="security.html">Security</a><a href="subprocessors.html">Subprocessors</a></div>
+      <div class="about"><img src="/butlr-wordmark-dark.png" alt="Butlr" width="296" height="96"><p>The hospitality operating system. One app for travelers, one operating environment for hotels.</p></div>
+      <div class="col"><p class="fh">Hotels</p><a href="venues.html">For hotels</a><a href="https://wa.me/447553773576?text=Hello%20Butlr%2C%20I%E2%80%99d%20like%20a%20live%20walkthrough%20for%20my%20hotel." target="_blank" rel="noopener">Book a demo</a><a href="https://portal.onebutlr.com/list-your-venue">List your venue</a></div>
+      <div class="col"><p class="fh">Travelers</p><a href="app.html">For travelers</a><a href="/hotels">Book a stay</a><a href="idea.html">About</a></div>
+      <div class="col"><p class="fh">Company</p><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="security.html">Security</a><a href="subprocessors.html">Subprocessors</a></div>
     </div>
     <div class="bottom"><div>&copy; 2026 Butlr. All rights reserved.</div><div><a href="mailto:info@onebutlr.com">info@onebutlr.com</a>&emsp;&ensp;<a href="https://wa.me/447553773576" target="_blank" rel="noopener" dir="ltr" style="white-space:nowrap" aria-label="WhatsApp +44 7553 773576">+44 7553 773576</a></div></div>
   </div>
 </div>
-<script>document.querySelectorAll('#pn-links a').forEach(function(a){a.addEventListener('click',function(){var n=document.getElementById('pn');n.classList.remove('open');document.body.style.overflow='';});});</script>
+<script src="/assets/site.js?v=1" defer></script>
 </body>
 </html>
