@@ -17,7 +17,7 @@
  */
 (function () {
   var KEY = 'butlr.lang';
-  var DICT_V = '7';
+  var DICT_V = '8';
   var doc = document.documentElement;
   var me = document.currentScript;
   var withLegal = !!(me && me.getAttribute('data-ar') === 'legal');

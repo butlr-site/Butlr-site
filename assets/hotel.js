@@ -289,9 +289,18 @@
         // The portal says whether the guest's copy went out (guestEmailSent,
         // added in round 10); an older portal build does not, and then the
         // copy is assumed sent as before. Never promise an e-mail that failed.
-        $("s-copy").textContent = res.j.guestEmailSent === false
-          ? "Keep this code, " + venue.name + " confirms your booking by email. We couldn’t e-mail you a copy of the request."
-          : "We’ve emailed you a copy, " + venue.name + " confirms your booking by email.";
+        // S30 review: a resent identical request answers duplicate:true with
+        // the first booking's code; say so instead of showing a new booking.
+        var doneH = document.querySelector("#modalDone h3");
+        if (res.j.duplicate === true) {
+          if (doneH) doneH.textContent = "Already received.";
+          $("s-copy").textContent = "We already have this request, " + venue.name + " confirms your booking by email. Your code is the same as before.";
+        } else {
+          if (doneH) doneH.textContent = "Request sent.";
+          $("s-copy").textContent = res.j.guestEmailSent === false
+            ? "Keep this code, " + venue.name + " confirms your booking by email. We couldn’t e-mail you a copy of the request."
+            : "We’ve emailed you a copy, " + venue.name + " confirms your booking by email.";
+        }
         $("modalForm").hidden = true; $("modalDone").hidden = false;
       })
       .catch(function(err){

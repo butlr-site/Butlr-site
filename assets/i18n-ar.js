@@ -285,6 +285,7 @@ window.__butlrArabic({
 "Cancel": "إلغاء",
 "Request booking": "أرسل طلب الحجز",
 "Request sent.": "تم إرسال طلبك.",
+"Already received.": "وصلنا طلبك من قبل.",
 "Done": "تم",
 "Photo gallery": "معرض الصور",
 "Your full name": "اسمك الكامل",
@@ -397,6 +398,7 @@ window.__butlrArabic({
   [/^\+(\d+) more$/, function (m, n) { n = +n; return n === 1 ? 'مرفق آخر' : n === 2 ? 'مرفقان آخران' : n <= 10 ? n + ' مرافق أخرى' : n + ' مرفقًا آخر'; }],
   [/^Live availability for (\d+) nights?\. Prices are set by the venue\.$/, function (m, n) { return 'التوفر الفعلي لمدة ' + nights(n, 1) + '. الأسعار تحددها المنشأة.'; }],
   [/^Keep this code, (.+) confirms your booking by email\. We couldn’t e-mail you a copy of the request\.$/, 'احتفظ بهذا الرمز، وستؤكد <bdi>$1</bdi> حجزك عبر البريد الإلكتروني. تعذّر إرسال نسخة من الطلب إلى بريدك الإلكتروني.'],
+  [/^We already have this request, (.+) confirms your booking by email\. Your code is the same as before\.$/, 'وصلنا هذا الطلب من قبل، وستؤكد <bdi>$1</bdi> حجزك عبر البريد الإلكتروني. رمزك هو نفسه كما في السابق.'],
   [/^We’ve emailed you a copy, (.+) confirms your booking by email\.$/, 'أرسلنا إليك نسخة عبر البريد الإلكتروني، وستؤكد <bdi>$1</bdi> حجزك عبر البريد الإلكتروني.'],
   [/^Email copied: (\S+)$/, 'تم نسخ البريد الإلكتروني: <bdi>$1</bdi>']
 ]);
