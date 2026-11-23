@@ -1,0 +1,15 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.onebutlr.app",
+      "sha256_cert_fingerprints": [
+        "8D:69:8C:10:7A:B1:ED:D9:0F:6A:A0:0C:C0:3E:F2:3B:AB:12:84:36:5C:EB:7E:51:8A:8C:1E:89:CE:11:75:22",
+        "EB:F9:B7:6B:74:87:DD:DA:92:A5:4C:6B:73:F2:C2:1C:EE:34:16:DC:2C:E2:D9:7D:5A:E6:04:6C:C4:D1:D2:AB",
+        "A4:FD:04:17:2E:63:E4:1B:1A:20:A4:19:6F:3B:3A:EF:FD:54:5C:4D:C2:3F:45:51:8A:46:B8:04:0D:C7:F1:A0",
+        "36:66:A0:20:21:07:AC:13:52:7C:B5:A3:CD:43:A4:F7:0E:E7:BA:13:E4:7B:E8:ED:80:1F:0C:BB:99:D7:49:DC"
+      ]
+    }
+  }
+]
