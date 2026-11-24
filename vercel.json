@@ -55,14 +55,13 @@
     {
       "source": "/v/:path*",
       "destination": "/open.html"
+    },
+    {
+      "source": "/download",
+      "destination": "/download.html"
     }
   ],
   "redirects": [
-    {
-      "source": "/download",
-      "destination": "https://apps.apple.com/kw/app/butlr/id6769944247",
-      "permanent": false
-    },
     {
       "source": "/portal",
       "destination": "https://portal.onebutlr.com",

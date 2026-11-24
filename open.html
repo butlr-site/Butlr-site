@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <script src="/assets/i18n.js?v=9"></script>
 <title>Open in the Butlr app | Butlr</title>
-<meta name="description" content="This link opens in the Butlr app. Download Butlr on the App Store, then tap the link again." />
+<meta name="description" content="This link opens in the Butlr app. Download Butlr on the App Store or Google Play, then tap the link again." />
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -254,10 +254,16 @@
   <h1>This link opens in the Butlr app.</h1>
   <p>Stays, orders and venue codes open in the app. If it did not open, download Butlr, then tap the link again.</p>
   <div class="cta">
-    <a class="btn btn-gold" href="https://apps.apple.com/app/butlr/id6769944247">Download on the App Store</a>
+    <a class="btn btn-gold" data-store="ios" href="https://apps.apple.com/app/butlr/id6769944247">Download on the App Store</a>
+    <a class="btn btn-gold" data-store="android" href="https://play.google.com/store/apps/details?id=com.onebutlr.app">Get it on Google Play</a>
     <a class="btn btn-line" href="/hotels" style="border-color:var(--line);color:var(--ink);">Book a stay</a>
   </div>
 </main>
+<script>
+/* Show the store for this phone: Android sees Google Play, iPhone and iPad see the App Store, a computer sees both. */
+(function(){var u=navigator.userAgent||'',a=/Android/i.test(u),i=/iPhone|iPad|iPod/i.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1);
+document.querySelectorAll('[data-store]').forEach(function(e){var s=e.getAttribute('data-store');if((a&&s==='ios')||(i&&s==='android'))e.style.display='none';});})();
+</script>
 <div class="pf" role="contentinfo">
   <div class="pw">
     <div class="top">
